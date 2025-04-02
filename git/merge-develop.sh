@@ -1,22 +1,11 @@
 #!/bin/bash
 
-# merge 하려는 브랜치
-merge_branch=develop
-
 # 현재 브랜치 확인
 current_branch=$(git rev-parse --abbrev-ref HEAD)
 
 if [[ -n $(git status --porcelain) ]]; then
   echo "커밋되지 않은 변경사항이 존재합니다."
   exit 1
-fi
-if [[ "$current_branch" != Card* ]]; then
-    echo "오류: 작업 브랜치명은 'Card'로 시작해야 합니다."
-    read -p "무시하고 계속 진행하시겠습니까? 계속 진행하려면 '$merge_branch' 이라고 입력하세요: " user_input
-    if [[ "$user_input" != "$merge_branch" ]]; then
-        echo "진행이 취소되었습니다."
-        exit 1
-    fi
 fi
 
 # 'master' 동기화
