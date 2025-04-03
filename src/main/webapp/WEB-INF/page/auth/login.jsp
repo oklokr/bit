@@ -102,9 +102,9 @@
         </tr>
         <tr>
             <td colspan="3" class="link-group">
-                <a style="text-align: 33%;" href="http://localhost:8080/findId">아이디찾기</a>
-                <a style="text-align: 33%;" href="http://localhost:8080/findPw">비밀번호찾기</a>
-                <a style="text-align: 33%;" href="http://localhost:8080/join">회원가입</a>
+                <a href="http://localhost:8080/findId">아이디찾기</a>
+                <a href="http://localhost:8080/findPw">비밀번호찾기</a>
+                <a href="http://localhost:8080/join">회원가입</a>
             </td>
         </tr>
     </table>
