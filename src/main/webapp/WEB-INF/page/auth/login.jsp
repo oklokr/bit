@@ -64,7 +64,6 @@
 
         .link-group {
             display: flex;
-            justify-content: center;
             gap: 10px;
             font-size : 12px;
         }
@@ -99,7 +98,7 @@
         </tr>
         <tr>
             <td colspan="2" class="link-group">
-                <a style="width: 33%;" href="http://localhost:8080/findId">아이디찾기</a>
+                <a href="http://localhost:8080/findId">아이디찾기</a>
             </td>
         </tr>
     </table>
