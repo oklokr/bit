@@ -17,7 +17,6 @@
     <jsp:include page="header.jsp" />
     
     <div id="app">
-        <div>${title}</div>
         <jsp:include page="${contentPage}" />
     </div>
 
