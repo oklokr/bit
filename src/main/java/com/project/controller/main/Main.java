@@ -19,7 +19,7 @@ public class Main {
     private UserService userService;
 
     @GetMapping("/main")
-    public String getMethodName(Model model) {
+    public String pageRender(Model model) {
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/main/main.jsp");
         return "layout/app";
