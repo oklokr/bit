@@ -67,9 +67,9 @@
         }
 
         .link-group {
+            display: flex;
             gap: 5px;
             font-size : 12px;
-            width : 100%;
         }
         .link-group a {
             color: #000000;
