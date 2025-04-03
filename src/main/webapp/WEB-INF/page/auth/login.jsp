@@ -68,16 +68,18 @@
 
         .link-group {
             display: flex;
-            justify-content: center;
+            justify-content: space-evenly;
             gap: 5px;
             font-size : 12px;
             width : 100%;
             white-space: nowrap;
+            text-align: center;
         }
         .link-group a {
             color: #000000;
             text-decoration: underline;
             cursor: pointer;
+            flex-grow: 1;
         }
         .link-group a:hover {
             color: #FF0000;
