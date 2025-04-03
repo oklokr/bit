@@ -22,7 +22,7 @@ public class Login {
         return "layout/app";
     }
     @PostMapping("/login")
-    public String login(@RequestParam String id,
+    public String loginProcess(@RequestParam String id,
                         @RequestParam String password,
                         Model model) {
         boolean isAuthenticated = userService.authenticate(id, password);
