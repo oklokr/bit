@@ -15,7 +15,7 @@
     }
     table {
             border-collapse: collapse;
-            border: 1px solid rgb(13, 125, 177);
+            border: 20px solid rgb(13, 125, 177);
             margin: 0 auto;
         }
 
