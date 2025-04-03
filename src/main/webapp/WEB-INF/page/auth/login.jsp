@@ -49,7 +49,7 @@
         }
         .inputbutton[type="submit"] {
             background-color: #d3d3d3;
-            width: 100%;
+            width: 50%;
             box-sizing: border-box;
         }
         .inputbutton[type="button"] {
@@ -85,11 +85,11 @@
             </th>
         </tr>
         <tr>
-            <th style="text-align: left;">ID</th>
+            <th>ID</th>
             <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요." autofocus></td>
         </tr>
         <tr>
-            <th style="text-align: left;">PW</th>
+            <th>PW</th>
             <td><input class="input" type="password" name="passwd" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
         </tr> 
         <tr>
