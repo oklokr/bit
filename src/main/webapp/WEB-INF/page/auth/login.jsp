@@ -21,16 +21,16 @@
 
     th, td{
         border: 1px solid black
-        padding 150px;
+        padding 15px;
         text-align: center;
     }
 
     th{
-        width : 100%;
+        width: 80px;
     }
 
     td{
-        width : 100%;
+        width : 250px;
     }
 
     .input {
