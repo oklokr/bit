@@ -4,11 +4,14 @@
 </div>
 
 <style>
-    .container {
+    body {
+            margin: 0;
+            height: 100vh; /* 뷰포트 높이 100% */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1;
+            flex-direction: column;
+            justify-content: space-between; /* 헤더, 콘텐츠, 푸터를 수직으로 배치 */
+            align-items: center; /* 수평 중앙 정렬 */
+            font-family: Arial, sans-serif;
     }
     table{
         border-collapse: collapse;
