@@ -7,4 +7,11 @@
     <select id="getCount" resultType="int">
         SELECT COUNT(*) FROM bulletin_board
     </select>
+
+    <select id="getArticles" resultType="com.project.model.BoardDto">
+        SELECT *
+        FROM bulletin_board
+        ORDER BY creation_date DESC
+        LIMIT #{pageSize} OFFSET #{start};
+    </select>
 </mapper>
