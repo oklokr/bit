@@ -17,4 +17,8 @@ public class UserService {
         System.out.println("UserService - 조회된 UserDto: " + user);
         return user;
     }
+
+    public boolean authenticate(String id, String password) {
+        throw new UnsupportedOperationException("Unimplemented method 'authenticate'");
+    }
 }
