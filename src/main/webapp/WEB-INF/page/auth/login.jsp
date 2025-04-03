@@ -7,23 +7,47 @@
         border-collapse: collapse;
         border: 1px solid rgb(13, 125, 177)
     }
+
     th, td{
         border: 1px solid black
         padding 10px;
         text-align: center;
     }
+
     th{
         width : 80px;
     }
+
     td{
         width : 200px;
     }
+
     .input {
         width : 100%
         padding 5px;
         box-sizing: border-box;
         border: 1px solid black;
     }
+
+    .inputbutton {
+            padding: 5px 10px;
+            border: 1px solid black;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .inputbutton[type="submit"] {
+            background-color: #d3d3d3;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .inputbutton[type="button"] {
+            background-color: #f0f0f0;
+        }
+
+        .logo {
+            width: 75px;
+            height: auto;
+        }
 </style>
 <form name="login" method="post">
     <table>
