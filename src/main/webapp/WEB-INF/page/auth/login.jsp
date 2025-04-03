@@ -87,12 +87,12 @@
             </th>
         </tr>
         <tr>
-            <th style="text-align: left;">  ID  </th>
-            <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력하세요."></td>
+            <th style="text-align: left;">ID</th>
+            <td style="text-align: left;"><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력하세요."></td>
         </tr>
         <tr>
-            <th style="text-align: left;">  PW  </th>
-            <td ><input class="input" type="password" name="passwd" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
+            <th style="text-align: left;">PW</th>
+            <td style="text-align: left;"><input class="input" type="password" name="passwd" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
         </tr> 
         <tr>
             <td colspan="2" style="text-align: center;">
