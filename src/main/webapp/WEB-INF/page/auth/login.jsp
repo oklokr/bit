@@ -2,6 +2,11 @@
 <div>
     로그인페이지
 </div>
+<div style="color: red; text-align: center;">
+    <c:if test="${not empty errorMessage}">
+        ${errorMessage}
+    </c:if>
+</div>
 <style>
     body {
             margin: 0;
@@ -83,7 +88,7 @@
             color: #FF0000;
         }
 </style>
-<form name="login" method="post">
+<form name="login" method="post" action="/login">
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
