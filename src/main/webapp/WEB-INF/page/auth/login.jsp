@@ -86,7 +86,7 @@
                 <img src="/images/icons/logoEx.png" class="logo">
             </th>
         </tr>
-        <tr>
+        <tr colspan="2">
             <th style="text-align: left;">ID</th>
             <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력하세요."></td>
         </tr>
@@ -100,7 +100,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" class="link-group">
+            <td class="link-group">
                 <a href="http://localhost:8080/findId">아이디 찾기</a>
                 <a href="http://localhost:8080/findPw">비밀번호 찾기</a>
                 <a href="http://localhost:8080/join">회원가입</a>
