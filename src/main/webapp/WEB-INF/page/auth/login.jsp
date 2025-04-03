@@ -66,6 +66,7 @@
             display: flex;
             justify-content: center;
             gap: 10px;
+            width: 100%
         }
         .link-group a {
             color: #000000;
