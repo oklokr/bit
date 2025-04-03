@@ -15,13 +15,17 @@
     }
     table {
             border-collapse: collapse;
-            border: 20px solid rgb(13, 125, 177);
+            border: 2px solid rgb(13, 125, 177);
             margin: 0 auto;
         }
 
     th, td{
         border: 1px solid black
-        padding 15px;
+        padding-top 10px;
+        padding-bottom : 20px;
+        padding-left : 10px;
+        padding-right : 10px;
+
         text-align: center;
     }
 
