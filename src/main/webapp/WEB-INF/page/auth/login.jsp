@@ -13,10 +13,11 @@
             align-items: center; /* 수평 중앙 정렬 */
             font-family: Arial, sans-serif;
     }
-    table{
-        border-collapse: collapse;
-        border: 1px solid rgb(13, 125, 177)
-    }
+    table {
+            border-collapse: collapse;
+            border: 1px solid rgb(13, 125, 177);
+            margin: 0 auto;
+        }
 
     th, td{
         border: 1px solid black
@@ -58,6 +59,23 @@
             width: 50px;
             height: auto;
         }
+        /* 링크 스타일 */
+        .link-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* 링크 간 간격 */
+        }
+        .link-group a {
+            color: #0000EE; /* 기본 파란색 */
+            text-decoration: underline; /* 밑줄 추가 */
+            cursor: pointer;
+        }
+        .link-group a:hover {
+            color: #FF0000; /* 마우스 오버 시 빨간색 */
+        }
+        .link-group span {
+            color: #000; /* 구분선 색상 */
+        }
 </style>
 <form name="login" method="post">
     <table>
@@ -80,10 +98,12 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="text-align: center;">
-                <input class="inputbutton" type="button" value="아이디찾기" onclick="location.href='http://localhost:8080/findId'">
-                <input class="inputbutton" type="button" value="비밀번호찾기" onclick="location.href='http://localhost:8080/findPw'">
-                <input class="inputbutton" type="button" value="회원가입" onclick="location.href='http://localhost:8080/join'">
+            <td colspan="2" class="link-group">
+                <a href="http://localhost:8080/findId">아이디 찾기</a>
+                <span>|</span>
+                <a href="http://localhost:8080/findPw">비밀번호 찾기</a>
+                <span>|</span>
+                <a href="http://localhost:8080/join">회원가입</a>
             </td>
         </tr>
     </table>
