@@ -70,7 +70,7 @@
             display: table-row;
             gap: 5px;
             font-size : 12px;
-            padding : 100%;
+            width : 100%;
         }
         .link-group a {
             color: #000000;
