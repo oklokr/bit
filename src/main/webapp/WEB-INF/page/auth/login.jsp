@@ -13,11 +13,11 @@
         <tr>
             <th>ID</th>
             <td> <input class="input" type="text" name="id" maxlength="15" autofocus> </td>
-        </tr>
+        </tr> <br> <br>
         <tr>
             <th>PW</th>
             <td> <input class="input" type="password" name="passwd" maxlength="20"> </td>
-        </tr>
+        </tr> <br> <br>
         <tr>
             <th>
                 <input  style="text-align: center;" class="inputbutton" type="submit" value="로그인">
@@ -25,9 +25,9 @@
         </tr>
         <tr>
             <th colspan="3">
-                <input class="inputbutton" type="button" value="아이디찾기">
-                <input class="inputbutton" type="button" value="비밀번호찾기">
-                <input class="inputbutton" type="button" value="회원가입">
+                <input class="inputbutton" type="text" value="아이디찾기" href="localhost:8080/main">
+                <input class="inputbutton" type="text" value="비밀번호찾기" href="localhost:8080/main">
+                <input class="inputbutton" type="text" value="회원가입" href="localhost:8080/main">
             </th>
         </tr>
     </table>
