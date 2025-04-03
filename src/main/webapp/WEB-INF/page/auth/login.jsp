@@ -88,7 +88,7 @@
             color: #FF0000;
         }
 </style>
-<form name="login" method="post" action="/login">
+<form name="login" method="post">
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
@@ -101,7 +101,7 @@
         </tr>
         <tr>
             <th style="text-align: left;">PW</th>
-            <td><input class="input" type="password" name="passwd" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
+            <td><input class="input" type="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
         </tr> 
         <tr>
             <td colspan="2" style="text-align: center;">
