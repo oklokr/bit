@@ -67,7 +67,7 @@
             justify-content: center;
             gap: 5px;
             width: 100%;
-
+            font-size : 8px;
         }
         .link-group a {
             color: #000000;
