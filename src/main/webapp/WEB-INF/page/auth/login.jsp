@@ -88,7 +88,7 @@
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
-                <img src="/images/icons/logoEx.png" class="logo">
+                <img src="/images/logo.png" class="logo">
             </th>
         </tr>
         <tr>
