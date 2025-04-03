@@ -19,8 +19,8 @@
             <td> <input class="input" type="password" name="passwd" maxlength="20"> </td>
         </tr>
         <tr>
-            <th style="text-align: center;">
-                <input class="inputbutton" type="submit" value="로그인">
+            <th>
+                <input  style="text-align: center;" class="inputbutton" type="submit" value="로그인">
             </th>
         </tr>
         <tr>
