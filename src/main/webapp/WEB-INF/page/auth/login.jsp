@@ -7,7 +7,7 @@
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
-                <img src="/images/icons/logoEx.png">
+                <img src="/images/icons/logoEx.png" style="width: 50px; height: auto;" >
             </th>
         </tr>
         <tr>
