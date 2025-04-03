@@ -16,29 +16,31 @@
         <br>
         <table class="table">
             <tr>
-                <th colspan="2">dto.title</th>
+                <th colspan="2">
+                    <input class="form-control form-control-lg" type="text" placeholder="원래 제목" name="title" maxlength="100">
+
+                </th>
             </tr>
             <tr>
                 <td>작성자 : dto.author</td>
                 <td>작성날짜 : dto.create_date</td>
             </tr>
-            <tr>
-                <th>
-                    <input class="input" type="text" name=""
-                </th>
-                
-            </tr>
         </table>
 
-        <form name="editform" method="post" action="board/edit">
-            <table>
-                <tr>
-                    <th colspan="2"
-                </tr>
-                
-            </table>
+        <div id ="editor">
+            <p>글을 작성하세여 </p>
+        </div>
 
-        </form>
+        <table class="table">
+            <!-- 버튼 그룹 -->
+            <div class="button-group d-flex">
+                <div class="ms-auto">
+                    <button class="btn btn-primary" onclick="submitPost()">작성</button>
+                    <button class="btn btn-primary">취소</button>
+                </div>
+            </div>
+        </table>
+        
     </div>
 </body>
 </html>
@@ -47,9 +49,10 @@
     .table {
         width: 100%;
         table-layout: fixed; /* 고정 레이아웃 */
+        border-color:#fff
     }
     
-    .board-detail-page {
+    .board-edit-page {
         max-width: 800px; /* 페이지 최대 너비 제한 */
         margin: 40px auto; /* 중앙 정렬 */
         padding: 20px;
@@ -57,16 +60,45 @@
         border-radius: 8px; /* 모서리 둥글게 */
     }
 
-    .board-detail-page h3 {
+    .board-edit-page h3 {
         text-align: center;
         margin: 20px 0; /* 위아래 여백 */
         align-items: center;
         font-weight: bold;
     }
 
-    td.content {
-        min-height: 100px;
+    .button-group{
+        margin-top: 10px;
+    }
+    .btn.btn-primary{
+        width: 120px;
     }
 
+    #editor{
+        height: 500px; /* 높이 조절 */
+        padding: 10px;
+    }
 
 </style>
+<script>
+    const quill=new Quill('#editor',{
+        theme: 'snow'
+    })
+
+    function submitPost(){
+        const content = quill.root.innerHTML;
+        
+        console.log("글 내용:", content);
+        
+        axios.post('/board/detail', {content:content})
+            .then(response => {
+                alert('게시글 저장 성공!');
+                window.location.href="/board/list";
+            })
+            .catch(error=>{
+                console.error('Error:' , error);
+                alert('게시글 저장 실패');
+            })
+    }
+
+</script>
