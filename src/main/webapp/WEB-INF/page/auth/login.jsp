@@ -101,7 +101,7 @@
         </tr> 
         <tr>
             <td colspan="2" style="text-align: center;">
-                <input class="inputbutton" type="submit" value="로그인" onclick="location='Login.java'">
+                <input class="inputbutton" type="submit" value="로그인">
             </td>
         </tr>
         <tr>
