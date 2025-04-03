@@ -2,6 +2,7 @@
 <div>
     내용
     <button type="button" class="btn">버튼</button>
+    <button type="button" class="btn btn-primary">버튼</button>
     <jsp:include page="../../component/popValidate.jsp" />
     <jsp:include page="../../component/textEditor.jsp" />
 </div>

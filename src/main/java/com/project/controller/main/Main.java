@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
-public class MainPage {
+public class Main {
     @Autowired
     private UserService userService;
 
     @GetMapping("/main")
     public String getMethodName(Model model) {
         model.addAttribute("title", "main page");
-        model.addAttribute("contentPage", "/WEB-INF/page/main/index.jsp");
+        model.addAttribute("contentPage", "/WEB-INF/page/main/main.jsp");
         return "layout/app";
     }
 
