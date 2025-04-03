@@ -88,7 +88,7 @@
         </tr>
         <tr colspan="2">
             <th style="text-align: left;">ID</th>
-            <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력하세요."></td>
+            <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력하세요." autofocus></td>
         </tr>
         <tr>
             <th style="text-align: left;">PW</th>
