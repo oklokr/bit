@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +18,6 @@
     <jsp:include page="header.jsp" />
     
     <div id="app">
-        <div>${title}</div>
         <jsp:include page="${contentPage}" />
     </div>
 
