@@ -9,16 +9,18 @@
             Logo
         </tr>
         <tr>
-            아이디
+            <td>아이디</td>
         </tr>
         <tr>
-            비밀번호
+            <td>비밀번호</td>
         </tr>
         <tr>
-           로그인 
+           <td>로그인</td>
         </tr>
         <tr colspan="3">
-            아이디찾기 , 비밀번호 찾기 , 회원가입 
+            <td>아이디찾기</td>
+            <td>비밀번호찾기</td>
+            <td>회원가입</td> 
         </tr>
     </table>
 </form>
