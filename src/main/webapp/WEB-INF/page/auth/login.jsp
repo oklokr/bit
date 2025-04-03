@@ -5,11 +5,12 @@
 
 <form name="login" method="post">
     <table>
-        <tr colspan="3">
-            Logo
+        <td style="text-align: center;">
+            Logo(이미지 대처 이미지 넣을 img/src 아래 이미지 폴더 필요)
         </tr>
-        <tr>
-            <td>아이디</td>
+        <tr colspan="2">
+            <th>ID</th>
+            <td> <input class="input" type="text" name="id" maxlength="15" autofocus> </td>
         </tr>
         <tr>
             <td>비밀번호</td>
