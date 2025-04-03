@@ -88,11 +88,11 @@
         </tr>
         <tr>
             <th style="text-align: left;">ID</th>
-            <td style="text-align: left;"><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력하세요."></td>
+            <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력하세요."></td>
         </tr>
         <tr>
             <th style="text-align: left;">PW</th>
-            <td style="text-align: left;"><input class="input" type="password" name="passwd" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
+            <td><input class="input" type="password" name="passwd" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
         </tr> 
         <tr>
             <td colspan="2" style="text-align: center;">
@@ -100,11 +100,9 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3" class="link-group">
+            <td colspan="2" class="link-group">
                 <a href="http://localhost:8080/findId">아이디 찾기</a>
-                <span>|</span>
                 <a href="http://localhost:8080/findPw">비밀번호 찾기</a>
-                <span>|</span>
                 <a href="http://localhost:8080/join">회원가입</a>
             </td>
         </tr>
