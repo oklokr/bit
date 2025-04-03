@@ -21,30 +21,30 @@
 
     th, td{
         border: 1px solid black
-        padding 15px;
+        padding 20px;
         text-align: center;
     }
 
     th{
-        width : 80px;
+        width : 120px;
     }
 
     td{
-        width : 200px;
+        width : 350px;
     }
 
     .input {
         width : 100%
-        padding 5px;
+        padding 10px;
         box-sizing: border-box;
         border: 1px solid black;
     }
 
     .inputbutton {
-            padding: 5px 8px;
-            border: 1px solid rgb(122, 122, 122);
-            cursor: pointer;
-            margin: 7px;
+        padding: 8px 15px;
+            border: 1px solid rgb(122, 122, 122)
+            cursor pointer;
+            box-sizing: border-box;
         }
         .inputbutton[type="submit"] {
             background-color: #d3d3d3;
@@ -53,6 +53,8 @@
         }
         .inputbutton[type="button"] {
             background-color: #f0f0f0;
+            display: inline-block;
+            margin: 5px;
         }
 
         .logo {
@@ -80,7 +82,7 @@
 <form name="login" method="post">
     <table>
         <tr>
-            <th colspan="3" style="text-align: center;">
+            <th colspan="2" style="text-align: center;">
                 <img src="/images/icons/logoEx.png" class="logo">
             </th>
         </tr>
@@ -93,12 +95,12 @@
             <td><input class="input" type="password" name="passwd" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
         </tr> 
         <tr>
-            <td colspan="3" style="text-align: center;">
+            <td colspan="2" style="text-align: center;">
                 <input class="inputbutton" type="submit" value="로그인">
             </td>
         </tr>
         <tr>
-            <td colspan="3" class="link-group">
+            <td colspan="2" class="link-group">
                 <a href="http://localhost:8080/findId">아이디 찾기</a>
                 <span>|</span>
                 <a href="http://localhost:8080/findPw">비밀번호 찾기</a>
