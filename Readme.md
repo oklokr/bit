@@ -22,3 +22,5 @@ src
 │       │   ├─ components
 │       │   ├─ layout
             └── page
+
+.
