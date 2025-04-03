@@ -2,7 +2,14 @@
 <div>
     로그인페이지
 </div>
+
 <style>
+    .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+    }
     table{
         border-collapse: collapse;
         border: 1px solid rgb(13, 125, 177)
@@ -10,7 +17,7 @@
 
     th, td{
         border: 1px solid black
-        padding 10px;
+        padding 15px;
         text-align: center;
     }
 
@@ -45,7 +52,7 @@
         }
 
         .logo {
-            width: 75px;
+            width: 50px;
             height: auto;
         }
 </style>
@@ -53,16 +60,16 @@
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
-                <img src="/images/icons/logoEx.png">
+                <img src="/images/icons/logoEx.png" class="logo">
             </th>
         </tr>
         <tr>
             <th>ID</th>
-            <td><input class="input" type="text" name="id" maxlength="15" autofocus></td>
+            <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력하세요."></td>
         </tr>
         <tr>
             <th>PW</th>
-            <td><input class="input" type="password" name="passwd" maxlength="20"></td>
+            <td><input class="input" type="password" name="passwd" maxlength="20" placeholder="비밀번호를 입력하세요."></td>
         </tr> 
         <tr>
             <td colspan="2" style="text-align: center;">
