@@ -11,13 +11,6 @@
 </head>
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <div style="display: none;">
-        넘어와야 되는 값: 
-        board_count 총 글 개수
-        number 출력용 글번호
-        count 전체 글 개수
-        dtos dto list
-    </div>
 
     <div>
         <c:set var="count" value="0" />
@@ -45,7 +38,6 @@
                 </tr>
 
             </c:if>
-            <!--
             <c:if test="${count ne 0}">
                 <c:set var="number" value="${number}"/>
                 <c:foreach var="dto" items="${dtos}">
@@ -71,7 +63,6 @@
                     </tr>
                 </c:foreach>
             </c:if>
-        -->
         </table>
     </div>
 </body>
@@ -79,8 +70,11 @@
 
 <style>
     .board-page {
-        margin: 20px; /* 바깥 여백 */
-        padding: 20px; /* 안쪽 여백 */
+        max-width: 800px; /* 페이지 최대 너비 제한 */
+        margin: 40px auto; /* 중앙 정렬 */
+        padding: 20px;
+        background: #fff; /* 배경 흰색 */
+        border-radius: 8px; /* 모서리 둥글게 */
     }
 
     .btn.btn-primary {
