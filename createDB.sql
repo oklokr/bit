@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 -- 🚨 기존 테이블 삭제 (순서 중요) 🚨
 DROP TABLE IF EXISTS replies;
 DROP TABLE IF EXISTS bulletin_board;
@@ -8,6 +10,8 @@ DROP TABLE IF EXISTS terms;
 DROP TABLE IF EXISTS members;
 DROP TABLE IF EXISTS common_codes;
 DROP TABLE IF EXISTS common;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- ✅ 공통 코드 테이블 생성
 CREATE TABLE common (
@@ -96,6 +100,7 @@ CREATE TABLE bulletin_board (
     board_id INT AUTO_INCREMENT PRIMARY KEY,
     member_no CHAR(36),
     title VARCHAR(255) NOT NULL,
+    content VARCHAR(1000),
     author VARCHAR(100) NOT NULL,
     creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     view_count INT DEFAULT 0,
@@ -117,3 +122,14 @@ CREATE TABLE replies (
     FOREIGN KEY (board_id) REFERENCES bulletin_board(board_id) ON DELETE CASCADE,
     FOREIGN KEY (member_no) REFERENCES members(member_no) ON DELETE SET NULL
 );
+
+
+select * from common;
+select * from common_codes;
+select * from inventory;
+select * from members;
+select * from member_terms_agreement;
+select * from product_info;
+select * from terms;
+select * from bulletin_board;
+select * from replies;
