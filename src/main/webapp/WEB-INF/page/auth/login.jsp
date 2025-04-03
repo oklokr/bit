@@ -67,8 +67,8 @@
         }
 
         .link-group {
-            display: flex;
-            gap: 10px;
+            display: table-row;
+            gap: 5px;
             font-size : 12px;
         }
         .link-group a {
