@@ -65,7 +65,7 @@
         .link-group {
             display: flex;
             justify-content: center;
-            gap: 5px;
+            gap: 10px;
             font-size : 12px;
         }
         .link-group a {
