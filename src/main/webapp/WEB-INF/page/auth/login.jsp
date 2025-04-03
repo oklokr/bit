@@ -8,10 +8,10 @@
         /* 전체 페이지 스타일 */
         body {
             margin: 0;
-            height: 100vh;
+            min-height: 100vh; /* 최소 높이를 뷰포트 높이로 설정 */
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column; /* 세로 방향으로 배치 */
+            justify-content: space-between; /* 헤더, 콘텐츠, 푸터를 위아래로 분리 */
             font-family: Arial, sans-serif;
         }
 
