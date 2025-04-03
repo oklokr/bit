@@ -12,7 +12,7 @@
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <div class="board-edit-page container">
-        <h3> 자유게시판 게시글 작성 / 수정정</h3>
+        <h3> 자유게시판 게시글 작성 / 수정</h3>
         <br>
         <table class="table">
             <tr>
@@ -22,11 +22,19 @@
                 <td>작성자 : dto.author</td>
                 <td>작성날짜 : dto.create_date</td>
             </tr>
+            <tr>
+                <th>
+                    <input class="input" type="text" name=""
+                </th>
+                
+            </tr>
         </table>
 
         <form name="editform" method="post" action="board/edit">
             <table>
-
+                <tr>
+                    <th colspan="2"
+                </tr>
                 
             </table>
 
