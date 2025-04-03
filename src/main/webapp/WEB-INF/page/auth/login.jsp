@@ -68,18 +68,16 @@
 
         .link-group {
             display: flex;
-            justify-content: space-evenly;
-            gap: 5px;
+            justify-content: center;
+            gap: 15px;
             font-size : 12px;
             width : 100%;
             white-space: nowrap;
-            text-align: center;
         }
         .link-group a {
             color: #000000;
             text-decoration: underline;
             cursor: pointer;
-            flex-grow: 1;
         }
         .link-group a:hover {
             color: #FF0000;
@@ -106,7 +104,7 @@
             </td>
         </tr>
         <tr>
-            <td class="link-group" style="text-align: center;">
+            <td colspan="2" class="link-group" style="text-align: center;">
                 <a href="http://localhost:8080/findId">아이디찾기</a>
                 <a href="http://localhost:8080/findPw">비밀번호찾기</a>
                 <a href="http://localhost:8080/join">회원가입</a>
