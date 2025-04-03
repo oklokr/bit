@@ -73,7 +73,7 @@
             font-size : 12px;
             width : 100%;
             white-space: nowrap;
-            margin: 15px;
+            margin: 5px;
         }
         .link-group a {
             color: #000000;
@@ -105,7 +105,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" class="link-group" style="text-align: center;">
+            <td class="link-group" style="text-align: center;">
                 <a href="http://localhost:8080/findId">아이디찾기</a>
                 <a href="http://localhost:8080/findPw">비밀번호찾기</a>
                 <a href="http://localhost:8080/join">회원가입</a>
