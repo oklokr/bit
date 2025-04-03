@@ -50,6 +50,7 @@
         width: 100%;
         table-layout: fixed; /* 고정 레이아웃 */
     }
+    
     .board-detail-page {
         max-width: 800px; /* 페이지 최대 너비 제한 */
         margin: 40px auto; /* 중앙 정렬 */
