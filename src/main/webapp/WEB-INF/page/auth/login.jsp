@@ -26,11 +26,11 @@
     }
 
     th{
-        width: 80px;
+        width: 60px;
     }
 
     td{
-        width : 250px;
+        width : 150%;
     }
 
     .input {
