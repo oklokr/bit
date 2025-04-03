@@ -73,6 +73,7 @@
             font-size : 12px;
             width : 100%;
             white-space: nowrap;
+            margin: 15px;
         }
         .link-group a {
             color: #000000;
