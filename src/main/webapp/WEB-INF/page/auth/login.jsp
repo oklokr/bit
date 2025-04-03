@@ -25,9 +25,9 @@
         </tr>
         <tr>
             <th colspan="3">
-                <input class="inputbutton" type="button" value="아이디찾기" href="localhost:8080/main">
-                <input class="inputbutton" type="button" value="비밀번호찾기" href="localhost:8080/main">
-                <input class="inputbutton" type="button" value="회원가입" href="localhost:8080/main">
+                <input class="inputbutton" type="button" value="아이디찾기" onclick="location='localhost:8080/main'">
+                <input class="inputbutton" type="button" value="비밀번호찾기" onclick="location='localhost:8080/main'">
+                <input class="inputbutton" type="button" value="회원가입" onclick="location='localhost:8080/main'">
             </th>
         </tr>
     </table>
