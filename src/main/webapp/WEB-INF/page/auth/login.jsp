@@ -100,7 +100,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" class="link-group">
+            <td colspan="3" class="link-group">
                 <a href="http://localhost:8080/findId">아이디 찾기</a>
                 <span>|</span>
                 <a href="http://localhost:8080/findPw">비밀번호 찾기</a>
