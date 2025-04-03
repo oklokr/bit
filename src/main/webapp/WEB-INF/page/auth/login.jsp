@@ -26,7 +26,7 @@
     }
 
     th{
-        white-space: nowrap;
+        width : 100%;
     }
 
     td{
@@ -97,7 +97,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" class="link-group">
+            <td class="link-group">
                 <a href="http://localhost:8080/findId">아이디찾기</a>
                 <a href="http://localhost:8080/findPw">비밀번호찾기</a>
                 <a href="http://localhost:8080/join">회원가입</a>
