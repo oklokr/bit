@@ -11,6 +11,13 @@
     th, td{
         border: 1px solid black
         padding 10px;
+        text-align: center;
+    }
+    th{
+        width : 80px;
+    }
+    td{
+        width : 200px;
     }
 </style>
 <form name="login" method="post">
