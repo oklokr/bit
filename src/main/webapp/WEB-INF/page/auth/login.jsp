@@ -7,7 +7,7 @@
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
-                logo <!-- 로고 이미지 경로 수정 필요 -->
+                <img src="src/main/resources/static/images/icons/logoEx.png">
             </th>
         </tr>
         <tr>
