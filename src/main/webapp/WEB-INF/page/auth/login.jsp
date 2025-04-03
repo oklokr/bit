@@ -18,12 +18,18 @@
     td{
         width : 200px;
     }
+    .input {
+        width : 100%
+        padding 5px;
+        box-sizing: border-box;
+        border: 1px solid black;
+    }
 </style>
 <form name="login" method="post">
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
-                <img src="/images/icons/logoEx.png" style="width: 50px; height: auto;" >
+                <img src="/images/icons/logoEx.png">
             </th>
         </tr>
         <tr>
