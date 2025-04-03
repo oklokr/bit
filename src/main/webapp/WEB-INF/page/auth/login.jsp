@@ -5,19 +5,23 @@
 
 <form name="login" method="post">
     <table>
-        <td style="text-align: center;">
-            Logo(이미지 대처 이미지 넣을 img/src 아래 이미지 폴더 필요)
+        <td>
+            <th  style="text-align: center;">
+                Logo(이미지 대처 이미지 넣을 img/src 아래 이미지 폴더 필요)
+            </th>
         </tr>
-        <tr colspan="2">
+        <tr>
             <th>ID</th>
             <td> <input class="input" type="text" name="id" maxlength="15" autofocus> </td>
         </tr>
-        <tr colspan="2">
+        <tr>
             <th>PW</th>
             <td> <input class="input" type="password" name="passwd" maxlength="20"> </td>
         </tr>
-        <tr style="text-align: center;">
-            <input class="inputbutton" type="submit" value="로그인">
+        <tr>
+            <th style="text-align: center;">
+                <input class="inputbutton" type="submit" value="로그인">
+            </th>
         </tr>
         <tr>
             <th colspan="3">
