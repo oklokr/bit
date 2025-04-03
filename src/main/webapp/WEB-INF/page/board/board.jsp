@@ -28,7 +28,7 @@
         <br>
         
         ${count}개
-        <input class="btn btn-primary" type="button" value="글쓰기"/>
+        <button class="btn btn-primary" type="button">글쓰기</button>
 
         ${str_num}
         <table class="table">
