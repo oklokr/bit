@@ -2,7 +2,13 @@
 <div>
     로그인페이지
 </div>
-
+<style>
+    table{
+        border-collapse: collapse;
+        border: 1px solid black
+        margin: 0 auto;
+    }
+</style>
 <form name="login" method="post">
     <table>
         <tr>
