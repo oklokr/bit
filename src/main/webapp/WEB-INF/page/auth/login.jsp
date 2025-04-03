@@ -6,7 +6,6 @@
     table{
         border-collapse: collapse;
         border: 1px solid rgb(13, 125, 177)
-        margin 0 auto;
     }
     th, td{
         border: 1px solid black
