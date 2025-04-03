@@ -67,7 +67,6 @@
         }
 
         .link-group {
-            display: table-row;
             gap: 5px;
             font-size : 12px;
             width : 100%;
