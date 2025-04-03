@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class Mypage {
     @GetMapping("/mypage")
-    public String getMethodName(Model model) {
+    public String pageRender(Model model) {
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/mypage/mypage.jsp");
         return "layout/app";
