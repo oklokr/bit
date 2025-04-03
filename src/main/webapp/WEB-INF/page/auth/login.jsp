@@ -25,8 +25,8 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: center;">
-                <input class="inputbutton" type="button" value="아이디찾기" onclick="location.href='http://localhost:8080/findid'">
-                <input class="inputbutton" type="button" value="비밀번호찾기" onclick="location.href='http://localhost:8080/findpw'">
+                <input class="inputbutton" type="button" value="아이디찾기" onclick="location.href='http://localhost:8080/findId'">
+                <input class="inputbutton" type="button" value="비밀번호찾기" onclick="location.href='http://localhost:8080/findPw'">
                 <input class="inputbutton" type="button" value="회원가입" onclick="location.href='http://localhost:8080/join'">
             </td>
         </tr>
