@@ -5,8 +5,30 @@
 
 <form name="login" method="post">
     <table>
-        <tr colspan="3">
-            <img src=""/>
+        <tr>
+            <th colspan="2" style="text-align: center;">
+                logo <!-- 로고 이미지 경로 수정 필요 -->
+            </th>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <td><input class="input" type="text" name="id" maxlength="15" autofocus></td>
+        </tr>
+        <tr>
+            <th>PW</th>
+            <td><input class="input" type="password" name="passwd" maxlength="20"></td>
+        </tr> 
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input class="inputbutton" type="submit" value="로그인">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input class="inputbutton" type="button" value="아이디찾기" onclick="location.href='http://localhost:8080/main'">
+                <input class="inputbutton" type="button" value="비밀번호찾기" onclick="location.href='http://localhost:8080/main'">
+                <input class="inputbutton" type="button" value="회원가입" onclick="location.href='http://localhost:8080/main'">
+            </td>
         </tr>
     </table>
 </form>
