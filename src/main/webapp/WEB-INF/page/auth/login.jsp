@@ -66,8 +66,7 @@
             display: flex;
             justify-content: center;
             gap: 5px;
-            width: 100%;
-            font-size : 8px;
+            font-size : 12px;
         }
         .link-group a {
             color: #000000;
@@ -100,9 +99,9 @@
         </tr>
         <tr>
             <td colspan="2" class="link-group">
-                <a href="http://localhost:8080/findId">아이디찾기</a>
-                <a href="http://localhost:8080/findPw">비밀번호찾기</a>
-                <a href="http://localhost:8080/join">회원가입</a>
+                <a style="width: 33%;" href="http://localhost:8080/findId">아이디찾기</a>
+                <a style="width: 33%;" href="http://localhost:8080/findPw">비밀번호찾기</a>
+                <a style="width: 33%;" href="http://localhost:8080/join">회원가입</a>
             </td>
         </tr>
     </table>
