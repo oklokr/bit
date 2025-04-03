@@ -97,7 +97,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" class="link-group">
+            <td class="link-group">
                 <a href="http://localhost:8080/findId">아이디찾기</a>
             </td>
         </tr>
