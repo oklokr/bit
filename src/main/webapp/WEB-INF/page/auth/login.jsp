@@ -13,13 +13,11 @@
         <tr>
             <th>ID</th>
             <td> <input class="input" type="text" name="id" maxlength="15" autofocus> </td>
-            <br> <br>
         </tr>
         <tr>
             <th>PW</th>
             <td> <input class="input" type="password" name="passwd" maxlength="20"> </td>
-            <br> <br>
-        </tr>
+        </tr> 
         <tr>
             <th>
                 <input  style="text-align: center;" class="inputbutton" type="submit" value="로그인">
