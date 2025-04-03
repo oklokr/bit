@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <header>
     <div class="container">
         <h1>
@@ -18,9 +19,46 @@
                 <a href="/mypage/inventory">병원재고 관리</a>
             </li>
         </ul>
-        <button type="button">마이페이지 열기</button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">마이페이지 열기</button>
     </div>
 </header>
+
+<div class="modal fade modal-fullscreen" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-name="mypage-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p class="title">
+                    <strong class="modal-title fs-5" id="exampleModalLabel">마이페이지</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </p>
+                <p class="info">
+                    <span>OOO병원 님</span>
+                    <button type="button" class="btn btn-link">로그아웃</button>
+                </p>
+            </div>
+            <div class="modal-body">
+                <a class="btn btn-primary" href="/mypage" role="button">내 정보</a>
+                <ul class="link-wrap">
+                    <li><a href="/main">상품정보</a></li>
+                    <li><a href="/main/product">상품정보 등록</a></li>
+                    <li><a href="/board">자유게시판</a></li>
+                    <li><a href="/mypage/inventory">병원재고 관리</a></li>
+                    <li><a href="/admin">회원 관리</a></li>
+                </ul>
+            </div>
+        </div>  
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const currentPath = window.location.pathname;
+        const menuLinks = document.querySelectorAll("header ul a");
+        menuLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPath) link.classList.add("active")
+        });
+    })
+</script>
 
 <style>
     header {
@@ -62,6 +100,10 @@
         font-weight: 600;
         position: relative;
     }
+    header ul a.active {
+        font-weight: bold;
+        color: #007bff;
+    }
     header ul a::before {
         content: "";
         width: 0%;
@@ -92,5 +134,66 @@
         background-color: transparent;
         background: url('/images/icons/user.png') no-repeat center center;
         background-size: 100%;
+    }
+
+    .modal[data-name="mypage-modal"] .modal-dialog {
+        margin: initial;
+        margin-left: auto;
+
+        --bs-modal-width: 380px;
+    }
+    .modal[data-name="mypage-modal"] .modal-header {
+        flex-direction: column;
+        padding: 0 16px;
+        border: initial;
+    }
+    .modal[data-name="mypage-modal"] .modal-header > p {
+        width: 100%;
+    }
+    .modal[data-name="mypage-modal"] .modal-header .title {
+        display: flex;
+        align-items: center;
+        padding: 16px 0;
+        margin: initial;
+    }
+    .modal[data-name="mypage-modal"] .modal-header .info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .modal[data-name="mypage-modal"] .modal-body {
+        padding-top: initial;
+    }
+
+    .modal[data-name="mypage-modal"] .modal-body .btn-primary {
+        display: block;
+        width: 100%;
+    }
+
+    .modal[data-name="mypage-modal"] .modal-body .link-wrap {
+        padding: initial;
+        margin-top: 30px;
+    }
+    .modal[data-name="mypage-modal"] .modal-body .link-wrap li {
+        border-bottom: 1px solid #212529;
+    }
+    .modal[data-name="mypage-modal"] .modal-body .link-wrap a {
+        display: block;
+        text-decoration: initial;
+        color: #212529;
+        padding: 16px 0;
+        transition: 0.3s;
+    }
+
+    .modal[data-name="mypage-modal"] .modal-body ul.link-wrap li:hover {
+        border-color: #007bff;
+    }
+    .modal[data-name="mypage-modal"] .modal-body ul.link-wrap li:hover a {
+        color: #007bff;
+        font-weight: 600;
+    }
+    .modal[data-name="mypage-modal"] .modal-body ul.link-wrap li:hover a.active {
+        color: #007bff;
+        font-weight: 600;
     }
 </style>
