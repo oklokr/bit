@@ -1,0 +1,15 @@
+.search-wrap.input-group-lg {
+    position: relative;
+}
+.search-wrap button.btn {
+    min-width: 80px;
+    border: initial;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    z-index: 6;
+    color: transparent;
+    text-indent: -9999px;
+    background: url("/images/icons/search.png") no-repeat center center;
+    background-size: 28px 28px;
+}

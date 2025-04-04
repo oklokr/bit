@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div class="container main-wrap">
     <h2>상품정보</h2>
-    <div class="input-group-lg search-warp">
+    <div class="input-group-lg search-wrap">
         <input type="text" class="form-control" placeholder="검색어를 입력해주세요." aria-label="검색어를 입력해주세요." aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
     </div>
@@ -125,7 +125,7 @@
         </button>
     </div>
 
-    <button type="button" class="more btn btn-primary btn-sm">더보기</button>
+    <a class="more btn btn-primary btn-sm" href="/main/search" role="button">더보기</a>
 </div>
 
 <script>
@@ -139,7 +139,7 @@
         font-weight: bold;
         text-align: center;
     }
-    .main-wrap .search-warp {
+    .main-wrap .search-wrap {
         margin-top: 40px;
     }
 
@@ -148,23 +148,6 @@
         gap: 8px;
         padding: 30px 0;
     }
-
-    .search-warp.input-group-lg {
-        position: relative;
-    }
-    .search-warp button.btn {
-        min-width: 80px;
-        border: initial;
-        position: absolute;
-        top: 1px;
-        right: 0;
-        z-index: 6;
-        color: transparent;
-        text-indent: -9999px;
-        background: url("/images/icons/search.png") no-repeat center center;
-        background-size: 28px 28px;
-    }
-
 
     #product-items {
         margin: 0 -50px;
@@ -215,7 +198,7 @@
     
     .main-wrap .more {
         display: block;
-        min-width: 360px;
+        width: 360px;
         margin: 60px auto 0;
     }
 </style>
