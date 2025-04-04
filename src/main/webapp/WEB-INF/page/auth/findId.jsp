@@ -48,8 +48,7 @@
             border: 1px solid rgb(122, 122, 122)
             cursor pointer;
             box-sizing: border-box;
-            width : 50%;
-            display : inline-block;
+            width : 45%;    
             text-align: center;
         }
         .inputbutton[type="submit"] {
@@ -85,10 +84,10 @@
         .link-group a:hover {
             color: #FF0000;
         }
-        td {
+        td.button-td {
         display: flex;
-        justify-content: space-between;  /* 좌우 여백을 균등하게 설정 */
-        align-items: center;
+        justify-content: space-between;  /* 버튼들을 가로로 배치하고 좌우 여백을 균등하게 설정 */
+        align-items: center;  /* 버튼들이 수직으로 가운데 정렬 */
         }
 </style>
 
