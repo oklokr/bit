@@ -148,7 +148,7 @@
         </tr>
         <tr>
             <td id="emailField" style="display: none;" style="text-align: left;">
-                이메일 <input class="input" type="text" name="email" maxlength="30" style="width: 150px;">
+                이메일 <input class="input" type="text" name="email" maxlength="30" style="width: 150px;" style="font-size: 12px;">
             </td>
         </tr>
         <tr>
