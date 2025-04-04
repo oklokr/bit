@@ -96,11 +96,9 @@
             </th>
         </tr>
         <tr>
-
             <td> ID <input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요."></td>
         </tr>
         <tr> 
-
             <td> PW <input class="input" type="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
         </tr> 
         <tr>
