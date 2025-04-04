@@ -14,6 +14,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+
     <div class="board-edit-page container">
         <h3> 자유게시판 게시글 작성</h3>
         <br>
@@ -23,7 +24,7 @@
                     <th colspan="2">
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">제목</span>
-                            <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" name = "title" aria-label="Username" aria-describedby="basic-addon1">
                           </div>
                     </th>
                 </tr>
@@ -33,7 +34,7 @@
                         <fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm" var="today"/>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">작성자</span>
-                            <input type="text" class="form-control" placeholder="작성자" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                            <input type="text" class="form-control" placeholder="작성자" name="author" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             <span class="input-group-text" id="basic-addon1">작성일</span>
                             <input type="text" class="form-control" placeholder="${today}" aria-label="Username" aria-describedby="basic-addon1" readonly>
                         </div>
@@ -50,8 +51,8 @@
                 <!-- 버튼 그룹 -->
                 <div class="button-group d-flex">
                     <div class="ms-auto">
-                        <button class="btn btn-primary" onclick="submitPost()">작성</button>
-                        <button class="btn btn-primary">취소</button>
+                        <button type="button" class="btn btn-primary" onclick="submitPost()">작성</button>
+                        <button type="reset" class="btn btn-primary">취소</button>
                     </div>
                 </div>
             </table>
