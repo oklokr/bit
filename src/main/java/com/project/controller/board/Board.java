@@ -20,8 +20,8 @@ public class Board {
 
     @GetMapping("/board")
     public String board(@RequestParam(required=false) String pageNum, Model model) {
-        int pageSize=9;
-        int pageBlock=10;
+        int pageSize=10;
+        int pageBlock=3;
         
         int count=0; //전체 글 개수
         int currentPage=0; //계산용

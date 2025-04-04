@@ -74,12 +74,40 @@
                 </c:forEach>
             </c:if>
         </table>
+
+        <div class="d-flex justify-content-center align-items-center gap-3 mt-0">
+            <c:if test="${count gt 0}">
+                <c:if test="${startPage gt pageBlock}">
+                    <a href="board">
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
+                </c:if>
+                <c:forEach var="i" begin="${startPage}" end="${endPage}">
+                    <c:if test="${i eq currentPage}">
+                        <span class="badge bg-primary" style="font-size: 1rem;">${i}</span>
+                    </c:if>
+                    <c:if test="${i ne currentPage}">
+                        <a href="board?pageNum=${i}" class="text-decoration-none">${i}</a>
+                    </c:if>
+                </c:forEach>
+                <c:if test="${pageCount gt endPage}">		
+                    <a href="board?pageNum=${startPage + pageBlock}">
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                </c:if>
+            </c:if>
+        </div>
     </div>
 
+    
 </body>
 </html>
 
 <style>
+    body {
+        padding-bottom: 50px; /* 페이지 아래쪽 여백 추가 */
+    }
+
     .board-page {
         max-width: 800px; /* 페이지 최대 너비 제한 */
         margin: 40px auto; /* 중앙 정렬 */
@@ -99,13 +127,12 @@
 
     .table {
         margin-top: 10px; /* 위쪽 여백 */
-        margin-bottom: 20px; /* 아래쪽 여백 */
         padding: 10px;
     }
 
     .board-page h3 {
         text-align: center;
-        margin: 20px 0; /* 위아래 여백 */
+        margin: 20px 100px; /* 위아래 여백 */
         align-items: center;
         font-weight: bold;
     }
