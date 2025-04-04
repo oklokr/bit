@@ -14,4 +14,12 @@
         ORDER BY creation_date DESC
         LIMIT #{pageSize} OFFSET #{start};
     </select>
+
+    <select id="getArticle" parameterType="int" resultType="com.project.model.BoardDto">
+        select * from bulletin_board where board_id = #{board_id}
+    </select>
+
+    <update id="addCount" parameterType="int">
+        update bulletin_board set view_count = view_count + 1 where board_id = #{board_id}
+    </update>
 </mapper>

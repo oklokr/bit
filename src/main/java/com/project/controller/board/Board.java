@@ -71,9 +71,10 @@ public class Board {
 
             List<BoardDto> dtos = boardDao.getArticles(map);
             model.addAttribute("dtos", dtos);
-            for (BoardDto dto:dtos){
-                System.out.println(dto.getTitle());
-            }
+            // for (BoardDto dto:dtos){
+            //     System.out.println(dto.getTitle());
+
+            // }
         }
         System.out.println(start+end);
         model.addAttribute("title", "main page");
