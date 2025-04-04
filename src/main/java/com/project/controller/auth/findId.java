@@ -34,7 +34,7 @@ public class FindId {
         UserDto userDto = userService.findUserByCertification(company_name, certification, cert_value);
 
         if (userDto != null) {
-            model.addAttribute("userId", userDto.getId());
+            model.addAttribute("id", userDto.getId());
             model.addAttribute("message", "아이디가 성공적으로 조회되었습니다.");
         } else {
             model.addAttribute("errorMessage", "해당 정보로 아이디를 찾을 수 없습니다.");

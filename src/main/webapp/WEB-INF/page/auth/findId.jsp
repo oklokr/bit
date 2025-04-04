@@ -5,7 +5,10 @@
         const selectedCert = document.querySelector('input[name="certification"]:checked');
         const emailField = document.getElementById('emailField');
         const phoneField = document.getElementById('phoneField');
-        
+        if (selectedCert) {
+            // 인증방법에 따라 cert_value 값을 설정
+            certValueInput.value = selectedCert.value; // cert_value에 선택된 값 저장
+
         if (selectedCert) {
             // 이메일을 선택한 경우
             if (selectedCert.value === "1") {
@@ -19,6 +22,7 @@
             }
         }
     }
+}
 </script>
 <style>
     body {
@@ -159,6 +163,12 @@
                 <input class="input" type="text" name="tel2" maxlength="4" style="width: 46px;">
                 - 
                 <input class="input" type="text" name="tel3" maxlength="4" style="width: 46px;">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <!-- 숨겨진 cert_value 필드 추가 -->
+                <input type="hidden" name="cert_value" value="">
             </td>
         </tr>
         <tr>
