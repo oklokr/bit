@@ -11,37 +11,67 @@
 </head>
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
     <div class="board-edit-page container">
-        <h3> 자유게시판 게시글 작성 / 수정</h3>
+        <h3> 자유게시판 게시글 수정</h3>
         <br>
-        <table class="table">
-            <tr>
-                <th colspan="2">
-                    <input class="form-control form-control-lg" type="text" placeholder="원래 제목" name="title" maxlength="100">
+        <form name="editform" method="POST" action="/board/edit">
+            <input type="hidden" name="title" id="title">
+            <input type="hidden" name="content" id="content">
+            <input type="hidden" name="pageNum" value="${pageNum}">
+            <input type="hidden" name="board_id" value="${boardDto.board_id}">
+            <table class="table">
+                <tr>
+                    <th colspan="2">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">제목</span>
+                            <input type="text" class="form-control" value="${boardDto.title}" name="titleInput" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th colspan="2">
+                        <jsp:useBean id="now" class="java.util.Date"/>
+                        <fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm" var="today"/>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">작성자</span>
+                            <input type="text" class="form-control" value="${boardDto.author}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                            <span class="input-group-text" id="basic-addon1">작성일</span>
+                            <input type="text" class="form-control" value="${boardDto.creation_date}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                        </div>
+                    </th>
+                </tr>
+            </table>
 
-                </th>
-            </tr>
-            <tr>
-                <td>작성자 : dto.author</td>
-                <td>작성날짜 : dto.create_date</td>
-            </tr>
-        </table>
-
-        <div id ="editor">
-            <p>글을 작성하세여 </p>
-        </div>
-
-        <table class="table">
-            <!-- 버튼 그룹 -->
-            <div class="button-group d-flex">
-                <div class="ms-auto">
-                    <button class="btn btn-primary" onclick="submitPost()">작성</button>
-                    <button class="btn btn-primary">취소</button>
-                </div>
+            <div id="editor">
+                ${boardDto.content}
             </div>
-        </table>
+        </form>
         
+        <!-- 버튼 그룹 -->
+        <div class="button-group d-flex">
+            <div class="ms-auto">
+                <button type="button" name="submit" class="btn btn-primary" onclick="submitPost()">수정</button>
+                <button type="reset" class="btn btn-primary" onclick="location='/board/detail?board_id=${board_id}&pageNum=${pageNum}'">취소</button>
+            </div>
+        </div>
     </div>
+
+    <c:if test="${result == '0'}">
+        <script>
+            alert("게시글 수정에 실패했습니다.");
+        </script>
+    </c:if>
+
+    <c:if test="${result == '1'}">
+        <script>
+            alert("게시글 수정에 성공했습니다.");
+        </script>
+        <meta http-equiv="refresh" content="0; url=/board/detail?board_id=${board_id}&pageNum=${pageNum}">
+    </c:if>
+
 </body>
 </html>
 
@@ -49,13 +79,12 @@
     .table {
         width: 100%;
         table-layout: fixed; /* 고정 레이아웃 */
-        border-color:#fff
+        border-color:#fff;
     }
     
     .board-edit-page {
         max-width: 800px; /* 페이지 최대 너비 제한 */
         margin: 40px auto; /* 중앙 정렬 */
-        padding: 20px;
         background: #fff; /* 배경 흰색 */
         border-radius: 8px; /* 모서리 둥글게 */
     }
@@ -74,6 +103,10 @@
         width: 120px;
     }
 
+    .form-control:focus {
+        box-shadow: none !important; /* 부트스트랩 기본 효과 제거 */
+    }
+
     #editor{
         height: 500px; /* 높이 조절 */
         padding: 10px;
@@ -84,21 +117,43 @@
     const quill=new Quill('#editor',{
         theme: 'snow'
     })
+    window.onload = function() {
+        const content = `${boardDto.content}`;  // 기존 게시글 내용
+        quill.root.innerHTML = content; // Quill 에디터에 내용 삽입
+    }
 
-    function submitPost(){
+    let submit = document.querySelector("button[name='submit']");
+    submit.addEventListener("click", (event) => {
+        let title = document.querySelector("input[name='titleInput']").value;
+        let content = quill.root.innerHTML;
+        let tag = /<[^>]*>/; 
+
+        if (!title) {
+            alert("제목을 입력하세요");
+            event.preventDefault();
+            document.querySelector("input[name='titleInput']").focus();
+        } else if (!content.trim()) {
+            alert("게시글 내용을 입력하세요");
+            event.preventDefault();
+        } else if (tag.test(title)) {
+            alert("제목에 태그를 포함할 수 없습니다");
+            event.preventDefault();
+        } else {
+            submitPost();  // 모든 검증 후 submitPost 함수 실행
+        }
+    });
+
+    function submitPost() {
         const content = quill.root.innerHTML;
+        const title = document.querySelector('input[name="titleInput"]').value;
+        const board_id = "${boardDto.board_id}";
         
-        console.log("글 내용:", content);
-        
-        axios.post('/board/detail', {content:content})
-            .then(response => {
-                alert('게시글 저장 성공!');
-                window.location.href="/board/list";
-            })
-            .catch(error=>{
-                console.error('Error:' , error);
-                alert('게시글 저장 실패');
-            })
+        // 숨겨진 input에 값 설정
+        document.querySelector('#title').value = title;
+        document.querySelector('#content').value = content;
+
+        // 폼 제출
+        document.forms["editform"].submit();
     }
 
 </script>

@@ -14,7 +14,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
     <div class="board-detail-page container">
-        <h3> 자유게시판 </h3>
+        <h3> 자유게시판 ${deleteResult}</h3>
         <br>
         <table class="table">
             <tr>
@@ -42,15 +42,34 @@
 
             <div class="ms-auto">
                 <button class="btn btn-primary"
-                onclick="location='/board/edit?board_id=${board_id}&pageNum=${pageNum}'">수정</button>
+                onclick="location='/board/edit?board_id=${board_id}&result=${-1}&pageNum=${pageNum}'">수정</button>
                 <button class="btn btn-primary"
                 onclick="location='/board/delete?board_id=${board_id}&pageNum=${pageNum}'">삭제</button>
             </div>
         </div>
     
     </div>
+
+
 </body>
 </html>
+
+<script>
+    window.onload = function() {
+        let deleteResult = "${deleteResult}";
+        
+        if (deleteResult === "1") {
+            alert("게시글이 삭제되었습니다.");
+            location.href = "/board?pageNum=${pageNum}"; // 목록 페이지로 이동
+        } else if (deleteResult === "0") {
+            alert("게시글 삭제에 실패했습니다.");
+        }
+
+    }
+</script>
+
+<%-- JSP에서 세션 값 삭제 (JavaScript 실행 이후) --%>
+<% session.removeAttribute("deleteResult"); %>
 
 <style>
     .table {

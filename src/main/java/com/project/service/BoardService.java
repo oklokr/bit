@@ -34,4 +34,12 @@ public class BoardService {
         return boardmapper.insertPost(boardDto);
     }
 
+    public int modifyPost(BoardDto boardDto){
+        return boardmapper.modifyPost(boardDto);
+    }
+
+    public int deletePost(int board_id){
+        return boardmapper.deletePost(board_id);
+    }
+
 }

@@ -28,6 +28,17 @@
         values(#{member_no}, #{title}, #{content}, #{author}, #{creation_date})
     </insert>
 
+    <update id="modifyPost" parameterType="com.project.model.BoardDto">
+            UPDATE bulletin_board 
+            SET title = #{title}, content = #{content} 
+            WHERE board_id = #{board_id}
+    </update>
+
+    <delete id="deletePost" parameterType="int">
+		delete from bulletin_board
+		WHERE board_id = #{board_id}
+	</delete>
+
 </mapper>
 
 

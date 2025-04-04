@@ -49,9 +49,10 @@
                         </td>
                         <td>
                             &nbsp; &nbsp;
-                            <a href="/board/detail?board_id=${dto.board_id}&pageNum=${pageNum}">
+                            <a href="/board/detail?board_id=${dto.board_id}&pageNum=${pageNum}" 
+                                class="board-title-link">
                                 ${dto.title}
-                            </a>
+                            </a>    
                         </td> 
                         <td>
                             ${dto.author}
@@ -119,6 +120,27 @@
     .col-title{
         text-align: center; /* 가운데 정렬 */
         font-weight: bold;  /* 글씨 굵게 */
+    }
+
+        /* 기본 상태: 검은색 */
+    .board-title-link {
+        color: black;
+        text-decoration: none;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* 마우스 올릴 때: 파란색 */
+    .board-title-link:hover {
+        color: RoyalBlue;
+        text-decoration: underline;
+    }
+
+    /* 방문한 링크: 보라색 */
+    .board-title-link:visited {
+        color: Purple;
     }
 
     .btn.btn-primary {

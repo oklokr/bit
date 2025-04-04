@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.model.BoardDto;
 import com.project.service.BoardService;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class BoardDetail {
@@ -20,7 +22,6 @@ public class BoardDetail {
     Model model) throws Exception {
         BoardDto boardDto = boardDao.getArticle(board_id);
         boardDao.addCount(board_id);
-
         model.addAttribute("board_id", board_id);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("boardDto", boardDto);
@@ -30,17 +31,13 @@ public class BoardDetail {
     }
 
     @GetMapping("/board/delete")
-    public String boardDelete(@RequestParam int board_id, @RequestParam String pageNum, Model model){
+    public String boardDelete(@RequestParam int board_id, @RequestParam String pageNum, Model model, HttpSession session){
+        int result = boardDao.deletePost(board_id);
+        session.setAttribute("deleteResult", result);
+        model.addAttribute("result", result);
+        model.addAttribute("pageNum", pageNum);
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/board/detail.jsp");
         return "layout/app";
     }
-    // @PostMapping("/board/detail")
-    // public String editPost(@RequestParam("content") String content, Model model) {
-    //     System.out.println("받은 데이터: " + content);
-
-    //     model.addAttribute("title", "main page");
-    //     model.addAttribute("contentPage", "/WEB-INF/page/board/detail.jsp");
-    //     return "layout/app";
-    // }
 }
