@@ -13,4 +13,7 @@ public interface BoardMapper {
     public BoardDto getArticle(int board_id);
     public void addCount(int board_id);
     public int insertPost(BoardDto boardDto);
+    public int modifyPost(BoardDto boardDto);
+    public int deletePost(int board_id);
+    public int getReplyCount(int board_id);
 }
