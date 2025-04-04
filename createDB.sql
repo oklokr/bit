@@ -20,12 +20,15 @@ CREATE TABLE common (
     common_code_creation_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+-- ✅ 공통 코드 상세 테이블 생성
 CREATE TABLE common_codes (
     common_code_id INT AUTO_INCREMENT PRIMARY KEY,
+    common_code VARCHAR(50) NOT NULL, -- common 테이블의 common_code를 참조
     common_name VARCHAR(100) NOT NULL,
     common_value VARCHAR(255) NOT NULL,
     creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     common_id INT,
+    FOREIGN KEY (common_code) REFERENCES common(common_code) ON DELETE CASCADE,
     FOREIGN KEY (common_id) REFERENCES common(common_id) ON DELETE CASCADE
 );
 
@@ -123,13 +126,13 @@ CREATE TABLE replies (
     FOREIGN KEY (member_no) REFERENCES members(member_no) ON DELETE SET NULL
 );
 
-
-select * from common;
-select * from common_codes;
-select * from inventory;
-select * from members;
-select * from member_terms_agreement;
-select * from product_info;
-select * from terms;
-select * from bulletin_board;
-select * from replies;
+-- ✅ 데이터 확인용 SELECT
+SELECT * FROM common;
+SELECT * FROM common_codes;
+SELECT * FROM inventory;
+SELECT * FROM members;
+SELECT * FROM member_terms_agreement;
+SELECT * FROM product_info;
+SELECT * FROM terms;
+SELECT * FROM bulletin_board;
+SELECT * FROM replies;

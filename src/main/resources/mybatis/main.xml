@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project.repository.ProductMapper">
+    <resultMap id="getCommonCode" type="com.project.model.CommonCodeDto">
+        <result property="commonCodeId" column="common_code_id"/>
+        <result property="commonCode" column="common_code"/>
+        <result property="commonName" column="common_name"/>
+        <result property="commonValue" column="common_value"/>
+        <result property="creationDate" column="creation_date"/>
+        <result property="commonId" column="common_id"/>
+    </resultMap>
+    <select id="getCommonCode" resultMap="getCommonCode">
+        SELECT * FROM common_codes where common_code = #{commonCode}
+    </select>
+</mapper>

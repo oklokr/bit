@@ -4,20 +4,20 @@ INSERT IGNORE INTO common (common_code) VALUES
 ('CATEGORY_TYPE'),
 ('TERMS_TYPE');
 
-INSERT INTO common_codes (common_name, common_value, common_id) VALUES 
-('user', 'USER', 1),
-('admin', 'ADMIN', 1),
-('impression_material', '인상재', 2),
-('resin', '레진', 2),
-('coating_agent', '도포제', 2),
-('wax', '왁스', 2),
-('carving_tool_and_motor', '조각도 및 모터', 2),
-('impression_taking', '인상채득', 2),
-('occlusion', '교합', 2),
-('pin', '핀', 2),
-('etc', '기타', 2),
-('service', 'SERVICE', 3),
-('privacy', 'PRIVACY', 3);
+INSERT INTO common_codes (common_code, common_name, common_value, common_id) VALUES 
+('MEMBER_TYPE', 'user', '1', 1),
+('MEMBER_TYPE', 'admin', '2', 1),
+('CATEGORY_TYPE', '인상재', '1', 2),
+('CATEGORY_TYPE', '레진', '2', 2),
+('CATEGORY_TYPE', '도포제', '3', 2),
+('CATEGORY_TYPE', '왁스', '4', 2),
+('CATEGORY_TYPE', '조각도 및 모터', '5', 2),
+('CATEGORY_TYPE', '인상채득', '6', 2),
+('CATEGORY_TYPE', '교합', '7', 2),
+('CATEGORY_TYPE', '핀', '8', 2),
+('CATEGORY_TYPE', '기타', '9', 2),
+('TERMS_TYPE', 'service', '1', 3),
+('TERMS_TYPE', 'privacy', '2', 3);
 
 -- ✅ 회원 데이터 삽입
 INSERT INTO members (id, company_name, password, email, phone_number, business_number, address, detailed_address, postal_code, member_type) VALUES 
