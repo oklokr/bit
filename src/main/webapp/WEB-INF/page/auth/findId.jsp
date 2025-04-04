@@ -102,10 +102,10 @@
             <td> <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="value를 입력해주세요" > </td>
         </tr>
         <tr>
-            <th colspan="2">
+            <td colspan="2">
                 <input class="inputbutton" type="reset" value="취소">
                 <input class="inputbutton" type="submit" value="전송">
-            </th>
+            </td>
         </tr>
     </table>
 </form>
