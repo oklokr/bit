@@ -110,7 +110,7 @@
                 인증방법
                <input type="radio" name="certification" value="1" 이메일> 이메일
                <input type="radio" name="certification" value="2" 휴대폰> 휴대폰
-               <input style="font-size : 16px;" class="input" type="text" maxlength="15" autofocus placeholder="value를 입력해주세요" >
+               <input style="font-size : 16px;" class="input" type="text" maxlength="30" autofocus placeholder="value를 입력해주세요" >
             </td>
         </tr>
         <tr>
