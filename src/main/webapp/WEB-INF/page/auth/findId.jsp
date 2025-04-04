@@ -112,8 +112,8 @@
         </tr>
         <tr>
             <td colspan="2" >
-                <input class="inputbutton" type="reset" value="취소">
-                <input class="inputbutton" type="submit" value="전송">
+                <input class="inputbutton" type="button" value="이전" onclick="location='/login'">
+                <input class="inputbutton" type="submit" value="확인">
             </td>
         </tr>
     </table>
