@@ -2,8 +2,8 @@
 <div>
     findId
 </div>
-<script src="/js/common.js"></script>
 <script>
+    // common.js에서 validate와 postRequestApi를 사용
     function validateForm() {
         const companyName = document.querySelector('input[name="company_name"]').value;
         const certification = document.querySelector('input[name="certification"]:checked');
