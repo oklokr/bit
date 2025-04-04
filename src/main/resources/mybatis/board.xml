@@ -22,4 +22,12 @@
     <update id="addCount" parameterType="int">
         update bulletin_board set view_count = view_count + 1 where board_id = #{board_id}
     </update>
+
+    <insert id="insertPost" parameterType="com.project.model.BoardDto">
+        insert into bulletin_board (member_no, title, content, author, creation_date)
+        values(#{member_no}, #{title}, #{content}, #{author}, #{creation_date})
+    </insert>
+
 </mapper>
+
+

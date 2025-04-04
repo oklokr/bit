@@ -22,7 +22,7 @@
             <tr>
                 <th colspan="4">총 ${count}개</th>
                 <th><input class="btn btn-primary"
-                    onclick="location=''" type="button" value="글쓰기"/></th>
+                    onclick="location='/board/write?result=${-1}'" type="button" value="글쓰기"/></th>
             </tr>
             <tr class="col-title">
                 <th style="width:7%">No</th>

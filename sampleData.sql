@@ -94,6 +94,7 @@ INSERT INTO bulletin_board (member_no, title, author, view_count) VALUES
 ((SELECT member_no FROM members WHERE id = 'user'), '서른아홉 번째 게시글', 'user', 20),
 ((SELECT member_no FROM members WHERE id = 'user'), '마흔 번째 게시글', 'user', 68);
 
+select member_no from members where id='user';
 
 -- ✅ 답글 데이터 삽입
 INSERT INTO replies (board_id, member_no, author, reply_title, reply_content, reply_order, reply_step, reply_level) VALUES 
