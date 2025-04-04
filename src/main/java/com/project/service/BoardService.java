@@ -30,4 +30,8 @@ public class BoardService {
         boardmapper.addCount(board_id);
     }
 
+    public int insertPost(BoardDto boardDto){
+        return boardmapper.insertPost(boardDto);
+    }
+
 }
