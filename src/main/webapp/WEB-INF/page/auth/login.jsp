@@ -10,7 +10,7 @@
 <style>
     body {
             margin: 0;
-            height: 100vh;
+            height: 100vh; 
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -88,7 +88,7 @@
             color: #FF0000;
         }
 </style>
-<form name="login" method="post">
+<form method="post">
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
@@ -97,7 +97,7 @@
         </tr>
         <tr>
             <th style="text-align: left;">ID</th>
-            <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요." autofocus></td>
+            <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요."></td>
         </tr>
         <tr>
             <th style="text-align: left;">PW</th>
