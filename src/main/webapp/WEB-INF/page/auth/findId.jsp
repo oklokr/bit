@@ -121,3 +121,75 @@
         </tr>
     </table>
 </form>
+
+<script>
+    // 공통 유효성 검사 함수
+    const validate = {
+        isEmpty: value => {
+            return value === null || value === undefined || value.trim() === '';
+        },
+        isEmail: value => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(value);
+        },
+        isPhoneNumber: value => {
+            const phoneRegex = /^\d{10,11}$/; // 한국 전화번호 형식 (10~11자리 숫자)
+            return phoneRegex.test(value);
+        }
+    };
+
+    // 폼 유효성 검사 함수
+    function validateForm() {
+        // 오류 메시지 초기화
+        clearErrors();
+
+        // 업체명 검사
+        const companyName = document.forms["findId"]["companyName"].value;
+        if (validate.isEmpty(companyName)) {
+            document.getElementById("companyNameError").textContent = "업체명을 입력해주세요.";
+            return false;
+        }
+
+        // 인증 방법 검사
+        const certification = document.forms["findId"]["certification"];
+        let certificationValue = '';
+        if (certification[0].checked) {
+            certificationValue = 'email';  // 이메일
+        } else if (certification[1].checked) {
+            certificationValue = 'phone';  // 휴대폰
+        }
+
+        if (validate.isEmpty(certificationValue)) {
+            document.getElementById("certificationError").textContent = "인증 방법을 선택해주세요.";
+            return false;
+        }
+
+        // 인증값 검사
+        const certificationInputValue = document.forms["findId"]["certificationValue"].value;
+        if (validate.isEmpty(certificationInputValue)) {
+            document.getElementById("certificationValueError").textContent = "인증값을 입력해주세요.";
+            return false;
+        }
+
+        // 인증값 형식 검증
+        if (certificationValue === 'email' && !validate.isEmail(certificationInputValue)) {
+            document.getElementById("certificationValueError").textContent = "올바른 이메일 형식이 아닙니다.";
+            return false;
+        }
+
+        if (certificationValue === 'phone' && !validate.isPhoneNumber(certificationInputValue)) {
+            document.getElementById("certificationValueError").textContent = "올바른 전화번호 형식이 아닙니다.";
+            return false;
+        }
+
+        // 모든 검사 통과 시 폼 전송
+        return true;
+    }
+
+    // 오류 메시지 초기화 함수
+    function clearErrors() {
+        document.getElementById("companyNameError").textContent = "";
+        document.getElementById("certificationError").textContent = "";
+        document.getElementById("certificationValueError").textContent = "";
+    }
+</script>
