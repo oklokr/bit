@@ -2,6 +2,57 @@
 <div>
     findId
 </div>
+<script>
+    // 유효성 검사 함수
+    const validate = {
+        isEmpty: value => value === null || value === undefined || value.trim() === '',
+        isEmail: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
+        isPhoneNumber: value => /^\d{10,11}$/.test(value)
+    };
+
+    // 폼 제출 시 유효성 검사
+    function validateForm() {
+        const companyName = document.forms["findId"]["company_name"].value;
+        const certification = document.querySelector('input[name="certification"]:checked');
+        const certValue = document.forms["findId"]["cert_value"].value;
+
+        // 업체명 검사
+        if (validate.isEmpty(companyName)) {
+            alert("업체명을 입력해주세요.");
+            return false;
+        }
+
+        // 인증 방법 선택 여부 검사
+        if (!certification) {
+            alert("인증 방법을 선택해주세요.");
+            return false;
+        }
+
+        // 선택된 인증 방법에 따라 유효성 검사
+        if (certification.value === "1") { // 이메일
+            if (!validate.isEmail(certValue)) {
+                alert("유효한 이메일을 입력해주세요.");
+                return false;
+            }
+        } else if (certification.value === "2") { // 휴대폰
+            if (!validate.isPhoneNumber(certValue)) {
+                alert("유효한 휴대폰 번호를 입력해주세요 (10~11자리 숫자).");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // 라디오 버튼 선택 시 placeholder 변경
+    function updatePlaceholder() {
+        const certValueInput = document.forms["findId"]["cert_value"];
+        const selectedCert = document.querySelector('input[name="certification"]:checked');
+        if (selectedCert) {
+            certValueInput.placeholder = selectedCert.value === "1" ? "이메일을 입력해주세요" : "휴대폰 번호를 입력해주세요";
+        }
+    }
+</script>
 <style>
     body {
             margin: 0;
