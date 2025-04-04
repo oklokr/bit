@@ -38,7 +38,6 @@ public class UserService {
         return "SUCCESS";
     }
     public UserDto findUserByEmail(String companyName, String email) {
-        // 실제 DB 조회 로직 (예: JPA, MyBatis 등)
         UserDto user = new UserDto();
         if (companyName.equals("테스트업체") && email.equals("test@example.com")) {
             user.setId("test123");
@@ -50,7 +49,6 @@ public class UserService {
     }
 
     public UserDto findUserByPhone(String companyName, String phone) {
-        // 실제 DB 조회 로직
         UserDto user = new UserDto();
         if (companyName.equals("테스트업체") && phone.equals("01012345678")) {
             user.setId("test123");
