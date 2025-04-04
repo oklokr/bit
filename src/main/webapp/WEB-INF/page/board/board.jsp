@@ -11,19 +11,17 @@
 </head>
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-    <div>
-        <c:set var="count" value="0" />
-    </div>
-
+    
     <div class="board-page countainer">
+        
         <h3> 자유게시판 </h3>
         <br>
-        
-        ${count}개
-        <input class="btn btn-primary" type="button" value="글쓰기"/>
 
-        ${str_num}
+        <input class="btn btn-primary" type="button" value="글쓰기"/>
+        ${count}개
+
         <table class="table">
             <tr>
                 <th>No</th>
@@ -34,25 +32,27 @@
             </tr>
             <c:if test="${count eq 0}">
                 <tr>
-                    <td colspan = "5">자유게시판 글이 존재하지 않습니다</td>
+                    <td colspan = "5">
+                        자유게시판 글이 존재하지 않습니다 ${count eq 0}
+                    </td>
                 </tr>
-
             </c:if>
+
             <c:if test="${count ne 0}">
                 <c:set var="number" value="${number}"/>
-                <c:foreach var="dto" items="${dtos}">
+                <c:forEach var="dto" items="${dtos}">
                     <tr>
                         <td>
                             ${number}
                             <c:set var="number" value="${number-1}"/>
                         </td>
                         <td>
-                            <a href="board/detail?id=${dto.id}&pageNum=${pageNum}&number=${number+1}">
+                            <a href="board/detail?board_id=${dto.board_id}&pageNum=${pageNum}&number=${number+1}">
                                 ${dto.title}
                             </a>
                         </td> 
                         <td>
-                            ${dto.author}
+                            ${dto.member_no}
                         </td>
                         <td>
                             ${dto.creation_date}
@@ -61,10 +61,11 @@
                             ${dto.view_count}
                         </td>
                     </tr>
-                </c:foreach>
+                </c:forEach>
             </c:if>
         </table>
     </div>
+
 </body>
 </html>
 
