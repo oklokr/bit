@@ -16,20 +16,25 @@ public class BoardDetail {
     private BoardService boardDao;
 
     @GetMapping("/board/detail")
-    public String pageRender(@RequestParam int board_id, @RequestParam String pageNum, @RequestParam int number,
+    public String boardDetail(@RequestParam int board_id, @RequestParam String pageNum,
     Model model) throws Exception {
         BoardDto boardDto = boardDao.getArticle(board_id);
         boardDao.addCount(board_id);
 
         model.addAttribute("board_id", board_id);
         model.addAttribute("pageNum", pageNum);
-        model.addAttribute("number", number);
         model.addAttribute("boardDto", boardDto);
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/board/detail.jsp");
         return "layout/app";
     }
 
+    @GetMapping("/board/delete")
+    public String boardDelete(@RequestParam int board_id, @RequestParam String pageNum, Model model){
+        model.addAttribute("title", "main page");
+        model.addAttribute("contentPage", "/WEB-INF/page/board/detail.jsp");
+        return "layout/app";
+    }
     // @PostMapping("/board/detail")
     // public String editPost(@RequestParam("content") String content, Model model) {
     //     System.out.println("받은 데이터: " + content);
