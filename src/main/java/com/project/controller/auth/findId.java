@@ -42,4 +42,5 @@ public class FindId {
         model.addAttribute("contentPage", "/WEB-INF/page/auth/findIdResult.jsp");
         return "layout/app";
     }
-}
+} 
+
