@@ -15,7 +15,7 @@ public class UserDto {
     private String phoneNumber;
     private String address;
     private String detailedAddress;
-    private String postalCode;
+    private String postalCode;  
     private int memberType;
     private Timestamp joinDate;
 }

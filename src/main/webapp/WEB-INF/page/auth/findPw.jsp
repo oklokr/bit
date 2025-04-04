@@ -2,6 +2,15 @@
 <div>
     findPw
 </div>
+<script>
+    function updatePlaceholder() {
+        const certValueInput = document.querySelector('input[name="cert_value"]');
+        const selectedCert = document.querySelector('input[name="certification"]:checked');
+        if (selectedCert) {
+            certValueInput.placeholder = selectedCert.value === "1" ? "이메일을 입력해주세요" : "휴대폰 번호를 입력해주세요";
+        }
+    }
+</script>
 <style>
     body {
             margin: 0;
@@ -106,11 +115,12 @@
             </td>
         </tr>
         <tr>
-            <td style="font-size : 12px;"> 
+            <td style="font-size: 12px;">
                 인증방법
-               <input type="radio" name="certification" value="1" 이메일> 이메일
-               <input type="radio" name="certification" value="2" 휴대폰> 휴대폰
-               <input style="font-size : 16px;" class="input" type="text" maxlength="15" autofocus placeholder="value를 입력해주세요" >
+                <input type="radio" name="certification" value="1" onclick="updatePlaceholder()"> 이메일
+                <input type="radio" name="certification" value="2" onclick="updatePlaceholder()"> 휴대폰
+                <br>
+                <input class="input" style="font-size: 16px;" type="text" name="cert_value" maxlength="30" placeholder="인증방법을 선택해주세요">
             </td>
         </tr>
         <tr>

@@ -5,6 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
+
+
+
+
+
 @Controller
 public class FindId {
     @GetMapping("/findId")
@@ -13,4 +18,6 @@ public class FindId {
         model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
         return "layout/app";
     }
-}
+
+} 
+
