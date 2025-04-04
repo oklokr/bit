@@ -3,18 +3,18 @@
     function updatePlaceholder() {
         const certValueInput = document.querySelector('input[name="cert_value"]');
         const selectedCert = document.querySelector('input[name="certification"]:checked');
+        // cert_value 입력 필드가 존재하는지 확인
+        if (!certValueInput) {
+            console.error('cert_value input field not found');
+            return;
+        }
+        
         if (selectedCert) {
-            // 이메일을 선택한 경우
+            // 인증 방법에 따라 placeholder를 업데이트
             if (selectedCert.value === "1") {
                 certValueInput.placeholder = "이메일을 입력해주세요";
-                emailField.style.display = "block";
-                phoneField.style.display = "none";
-            }
-            // 휴대폰을 선택한 경우
-            else if (selectedCert.value === "2") {
+            } else if (selectedCert.value === "2") {
                 certValueInput.placeholder = "휴대폰 번호를 입력해주세요";
-                emailField.style.display = "none";
-                phoneField.style.display = "block";
             }
         }
     }
