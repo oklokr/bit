@@ -58,12 +58,8 @@
             background-color: #d3d3d3;
             width: 50%;
             height: 50%;
-            box-sizing: border-box;
-        }
-        .inputbutton[type="button"] {
-            background-color: #f0f0f0;
-            display: inline-block;
-            margin: 5px;
+            margin : 5px;
+            box-sizing : border-box;
         }
 
         .logo {
