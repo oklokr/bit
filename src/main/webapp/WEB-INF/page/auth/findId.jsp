@@ -2,13 +2,8 @@
 <div>
     findId
 </div>
+<script src="/js/common.js"></script>
 <script>
-    const validate = {
-        isEmpty: value => value === null || value === undefined || value.trim() === '',
-        isEmail: value => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value),
-        isPhoneNumber: value => /^\d{10,11}$/.test(value)
-    };
-
     function validateForm() {
         const companyName = document.querySelector('input[name="company_name"]').value;
         const certification = document.querySelector('input[name="certification"]:checked');
