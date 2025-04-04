@@ -100,8 +100,8 @@
                 인증방법
                <input type="radio" name="certification" value="1" 이메일> 이메일
                <input type="radio" name="certification" value="2" 휴대폰> 휴대폰
+               <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="value를 입력해주세요" >
             </td>
-            <td> <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="value를 입력해주세요" > </td>
         </tr>
     </table>
 </form>
