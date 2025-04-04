@@ -59,6 +59,7 @@ public class FindId {
             model.addAttribute("title", "아이디 찾기");
             model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
         }
+        System.out.println("검사성공");
         return "layout/app";
     }
 } 
