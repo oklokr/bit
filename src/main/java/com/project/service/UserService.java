@@ -3,7 +3,7 @@ package com.project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.controller.auth.FindIdResult;
+
 import com.project.model.UserDto;
 import com.project.repository.UserMapper;
 
@@ -37,16 +37,5 @@ public class UserService {
 
         return "SUCCESS";
     }
-    // 아이디 찾기 로직
-    public FindIdResult findId(UserDto userDto) {
-        // 실제로는 DB에서 해당 정보를 조회하는 로직을 작성해야 함
-        // 예시: 회사명과 인증값이 특정 값일 때 아이디를 반환
-        if ("exampleCompany".equals(userDto.getCompanyName()) &&
-            "exampleEmail@example.com".equals(userDto.getCertificationValue())) {
-            // 아이디 찾기 성공
-            return new FindIdResult(true, "exampleUserId");
-        }
-        // 아이디를 찾을 수 없는 경우
-        return new FindIdResult(false, null);
-    }
+  
 }
