@@ -8,5 +8,5 @@ public interface UserMapper {
     UserDto findByCompanyNameAndEmail(String companyName, String email);
 
     // 전화번호로 사용자 조회
-    UserDto findByCompanyNameAndPhone(String companyName, String phone);
+    UserDto findByCompanyNameAndPhoneNumber(String companyName, String phoneNumber);
 }

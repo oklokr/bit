@@ -42,7 +42,7 @@ public class UserService {
         if ("1".equals(certification)) { // 이메일로 검색
             return userMapper.findByCompanyNameAndEmail(companyName, certValue);
         } else if ("2".equals(certification)) { // 전화번호로 검색
-            return userMapper.findByCompanyNameAndPhone(companyName, certValue);
+            return userMapper.findByCompanyNameAndPhoneNumber(companyName, certValue);
         }
         return null;
     }
