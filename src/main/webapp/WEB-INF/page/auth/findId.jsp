@@ -118,7 +118,7 @@
                     <input type="radio" name="certification" value="2" onclick="updatePlaceholder()"> 휴대폰
                     <br>
                     <input class="input" style="font-size: 16px;" type="text" name="cert_value" maxlength="30" placeholder="인증방법을 선택해주세요">
-                </td>
+            </td>
         </tr>
         <tr>
             <td colspan="2" >
