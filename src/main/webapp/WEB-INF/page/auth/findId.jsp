@@ -48,18 +48,21 @@
             border: 1px solid rgb(122, 122, 122)
             cursor pointer;
             box-sizing: border-box;
-            width : 45%;    
+            width : 40%;    
             text-align: center;
         }
         .inputbutton[type="submit"] {
             background-color: #d3d3d3;
-            width: 50%;
+            width: 40%;
             box-sizing: border-box;
+            margin : 5px;
         }
         .inputbutton[type="button"] {
-            background-color: #f0f0f0;
+            background-color: #d3d3d3;
             display: inline-block;
+            width: 40%;
             margin: 5px;
+            box-sizing: border-box;
         }
 
         .logo {
