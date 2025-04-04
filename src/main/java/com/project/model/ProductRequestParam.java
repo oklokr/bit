@@ -5,15 +5,13 @@ import java.sql.Timestamp;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class ProductDto {
-    private int productId;
+@Setter
+public class ProductRequestParam {
     private String id;
-    private String image;
     private String productName;
-    private int categoryCode;
-    private String categoryName;
-    private String productDescription;
     private Timestamp productRegistrationDate;
+    private String categoryCode;
+    private int page = 0;
+    private int size = 10;
 }

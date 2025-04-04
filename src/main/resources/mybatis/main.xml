@@ -4,6 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.repository.ProductMapper">
+    <!-- 공통코드 조회 -->
     <resultMap id="getCommonCode" type="com.project.model.CommonCodeDto">
         <result property="commonCodeId" column="common_code_id"/>
         <result property="commonCode" column="common_code"/>
@@ -14,5 +15,48 @@
     </resultMap>
     <select id="getCommonCode" resultMap="getCommonCode">
         SELECT * FROM common_codes where common_code = #{commonCode}
+    </select>
+
+    <!-- 상품조회 -->
+    <resultMap id="getProductList" type="com.project.model.ProductDto">
+        <result property="productId" column="product_id"/>
+        <result property="id" column="id"/>
+        <result property="image" column="image"/>
+        <result property="productName" column="product_name"/>
+        <result property="categoryCode" column="category_code"/>
+        <result property="categoryName" column="category_name"/>
+        <result property="productDescription" column="product_description"/>
+        <result property="productRegistrationDate" column="product_registration_date"/>
+    </resultMap>
+    <select id="getProductList" resultMap="getProductList">
+        SELECT 
+            p.product_id,
+            p.id,
+            p.image,
+            p.product_name,
+            p.category_code,
+            c.common_name AS category_name,
+            p.product_description,
+            p.product_registration_date
+        FROM product_info p
+        LEFT JOIN common_codes c 
+            ON p.category_code = c.common_value
+        WHERE c.common_code = 'CATEGORY_TYPE'
+        <if test="id != null and id != ''">
+            AND p.id = #{id}
+        </if>
+        <if test="productName != null and productName != ''">
+            AND p.product_name LIKE CONCAT('%', #{productName}, '%')
+        </if>
+        <if test="productRegistrationDate != null and productRegistrationDate != ''">
+            AND DATE(p.product_registration_date) = #{productRegistrationDate}
+        </if>
+        <if test="categoryCode != null and categoryCode != ''">
+            AND p.category_code = #{categoryCode}
+        </if>
+        ORDER BY p.product_registration_date DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
     </select>
 </mapper>

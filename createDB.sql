@@ -72,13 +72,13 @@ CREATE TABLE member_terms_agreement (
 -- ✅ 상품 정보 테이블 생성
 CREATE TABLE product_info (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
-    member_no CHAR(36),
+    id VARCHAR(50),
     image VARCHAR(255),
     product_name VARCHAR(255) NOT NULL,
     category_code INT NULL,  
     product_description TEXT,
     product_registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (member_no) REFERENCES members(member_no) ON DELETE CASCADE,
+    FOREIGN KEY (id) REFERENCES members(id) ON DELETE CASCADE,
     FOREIGN KEY (category_code) REFERENCES common_codes(common_code_id) ON DELETE SET NULL
 );
 
@@ -86,7 +86,7 @@ CREATE TABLE product_info (
 CREATE TABLE inventory (
     inventory_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
-    member_no CHAR(36),
+    id VARCHAR(50),
     image VARCHAR(255),
     product_name VARCHAR(255) NOT NULL,
     category_code INT NULL,  
@@ -94,7 +94,7 @@ CREATE TABLE inventory (
     stock_quantity INT NOT NULL DEFAULT 0,
     inventory_registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES product_info(product_id) ON DELETE CASCADE,
-    FOREIGN KEY (member_no) REFERENCES members(member_no) ON DELETE CASCADE,
+    FOREIGN KEY (id) REFERENCES members(id) ON DELETE CASCADE,
     FOREIGN KEY (category_code) REFERENCES common_codes(common_code_id) ON DELETE SET NULL
 );
 
