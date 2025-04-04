@@ -48,7 +48,9 @@
             border: 1px solid rgb(122, 122, 122)
             cursor pointer;
             box-sizing: border-box;
-            width : 50%
+            width : 50%;
+            display : inline-block;
+            text-align: center;
         }
         .inputbutton[type="submit"] {
             background-color: #d3d3d3;
