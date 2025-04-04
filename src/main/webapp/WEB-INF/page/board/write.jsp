@@ -53,22 +53,22 @@
         <div class="button-group d-flex">
             <div class="ms-auto">
                 <button type="button" name="submit" class="btn btn-primary" onclick="submitPost()">작성</button>
-                <button type="reset" class="btn btn-primary">취소</button>
+                <button type="reset" class="btn btn-primary" onclick="location='/board'">취소</button>
             </div>
         </div>
     </div>
 
-    <c:if test="${result == 0}">
+    <c:if test="${param.result == '0'}">
         <script>
             alert("게시글 작성에 실패했습니다.");
         </script>
     </c:if>
 
-    <c:if test="${result == 1}">
+    <c:if test="${param.result == '1'}">
         <script>
             alert("게시글 작성에 성공했습니다.");
-            window.location.href = 'board';
         </script>
+        <meta http-equiv="refresh" content="0; url=/board">
     </c:if>
 
 </body>
