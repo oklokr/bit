@@ -37,12 +37,17 @@
 
         <!-- 버튼 그룹 -->
         <div class="button-group d-flex">
-            <button class="btn btn-secondary">목록</button>
+            <button class="btn btn-secondary"
+            onclick="location='/board?pageNum=${pageNum}'">목록</button>
+
             <div class="ms-auto">
-                <button class="btn btn-primary">수정</button>
-                <button class="btn btn-primary">삭제</button>
+                <button class="btn btn-primary"
+                onclick="location='/board/edit?board_id=${board_id}&pageNum=${pageNum}'">수정</button>
+                <button class="btn btn-primary"
+                onclick="location='/board/delete?board_id=${board_id}&pageNum=${pageNum}'">삭제</button>
             </div>
         </div>
+    
     </div>
 </body>
 </html>
