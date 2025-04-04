@@ -90,8 +90,10 @@
             <th style="padding-top: 10px;"> 아이디찾기 </th>
         </tr>
         <tr>
-            <th> 업체명 </th>
-            <td> <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="업체명을 입력해주세요."> </td>
+            <td>
+                업체명 
+                <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="업체명을 입력해주세요."> 
+            </td>
         </tr>
     </table>
 </form>
