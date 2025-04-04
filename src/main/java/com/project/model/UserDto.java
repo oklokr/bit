@@ -16,6 +16,8 @@ public class UserDto {
     private String address;
     private String detailedAddress;
     private String postalCode;
+    private String certification;     
+    private String certificationValue;  
     private int memberType;
     private Timestamp joinDate;
 }
