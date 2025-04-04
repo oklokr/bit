@@ -11,19 +11,21 @@
 </head>
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
     <div class="board-detail-page container">
         <h3> 자유게시판 </h3>
         <br>
         <table class="table">
             <tr>
-                <th colspan="2">dto.title</th>
+                <th colspan="2">${boardDto.title}</th>
             </tr>
             <tr>
-                <td>작성자 : dto.author</td>
-                <td>작성날짜 : dto.create_date</td>
+                <td>작성자 : ${boardDto.author}</td>
+                <td>작성날짜 : <fmt:formatDate value="${boardDto.creation_date}" pattern="yyyy-MM-dd HH:mm"/></td>
             </tr>
             <tr>
-                <td colspan="2" class="content">dto.content</td>
+                <td colspan="2" class="content">${boardDto.content}</td>
             </tr>
         </table>
 

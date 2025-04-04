@@ -12,8 +12,8 @@
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-    
     <div class="board-page countainer">
         
         <h3> 자유게시판 </h3>
@@ -52,10 +52,10 @@
                             </a>
                         </td> 
                         <td>
-                            ${dto.member_no}
+                            ${dto.author}
                         </td>
                         <td>
-                            ${dto.creation_date}
+                            <fmt:formatDate value="${dto.creation_date}" pattern="yyyy-MM-dd HH:mm"/>
                         </td>
                         <td>
                             ${dto.view_count}

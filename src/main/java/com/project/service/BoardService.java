@@ -22,4 +22,12 @@ public class BoardService {
         return boardmapper.getArticles(map);
     }
 
+    public BoardDto getArticle(int board_id){
+        return boardmapper.getArticle(board_id);
+    }
+
+    public void addCount(int board_id){
+        boardmapper.addCount(board_id);
+    }
+
 }
