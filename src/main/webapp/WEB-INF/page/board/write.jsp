@@ -14,7 +14,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-    <div class="board-edit-page container">
+    <div class="board-write-page container">
         <h3> 자유게시판 게시글 작성</h3>
         <br>
         <form name="writeform" method="POST" action="/board/write">
@@ -123,14 +123,14 @@
         border-color:#fff;
     }
     
-    .board-edit-page {
+    .board-write-page {
         max-width: 800px; /* 페이지 최대 너비 제한 */
         margin: 40px auto; /* 중앙 정렬 */
         background: #fff; /* 배경 흰색 */
         border-radius: 8px; /* 모서리 둥글게 */
     }
 
-    .board-edit-page h3 {
+    .board-write-page h3 {
         text-align: center;
         margin: 20px 0; /* 위아래 여백 */
         align-items: center;
