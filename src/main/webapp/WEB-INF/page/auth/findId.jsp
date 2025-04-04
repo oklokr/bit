@@ -127,7 +127,6 @@
                     인증방법
                     <input type="radio" name="certification" value="1" onclick="updatePlaceholder()"> 이메일
                     <input type="radio" name="certification" value="2" onclick="updatePlaceholder()"> 휴대폰
-                    인증방법을 선택해주세요
             </td>
         </tr>
         <tr>
