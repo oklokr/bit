@@ -1,35 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div>
-    findId
-</div>
 <script>
-    function validateForm() {
-        const companyName = document.querySelector('input[name="company_name"]').value;
-        const certification = document.querySelector('input[name="certification"]:checked');
-        const certValue = document.querySelector('input[name="cert_value"]').value;
-
-        if (app.validate.isEmpty(companyName)) {
-            alert("업체명을 입력해주세요.");
-            return false;
-        }
-        if (!certification) {
-            alert("인증 방법을 선택해주세요.");
-            return false;
-        }
-        if (certification.value === "1") {
-            if (!app.validate.isEmail(certValue)) {
-                alert("유효한 이메일을 입력해주세요.");
-                return false;
-            }
-        } else if (certification.value === "2") {
-            if (!app.validate.isPhoneNumber(certValue)) {
-                alert("유효한 휴대폰 번호를 입력해주세요 (10~11자리 숫자).");
-                return false;
-            }
-        }
-        return true;
-    }
-
     function updatePlaceholder() {
         const certValueInput = document.querySelector('input[name="cert_value"]');
         const selectedCert = document.querySelector('input[name="certification"]:checked');

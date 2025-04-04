@@ -37,15 +37,4 @@ public class UserService {
 
         return "SUCCESS";
     }
-    public UserDto findUserByEmail(String companyName, String email) {
-        UserDto user = userMapper.findUserByEmail(companyName, email);
-        System.out.println("findUserByEmail - companyName: " + companyName + ", email: " + email + ", result: " + (user != null ? user.getId() : "null"));
-        return user;
-    }
-
-    public UserDto findUserByPhoneNumber(String companyName, String phoneNumber) {
-        UserDto user = userMapper.findUserByPhoneNumber(companyName, phoneNumber);
-        System.out.println("findUserByPhoneNumber - companyName: " + companyName + ", phoneNumber: " + phoneNumber + ", result: " + (user != null ? user.getId() : "null"));
-        return user;
-    }
 }
