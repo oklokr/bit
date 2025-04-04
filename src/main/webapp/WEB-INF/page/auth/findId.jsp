@@ -48,6 +48,7 @@
             border: 1px solid rgb(122, 122, 122)
             cursor pointer;
             box-sizing: border-box;
+            width : 50%
         }
         .inputbutton[type="submit"] {
             background-color: #d3d3d3;
@@ -97,14 +98,14 @@
         </tr>
         <tr>
             <td style="font-size : 12px;"> 
-                <th> 인증방법 </th>
+                인증방법
                <input type="radio" name="certification" value="1" 이메일> 이메일
                <input type="radio" name="certification" value="2" 휴대폰> 휴대폰
                <input style="font-size : 16px;" class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="value를 입력해주세요" >
             </td>
         </tr>
         <tr>
-            <td colspan="2">
+            <td colspan="2" >
                 <input class="inputbutton" type="reset" value="취소">
                 <input class="inputbutton" type="submit" value="전송">
             </td>
