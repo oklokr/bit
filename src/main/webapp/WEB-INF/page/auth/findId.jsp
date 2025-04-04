@@ -48,16 +48,21 @@
             border: 1px solid rgb(122, 122, 122)
             cursor pointer;
             box-sizing: border-box;
+            width : 40%;    
+            text-align: center;
         }
         .inputbutton[type="submit"] {
             background-color: #d3d3d3;
-            width: 50%;
+            width: 40%;
             box-sizing: border-box;
+            margin : 5px;
         }
         .inputbutton[type="button"] {
-            background-color: #f0f0f0;
+            background-color: #d3d3d3;
             display: inline-block;
+            width: 40%;
             margin: 5px;
+            box-sizing: border-box;
         }
 
         .logo {
@@ -82,15 +87,37 @@
         .link-group a:hover {
             color: #FF0000;
         }
+        td.button-td {
+        display: flex;
+        justify-content: space-between;  /* 버튼들을 가로로 배치하고 좌우 여백을 균등하게 설정 */
+        align-items: center;  /* 버튼들이 수직으로 가운데 정렬 */
+        }
 </style>
 
-<form name="아이디찾기" method="post">
+<form name="findId" method="post">
     <table>
         <tr>
-            <th> 업체명 </th>
+            <th style="padding-top: 10px;"> 아이디찾기 </th>
         </tr>
         <tr>
-            <td> <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="아이디를 입력해주세요."> </td>
+            <td>
+                업체명 
+                <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="업체명을 입력해주세요."> 
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size : 12px;"> 
+                인증방법
+               <input type="radio" name="certification" value="1" 이메일> 이메일
+               <input type="radio" name="certification" value="2" 휴대폰> 휴대폰
+               <input style="font-size : 16px;" class="input" type="text" maxlength="15" autofocus placeholder="value를 입력해주세요" >
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" >
+                <input class="inputbutton" type="button" value="이전" onclick="location='/login'">
+                <input class="inputbutton" type="submit" value="확인">
+            </td>
         </tr>
     </table>
 </form>

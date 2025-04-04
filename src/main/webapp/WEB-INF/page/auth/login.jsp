@@ -57,12 +57,9 @@
         .inputbutton[type="submit"] {
             background-color: #d3d3d3;
             width: 50%;
-            box-sizing: border-box;
-        }
-        .inputbutton[type="button"] {
-            background-color: #f0f0f0;
-            display: inline-block;
-            margin: 5px;
+            height: 50%;
+            margin : 5px;
+            box-sizing : border-box;
         }
 
         .logo {
@@ -88,7 +85,7 @@
             color: #FF0000;
         }
 </style>
-<form method="post">
+<form name="login" method="post">
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
@@ -96,12 +93,10 @@
             </th>
         </tr>
         <tr>
-            <th style="text-align: left;">ID</th>
-            <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요."></td>
+            <td> ID <input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요."></td>
         </tr>
         <tr>
-            <th style="text-align: left;">PW</th>
-            <td><input class="input" type="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
+            <td> PW <input class="input" type="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
         </tr> 
         <tr>
             <td colspan="2" style="text-align: center;">
