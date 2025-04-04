@@ -5,24 +5,19 @@
         const selectedCert = document.querySelector('input[name="certification"]:checked');
         const emailField = document.getElementById('emailField');
         const phoneField = document.getElementById('phoneField');
-        if (selectedCert) {
-            // 인증방법에 따라 cert_value 값을 설정
-            certValueInput.value = selectedCert.value; // cert_value에 선택된 값 저장
 
         if (selectedCert) {
-            // 이메일을 선택한 경우
+            certValueInput.value = selectedCert.value;
+
             if (selectedCert.value === "1") {
                 emailField.style.display = "block";
                 phoneField.style.display = "none";
-            }
-            // 휴대폰을 선택한 경우
-            else if (selectedCert.value === "2") {
+            } else if (selectedCert.value === "2") {
                 emailField.style.display = "none";
                 phoneField.style.display = "block";
             }
         }
     }
-}
 </script>
 <style>
     body {
@@ -144,19 +139,19 @@
             </td>
         </tr>
         <tr>
-            <td style="font-size: 12px;">
-                    인증방법
-                    <input type="radio" name="certification" value="1" onclick="updatePlaceholder()"> 이메일
-                    <input type="radio" name="certification" value="2" onclick="updatePlaceholder()"> 휴대폰
+            <td>
+                인증방법
+                <input type="radio" name="certification" value="1" onclick="updatePlaceholder()"> 이메일
+                <input type="radio" name="certification" value="2" onclick="updatePlaceholder()"> 휴대폰
             </td>
         </tr>
-        <tr>
-            <td id="emailField" style="display: none;" style="text-align: left;">
-                이메일 <input class="input" type="text" name="email" maxlength="30" style="width: 150px;" style="font-size: 12px;">
+        <tr id="emailField" style="display: none;">
+            <td>
+                이메일 <input class="input" type="text" name="email" maxlength="30" style="width: 150px; font-size: 12px;">
             </td>
         </tr>
-        <tr>
-            <td id="phoneField" style="display: none;" style="text-align: left;">
+        <tr id="phoneField" style="display: none;">
+            <td>
                 휴대폰
                 <input class="input" type="text" name="tel1" maxlength="3" style="width: 38px;">
                 - 
@@ -167,7 +162,6 @@
         </tr>
         <tr>
             <td>
-                <!-- 숨겨진 cert_value 필드 추가 -->
                 <input type="hidden" name="cert_value" value="">
             </td>
         </tr>

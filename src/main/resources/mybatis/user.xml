@@ -8,17 +8,18 @@
         SELECT * FROM members WHERE id = #{id}
     </select>
     <!-- 이메일로 사용자 조회 -->
-    <select id="findByCompanyNameAndEmail" resultType="com.project.model.UserDto">
+    <select id="findByCompanyNameAndEmail" parameterType="map" resultType="com.project.model.UserDto">
         SELECT * FROM members
         WHERE company_name = #{companyName}
         AND email = #{email}
         LIMIT 1
     </select>
+
     <!-- 전화번호로 사용자 조회 -->
-    <select id="findByCompanyNameAndPhoneNumber" resultType="com.project.model.UserDto">
+    <select id="findByCompanyNameAndPhoneNumber" parameterType="map" resultType="com.project.model.UserDto">
         SELECT * FROM members
         WHERE company_name = #{companyName}
-        AND phoneNumber = #{phoneNumber}
+        AND phone_number = #{phoneNumber}
         LIMIT 1
     </select>
 </mapper>

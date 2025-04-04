@@ -1,5 +1,8 @@
 package com.project.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,12 +41,21 @@ public class UserService {
         return "SUCCESS";
     }
     
-    public UserDto findUserByCertification(String companyName, String certification, String certValue) {
-        if ("1".equals(certification)) { // 이메일로 검색
-            return userMapper.findByCompanyNameAndEmail(companyName, certValue);
-        } else if ("2".equals(certification)) { // 전화번호로 검색
-            return userMapper.findByCompanyNameAndPhoneNumber(companyName, certValue);
-        }
-        return null;
+    public UserDto findByCompanyNameAndEmail(String companyName, String email) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("companyName", companyName);
+        params.put("email", email);
+        UserDto user = userMapper.findByCompanyNameAndEmail(params);
+        System.out.println("이메일로 조회된 사용자: " + user);
+        return user;
+    }
+
+    public UserDto findByCompanyNameAndPhoneNumber(String companyName, String phoneNumber) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("companyName", companyName);
+        params.put("phoneNumber", phoneNumber);
+        UserDto user = userMapper.findByCompanyNameAndPhoneNumber(params);
+        System.out.println("휴대폰 번호로 조회된 사용자: " + user);
+        return user;
     }
 }

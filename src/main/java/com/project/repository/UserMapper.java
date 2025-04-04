@@ -1,12 +1,14 @@
 package com.project.repository;
 
 import com.project.model.UserDto;
+import java.util.Map;
 
 public interface UserMapper {
-    public UserDto getUserById(String id);
+    UserDto getUserById(String id);
+
     // 이메일로 사용자 조회
-    UserDto findByCompanyNameAndEmail(String companyName, String email);
+    UserDto findByCompanyNameAndEmail(Map<String, Object> params);
 
     // 전화번호로 사용자 조회
-    UserDto findByCompanyNameAndPhoneNumber(String companyName, String phoneNumber);
+    UserDto findByCompanyNameAndPhoneNumber(Map<String, Object> params);
 }
