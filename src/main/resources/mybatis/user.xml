@@ -8,3 +8,23 @@
         SELECT * FROM members WHERE id = #{id}
     </select>
 </mapper>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.repository.UserMapper">
+    <select id="getUserById" resultType="com.project.model.UserDto">
+        SELECT user_id AS userId, company_name AS companyName, email, phone_number AS phoneNumber, password
+        FROM users
+        WHERE user_id = #{id}
+    </select>
+
+    <select id="findUserByEmail" resultType="com.project.model.UserDto">
+        SELECT user_id AS userId, company_name AS companyName, email, phone_number AS phoneNumber, password
+        FROM users
+        WHERE company_name = #{companyName} AND email = #{email}
+    </select>
+
+    <select id="findUserByPhone" resultType="com.project.model.UserDto">
+        SELECT user_id AS userId, company_name AS companyName, email, phone_number AS phoneNumber, password
+        FROM users
+        WHERE company_name = #{companyName} AND phone_number = #{phone}
+    </select>
+</mapper>

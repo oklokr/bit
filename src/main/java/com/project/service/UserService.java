@@ -38,24 +38,14 @@ public class UserService {
         return "SUCCESS";
     }
     public UserDto findUserByEmail(String companyName, String email) {
-        UserDto user = new UserDto();
-        if (companyName.equals("테스트업체") && email.equals("test@example.com")) {
-            user.setId("test123");
-            user.setCompanyName(companyName);
-            user.setEmail(email);
-            return user;
-        }
-        return null;
+        UserDto user = userMapper.findUserByEmail(companyName, email);
+        System.out.println("findUserByEmail - companyName: " + companyName + ", email: " + email + ", result: " + (user != null ? user.getId() : "null"));
+        return user;
     }
 
-    public UserDto findUserByPhone(String companyName, String phone) {
-        UserDto user = new UserDto();
-        if (companyName.equals("테스트업체") && phone.equals("01012345678")) {
-            user.setId("test123");
-            user.setCompanyName(companyName);
-            user.setPhoneNumber(phone);
-            return user;
-        }
-        return null;
+    public UserDto findUserByPhoneNumber(String companyName, String phoneNumber) {
+        UserDto user = userMapper.findUserByPhoneNumber(companyName, phoneNumber);
+        System.out.println("findUserByPhoneNumber - companyName: " + companyName + ", phoneNumber: " + phoneNumber + ", result: " + (user != null ? user.getId() : "null"));
+        return user;
     }
 }

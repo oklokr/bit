@@ -29,38 +29,40 @@ public class FindId {
     }
     @PostMapping("/findId")
     public String processFindId(
-            @RequestParam("company_name") String companyName,
-            @RequestParam("certification") String certification,
-            @RequestParam("cert_value") String certValue,
-            Model model,
-            RedirectAttributes redirectAttributes) {
+        @RequestParam("company_name") String companyName,
+        @RequestParam("certification") String certification,
+        @RequestParam("cert_value") String certValue,
+        Model model,
+        RedirectAttributes redirectAttributes) {
 
-        System.out.println("companyName: " + companyName + ", certification: " + certification + ", certValue: " + certValue);
+    System.out.println("Received - companyName: '" + companyName + "', certification: '" + certification + "', certValue: '" + certValue + "'");
 
-        if (companyName == null || companyName.trim().isEmpty() || 
-            certification == null || certValue == null || certValue.trim().isEmpty()) {
-            model.addAttribute("error", "모든 필드를 입력해주세요.");
-            model.addAttribute("title", "아이디 찾기");
-            model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
-            return "layout/app";
-        }
-
-        UserDto user = null;
-        if ("1".equals(certification)) {
-            user = userService.findUserByEmail(companyName, certValue);
-        } else if ("2".equals(certification)) {
-            user = userService.findUserByPhone(companyName, certValue);
-        }
-
-        if (user != null) {
-            redirectAttributes.addFlashAttribute("user", user); // 리다이렉트 시 데이터 전달
-            return "redirect:/findIdResult";
-        } else {
-            model.addAttribute("error", "일치하는 사용자가 없습니다.");
-            model.addAttribute("title", "아이디 찾기");
-            model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
-            return "layout/app";
-        }
+    if (companyName == null || companyName.trim().isEmpty() || 
+        certification == null || certValue == null || certValue.trim().isEmpty()) {
+        model.addAttribute("error", "모든 필드를 입력해주세요.");
+        model.addAttribute("title", "아이디 찾기");
+        model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
+        return "layout/app";
     }
+
+    UserDto user = null;
+    if ("1".equals(certification)) {
+        user = userService.findUserByEmail(companyName, certValue);
+        System.out.println("findUserByEmail result: " + (user != null ? user.getId() : "null"));
+    } else if ("2".equals(certification)) {
+        user = userService.findUserByPhoneNumber(companyName, certValue);
+        System.out.println("findUserByPhone result: " + (user != null ? user.getId() : "null"));
+    }
+
+    if (user != null) {
+        redirectAttributes.addFlashAttribute("user", user);
+        return "redirect:/findIdResult";
+    } else {
+        model.addAttribute("error", "일치하는 사용자가 없습니다.");
+        model.addAttribute("title", "아이디 찾기");
+        model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
+        return "layout/app";
+    }
+}
 } 
 
