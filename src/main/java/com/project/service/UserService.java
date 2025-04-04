@@ -34,6 +34,7 @@ public class UserService {
             return "비밀번호가 틀렸습니다.";
         }
 
-        return "SUCCESS"; // 인증 성공
+        return "SUCCESS";
     }
+
 }
