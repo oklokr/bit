@@ -3,7 +3,6 @@ package com.project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.project.controller.auth.FindIdResult;
 import com.project.model.UserDto;
 import com.project.repository.UserMapper;
 
@@ -37,12 +36,4 @@ public class UserService {
 
         return "SUCCESS";
     }
-
-    public static FindIdResult findId(UserDto userdto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findId'");
-    }
-
-
-
 }
