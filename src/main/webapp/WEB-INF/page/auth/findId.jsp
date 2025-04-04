@@ -97,7 +97,7 @@
         </tr>
         <tr>
             <td style="font-size : 12px;"> 
-                <th style="font-size : 16px;"> 인증방법 </th>
+                <th> 인증방법 </th>
                <input type="radio" name="certification" value="1" 이메일> 이메일
                <input type="radio" name="certification" value="2" 휴대폰> 휴대폰
                <input style="font-size : 16px;" class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="value를 입력해주세요" >
