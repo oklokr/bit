@@ -22,6 +22,9 @@ public class BoardDetail {
     Model model) throws Exception {
         BoardDto boardDto = boardDao.getArticle(board_id);
         boardDao.addCount(board_id);
+        int replyCount = 0;
+        replyCount = boardDao.getReplyCount(board_id);
+        model.addAttribute("replyCount", replyCount);
         model.addAttribute("board_id", board_id);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("boardDto", boardDto);

@@ -18,7 +18,7 @@
         <br>
         <table class="table">
             <tr>
-                <th colspan="2">${boardDto.title}</th>
+                <th colspan="2" class="title">${boardDto.title}</th>
             </tr>
             <tr>
                 <td>작성자 : ${boardDto.author}</td>
@@ -27,13 +27,22 @@
             <tr>
                 <td colspan="2" class="content">${boardDto.content}</td>
             </tr>
+
         </table>
 
         <!-- 답글 섹션 -->
         <div class="reply-section">
-            <h5>답글</h5>
-            
-        </div>
+            <h5>답글 <span>(${replyCount}개)</span></h5>
+            <table class="reply-table">
+                <c:if test="${replyCount eq 0}">
+                    <tr>
+                        <td colspan = "2">
+                            답글이 존재하지 않습니다
+                        </td>
+                    </tr>
+                </c:if>
+            </table>
+        </div>  
 
         <!-- 버튼 그룹 -->
         <div class="button-group d-flex">
@@ -76,13 +85,31 @@
         width: 100%;
         table-layout: fixed; /* 고정 레이아웃 */
     }
-    
+    th.title {
+        font-size: 1.4rem;
+        font-weight: bold;
+    }
     .board-detail-page {
         max-width: 800px; /* 페이지 최대 너비 제한 */
         margin: 40px auto; /* 중앙 정렬 */
         padding: 20px;
         background: #fff; /* 배경 흰색 */
         border-radius: 8px; /* 모서리 둥글게 */
+    }
+
+    .reply-table {
+        margin-bottom: 50px; /* 바닥에서 20px 떨어지도록 설정 */
+    }
+
+    .reply-section h5 {
+        font-size: 1.2rem; /* 제목 크기 키우기 */
+        font-weight: bold; /* 제목 굵게 */
+    }
+
+    .reply-section h5 span {
+        font-size: 1rem; /* 총 답글 수는 작은 글씨 */
+        font-weight: normal; /* 기본 글씨 두께 */
+        color: #666; /* 회색 계열로 가독성 조절 */
     }
 
     .board-detail-page h3 {
@@ -93,7 +120,11 @@
     }
 
     td.content {
-        min-height: 100px;
+        min-height: 100px; /* 최소 높이 */
+        height: 100px; /* 높이 설정 */
+        padding: 10px; /* 내부 여백 */
+        word-wrap: break-word; /* 긴 단어 줄 바꿈 */
+        vertical-align: top; /* 내용이 위쪽 정렬되도록 설정 */
     }
 
 

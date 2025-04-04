@@ -39,6 +39,10 @@
 		WHERE board_id = #{board_id}
 	</delete>
 
+    <select id="getReplyCount" parameterType="int" resultType="int">
+        select count(*) from replies where board_id=#{board_id}
+    </select>
+
 </mapper>
 
 

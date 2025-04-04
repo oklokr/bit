@@ -34,7 +34,7 @@
             <c:if test="${count eq 0}">
                 <tr>
                     <td colspan = "5">
-                        자유게시판 글이 존재하지 않습니다 ${count eq 0}
+                        자유게시판 글이 존재하지 않습니다
                     </td>
                 </tr>
             </c:if>

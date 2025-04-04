@@ -42,4 +42,8 @@ public class BoardService {
         return boardmapper.deletePost(board_id);
     }
 
+    public int getReplyCount(int board_id){
+        return boardmapper.getReplyCount(board_id);
+    }
+
 }
