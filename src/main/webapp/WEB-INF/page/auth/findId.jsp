@@ -4,7 +4,18 @@
         const certValueInput = document.querySelector('input[name="cert_value"]');
         const selectedCert = document.querySelector('input[name="certification"]:checked');
         if (selectedCert) {
-            certValueInput.placeholder = selectedCert.value === "1" ? "이메일을 입력해주세요" : "휴대폰 번호를 입력해주세요";
+            // 이메일을 선택한 경우
+            if (selectedCert.value === "1") {
+                certValueInput.placeholder = "이메일을 입력해주세요";
+                emailField.style.display = "block";
+                phoneField.style.display = "none";
+            }
+            // 휴대폰을 선택한 경우
+            else if (selectedCert.value === "2") {
+                certValueInput.placeholder = "휴대폰 번호를 입력해주세요";
+                emailField.style.display = "none";
+                phoneField.style.display = "block";
+            }
         }
     }
 </script>
@@ -116,8 +127,25 @@
                     인증방법
                     <input type="radio" name="certification" value="1" onclick="updatePlaceholder()"> 이메일
                     <input type="radio" name="certification" value="2" onclick="updatePlaceholder()"> 휴대폰
-                    <br>
-                    <input class="input" style="font-size: 16px;" type="text" name="cert_value" maxlength="30" placeholder="인증방법을 선택해주세요">
+                    인증방법을 선택해주세요
+            </td>
+        </tr>
+        <tr>
+            <td id="emailField" style="display: none;">
+                <input class="input" type="text" name="email1" maxlength="20" style="width: 100px;">
+                @
+                <select name="email2">
+                    <option value="1">직접입력</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td id="phoneField" style="display: none;">
+                <input class="input" type="text" name="tel1" maxlength="3" style="width: 30px;">
+                - 
+                <input class="input" type="text" name="tel2" maxlength="4" style="width: 38px;">
+                - 
+                <input class="input" type="text" name="tel3" maxlength="4" style="width: 38px;">
             </td>
         </tr>
         <tr>

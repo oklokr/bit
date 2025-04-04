@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div>
-    로그인페이지
-</div>
 <div style="color: red; text-align: center;">
     <c:if test="${not empty errorMessage}">
         ${errorMessage}

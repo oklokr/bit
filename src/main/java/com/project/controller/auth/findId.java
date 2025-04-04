@@ -18,6 +18,6 @@ public class FindId {
         model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
         return "layout/app";
     }
-
+    
 } 
 
