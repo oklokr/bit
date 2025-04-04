@@ -87,10 +87,25 @@
 <form name="아이디찾기" method="post">
     <table>
         <tr>
-            <th> 업체명 </th>
+            <th style="padding-top: 10px;"> 아이디찾기 </th>
         </tr>
         <tr>
-            <td> <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="아이디를 입력해주세요."> </td>
+            <th> 업체명 </th>
+            <td> <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="업체명을 입력해주세요."> </td>
+        </tr>
+        <tr>
+            <th> 인증방법 </th>
+            <td> 
+               <input type="radio" name="certification" value="1" 이메일>
+               <input type="radio" name="certification" value="2" 휴대폰> 
+            </td>
+            <td> <input class="input" type="text" name="company_name" maxlength="15" autofocus placeholder="value를 입력해주세요" > </td>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <input class="inputbutton" type="reset" value="취소">
+                <input class="inputbutton" type="submit" value="전송">
+            </th>
         </tr>
     </table>
 </form>
