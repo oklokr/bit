@@ -37,4 +37,13 @@ public class UserService {
 
         return "SUCCESS";
     }
+    
+    public UserDto findUserByCertification(String companyName, String certification, String certValue) {
+        if ("1".equals(certification)) { // 이메일로 검색
+            return userMapper.findByCompanyNameAndEmail(companyName, certValue);
+        } else if ("2".equals(certification)) { // 전화번호로 검색
+            return userMapper.findByCompanyNameAndPhoneNumber(companyName, certValue);
+        }
+        return null;
+    }
 }

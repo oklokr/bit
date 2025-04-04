@@ -6,8 +6,20 @@
     function updatePlaceholder() {
         const certValueInput = document.querySelector('input[name="cert_value"]');
         const selectedCert = document.querySelector('input[name="certification"]:checked');
+        const emailField = document.getElementById('emailField');
+        const phoneField = document.getElementById('phoneField');
+        
         if (selectedCert) {
-            certValueInput.placeholder = selectedCert.value === "1" ? "이메일을 입력해주세요" : "휴대폰 번호를 입력해주세요";
+            // 이메일을 선택한 경우
+            if (selectedCert.value === "1") {
+                emailField.style.display = "block";
+                phoneField.style.display = "none";
+            }
+            // 휴대폰을 선택한 경우
+            else if (selectedCert.value === "2") {
+                emailField.style.display = "none";
+                phoneField.style.display = "block";
+            }
         }
     }
 </script>
@@ -25,6 +37,7 @@
             border-collapse: collapse;
             border: 2px solid rgb(13, 125, 177);
             margin: 0 auto;
+            width : 150%;
         }
 
     th, td{
@@ -46,11 +59,12 @@
     }
 
     .input {
-        width : 100%
-        padding 5px;
+        width: 100%;
+        padding : 5px;
         box-sizing: border-box;
         border: 1px solid black;
-    }
+        text-align: center;
+         }
 
     .inputbutton {
         padding: 8px 15px;
@@ -101,6 +115,20 @@
         justify-content: space-between;  /* 버튼들을 가로로 배치하고 좌우 여백을 균등하게 설정 */
         align-items: center;  /* 버튼들이 수직으로 가운데 정렬 */
         }
+            /* 이메일 입력 필드와 전화번호 입력 필드 스타일 수정 */
+    #emailField, #phoneField {
+        text-align: center; /* 입력 필드를 테이블에서 중앙 정렬 */
+        width: 100%; /* 테이블 너비에 맞게 확장 */
+    }
+
+    #emailField input, #phoneField input {
+        width: 80%; /* 입력 필드 너비를 제한 */
+        display: inline-block;
+    }
+
+    #phoneField input {
+        width: 30%; /* 전화번호 각 입력칸의 너비 */
+    }
 </style>
 
 <form name="findId" method="post">
@@ -116,11 +144,24 @@
         </tr>
         <tr>
             <td style="font-size: 12px;">
-                인증방법
-                <input type="radio" name="certification" value="1" onclick="updatePlaceholder()"> 이메일
-                <input type="radio" name="certification" value="2" onclick="updatePlaceholder()"> 휴대폰
-                <br>
-                <input class="input" style="font-size: 16px;" type="text" name="cert_value" maxlength="30" placeholder="인증방법을 선택해주세요">
+                    인증방법
+                    <input type="radio" name="certification" value="1" onclick="updatePlaceholder()"> 이메일
+                    <input type="radio" name="certification" value="2" onclick="updatePlaceholder()"> 휴대폰
+            </td>
+        </tr>
+        <tr>
+            <td id="emailField" style="display: none;" style="text-align: left;">
+                이메일 <input class="input" type="text" name="email" maxlength="30" style="width: 150px;">
+            </td>
+        </tr>
+        <tr>
+            <td id="phoneField" style="display: none;" style="text-align: left;">
+                휴대폰
+                <input class="input" type="text" name="tel1" maxlength="3" style="width: 38px;">
+                - 
+                <input class="input" type="text" name="tel2" maxlength="4" style="width: 46px;">
+                - 
+                <input class="input" type="text" name="tel3" maxlength="4" style="width: 46px;">
             </td>
         </tr>
         <tr>
