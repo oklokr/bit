@@ -27,7 +27,7 @@ public class FindId {
         if( "SUCCESS".equals(result)) {
             return "redirect:/findIdResult";
         } else {
-            return "layout/app";
+            return "redirect:/login";
         }
     }
     
