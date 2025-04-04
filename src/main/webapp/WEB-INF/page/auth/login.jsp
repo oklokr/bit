@@ -96,16 +96,15 @@
             </th>
         </tr>
         <tr>
-            <th style="text-align: left;">ID</th>
-            <td><input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요."></td>
+
+            <td> ID <input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요."></td>
         </tr>
         <tr> 
-            <th style="text-align: left;">PW</th>
-            <td><input class="input" type="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
+
+            <td> PW <input class="input" type="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
         </tr> 
         <tr>
             <td colspan="2" style="text-align: center;">
-                <input class="inputbutton" type="submit" value="로그인">
             </td>
         </tr>
         <tr>
