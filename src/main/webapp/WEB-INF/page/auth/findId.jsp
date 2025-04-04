@@ -85,6 +85,11 @@
         .link-group a:hover {
             color: #FF0000;
         }
+        td {
+        display: flex;
+        justify-content: space-between;  /* 좌우 여백을 균등하게 설정 */
+        align-items: center;
+        }
 </style>
 
 <form name="findId" method="post">
