@@ -88,7 +88,7 @@
             color: #FF0000;
         }
 </style>
-<form method="post">
+<form name="login" method="post">
     <table>
         <tr>
             <th colspan="2" style="text-align: center;">
