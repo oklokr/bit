@@ -3,13 +3,12 @@
     findId
 </div>
 <script>
-    // common.js에서 validate와 postRequestApi를 사용
     function validateForm() {
         const companyName = document.querySelector('input[name="company_name"]').value;
         const certification = document.querySelector('input[name="certification"]:checked');
         const certValue = document.querySelector('input[name="cert_value"]').value;
 
-        if (validate.isEmpty(companyName)) {
+        if (app.validate.isEmpty(companyName)) {
             alert("업체명을 입력해주세요.");
             return false;
         }
@@ -18,12 +17,12 @@
             return false;
         }
         if (certification.value === "1") {
-            if (!validate.isEmail(certValue)) {
+            if (!app.validate.isEmail(certValue)) {
                 alert("유효한 이메일을 입력해주세요.");
                 return false;
             }
         } else if (certification.value === "2") {
-            if (!validate.isPhoneNumber(certValue)) {
+            if (!app.validate.isPhoneNumber(certValue)) {
                 alert("유효한 휴대폰 번호를 입력해주세요 (10~11자리 숫자).");
                 return false;
             }
