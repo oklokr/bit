@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @Controller
-public class findPw {
+public class FindPw {
     @GetMapping("/findPw")
     public String pageRender(Model model) {
         model.addAttribute("title", "Login Page");
@@ -14,3 +14,4 @@ public class findPw {
         return "layout/app";
     }
 }
+

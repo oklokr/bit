@@ -3,6 +3,7 @@ package com.project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.project.model.UserDto;
 import com.project.repository.UserMapper;
 
@@ -34,6 +35,6 @@ public class UserService {
             return "비밀번호가 틀렸습니다.";
         }
 
-        return "SUCCESS"; // 인증 성공
+        return "SUCCESS";
     }
 }

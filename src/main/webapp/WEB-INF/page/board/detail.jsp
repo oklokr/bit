@@ -11,19 +11,21 @@
 </head>
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
     <div class="board-detail-page container">
         <h3> 자유게시판 </h3>
         <br>
         <table class="table">
             <tr>
-                <th colspan="2">dto.title</th>
+                <th colspan="2">${boardDto.title}</th>
             </tr>
             <tr>
-                <td>작성자 : dto.author</td>
-                <td>작성날짜 : dto.create_date</td>
+                <td>작성자 : ${boardDto.author}</td>
+                <td>작성날짜 : <fmt:formatDate value="${boardDto.creation_date}" pattern="yyyy-MM-dd HH:mm"/></td>
             </tr>
             <tr>
-                <td colspan="2" class="content">dto.content</td>
+                <td colspan="2" class="content">${boardDto.content}</td>
             </tr>
         </table>
 
@@ -35,12 +37,17 @@
 
         <!-- 버튼 그룹 -->
         <div class="button-group d-flex">
-            <button class="btn btn-secondary">목록</button>
+            <button class="btn btn-secondary"
+            onclick="location='/board?pageNum=${pageNum}'">목록</button>
+
             <div class="ms-auto">
-                <button class="btn btn-primary">수정</button>
-                <button class="btn btn-primary">삭제</button>
+                <button class="btn btn-primary"
+                onclick="location='/board/edit?board_id=${board_id}&pageNum=${pageNum}'">수정</button>
+                <button class="btn btn-primary"
+                onclick="location='/board/delete?board_id=${board_id}&pageNum=${pageNum}'">삭제</button>
             </div>
         </div>
+    
     </div>
 </body>
 </html>

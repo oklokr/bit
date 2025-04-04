@@ -10,4 +10,6 @@ import com.project.model.BoardDto;
 public interface BoardMapper {
     public int getCount();
     public List<BoardDto> getArticles(Map<String, Integer> map);
+    public BoardDto getArticle(int board_id);
+    public void addCount(int board_id);
 }

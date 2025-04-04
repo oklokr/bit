@@ -50,6 +50,51 @@ INSERT INTO bulletin_board (member_no, title, author, view_count) VALUES
 ((SELECT member_no FROM members WHERE id = 'user'), '첫 번째 게시글', 'user', 100),
 ((SELECT member_no FROM members WHERE id = 'user'), '두 번째 게시글', 'user', 50);
 
+INSERT INTO bulletin_board (member_no, title, author, view_count) VALUES 
+((SELECT member_no FROM members WHERE id = 'user'), '세 번째 게시글', 'user', 50);
+
+INSERT INTO bulletin_board (member_no, title, author, view_count) VALUES 
+((SELECT member_no FROM members WHERE id = 'user'), '네네 번째 게시글', 'user', 50);
+
+INSERT INTO bulletin_board (member_no, title, author, view_count) VALUES 
+((SELECT member_no FROM members WHERE id = 'user'), '다섯 번째 게시글', 'user', 37),
+((SELECT member_no FROM members WHERE id = 'user'), '여섯 번째 게시글', 'user', 82),
+((SELECT member_no FROM members WHERE id = 'user'), '일곱 번째 게시글', 'user', 14),
+((SELECT member_no FROM members WHERE id = 'user'), '여덟 번째 게시글', 'user', 65),
+((SELECT member_no FROM members WHERE id = 'user'), '아홉 번째 게시글', 'user', 23),
+((SELECT member_no FROM members WHERE id = 'user'), '열 번째 게시글', 'user', 97),
+((SELECT member_no FROM members WHERE id = 'user'), '열한 번째 게시글', 'user', 8),
+((SELECT member_no FROM members WHERE id = 'user'), '열두 번째 게시글', 'user', 56),
+((SELECT member_no FROM members WHERE id = 'user'), '열세 번째 게시글', 'user', 41),
+((SELECT member_no FROM members WHERE id = 'user'), '열네 번째 게시글', 'user', 78),
+((SELECT member_no FROM members WHERE id = 'user'), '열다섯 번째 게시글', 'user', 12),
+((SELECT member_no FROM members WHERE id = 'user'), '열여섯 번째 게시글', 'user', 64),
+((SELECT member_no FROM members WHERE id = 'user'), '열일곱 번째 게시글', 'user', 25),
+((SELECT member_no FROM members WHERE id = 'user'), '열여덟 번째 게시글', 'user', 92),
+((SELECT member_no FROM members WHERE id = 'user'), '열아홉 번째 게시글', 'user', 30),
+((SELECT member_no FROM members WHERE id = 'user'), '스무 번째 게시글', 'user', 55),
+((SELECT member_no FROM members WHERE id = 'user'), '스물한 번째 게시글', 'user', 18),
+((SELECT member_no FROM members WHERE id = 'user'), '스물두 번째 게시글', 'user', 71),
+((SELECT member_no FROM members WHERE id = 'user'), '스물세 번째 게시글', 'user', 42),
+((SELECT member_no FROM members WHERE id = 'user'), '스물네 번째 게시글', 'user', 99),
+((SELECT member_no FROM members WHERE id = 'user'), '스물다섯 번째 게시글', 'user', 7),
+((SELECT member_no FROM members WHERE id = 'user'), '스물여섯 번째 게시글', 'user', 53),
+((SELECT member_no FROM members WHERE id = 'user'), '스물일곱 번째 게시글', 'user', 36),
+((SELECT member_no FROM members WHERE id = 'user'), '스물여덟 번째 게시글', 'user', 82),
+((SELECT member_no FROM members WHERE id = 'user'), '스물아홉 번째 게시글', 'user', 15),
+((SELECT member_no FROM members WHERE id = 'user'), '서른 번째 게시글', 'user', 60),
+((SELECT member_no FROM members WHERE id = 'user'), '서른한 번째 게시글', 'user', 21),
+((SELECT member_no FROM members WHERE id = 'user'), '서른두 번째 게시글', 'user', 90),
+((SELECT member_no FROM members WHERE id = 'user'), '서른세 번째 게시글', 'user', 44),
+((SELECT member_no FROM members WHERE id = 'user'), '서른네 번째 게시글', 'user', 75),
+((SELECT member_no FROM members WHERE id = 'user'), '서른다섯 번째 게시글', 'user', 9),
+((SELECT member_no FROM members WHERE id = 'user'), '서른여섯 번째 게시글', 'user', 48),
+((SELECT member_no FROM members WHERE id = 'user'), '서른일곱 번째 게시글', 'user', 31),
+((SELECT member_no FROM members WHERE id = 'user'), '서른여덟 번째 게시글', 'user', 83),
+((SELECT member_no FROM members WHERE id = 'user'), '서른아홉 번째 게시글', 'user', 20),
+((SELECT member_no FROM members WHERE id = 'user'), '마흔 번째 게시글', 'user', 68);
+
+
 -- ✅ 답글 데이터 삽입
 INSERT INTO replies (board_id, member_no, author, reply_title, reply_content, reply_order, reply_step, reply_level) VALUES 
 (1, (SELECT member_no FROM members WHERE id = 'user'), 'user', '첫 번째 답글', '좋은 글 감사합니다.', 1, 0, 0),

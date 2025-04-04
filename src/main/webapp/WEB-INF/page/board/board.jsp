@@ -12,23 +12,24 @@
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-    
     <div class="board-page countainer">
         
         <h3> 자유게시판 </h3>
         <br>
-
-        <input class="btn btn-primary" type="button" value="글쓰기"/>
-        ${count}개
-
         <table class="table">
             <tr>
-                <th>No</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-                <th>조회수</th>
+                <th colspan="4">총 ${count}개</th>
+                <th><input class="btn btn-primary"
+                    onclick="location=''" type="button" value="글쓰기"/></th>
+            </tr>
+            <tr class="col-title">
+                <th style="width:7%">No</th>
+                <th style="width:50%">제목</th>
+                <th style="width:13%">작성자</th>
+                <th style="width:18%; white-space: nowrap;">작성일</th>
+                <th style="width:8%">조회수</th>
             </tr>
             <c:if test="${count eq 0}">
                 <tr>
@@ -39,23 +40,32 @@
             </c:if>
 
             <c:if test="${count ne 0}">
-                <c:set var="number" value="${number}"/>
+                <c:set var="number" value="${number+1}"/>
                 <c:forEach var="dto" items="${dtos}">
                     <tr>
                         <td>
                             ${number}
-                            <c:set var="number" value="${number-1}"/>
+                            <c:set var="number" value="${number+1}"/>
                         </td>
                         <td>
-                            <a href="board/detail?board_id=${dto.board_id}&pageNum=${pageNum}&number=${number+1}">
+                            &nbsp; &nbsp;
+                            <a href="/board/detail?board_id=${dto.board_id}&pageNum=${pageNum}">
                                 ${dto.title}
                             </a>
                         </td> 
                         <td>
-                            ${dto.member_no}
+                            ${dto.author}
                         </td>
                         <td>
-                            ${dto.creation_date}
+                            <jsp:useBean id="now" class="java.util.Date"/>
+                            <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+                            <fmt:formatDate value="${dto.creation_date}" pattern="yyyy-MM-dd" var="formattedDate"/>
+                            <c:if test="${formattedDate eq today}">
+                                <fmt:formatDate value="${dto.creation_date}" pattern="HH:mm"/>
+                            </c:if>
+                            <c:if test="${formattedDate ne today}">
+                                <fmt:formatDate value="${dto.creation_date}" pattern="yyyy-MM-dd"/>
+                            </c:if>
                         </td>
                         <td>
                             ${dto.view_count}
@@ -78,9 +88,13 @@
         border-radius: 8px; /* 모서리 둥글게 */
     }
 
+    .col-title{
+        text-align: center; /* 가운데 정렬 */
+        font-weight: bold;  /* 글씨 굵게 */
+    }
+
     .btn.btn-primary {
         float: right;
-        margin: 10px; /* 버튼 바깥 여백 */
     }
 
     .table {
@@ -95,4 +109,9 @@
         align-items: center;
         font-weight: bold;
     }
+
+    td:not(:nth-child(2)) {
+        text-align: center;
+    }
+    
 </style>
