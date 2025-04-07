@@ -33,7 +33,7 @@
                 </p>
                 <p class="info">
                     <span>OOO병원 님</span>
-                    <button type="button" class="btn btn-link">로그아웃</button>
+                    <button type="button" class="btn btn-link" onclick="logout()">로그아웃</button>
                 </p>
             </div>
             <div class="modal-body">

@@ -27,8 +27,27 @@
         WHERE id = #{id} AND email = #{email}
     </select>
     <update id="updatePassword" parameterType="map">
-    UPDATE members
-    SET password = #{password}
-    WHERE id = #{id}
+        UPDATE members
+        SET password = #{password}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 세션 관련 쿼리문 -->
+    <update id="updateSessionInfo">
+        UPDATE members
+        SET session_id = #{sessionId},
+            last_access_time = #{lastAccessTime},
+            session_expiry_time = #{expiryTime}
+        WHERE id = #{id}
+    </update>
+    <select id="findBySessionId" parameterType="string" resultType="com.project.model.UserDto">
+        SELECT * FROM members WHERE session_id = #{sessionId}
+    </select>
+    <update id="clearSessionInfo">
+        UPDATE members
+        SET session_id = NULL,
+            last_access_time = NULL,
+            session_expiry_time = NULL
+        WHERE session_id = #{sessionId}
     </update>
 </mapper>

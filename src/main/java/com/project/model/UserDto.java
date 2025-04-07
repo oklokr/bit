@@ -1,6 +1,7 @@
 package com.project.model;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
@@ -21,4 +22,5 @@ public class UserDto {
     private String postalCode;
     private int memberType;
     private Timestamp joinDate;
+    private Date sessionExpiryTime;
 }

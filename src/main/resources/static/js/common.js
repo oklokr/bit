@@ -16,6 +16,13 @@ function handleSearch() {
     }
 }
 
+function logout() {
+    postRequestApi("logout", null, res => {
+        if(res.status !== 200) return alert("네트워크 오류입니다.");
+        location.href = "/login";
+    })
+}
+
 // 공통 유효성 검사 함수
 const validate = {
     isEmpty: value => {

@@ -24,9 +24,9 @@
         </tr>
         <tr>
             <td class="link-group" style="text-align: center;">
-                <a href="http://localhost:8080/findId">아이디찾기</a>
-                <a href="http://localhost:8080/findPw">비밀번호찾기</a>
-                <a href="http://localhost:8080/join">회원가입</a>
+                <a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/findId">아이디찾기</a>
+                <a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/findPw">비밀번호찾기</a>
+                <a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/join">회원가입</a>
             </td>
         </tr>
     </table>

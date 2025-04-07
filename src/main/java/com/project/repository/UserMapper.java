@@ -1,11 +1,21 @@
 package com.project.repository;
 
+import java.util.Date;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.project.model.UserDto;
 
 public interface UserMapper {
     UserDto getUserById(String id);
+
+    void updateSessionInfo(@Param("id") String id, @Param("sessionId") String sessionId,
+        @Param("lastAccessTime") Date lastAccessTime, @Param("expiryTime") Date expiryTime);
+
+    void clearSessionInfo(@Param("sessionId") String sessionId);
+    
+    UserDto findBySessionId(@Param("sessionId") String sessionId);
     
     UserDto findByCompanyName(String companyName);
 
