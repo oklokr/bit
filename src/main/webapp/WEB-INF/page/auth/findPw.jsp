@@ -22,6 +22,91 @@
             }
         }
     }
+    async function sendId(event) {
+    event.preventDefault(); // 폼의 기본 제출 동작을 막음
+
+    const idInput = document.querySelector('input[name="id"]');
+    const selectedCert = document.querySelector('input[name="certification"]:checked');
+    const certValueInput = document.querySelector('input[name="cert_value"]'); // 숨겨진 필드
+    const id = idInput.value.trim();
+    const certType = selectedCert ? selectedCert.value : null;
+
+    let certValue = ""; // 인증 값 초기화
+
+    if (!id) {
+        alert("아이디를 입력해주세요.");
+        return;
+    }
+
+    if (!certType) {
+        alert("인증 방법을 선택해주세요.");
+        return;
+    }
+
+    // 이메일 또는 전화번호 값 설정
+    if (certType === "1") {
+        const emailInput = document.querySelector('input[name="email"]');
+        certValue = emailInput.value.trim();
+    } else if (certType === "2") {
+        const tel1 = document.querySelector('input[name="tel1"]').value.trim();
+        const tel2 = document.querySelector('input[name="tel2"]').value.trim();
+        const tel3 = document.querySelector('input[name="tel3"]').value.trim();
+
+        // 전화번호 입력값 검증
+        if (!tel1 || !tel2 || !tel3) {
+            alert("휴대폰 번호를 모두 입력해주세요.");
+            return;
+        }
+
+        certValue = tel1 + "-" + tel2 + "-" + tel3; // 전화번호를 합쳐서 설정
+    }
+
+    // 인증 값이 비어 있는지 확인
+    if (!certValue) {
+        alert(certType === "1" ? "이메일을 입력해주세요." : "휴대폰 번호를 입력해주세요.");
+        return;
+    }
+
+    // 숨겨진 필드에 인증 값 설정
+    certValueInput.value = certValue;
+
+    console.log("전송 데이터:", { id: id, cert_type: certType, cert_value: certValue });
+
+    try {
+        const response = await fetch('/findPw', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // JSON 형식으로 요청
+            },
+            body: JSON.stringify({ id: id, cert_type: certType, cert_value: certValue }) // JSON 데이터
+        });
+
+        if (!response.ok) {
+            throw new Error(`서버 오류: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        console.log("서버 응답 데이터:", result);
+
+        if (result.success) {
+            // 성공 시 findPwResult 페이지로 이동
+            const queryParams = 
+                "?id=" + encodeURIComponent(id) +
+                "&cert_type=" + encodeURIComponent(certType) +
+                "&cert_value=" + encodeURIComponent(certValue) +
+                "&password=" + encodeURIComponent(result.password);
+
+            window.location.href = "/findPwResult" + queryParams;
+        } else {
+            // 실패 시 에러 메시지를 alert 창에 출력
+            alert(result.message || "일치하는 정보가 없습니다.");
+        }
+    } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
+        alert("서버와 통신 중 오류가 발생했습니다.");
+    }
+}
 </script>
 <style>
     body {
@@ -131,7 +216,7 @@
     }
 </style>
 
-<form name="findId" method="post">
+<form name="findPw" onsubmit="sendId(event)">
     <table>
         <tr>
             <th style="padding-top: 10px;"> 비밀번호찾기 </th>
@@ -164,6 +249,10 @@
                 <input class="input" type="text" name="tel3" maxlength="4" style="width: 46px;">
             </td>
         </tr>
+    </tr>
+    <!-- 숨겨진 필드 추가 -->
+    <input type="hidden" name="cert_value" value="">
+    <tr>
         <tr>
             <td colspan="2" >
                 <input class="inputbutton" type="button" value="이전" onclick="location='/login'">
