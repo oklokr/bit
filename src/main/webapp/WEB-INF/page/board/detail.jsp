@@ -46,10 +46,18 @@
                 <c:if test="${replyCount ne 0}">
                     <c:forEach var="replyDto" items="${replyDtos}">
                         <div class="reply <c:if test='${replyDto.replyLevel == 1}'>reply-indent</c:if>">
-                            <div class="meta">
-                                작성자 : ${replyDto.author}
-                                &nbsp;&nbsp;|&nbsp;&nbsp;
-                                작성날짜 : <fmt:formatDate value="${replyDto.creationDate}" pattern="yyyy.MM.dd HH:mm"/>
+                            <div class="meta d-flex justify-content-between align-items-center">
+                                <div>
+                                    작성자 : ${replyDto.author}
+                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    작성날짜 : <fmt:formatDate value="${replyDto.creationDate}" pattern="yyyy.MM.dd HH:mm"/>
+                                </div>
+                                
+                                <c:if test="${replyDto.replyLevel == 0}">
+                                    <button class="btn btn-sm btn-outline-secondary py-0 px-2" 
+                                            style="font-size: 0.75rem;" 
+                                            onclick="nestedReplyForm('${replyDto.replyRef}')">답글</button>
+                                </c:if>
                             </div>
                             <div class="title">
                                 ${replyDto.replyTitle}
@@ -58,6 +66,33 @@
                                 ${replyDto.replyContent}
                             </div>
                         </div>
+                        <!-- 대댓글 작성 -->
+                        <div id="reply-form-${replyDto.replyRef}" class="reply-form nested-reply-form mt-2" style="display: none;">
+                            <form action="${pageContext.request.contextPath}/board/reply/write" method="post" name="replyform">
+                                <input type="hidden" name="boardId" value="${boardId}">
+                                <input type="hidden" name="replyLevel" value="1">
+                                <input type="hidden" name="pageNum" value="${pageNum}">
+                                <input type="hidden" name="replyRef" value="${replyDto.replyRef}" />
+                        
+                                <div class="small text-muted mb-2">
+                                    작성자: ${"User"} &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/>
+                                </div>
+                        
+                                <div class="mb-2">
+                                    <input type="text" name="replyTitle" class="form-control" placeholder="제목을 입력해주세요">
+                                </div>
+                        
+                                <div class="mb-2">
+                                    <textarea name="replyContent" class="form-control" placeholder="내용을 입력해주세요" rows="5" maxlength="250"></textarea>
+                                </div>
+                        
+                                <div class="text-end">
+                                    <button type="submit" name="submit" class="btn btn-sm btn-secondary">답글 작성</button>
+                                </div>
+                            </form>
+                        </div>
+
                     </c:forEach>
                 </c:if>
             </table>
@@ -150,6 +185,15 @@
             event.preventDefault();
         }
     });
+
+    function nestedReplyForm(replyId) {
+        const form = document.getElementById('reply-form-' + replyId);
+        if (form.style.display === 'none') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    }
 
 </script>
 
@@ -244,8 +288,16 @@
     .form-control{
         box-shadow: none !important;
     }
+
     .reply-table textarea {
     resize: none !important;
     }
+
+    .nested-reply-form {
+    margin-left: 20px;       /* 댓글보다 오른쪽으로 들여쓰기 */
+    padding: 10px;
+    font-size: 0.95rem;       /* 글자도 살짝 작게 */
+    margin-bottom: 20px;
+}
 </style>
 
