@@ -1,4 +1,5 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -16,13 +17,20 @@
 </head>
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <jsp:include page="header.jsp" />
-    
-    <div id="app">
-        <jsp:include page="${contentPage}" />
-    </div>
+    <c:if test='${defaultLayout eq "false"}'>
+        <div id="app">
+            <jsp:include page="${contentPage}" />
+        </div>
+    </c:if>
+    <c:if test='${defaultLayout ne "false"}'>
+        <jsp:include page="header.jsp" />
 
-    <jsp:include page="footer.jsp" />
+        <div id="app">
+            <jsp:include page="${contentPage}" />
+        </div>
+
+        <jsp:include page="footer.jsp" />
+    </c:if>
 </body>
 </html>
 

@@ -23,6 +23,7 @@ public class FindId {
     public String pageRender(Model model) {
         model.addAttribute("title", "아이디 찾기");
         model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
+        model.addAttribute("defaultLayout", "false");
         return "layout/app";
     }
 

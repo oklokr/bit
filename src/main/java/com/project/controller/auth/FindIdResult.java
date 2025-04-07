@@ -11,6 +11,7 @@ public class FindIdResult {
     public String pageRender(Model model) {
         model.addAttribute("title", "FindIdResult Page");
         model.addAttribute("contentPage", "/WEB-INF/page/auth/findIdResult.jsp");
+        model.addAttribute("defaultLayout", "false");
         return "layout/app";
     }
 } 

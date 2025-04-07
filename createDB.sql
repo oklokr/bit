@@ -46,6 +46,9 @@ CREATE TABLE members (
     postal_code VARCHAR(20) NOT NULL,
     member_type INT NULL,  
     join_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    session_id VARCHAR(255),
+    last_access_time DATETIME,
+    session_expiry_time DATETIME,
     FOREIGN KEY (member_type) REFERENCES common_codes(common_code_id) ON DELETE SET NULL
 );
 
@@ -136,3 +139,9 @@ SELECT * FROM product_info;
 SELECT * FROM terms;
 SELECT * FROM bulletin_board;
 SELECT * FROM replies;
+
+
+ALTER TABLE members
+ADD COLUMN session_id VARCHAR(255),
+ADD COLUMN last_access_time DATETIME,
+ADD COLUMN session_expiry_time DATETIME;

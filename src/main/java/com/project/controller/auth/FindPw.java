@@ -24,6 +24,7 @@ public class FindPw {
     public String pageRender(Model model) {
         model.addAttribute("title", "비밀번호 찾기");
         model.addAttribute("contentPage", "/WEB-INF/page/auth/findPw.jsp");
+        model.addAttribute("defaultLayout", "false");
         return "layout/app";
     }
 

@@ -11,6 +11,7 @@ public class FindPwResult {
     public String pageRender(Model model) {
         model.addAttribute("title", "FindPwResult Page");
         model.addAttribute("contentPage", "/WEB-INF/page/auth/findPwResult.jsp");
+        model.addAttribute("defaultLayout", "false");
         return "layout/app";
     }
 }

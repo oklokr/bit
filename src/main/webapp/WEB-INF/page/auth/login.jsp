@@ -4,6 +4,34 @@
         ${errorMessage}
     </c:if>
 </div>
+<form name="login" method="post">
+    <table>
+        <tr>
+            <th colspan="2" style="text-align: center;">
+                <img src="/images/logo.png" class="logo">
+            </th>
+        </tr>
+        <tr>
+            <td > ID <input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요."></td>
+        </tr>
+        <tr>
+            <td> PW <input class="input" type="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
+        </tr> 
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input class="inputbutton" type="submit" value="로그인">
+            </td>
+        </tr>
+        <tr>
+            <td class="link-group" style="text-align: center;">
+                <a href="http://localhost:8080/findId">아이디찾기</a>
+                <a href="http://localhost:8080/findPw">비밀번호찾기</a>
+                <a href="http://localhost:8080/join">회원가입</a>
+            </td>
+        </tr>
+    </table>
+</form>
+
 <style>
     body {
             margin: 0;
@@ -83,30 +111,3 @@
             color: #FF0000;
         }
 </style>
-<form name="login" method="post">
-    <table>
-        <tr>
-            <th colspan="2" style="text-align: center;">
-                <img src="/images/logo.png" class="logo">
-            </th>
-        </tr>
-        <tr>
-            <td > ID <input class="input" type="text" name="id" maxlength="15" autofocus placeholder="아이디를 입력해주세요."></td>
-        </tr>
-        <tr>
-            <td> PW <input class="input" type="password" name="password" maxlength="20" placeholder="비밀번호를 입력해주세요."></td>
-        </tr> 
-        <tr>
-            <td colspan="2" style="text-align: center;">
-                <input class="inputbutton" type="submit" value="로그인">
-            </td>
-        </tr>
-        <tr>
-            <td class="link-group" style="text-align: center;">
-                <a href="http://localhost:8080/findId">아이디찾기</a>
-                <a href="http://localhost:8080/findPw">비밀번호찾기</a>
-                <a href="http://localhost:8080/join">회원가입</a>
-            </td>
-        </tr>
-    </table>
-</form>
