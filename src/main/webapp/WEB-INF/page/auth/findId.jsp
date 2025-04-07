@@ -87,9 +87,15 @@
         console.log("서버 응답 데이터:", result);
 
         if (result.success) {
-            // 성공 시 아이디를 alert 창에 출력
-            alert("아이디 : " + result.id);
-        } else {
+            const queryParams = 
+        "?id=" + encodeURIComponent(result.id) +
+        "&company_name=" + encodeURIComponent(companyName) +
+        "&cert_type=" + encodeURIComponent(certType) +
+        "&cert_value=" + encodeURIComponent(certValue);
+
+    window.location.href = "/findIdResult" + queryParams;
+}
+         else {
             // 실패 시 에러 메시지를 alert 창에 출력
             alert(result.message || "일치하는 정보가 없습니다.");
         }
