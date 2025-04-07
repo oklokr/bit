@@ -41,6 +41,13 @@
                         </td>
                     </tr>
                 </c:if>
+                <c:if test="${replyCount ne 0}">
+                    <c:forEach var="dto" items="${dtos}">
+                        <tr>
+                            
+                        </tr>
+                    </c:forEach>
+                </c:if>
             </table>
         </div>  
 
