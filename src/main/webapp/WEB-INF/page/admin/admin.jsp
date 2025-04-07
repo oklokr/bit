@@ -27,17 +27,17 @@
     </form>
 
     <!-- 회원 테이블 -->
-    <table class="table table-bordered table-hover mt-4 rounded-table">
+    <table class="table table-bordered table-hover mt-4">
         <thead class="table-light">
             <tr>
                 <th style="width:5%;">No</th>
                 <th style="width:10%;">회원ID</th>
-                <th style="width:12%;">회사명</th>
+                <th style="width:19%;">회사명</th>
                 <th style="width:18%;">이메일</th>
                 <th style="width:12%;">전화번호</th>
                 <th style="width:12%;">사업자번호</th>
-                <th style="width:21%;">주소</th>
-                <th style="width:10%;">회원 유형</th>
+                <th style="width:16%;">주소</th>
+                <th style="width:8%;">회원 유형</th>
             </tr>
         </thead>
         <c:if test="${count eq 0}">
@@ -68,28 +68,23 @@
     </table>
 
     <!-- 페이징 -->
-    <div class="d-flex justify-content-center align-items-center gap-3 mt-0">
-        <c:if test="${totalPages gt 0}">
-            <!-- 이전 블록 -->
-            <c:if test="${startPage gt 1}">
-                <a href="?page=${startPage - 1}&searchName=${param.searchName}" class="text-dark">
+    <div class="d-flex justify-content-center align-items-center gap-3 mt-1">
+        <c:if test="${count gt 0}">
+            <c:if test="${startPage gt pageBlock}">
+                <a href="admin">
                     <i class="bi bi-chevron-left"></i>
                 </a>
             </c:if>
-    
-            <!-- 페이지 번호 -->
             <c:forEach var="i" begin="${startPage}" end="${endPage}">
                 <c:if test="${i eq currentPage}">
                     <span class="badge bg-primary" style="font-size: 1rem;">${i}</span>
                 </c:if>
                 <c:if test="${i ne currentPage}">
-                    <a href="?page=${i}&searchName=${param.searchName}" class="text-decoration-none">${i}</a>
+                    <a href="admin?pageNum=${i}" class="text-decoration-none">${i}</a>
                 </c:if>
             </c:forEach>
-    
-            <!-- 다음 블록 -->
-            <c:if test="${endPage lt totalPages}">
-                <a href="?page=${startPage + pageBlock}&searchName=${param.searchName}" class="text-dark">
+            <c:if test="${pageCount gt endPage}">		
+                <a href="admin?pageNum=${startPage + pageBlock}">
                     <i class="bi bi-chevron-right"></i>
                 </a>
             </c:if>
@@ -100,14 +95,41 @@
 </body>
 
 <style>
+    /* 헤더 */
+    h4 strong {
+        font-size: 1.6rem;
+    }
+
     /* 검색 박스 */
     .member-box {
-        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem;
+        padding: 20px 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         margin-top: 30px;
-        text-align: center;
+    }
+
+    .member-box input[type="text"] {
+        max-width: 300px;
+    }
+
+    .member-box .btn {
+        margin-left: 10px;
     }
 
     /* 테이블 */
+    table th {
+        background-color: #f1f3f5;
+        color: #495057;
+        font-weight: 600;
+    }
+
+    table td {
+        background-color: #ffffff;
+        color: #212529;
+    }
+
     table th,
     table td {
         text-align: center;
@@ -115,38 +137,9 @@
     }
 
     thead tr {
-        border-bottom: 1px solid #dee2e6;
+        border-bottom: 2px solid #dee2e6;
     }
 
-    /* 둥근 테두리를 위한 테이블 래퍼 */
-    .rounded-table {
-        border-collapse: separate;
-        border-spacing: 0;
-        border: 1px solid #dee2e6;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-
-    .rounded-table th:first-child {
-        border-top-left-radius: 10px;
-    }
-
-    .rounded-table th:last-child {
-        border-top-right-radius: 10px;
-    }
-
-    .rounded-table td:first-child {
-        border-bottom-left-radius: 10px;
-    }
-
-    .rounded-table td:last-child {
-        border-bottom-right-radius: 10px;
-    }
-
-    /* 페이징 가운데 정렬 */
-    .pagination {
-        justify-content: center;
-    }
 </style>
 
 </html>

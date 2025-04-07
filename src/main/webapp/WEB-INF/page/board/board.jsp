@@ -123,7 +123,7 @@
         font-weight: bold;  /* 글씨 굵게 */
     }
 
-        /* 기본 상태: 검은색 */
+    /* 기본 상태: 검은색 */
     .board-title-link {
         color: black;
         text-decoration: none;
