@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.model.BoardDto;
+import com.project.model.ReplyDto;
 import com.project.repository.BoardMapper;
 
 @Service
@@ -46,4 +47,7 @@ public class BoardService {
         return boardmapper.getReplyCount(board_id);
     }
 
+    public List<ReplyDto> getReplies(int board_id){
+        return boardmapper.getReplies(board_id);
+    }
 }

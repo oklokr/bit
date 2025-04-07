@@ -12,6 +12,7 @@
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <div class="board-detail-page container">
         <h3> 자유게시판 ${deleteResult}</h3>
@@ -27,12 +28,13 @@
             <tr>
                 <td colspan="2" class="content">${boardDto.content}</td>
             </tr>
-
         </table>
 
         <!-- 답글 섹션 -->
         <div class="reply-section">
-            <h5>답글 <span>(${replyCount}개)</span></h5>
+            <strong style="display: block; margin-bottom: 10px;">
+                답글 (<fmt:formatNumber value="${replyCount}" pattern="###,###"/>개)
+            </strong>
             <table class="reply-table">
                 <c:if test="${replyCount eq 0}">
                     <tr>
@@ -43,9 +45,19 @@
                 </c:if>
                 <c:if test="${replyCount ne 0}">
                     <c:forEach var="dto" items="${dtos}">
-                        <tr>
-                            
-                        </tr>
+                        <div class="reply <c:if test='${dto.reply_level == 1}'>reply-indent</c:if>">
+                            <div class="meta">
+                                작성자 : ${dto.author}
+                                &nbsp;&nbsp;|&nbsp;&nbsp;
+                                작성날짜 : <fmt:formatDate value="${dto.creation_date}" pattern="yyyy.MM.dd HH:mm"/>
+                            </div>
+                            <div class="title">
+                                ${dto.reply_title}
+                            </div>
+                            <div class="content">
+                                ${dto.reply_content}
+                            </div>
+                        </div>
                     </c:forEach>
                 </c:if>
             </table>
@@ -88,51 +100,89 @@
 <% session.removeAttribute("deleteResult"); %>
 
 <style>
+    /* 기본 테이블 스타일 */
     .table {
         width: 100%;
-        table-layout: fixed; /* 고정 레이아웃 */
+        table-layout: fixed;
     }
+
+    /* 페이지 레이아웃 */
+    .board-detail-page {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+    }
+
+    /* 제목 스타일 */
+    .board-detail-page h3 {
+        text-align: center;
+        margin: 20px 0;
+        font-weight: bold;
+    }
+
     th.title {
         font-size: 1.4rem;
         font-weight: bold;
     }
-    .board-detail-page {
-        max-width: 800px; /* 페이지 최대 너비 제한 */
-        margin: 40px auto; /* 중앙 정렬 */
-        padding: 20px;
-        background: #fff; /* 배경 흰색 */
-        border-radius: 8px; /* 모서리 둥글게 */
+
+    /* 게시글 내용 스타일 */
+    td.content {
+        min-height: 100px;
+        height: 100px;
+        padding: 10px;
+        word-wrap: break-word;
+        vertical-align: top;
+    }
+
+    /* 답글 영역 */
+    .reply-section {
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+
+    .reply-section span {
+        font-size: 1.2rem;
+        font-weight: normal;
+        color: #666;
+        margin-bottom: 10px;
     }
 
     .reply-table {
-        margin-bottom: 50px; /* 바닥에서 20px 떨어지도록 설정 */
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 50px;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
     }
 
-    .reply-section h5 {
-        font-size: 1.2rem; /* 제목 크기 키우기 */
-        font-weight: bold; /* 제목 굵게 */
+    .reply {
+        border-top: 1px solid #eee;
+        padding: 10px 0;
     }
 
-    .reply-section h5 span {
-        font-size: 1rem; /* 총 답글 수는 작은 글씨 */
-        font-weight: normal; /* 기본 글씨 두께 */
-        color: #666; /* 회색 계열로 가독성 조절 */
+    .reply.reply-indent {
+        margin-left: 20px;
     }
 
-    .board-detail-page h3 {
-        text-align: center;
-        margin: 20px 0; /* 위아래 여백 */
-        align-items: center;
+    .reply .meta {
+        font-size: 12px;
+        color: #666;
+    }
+
+    .reply .title {
         font-weight: bold;
+        margin-top: 5px;
     }
 
-    td.content {
-        min-height: 100px; /* 최소 높이 */
-        height: 100px; /* 높이 설정 */
-        padding: 10px; /* 내부 여백 */
-        word-wrap: break-word; /* 긴 단어 줄 바꿈 */
-        vertical-align: top; /* 내용이 위쪽 정렬되도록 설정 */
+    .reply .content {
+        margin-top: 3px;
     }
 
-
+    /* 버튼 그룹 */
+    .button-group {
+        margin-top: 30px;
+    }
 </style>
+

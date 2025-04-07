@@ -1,5 +1,7 @@
 package com.project.controller.board;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.model.BoardDto;
+import com.project.model.ReplyDto;
 import com.project.service.BoardService;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +27,10 @@ public class BoardDetail {
         boardDao.addCount(board_id);
         int replyCount = 0;
         replyCount = boardDao.getReplyCount(board_id);
+
+        List<ReplyDto> replyDtos = boardDao.getReplies(board_id);
+        model.addAttribute("dtos", replyDtos);
+
         model.addAttribute("replyCount", replyCount);
         model.addAttribute("board_id", board_id);
         model.addAttribute("pageNum", pageNum);
