@@ -18,6 +18,44 @@
             }
         }
     }
+    async function sendCompanyName(event) {
+    event.preventDefault(); // 폼의 기본 제출 동작을 막음
+
+    const companyNameInput = document.querySelector('input[name="company_name"]');
+    const companyName = companyNameInput.value.trim();
+
+    if (!companyName) {
+        alert("업체명을 입력해주세요.");
+        return;
+    }
+
+    try {
+        const response = await fetch('/findId', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // JSON 형식으로 요청
+            },
+            body: JSON.stringify({ company_name: companyName }) // JSON 데이터
+        });
+
+        if (!response.ok) {
+            throw new Error(`서버 오류: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+            // 성공 시 아이디를 alert 창에 출력
+            alert(`아이디: ${result.id}`);
+        } else {
+            // 실패 시 에러 메시지를 alert 창에 출력
+            alert(result.message || "일치하는 정보가 없습니다.");
+        }
+    } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
+        alert("서버와 통신 중 오류가 발생했습니다.");
+    }
+}
 </script>
 <style>
     body {
@@ -127,7 +165,7 @@
     }
 </style>
 
-<form name="findId" method="post">
+<form name="findId" onsubmit="sendCompanyName(event)">
     <table>
         <tr>
             <th style="padding-top: 10px;"> 아이디찾기 </th>
