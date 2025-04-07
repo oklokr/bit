@@ -46,7 +46,7 @@
             postData.categoryCode = categoryCode;
         }
         const setProductList = res => {
-            const products = res.data;
+            const products = res.data.data;
             const groupSize = 8;
             let currentGroup = null;
 
