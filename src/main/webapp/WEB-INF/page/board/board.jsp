@@ -59,7 +59,6 @@
                             ${dto.author}
                         </td>
                         <td>
-                            ${dto.creationDate}
                             <jsp:useBean id="now" class="java.util.Date"/>
                             <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
                             <fmt:formatDate value="${dto.creationDate}" pattern="yyyy-MM-dd" var="formattedDate"/>
@@ -71,7 +70,7 @@
                             </c:if>
                         </td>
                         <td>
-                            ${dto.view_count}
+                            ${dto.viewCount}
                         </td>
                     </tr>
                 </c:forEach>
