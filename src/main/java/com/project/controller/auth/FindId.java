@@ -1,75 +1,78 @@
 package com.project.controller.auth;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.model.UserDto;
 import com.project.service.UserService;
 
-@Controller
+    @Controller
 public class FindId {
     @Autowired
     private UserService userService;
 
     @GetMapping("/findId")
-    public String pageRender(Model model) {
-        model.addAttribute("title", "아이디 찾기");
-        model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
-        return "layout/app";
+    public String pageRender() {
+        return "auth/findId";
     }
 
     @PostMapping("/findId")
-    public String findId(@RequestParam String company_name,
-                         @RequestParam String cert_value,
-                         @RequestParam(required = false) String email,
-                         @RequestParam(required = false) String tel1,
-                         @RequestParam(required = false) String tel2,
-                         @RequestParam(required = false) String tel3,
-                         Model model) {
-        System.out.println("회사명: " + company_name);
-        System.out.println("인증 방법: " + cert_value);
+    @ResponseBody
+    public Map<String, Object> findId(@RequestBody Map<String, String> requestBody) {
+        System.out.println("요청 받은 데이터: " + requestBody);
 
-        if ("1".equals(cert_value)) { // 이메일 인증
-            if (email != null && !email.isEmpty()) {
-                UserDto user = userService.findByCompanyNameAndEmail(company_name, email);
-                System.out.println("조회된 사용자: " + user);
-                if (user != null) {
-                    model.addAttribute("userId", user.getId());
-                    return "auth/findidResult";
-                } else {
-                    model.addAttribute("errorMessage", "일치하는 정보가 없습니다.");
-                    return "auth/findidResult";
-                }
-            } else {
-                model.addAttribute("errorMessage", "이메일을 입력해 주세요.");
-                return "auth/findidResult";
+        Map<String, Object> response = new HashMap<>();
+
+        try {
+            if (requestBody == null || requestBody.isEmpty()) {
+                response.put("success", false);
+                response.put("message", "요청 데이터가 비어 있습니다.");
+                return response;
             }
-        } else if ("2".equals(cert_value)) { // 휴대폰 인증
-            if (tel1 != null && !tel1.isEmpty() &&
-                tel2 != null && !tel2.isEmpty() &&
-                tel3 != null && !tel3.isEmpty()) {
-                String phoneNumber = tel1 + "-" + tel2 + "-" + tel3;
-                UserDto user = userService.findByCompanyNameAndPhoneNumber(company_name, phoneNumber);
-                System.out.println("조회된 사용자: " + user);
-                if (user != null) {
-                    model.addAttribute("userId", user.getId());
-                    return "auth/findidResult";
-                } else {
-                    model.addAttribute("errorMessage", "일치하는 정보가 없습니다.");
-                    return "auth/findidResult";
-                }
-            } else {
-                model.addAttribute("errorMessage", "휴대폰 번호를 모두 입력해 주세요.");
-                return "auth/findidResult";
+
+            String companyName = requestBody.get("company_name");
+            String email = requestBody.get("email");
+
+            System.out.println("요청 받은 업체명: " + companyName);
+            System.out.println("요청 받은 이메일: " + email);
+
+            if (companyName == null || companyName.isEmpty()) {
+                response.put("success", false);
+                response.put("message", "업체명을 입력해주세요.");
+                return response;
             }
-        } else {
-            model.addAttribute("errorMessage", "잘못된 인증 방법입니다.");
-            return "auth/findidResult";
+
+            if (email == null || email.isEmpty()) {
+                response.put("success", false);
+                response.put("message", "이메일을 입력해주세요.");
+                return response;
+            }
+
+            // 업체명과 이메일로 사용자 조회
+            UserDto user = userService.findByCompanyNameAndEmail(companyName, email);
+            System.out.println("조회된 사용자: " + user);
+
+            if (user != null) {
+                response.put("success", true);
+                response.put("id", user.getId());
+            } else {
+                response.put("success", false);
+                response.put("message", "일치하는 정보가 없습니다.");
+            }
+        } catch (Exception e) {
+            System.err.println("오류 발생: " + e.getMessage());
+            e.printStackTrace();
+            response.put("success", false);
+            response.put("message", "서버 처리 중 오류가 발생했습니다.");
         }
+
+        return response;
     }
 }
-

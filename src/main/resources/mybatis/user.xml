@@ -7,19 +7,11 @@
     <select id="getUserById" parameterType="string" resultType="com.project.model.UserDto">
         SELECT * FROM members WHERE id = #{id}
     </select>
-    <!-- 이메일로 사용자 조회 -->
-    <select id="findByCompanyNameAndEmail" parameterType="map" resultType="com.project.model.UserDto">
-        SELECT * FROM members
-        WHERE company_name = #{companyName}
-        AND email = #{email}
-        LIMIT 1
+    <select id="findByCompanyName" parameterType="string" resultType="com.project.model.UserDto">
+        SELECT * FROM members WHERE company_name = #{companyName}
     </select>
-
-    <!-- 전화번호로 사용자 조회 -->
-    <select id="findByCompanyNameAndPhoneNumber" parameterType="map" resultType="com.project.model.UserDto">
-        SELECT * FROM members
-        WHERE company_name = #{companyName}
-        AND phone_number = #{phoneNumber}
-        LIMIT 1
+    <select id="findByCompanyNameAndEmail" parameterType="map" resultType="com.project.model.UserDto">
+        SELECT * FROM members 
+        WHERE company_name = #{companyName} AND email = #{email}
     </select>
 </mapper>

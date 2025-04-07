@@ -41,21 +41,15 @@ public class UserService {
         return "SUCCESS";
     }
     
-    public UserDto findByCompanyNameAndEmail(String companyName, String email) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("companyName", companyName);
-        params.put("email", email);
-        UserDto user = userMapper.findByCompanyNameAndEmail(params);
-        System.out.println("이메일로 조회된 사용자: " + user);
-        return user;
+    public UserDto findByCompanyName(String companyName) {
+        System.out.println("UserService - 조회할 업체명: " + companyName);
+        return userMapper.findByCompanyName(companyName);
     }
 
-    public UserDto findByCompanyNameAndPhoneNumber(String companyName, String phoneNumber) {
-        Map<String, Object> params = new HashMap<>();
+    public UserDto findByCompanyNameAndEmail(String companyName, String email) {
+        Map<String, String> params = new HashMap<>();
         params.put("companyName", companyName);
-        params.put("phoneNumber", phoneNumber);
-        UserDto user = userMapper.findByCompanyNameAndPhoneNumber(params);
-        System.out.println("휴대폰 번호로 조회된 사용자: " + user);
-        return user;
+        params.put("email", email);
+        return userMapper.findByCompanyNameAndEmail(params);
     }
 }
