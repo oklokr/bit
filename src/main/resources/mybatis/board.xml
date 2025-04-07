@@ -49,6 +49,9 @@
         WHERE board_id = #{board_id}
         ORDER BY reply_order ASC, reply_step ASC;
     </select>
+
+    <insert id="insertReply" parameterType="com.project.model.ReplyDto">
+    </insert>
 </mapper>
 
 
