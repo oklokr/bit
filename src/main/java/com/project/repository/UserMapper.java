@@ -10,5 +10,7 @@ public interface UserMapper {
     UserDto findByCompanyName(String companyName);
 
     UserDto findByCompanyNameAndEmail(Map<String, String> params);
+
+    UserDto findByCompanyNameAndPhone(Map<String, String> params); // 이 메서드가 정의되어 있어야 합니다.
 }
 

@@ -7,7 +7,7 @@
         const phoneField = document.getElementById('phoneField');
 
         if (selectedCert) {
-            certValueInput.value = selectedCert.value;
+            certValueInput.value = ""; // 인증 값 초기화
 
             if (selectedCert.value === "1") {
                 emailField.style.display = "block";
@@ -18,51 +18,86 @@
             }
         }
     }
+
     async function sendCompanyName(event) {
-        event.preventDefault(); // 폼의 기본 제출 동작을 막음
+    event.preventDefault(); // 폼의 기본 제출 동작을 막음
 
-        const companyNameInput = document.querySelector('input[name="company_name"]');
-        const emailInput = document.querySelector('input[name="email"]');
-        const companyName = companyNameInput.value.trim();
-        const email = emailInput.value.trim();
+    const companyNameInput = document.querySelector('input[name="company_name"]');
+    const selectedCert = document.querySelector('input[name="certification"]:checked');
+    const certValueInput = document.querySelector('input[name="cert_value"]');
+    const companyName = companyNameInput.value.trim();
+    const certType = selectedCert ? selectedCert.value : null;
 
-        if (!companyName) {
-            alert("업체명을 입력해주세요.");
-            return;
-        }
+    let certValue = ""; // 인증 값 초기화
 
-        if (!email) {
-            alert("이메일을 입력해주세요.");
-            return;
-        }
-
-        try {
-            const response = await fetch('/findId', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json' // JSON 형식으로 요청
-                },
-                body: JSON.stringify({ company_name: companyName, email: email }) // JSON 데이터
-            });
-
-            if (!response.ok) {
-                throw new Error(`서버 오류: ${response.status}`);
-            }
-
-            const result = await response.json();
-
-            if (result.success) {
-                // 성공 시 아이디를 alert 창에 출력
-                alert(`아이디: ${result.id}`);
-            } else {
-                // 실패 시 에러 메시지를 alert 창에 출력
-                alert(result.message || "일치하는 정보가 없습니다.");
-            }
-        } catch (error) {
-            console.error("API 호출 중 오류 발생:", error);
-            alert("서버와 통신 중 오류가 발생했습니다.");
-        }
+    if (!companyName) {
+        alert("업체명을 입력해주세요.");
+        return;
     }
+
+    if (!certType) {
+        alert("인증 방법을 선택해주세요.");
+        return;
+    }
+
+    // 이메일 또는 전화번호 값 설정
+    if (certType === "1") {
+        const emailInput = document.querySelector('input[name="email"]');
+        certValue = emailInput.value.trim();
+    } else if (certType === "2") {
+        const tel1 = document.querySelector('input[name="tel1"]').value.trim();
+        const tel2 = document.querySelector('input[name="tel2"]').value.trim();
+        const tel3 = document.querySelector('input[name="tel3"]').value.trim();
+
+        // 전화번호 입력값 검증
+        if (!tel1 || !tel2 || !tel3) {
+            alert("휴대폰 번호를 모두 입력해주세요.");
+            return;
+        }
+
+        certValue = tel1 + "-" + tel2 + "-" + tel3; // 전화번호를 합쳐서 설정
+    }
+
+    // 인증 값이 비어 있는지 확인
+    if (!certValue) {
+        alert(certType === "1" ? "이메일을 입력해주세요." : "휴대폰 번호를 입력해주세요.");
+        return;
+    }
+
+    // 숨겨진 필드에 인증 값 설정
+    certValueInput.value = certValue;
+
+    console.log("전송 데이터:", { company_name: companyName, cert_type: certType, cert_value: certValue });
+
+    try {
+        const response = await fetch('/findId', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // JSON 형식으로 요청
+            },
+            body: JSON.stringify({ company_name: companyName, cert_type: certType, cert_value: certValue }) // JSON 데이터
+        });
+
+        if (!response.ok) {
+            throw new Error(`서버 오류: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        console.log("서버 응답 데이터:", result);
+
+        if (result.success) {
+            // 성공 시 아이디를 alert 창에 출력
+            alert("아이디 : " + result.id);
+        } else {
+            // 실패 시 에러 메시지를 alert 창에 출력
+            alert(result.message || "일치하는 정보가 없습니다.");
+        }
+    } catch (error) {
+        console.error("API 호출 중 오류 발생:", error);
+        alert("서버와 통신 중 오류가 발생했습니다.");
+    }
+}
 </script>
 <style>
     body {

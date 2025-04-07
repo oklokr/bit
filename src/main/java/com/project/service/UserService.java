@@ -52,4 +52,11 @@ public class UserService {
         params.put("email", email);
         return userMapper.findByCompanyNameAndEmail(params);
     }
+
+    public UserDto findByCompanyNameAndPhone(String companyName, String phoneNumber) {
+        Map<String, String> params = new HashMap<>();
+        params.put("companyName", companyName);
+        params.put("phoneNumber", phoneNumber);
+        return userMapper.findByCompanyNameAndPhone(params);
+    }
 }

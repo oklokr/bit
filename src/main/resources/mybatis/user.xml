@@ -14,4 +14,8 @@
         SELECT * FROM members 
         WHERE company_name = #{companyName} AND email = #{email}
     </select>
+    <select id="findByCompanyNameAndPhone" parameterType="map" resultType="com.project.model.UserDto">
+        SELECT * FROM members 
+        WHERE company_name = #{companyName} AND Phone_Number = #{phoneNumber}
+    </select>
 </mapper>
