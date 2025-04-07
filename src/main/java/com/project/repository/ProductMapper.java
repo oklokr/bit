@@ -12,4 +12,5 @@ import com.project.model.ProductDto;
 public interface ProductMapper {
     public List<CommonCodeDto> getCommonCode(String commonCode);
     public List<ProductDto> getProductList(Map<String, Object> params);
+    public int getProductCount(Map<String, Object> params);
 }

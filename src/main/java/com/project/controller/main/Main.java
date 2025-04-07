@@ -1,6 +1,8 @@
 package com.project.controller.main;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,9 +33,10 @@ public class Main {
 class ProductApiController {
     @Autowired
     private ProductService productService;
+
     @PostMapping("/api/main/product")
-    public List<ProductDto> getProductList(@RequestBody ProductRequestParam filterRequest) {
-        return productService.getProductList(
+    public Map<String, Object> getProductList(@RequestBody ProductRequestParam filterRequest) {
+        List<ProductDto> productList = productService.getProductList(
             filterRequest.getId(), 
             filterRequest.getProductName(), 
             filterRequest.getProductRegistrationDate(), 
@@ -41,5 +44,16 @@ class ProductApiController {
             filterRequest.getPage(), 
             filterRequest.getSize()
         );
-    }
+        int totalCount = productService.getProductCount(
+            filterRequest.getId(),
+            filterRequest.getProductName(),
+            filterRequest.getProductRegistrationDate(),
+            filterRequest.getCategoryCode()
+        );
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("data", productList);
+        response.put("totalCount", totalCount);
+        return response;
+    } 
 }

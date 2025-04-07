@@ -32,4 +32,13 @@ public class ProductService {
 
         return productMapper.getProductList(params);
     }
+
+    public int getProductCount(String id, String productName, Timestamp productRegistrationDate, String categoryCode) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        params.put("productName", productName);
+        params.put("productRegistrationDate", productRegistrationDate);
+        params.put("categoryCode", categoryCode);
+        return productMapper.getProductCount(params);
+    }
 }
