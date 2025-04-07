@@ -29,11 +29,11 @@ public class Write{
     @PostMapping("/board/write")
     public String postMethodName(@ModelAttribute BoardDto boardDto, Model model ) {
         // 작성일
-		boardDto.setCreation_date(new Timestamp(System.currentTimeMillis()));
+		boardDto.setCreationDate(new Timestamp(System.currentTimeMillis()));
 
         //원래 쿠키에서 가져와야.. 임시
         boardDto.setAuthor("user");
-        boardDto.setMember_no("78e1ab57-1122-11f0-899e-c8418a1096fd");
+        boardDto.setMemberNo("78e1ab57-1122-11f0-899e-c8418a1096fd");
         
         int result = boardDao.insertPost(boardDto);
 

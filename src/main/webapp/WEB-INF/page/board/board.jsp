@@ -18,6 +18,7 @@
         
         <h3> 자유게시판 </h3>
         <br>
+        
         <table class="table">
             <tr>
                 <th colspan="4">총 ${count}개</th>
@@ -49,7 +50,7 @@
                         </td>
                         <td>
                             &nbsp; &nbsp;
-                            <a href="/board/detail?board_id=${dto.board_id}&pageNum=${pageNum}" 
+                            <a href="/board/detail?boardId=${dto.boardId}&pageNum=${pageNum}" 
                                 class="board-title-link">
                                 ${dto.title}
                             </a>    
@@ -58,14 +59,15 @@
                             ${dto.author}
                         </td>
                         <td>
+                            ${dto.creationDate}
                             <jsp:useBean id="now" class="java.util.Date"/>
                             <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-                            <fmt:formatDate value="${dto.creation_date}" pattern="yyyy-MM-dd" var="formattedDate"/>
+                            <fmt:formatDate value="${dto.creationDate}" pattern="yyyy-MM-dd" var="formattedDate"/>
                             <c:if test="${formattedDate eq today}">
-                                <fmt:formatDate value="${dto.creation_date}" pattern="HH:mm"/>
+                                <fmt:formatDate value="${dto.creationDate}" pattern="HH:mm"/>
                             </c:if>
                             <c:if test="${formattedDate ne today}">
-                                <fmt:formatDate value="${dto.creation_date}" pattern="yyyy-MM-dd"/>
+                                <fmt:formatDate value="${dto.creationDate}" pattern="yyyy-MM-dd"/>
                             </c:if>
                         </td>
                         <td>

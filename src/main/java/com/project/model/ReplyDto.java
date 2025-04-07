@@ -8,14 +8,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ReplyDto {
-    private int reply_id;
-    private int board_id;
-    private String member_no;
+    private int replyId;
+    private int boardId;
+    private String memberNo;
     private String author;
-    private Timestamp creation_date;
-    private String reply_title;
-    private String reply_content;
-    private int reply_ref;
-    private int reply_step;
-    private int reply_level;
+    private Timestamp creationDate;
+    private String replyTitle;
+    private String replyContent;
+    private int replyRef;
+    private int replyStep;
+    private int replyLevel;
 }

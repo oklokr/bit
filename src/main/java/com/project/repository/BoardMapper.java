@@ -11,14 +11,14 @@ import com.project.model.ReplyDto;
 public interface BoardMapper {
     public int getCount();
     public List<BoardDto> getArticles(Map<String, Integer> map);
-    public BoardDto getArticle(int board_id);
-    public void addCount(int board_id);
+    public BoardDto getArticle(int boardId);
+    public void addCount(int boardId);
     public int insertPost(BoardDto boardDto);
     public int modifyPost(BoardDto boardDto);
-    public int deletePost(int board_id);
-    public int getReplyCount(int board_id);
-    public List<ReplyDto> getReplies(int board_id);
+    public int deletePost(int boardId);
+    public int getReplyCount(int boardId);
+    public List<ReplyDto> getReplies(int boardId);
     public int insertReply(ReplyDto replyDto);
-    public int getMaxReplyRef(int board_id);
+    public int getMaxReplyRef(int boardId);
     public int getMaxReplyStep(Map<String, Object> paramMap);
 }

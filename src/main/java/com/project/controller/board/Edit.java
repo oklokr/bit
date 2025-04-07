@@ -33,7 +33,7 @@ public class Edit {
     @PostMapping("/board/edit")
     public String postBoardEdit(@ModelAttribute BoardDto boardDto, @RequestParam String pageNum, Model model){
         int result = boardDao.modifyPost(boardDto);
-        int id = boardDto.getBoard_id();
+        int id = boardDto.getBoardId();
 
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("result", result);

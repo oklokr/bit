@@ -4,90 +4,92 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.project.repository.BoardMapper">
+
     <select id="getCount" resultType="int">
         SELECT COUNT(*) FROM bulletin_board
     </select>
 
     <select id="getArticles" resultType="com.project.model.BoardDto">
-        SELECT *
+        SELECT board_id, member_no, title, content, author, creation_date, view_count
         FROM bulletin_board
         ORDER BY creation_date DESC
         LIMIT #{pageSize} OFFSET #{start};
     </select>
 
     <select id="getArticle" parameterType="int" resultType="com.project.model.BoardDto">
-        select * from bulletin_board where board_id = #{board_id}
+        SELECT board_id, member_no, title, content, author, creation_date, view_count
+        FROM bulletin_board
+        WHERE board_id = #{boardId}
     </select>
 
     <update id="addCount" parameterType="int">
-        update bulletin_board set view_count = view_count + 1 where board_id = #{board_id}
+        UPDATE bulletin_board
+        SET view_count = view_count + 1
+        WHERE board_id = #{boardId}
     </update>
 
     <insert id="insertPost" parameterType="com.project.model.BoardDto">
-        insert into bulletin_board (member_no, title, content, author, creation_date)
-        values(#{member_no}, #{title}, #{content}, #{author}, #{creation_date})
+        INSERT INTO bulletin_board (member_no, title, content, author, creation_date)
+        VALUES (#{memberNo}, #{title}, #{content}, #{author}, #{creationDate})
     </insert>
 
     <update id="modifyPost" parameterType="com.project.model.BoardDto">
-        UPDATE bulletin_board 
-        SET title = #{title}, content = #{content} 
-        WHERE board_id = #{board_id}
+        UPDATE bulletin_board
+        SET title = #{title}, content = #{content}
+        WHERE board_id = #{boardId}
     </update>
 
     <delete id="deletePost" parameterType="int">
-		delete from bulletin_board
-		WHERE board_id = #{board_id}
-	</delete>
+        DELETE FROM bulletin_board
+        WHERE board_id = #{boardId}
+    </delete>
 
     <select id="getReplyCount" parameterType="int" resultType="int">
-        select count(*) from replies where board_id=#{board_id}
+        SELECT COUNT(*) FROM replies WHERE board_id = #{boardId}
     </select>
 
     <select id="getReplies" parameterType="int" resultType="com.project.model.ReplyDto">
-        SELECT *
+        SELECT reply_id, board_id, member_no, author, creation_date, reply_title, reply_content, reply_ref, reply_step, reply_level
         FROM replies
-        WHERE board_id = #{board_id}
+        WHERE board_id = #{boardId}
         ORDER BY reply_ref ASC, reply_step ASC;
     </select>
 
     <select id="getMaxReplyRef" parameterType="int" resultType="int">
-        SELECT COALESCE(MAX(reply_ref), 0) FROM replies
-        WHERE reply_level = 0 AND board_id = #{board_id}
+        SELECT COALESCE(MAX(reply_ref), 0)
+        FROM replies
+        WHERE reply_level = 0 AND board_id = #{boardId}
     </select>
 
     <select id="getMaxReplyStep" resultType="int">
-        SELECT COALESCE(MAX(reply_step), 0) FROM replies
-        WHERE board_id = #{board_id} AND reply_ref = #{reply_ref} AND reply_level = 1
+        SELECT COALESCE(MAX(reply_step), 0)
+        FROM replies
+        WHERE board_id = #{boardId} AND reply_ref = #{replyRef} AND reply_level = 1
     </select>
 
     <insert id="insertReply" parameterType="com.project.model.ReplyDto">
-    INSERT INTO replies (
-        board_id,
-        member_no,
-        author,
-        creation_date,
-        reply_title,
-        reply_content,
-        reply_ref,
-        reply_step,
-        reply_level
-    )
-    VALUES (
-        #{board_id},
-        #{member_no},
-        #{author},
-        #{creation_date},
-        #{reply_title},
-        #{reply_content},
-        #{reply_ref},
-        #{reply_step},
-        #{reply_level}
-    )
-</insert>
+        INSERT INTO replies (
+            board_id,
+            member_no,
+            author,
+            creation_date,
+            reply_title,
+            reply_content,
+            reply_ref,
+            reply_step,
+            reply_level
+        )
+        VALUES (
+            #{boardId},
+            #{memberNo},
+            #{author},
+            #{creationDate},
+            #{replyTitle},
+            #{replyContent},
+            #{replyRef},
+            #{replyStep},
+            #{replyLevel}
+        )
+    </insert>
 
 </mapper>
-
-
-
-
-

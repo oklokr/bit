@@ -73,8 +73,16 @@ public class Board {
 
             List<BoardDto> dtos = boardDao.getArticles(map);
             model.addAttribute("dtos", dtos);
+
+            System.out.println("=== 게시글 목록 ===");
+            for (BoardDto dto : dtos) {
+                System.out.println(dto.getTitle() + " / " + dto.getCreationDate() + " / " + dto.getViewCount());
+            }
+    
         }
-        System.out.println(start+end);
+
+       
+
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/board/board.jsp");
         return "layout/app";

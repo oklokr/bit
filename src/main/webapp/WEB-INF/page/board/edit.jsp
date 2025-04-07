@@ -21,7 +21,7 @@
             <input type="hidden" name="title" id="title">
             <input type="hidden" name="content" id="content">
             <input type="hidden" name="pageNum" value="${pageNum}">
-            <input type="hidden" name="board_id" value="${boardDto.board_id}">
+            <input type="hidden" name="boardId" value="${boardDto.boardId}">
             <table class="table">
                 <tr>
                     <th colspan="2">
@@ -39,7 +39,7 @@
                             <span class="input-group-text" id="basic-addon1">작성자</span>
                             <input type="text" class="form-control" value="${boardDto.author}" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             <span class="input-group-text" id="basic-addon1">작성일</span>
-                            <input type="text" class="form-control" value="${boardDto.creation_date}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                            <input type="text" class="form-control" value="${boardDto.createionDate}" aria-label="Username" aria-describedby="basic-addon1" readonly>
                         </div>
                     </th>
                 </tr>
@@ -54,7 +54,7 @@
         <div class="button-group d-flex">
             <div class="ms-auto">
                 <button type="button" name="submit" class="btn btn-primary" onclick="submitPost()">수정</button>
-                <button type="reset" class="btn btn-primary" onclick="location='/board/detail?board_id=${board_id}&pageNum=${pageNum}'">취소</button>
+                <button type="reset" class="btn btn-primary" onclick="location='/board/detail?boardId=${boardId}&pageNum=${pageNum}'">취소</button>
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@
         <script>
             alert("게시글 수정에 성공했습니다.");
         </script>
-        <meta http-equiv="refresh" content="0; url=/board/detail?board_id=${board_id}&pageNum=${pageNum}">
+        <meta http-equiv="refresh" content="0; url=/board/detail?boardId=${boardId}&pageNum=${pageNum}">
     </c:if>
 
 </body>
@@ -146,7 +146,7 @@
     function submitPost() {
         const content = quill.root.innerHTML;
         const title = document.querySelector('input[name="titleInput"]').value;
-        const board_id = "${boardDto.board_id}";
+        const boardId = "${boardDto.boardId}";
         
         // 숨겨진 input에 값 설정
         document.querySelector('#title').value = title;
