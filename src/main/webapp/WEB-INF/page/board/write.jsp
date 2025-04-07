@@ -80,6 +80,7 @@
     });
 
     let submit = document.querySelector("button[name='submit']");
+    
     submit.addEventListener("click", (event) => {
         let title = document.querySelector("input[name='titleInput']").value;
         let content = quill.root.innerHTML;

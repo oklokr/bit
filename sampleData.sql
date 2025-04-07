@@ -100,3 +100,10 @@ select member_no from members where id='user';
 INSERT INTO replies (board_id, member_no, author, reply_title, reply_content, reply_ref, reply_step, reply_level) VALUES 
 (1, (SELECT member_no FROM members WHERE id = 'user'), 'user', '첫 번째 답글', '좋은 글 감사합니다.', 1, 0, 0),
 (1, (SELECT member_no FROM members WHERE id = 'user'), 'user', '두 번째 답글', '감사합니다!', 2, 1, 1);
+
+INSERT INTO replies (board_id, member_no, author, reply_title, reply_content, reply_ref, reply_step, reply_level) VALUES 
+(2, (SELECT member_no FROM members WHERE id = 'user'), 'user', '첫 번째 답글', '좋은 글 감사합니다.', 1, 0, 0),
+(2, (SELECT member_no FROM members WHERE id = 'user'), 'user', '첫 번째 답글의 답글', '감사합니다!', 1, 1, 1),
+(2, (SELECT member_no FROM members WHERE id = 'user'), 'user', '두 번째 답글', '감사합니다!', 2, 0, 0),
+(2, (SELECT member_no FROM members WHERE id = 'user'), 'user', '두 번째 답글의 답글', '감사합니다!', 2, 1, 1),
+(2, (SELECT member_no FROM members WHERE id = 'user'), 'user', '두 번째 답글의 최신 답글', '감사합니다!', 2, 2, 1);

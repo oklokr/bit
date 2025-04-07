@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.project.model.BoardDto;
+import com.project.model.ReplyDto;
 
 @Mapper
 public interface BoardMapper {
@@ -16,4 +17,5 @@ public interface BoardMapper {
     public int modifyPost(BoardDto boardDto);
     public int deletePost(int board_id);
     public int getReplyCount(int board_id);
+    public List<ReplyDto> getReplies(int board_id);
 }

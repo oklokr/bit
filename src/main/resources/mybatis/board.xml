@@ -29,9 +29,9 @@
     </insert>
 
     <update id="modifyPost" parameterType="com.project.model.BoardDto">
-            UPDATE bulletin_board 
-            SET title = #{title}, content = #{content} 
-            WHERE board_id = #{board_id}
+        UPDATE bulletin_board 
+        SET title = #{title}, content = #{content} 
+        WHERE board_id = #{board_id}
     </update>
 
     <delete id="deletePost" parameterType="int">
@@ -43,6 +43,12 @@
         select count(*) from replies where board_id=#{board_id}
     </select>
 
+    <select id="getReplies" parameterType="int" resultType="com.project.model.ReplyDto">
+        SELECT *
+        FROM replies
+        WHERE board_id = #{board_id}
+        ORDER BY reply_order ASC, reply_step ASC;
+    </select>
 </mapper>
 
 
