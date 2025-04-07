@@ -18,4 +18,5 @@ public interface BoardMapper {
     public int deletePost(int board_id);
     public int getReplyCount(int board_id);
     public List<ReplyDto> getReplies(int board_id);
+    public int insertReply(ReplyDto replyDto);
 }

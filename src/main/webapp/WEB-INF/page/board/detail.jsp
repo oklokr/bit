@@ -63,8 +63,9 @@
             </table>
 
             <!-- 답글 작성 폼 -->
-            <form action="/reply/write" method="post" class="mt-4" name="replyform">
+            <form action="/board/reply/write" method="post" class="mt-4" name="replyform">
                 <input type="hidden" name="board_id" value="${board_id}">
+                <input type="hidden" name="reply_level" value="0">
                 <table class="table reply-table">
                     <thead>
                         <tr>
@@ -128,6 +129,14 @@
             alert("게시글 삭제에 실패했습니다.");
         }
 
+        let replyResult = "${replyResult}";
+        
+        if (replyResult === "1") {
+            alert("답글 작성 성공");
+        } else if (replyResult === "0") {
+            alert("답글 작성에 실패했습니다.");
+        }
+
     }
 
     
@@ -156,6 +165,7 @@
 
 <%-- JSP에서 세션 값 삭제 (JavaScript 실행 이후) --%>
 <% session.removeAttribute("deleteResult"); %>
+<% session.removeAttribute("replyResult"); %>
 
 <style>
     /* 기본 테이블 스타일 */

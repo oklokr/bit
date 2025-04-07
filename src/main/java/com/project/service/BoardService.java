@@ -50,4 +50,8 @@ public class BoardService {
     public List<ReplyDto> getReplies(int board_id){
         return boardmapper.getReplies(board_id);
     }
+
+    public int insertReply(ReplyDto replyDto){
+        return boardmapper.insertReply(replyDto);
+    }
 }
