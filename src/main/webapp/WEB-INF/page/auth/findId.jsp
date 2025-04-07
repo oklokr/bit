@@ -45,8 +45,10 @@
         const result = await response.json();
 
         if (result.success) {
-            window.location.href = '/findIdResult';
+            // 성공 시 아이디를 alert 창에 출력
+            alert(`아이디: ${result.id}`);
         } else {
+            // 실패 시 에러 메시지를 alert 창에 출력
             alert(result.message || "일치하는 정보가 없습니다.");
         }
     } catch (error) {
