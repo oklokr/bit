@@ -74,14 +74,18 @@ public class UserService {
     public UserDto findByIdAndPhone(String id, String phoneNumber) {
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
-        params.put("phoneNumber", phoneNumber);
-        return userMapper.findByCompanyNameAndPhone(params);
+        params.put("email", email);
+        UserDto user = userMapper.findByIdAndEmail(params);
+        System.out.println("findByIdAndEmail 결과: " + user);
+        return user;
     }
     public UserDto findByIdAndEmail(String id, String email) {
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
-        params.put("email", email);
-        return userMapper.findByCompanyNameAndEmail(params);
+        params.put("phoneNumber", phoneNumber);
+        UserDto user = userMapper.findByIdAndPhone(params);
+        System.out.println("findByIdAndPhone 결과: " + user);
+        return user;
     }
     public void updatePassword(String id, String randomPassword) {
         Map<String, String> params = new HashMap<>();

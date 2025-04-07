@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<h2>아이디 찾기 결과</h2>
 
-<c:if test="${not empty userId}">
-    <p>아이디: ${id}</p>
-</c:if>
 <%
     // URL에서 전달된 파라미터 값 읽기
     String id = request.getParameter("id");
@@ -30,8 +26,7 @@
         }
 
     th, td{
-        border: 1px solid black
-        padding-top 10px;
+        padding-top : 10px;
         padding-bottom : 20px;
         padding-left : 10px;
         padding-right : 10px;

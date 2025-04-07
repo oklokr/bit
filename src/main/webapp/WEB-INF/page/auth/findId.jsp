@@ -123,8 +123,7 @@
         }
 
     th, td{
-        border: 1px solid black
-        padding-top 10px;
+        padding-top : 10px;
         padding-bottom : 20px;
         padding-left : 10px;
         padding-right : 10px;
@@ -150,8 +149,8 @@
 
     .inputbutton {
         padding: 8px 15px;
-            border: 1px solid rgb(122, 122, 122)
-            cursor pointer;
+            border: 1px solid rgb(122, 122, 122);
+            cursor : pointer;
             box-sizing: border-box;
             width : 40%;    
             text-align: center;
