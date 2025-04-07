@@ -1,5 +1,8 @@
 package com.project.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +44,12 @@ public class UserService {
     public UserDto findByCompanyName(String companyName) {
         System.out.println("UserService - 조회할 업체명: " + companyName);
         return userMapper.findByCompanyName(companyName);
+    }
+
+    public UserDto findByCompanyNameAndEmail(String companyName, String email) {
+        Map<String, String> params = new HashMap<>();
+        params.put("companyName", companyName);
+        params.put("email", email);
+        return userMapper.findByCompanyNameAndEmail(params);
     }
 }

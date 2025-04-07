@@ -2,11 +2,14 @@ package com.project.model;
 
 import java.sql.Timestamp;
 
+import org.apache.ibatis.type.Alias;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
+@Alias("UserDto")
 public class UserDto {
     private String id;
     private String companyName;
