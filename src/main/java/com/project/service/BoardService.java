@@ -24,12 +24,12 @@ public class BoardService {
         return boardmapper.getArticles(map);
     }
 
-    public BoardDto getArticle(int board_id){
-        return boardmapper.getArticle(board_id);
+    public BoardDto getArticle(int boardId){
+        return boardmapper.getArticle(boardId);
     }
 
-    public void addCount(int board_id){
-        boardmapper.addCount(board_id);
+    public void addCount(int boardId){
+        boardmapper.addCount(boardId);
     }
 
     public int insertPost(BoardDto boardDto){
@@ -40,30 +40,30 @@ public class BoardService {
         return boardmapper.modifyPost(boardDto);
     }
 
-    public int deletePost(int board_id){
-        return boardmapper.deletePost(board_id);
+    public int deletePost(int boardId){
+        return boardmapper.deletePost(boardId);
     }
 
-    public int getReplyCount(int board_id){
-        return boardmapper.getReplyCount(board_id);
+    public int getReplyCount(int boardId){
+        return boardmapper.getReplyCount(boardId);
     }
 
-    public List<ReplyDto> getReplies(int board_id){
-        return boardmapper.getReplies(board_id);
+    public List<ReplyDto> getReplies(int boardId){
+        return boardmapper.getReplies(boardId);
     }
 
     public int insertReply(ReplyDto replyDto){
-        if (replyDto.getReply_level() == 0) {
-            int maxRef = boardmapper.getMaxReplyRef(replyDto.getBoard_id());
-            replyDto.setReply_ref(maxRef + 1);
-            replyDto.setReply_step(0);
-        } else if (replyDto.getReply_level() == 1) {
+        if (replyDto.getReplyLevel() == 0) {
+            int maxRef = boardmapper.getMaxReplyRef(replyDto.getBoardId());
+            replyDto.setReplyRef(maxRef + 1);
+            replyDto.setReplyStep(0);
+        } else if (replyDto.getReplyLevel() == 1) {
             Map<String, Object> paramMap = new HashMap<>();
-            paramMap.put("board_id", replyDto.getBoard_id());
-            paramMap.put("reply_ref", replyDto.getReply_ref());
+            paramMap.put("boardId", replyDto.getBoardId());
+            paramMap.put("replyRef", replyDto.getReplyRef());
 
             int maxStep = boardmapper.getMaxReplyStep(paramMap);
-            replyDto.setReply_step(maxStep + 1);
+            replyDto.setReplyStep(maxStep + 1);
         }
        return boardmapper.insertReply(replyDto);
     }
