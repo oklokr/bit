@@ -27,47 +27,63 @@ public class FindId {
     }
 
     @PostMapping("/findId")
-    @ResponseBody
-    public Map<String, Object> findId(@RequestBody Map<String, String> requestBody) {
-        System.out.println("요청 받은 데이터: " + requestBody);
+@ResponseBody
+public Map<String, Object> findId(@RequestBody Map<String, String> requestBody) {
+    System.out.println("요청 받은 데이터: " + requestBody);
 
-        Map<String, Object> response = new HashMap<>();
+    Map<String, Object> response = new HashMap<>();
 
-        try {
-            if (requestBody == null || requestBody.isEmpty()) {
-                System.err.println("요청 데이터가 비어 있습니다.");
-                response.put("success", false);
-                response.put("message", "요청 데이터가 비어 있습니다.");
-                return response;
-            }
-
-            String companyName = requestBody.get("company_name");
-            System.out.println("요청 받은 업체명: " + companyName);
-
-            if (companyName == null || companyName.isEmpty()) {
-                response.put("success", false);
-                response.put("message", "업체명을 입력해주세요.");
-                return response;
-            }
-
-            // 업체명으로 사용자 조회
-            UserDto user = userService.findByCompanyName(companyName);
-            System.out.println("조회된 사용자: " + user);
-
-            if (user != null) {
-                response.put("success", true);
-                response.put("userId", user.getId());
-            } else {
-                response.put("success", false);
-                response.put("message", "일치하는 정보가 없습니다.");
-            }
-        } catch (Exception e) {
-            System.err.println("오류 발생: " + e.getMessage());
-            e.printStackTrace();
+    try {
+        if (requestBody == null || requestBody.isEmpty()) {
             response.put("success", false);
-            response.put("message", "서버 처리 중 오류가 발생했습니다.");
+            response.put("message", "요청 데이터가 비어 있습니다.");
+            return response;
         }
 
-        return response;
+        String companyName = requestBody.get("company_name");
+        String certType = requestBody.get("cert_type"); // 인증 방법 (1: 이메일, 2: 휴대폰)
+        String certValue = requestBody.get("cert_value"); // 인증 값 (이메일 또는 휴대폰 번호)
+
+        System.out.println("요청 받은 업체명: " + companyName);
+        System.out.println("인증 방법: " + certType);
+        System.out.println("인증 값: " + certValue);
+
+        if (companyName == null || companyName.isEmpty()) {
+            response.put("success", false);
+            response.put("message", "업체명을 입력해주세요.");
+            return response;
+        }
+
+        if (certType == null || certType.isEmpty() || certValue == null || certValue.isEmpty()) {
+            response.put("success", false);
+            response.put("message", "인증 정보를 입력해주세요.");
+            return response;
+        }
+
+        UserDto user = null;
+        if ("1".equals(certType)) { // 이메일 인증
+            user = userService.findByCompanyNameAndEmail(companyName, certValue);
+        } else if ("2".equals(certType)) { // 휴대폰 인증
+            user = userService.findByCompanyNameAndPhone(companyName, certValue);
+        }
+
+        System.out.println("조회된 사용자: " + user);
+
+        if (user != null) {
+            response.put("success", true);
+            response.put("id", user.getId());
+        } else {
+            response.put("success", false);
+            response.put("message", "일치하는 정보가 없습니다.");
+        }
+    } catch (Exception e) {
+        System.err.println("오류 발생: " + e.getMessage());
+        e.printStackTrace();
+        response.put("success", false);
+        response.put("message", "서버 처리 중 오류가 발생했습니다.");
+    }
+
+    System.out.println("서버 응답 데이터: " + response);
+    return response;
     }
 }
