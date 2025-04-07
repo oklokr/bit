@@ -133,15 +133,21 @@
     }
 
     #product-items .inner li {
-        width: calc(100% / 4 - 15px);
+        min-width: calc(100% / 4 - 15px);
+        align-items: center;
     }
 
     #product-items .inner li .product-inner {
         display: flex;
-        width: 230px;
+        width: 184px;
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
+    }
+    @media (min-width: 1200px) {
+        #product-items .inner li .product-inner {
+            width: 230px;
+        }
     }
 
     #product-items .product-itme {
