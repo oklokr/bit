@@ -19,4 +19,6 @@ public interface BoardMapper {
     public int getReplyCount(int board_id);
     public List<ReplyDto> getReplies(int board_id);
     public int insertReply(ReplyDto replyDto);
+    public int getMaxReplyRef(int board_id);
+    public int getMaxReplyStep(Map<String, Object> paramMap);
 }

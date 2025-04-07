@@ -15,7 +15,7 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
     <div class="board-detail-page container">
-        <h3> 자유게시판 ${deleteResult}</h3>
+        <h3> 자유게시판</h3>
         <br>
         <table class="table">
             <tr>
@@ -44,18 +44,18 @@
                     </tr>
                 </c:if>
                 <c:if test="${replyCount ne 0}">
-                    <c:forEach var="dto" items="${dtos}">
-                        <div class="reply <c:if test='${dto.reply_level == 1}'>reply-indent</c:if>">
+                    <c:forEach var="replayDto" items="${replyDtos}">
+                        <div class="reply <c:if test='${replayDto.reply_level == 1}'>reply-indent</c:if>">
                             <div class="meta">
                                 작성자 : ${dto.author}
                                 &nbsp;&nbsp;|&nbsp;&nbsp;
-                                작성날짜 : <fmt:formatDate value="${dto.creation_date}" pattern="yyyy.MM.dd HH:mm"/>
+                                작성날짜 : <fmt:formatDate value="${replayDto.creation_date}" pattern="yyyy.MM.dd HH:mm"/>
                             </div>
                             <div class="title">
-                                ${dto.reply_title}
+                                ${replayDto.reply_title}
                             </div>
                             <div class="content">
-                                ${dto.reply_content}
+                                ${replayDto.reply_content}
                             </div>
                         </div>
                     </c:forEach>
@@ -63,9 +63,10 @@
             </table>
 
             <!-- 답글 작성 폼 -->
-            <form action="/board/reply/write" method="post" class="mt-4" name="replyform">
+            <form action="${pageContext.request.contextPath}/board/reply/write" method="POST" class="mt-4" name="replyform">
                 <input type="hidden" name="board_id" value="${board_id}">
                 <input type="hidden" name="reply_level" value="0">
+                <input type="hidden" name="pageNum" value="${pageNum}">
                 <table class="table reply-table">
                     <thead>
                         <tr>
@@ -128,20 +129,9 @@
         } else if (deleteResult === "0") {
             alert("게시글 삭제에 실패했습니다.");
         }
-
-        let replyResult = "${replyResult}";
-        
-        if (replyResult === "1") {
-            alert("답글 작성 성공");
-        } else if (replyResult === "0") {
-            alert("답글 작성에 실패했습니다.");
-        }
-
     }
-
     
     let replyform = document.querySelector( "form[name='replyform']" );
-    
     replyform.addEventListener("submit", (event) => {
         let title = document.querySelector("input[name='reply_title']").value.trim();
         let content = document.querySelector("textarea[name='reply_content']").value.trim();
@@ -152,7 +142,7 @@
             event.preventDefault();
             document.querySelector("input[name='reply_title']").focus();
         } else if (!content) {
-            alert("게시글 내용을 입력하세요");
+            alert("답글 내용을 입력하세요");
             event.preventDefault();
             document.querySelector("textarea[name='reply_content']").focus();
         } else if (tag.test(title) || tag.test(content)) {
@@ -165,7 +155,6 @@
 
 <%-- JSP에서 세션 값 삭제 (JavaScript 실행 이후) --%>
 <% session.removeAttribute("deleteResult"); %>
-<% session.removeAttribute("replyResult"); %>
 
 <style>
     /* 기본 테이블 스타일 */

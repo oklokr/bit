@@ -25,6 +25,7 @@ public class BoardDetail {
     @Autowired
     private BoardService boardDao;
 
+
     @GetMapping("/board/detail")
     public String boardDetail(@RequestParam int board_id, @RequestParam String pageNum,
     Model model) throws Exception {
@@ -34,7 +35,7 @@ public class BoardDetail {
         replyCount = boardDao.getReplyCount(board_id);
 
         List<ReplyDto> replyDtos = boardDao.getReplies(board_id);
-        model.addAttribute("dtos", replyDtos);
+        model.addAttribute("replyDtos", replyDtos);
 
         model.addAttribute("replyCount", replyCount);
         model.addAttribute("board_id", board_id);
@@ -49,7 +50,6 @@ public class BoardDetail {
     public String boardDelete(@RequestParam int board_id, @RequestParam String pageNum, Model model, HttpSession session){
         int result = boardDao.deletePost(board_id);
         session.setAttribute("deleteResult", result);
-        model.addAttribute("result", result);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/board/detail.jsp");
@@ -57,17 +57,17 @@ public class BoardDetail {
     }
 
     @PostMapping("/board/reply/write")
-    public String postReply(@ModelAttribute BoardDto boardDto, Model model, HttpSession session) {
-        boardDto.setCreation_date(new Timestamp(System.currentTimeMillis()));
+    public String postReply(@ModelAttribute ReplyDto replyDto, @RequestParam String pageNum, Model model, HttpSession session) {
 
         //원래 쿠키에서 가져와야.. 임시
-        boardDto.setAuthor("user");
-        boardDto.setMember_no("78e1ab57-1122-11f0-899e-c8418a1096fd");
+        replyDto.setAuthor("user");
+        replyDto.setMember_no("9379d1ca-1358-11f0-899e-c8418a1096fd");
         
-        //int result = boardDao.insertReply(boardDto);
-        //session.setAttribute("ReplyResult", result);
-        model.addAttribute("title", "main page");
-        model.addAttribute("contentPage", "/WEB-INF/page/board/detail.jsp");
-        return "layout/app";
+        replyDto.setCreation_date(new Timestamp(System.currentTimeMillis()));
+        
+        int result=boardDao.insertReply(replyDto);
+
+        session.setAttribute("ReplyResult", result);
+        return "redirect:/board/detail?board_id=" + replyDto.getBoard_id() + "&pageNum=" + pageNum;
     }
 }

@@ -47,11 +47,47 @@
         SELECT *
         FROM replies
         WHERE board_id = #{board_id}
-        ORDER BY reply_order ASC, reply_step ASC;
+        ORDER BY reply_ref ASC, reply_step ASC;
+    </select>
+
+    <select id="getMaxReplyRef" parameterType="int" resultType="int">
+        SELECT COALESCE(MAX(reply_ref), 0) FROM replies
+        WHERE reply_level = 0 AND board_id = #{board_id}
+    </select>
+
+    <select id="getMaxReplyStep" resultType="int">
+        SELECT COALESCE(MAX(reply_step), 0) FROM replies
+        WHERE board_id = #{board_id} AND reply_ref = #{reply_ref} AND reply_level = 1
     </select>
 
     <insert id="insertReply" parameterType="com.project.model.ReplyDto">
-    </insert>
+    INSERT INTO replies (
+        board_id,
+        member_no,
+        author,
+        creation_date,
+        reply_title,
+        reply_content,
+        reply_ref,
+        reply_step,
+        reply_level
+    )
+    VALUES (
+        #{board_id},
+        #{member_no},
+        #{author},
+        #{creation_date},
+        #{reply_title},
+        #{reply_content},
+        #{reply_ref},
+        #{reply_step},
+        #{reply_level}
+    )
+</insert>
+
 </mapper>
+
+
+
 
 
