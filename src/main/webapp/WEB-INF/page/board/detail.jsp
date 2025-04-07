@@ -61,6 +61,41 @@
                     </c:forEach>
                 </c:if>
             </table>
+
+            <!-- 답글 작성 폼 -->
+            <form action="/reply/write" method="post" class="mt-4" name="replyform">
+                <input type="hidden" name="board_id" value="${board_id}">
+                <table class="table reply-table">
+                    <thead>
+                        <tr>
+                            <strong style="display: block; margin-bottom: 10px;">답글 작성</strong>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="2" class="small text-muted">
+                                작성자: ${"User"} &nbsp;&nbsp;|&nbsp;&nbsp;
+                                작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="text" name="reply_title" class="form-control" placeholder="제목을 입력해주세요">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <textarea name="reply_content" class="form-control" placeholder="내용을 입력해주세요" rows="5" maxlength="250"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="text-end">
+                                <button type="submit" name="submit" class="btn btn-primary">작성</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
         </div>  
 
         <!-- 버튼 그룹 -->
@@ -94,6 +129,29 @@
         }
 
     }
+
+    
+    let replyform = document.querySelector( "form[name='replyform']" );
+    
+    replyform.addEventListener("submit", (event) => {
+        let title = document.querySelector("input[name='reply_title']").value.trim();
+        let content = document.querySelector("textarea[name='reply_content']").value.trim();
+        let tag = /<[^>]*>/;
+
+        if (!title) {
+            alert("제목을 입력하세요");
+            event.preventDefault();
+            document.querySelector("input[name='reply_title']").focus();
+        } else if (!content) {
+            alert("게시글 내용을 입력하세요");
+            event.preventDefault();
+            document.querySelector("textarea[name='reply_content']").focus();
+        } else if (tag.test(title) || tag.test(content)) {
+            alert("제목과 내용에 태그를 포함할 수 없습니다");
+            event.preventDefault();
+        }
+    });
+
 </script>
 
 <%-- JSP에서 세션 값 삭제 (JavaScript 실행 이후) --%>
@@ -152,7 +210,6 @@
     .reply-table {
         width: 100%;
         margin-top: 10px;
-        margin-bottom: 50px;
         border-top: 1px solid #ccc;
         padding-top: 10px;
     }
@@ -183,6 +240,13 @@
     /* 버튼 그룹 */
     .button-group {
         margin-top: 30px;
+    }
+
+    .form-control{
+        box-shadow: none !important;
+    }
+    .reply-table textarea {
+    resize: none !important;
     }
 </style>
 
