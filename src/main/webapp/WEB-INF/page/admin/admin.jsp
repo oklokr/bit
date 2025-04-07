@@ -18,7 +18,7 @@
     <h4><strong>회원관리</strong></h4>
 
     <!-- 검색 -->
-    <form action="${pageContext.request.contextPath}/member/list" method="get" class="member-box mt-4 text-center">
+    <form action="${pageContext.request.contextPath}/admin" method="get" class="member-box mt-4 text-center">
         <label for="searchName" class="form-label me-2">회원명 :</label>
         <input type="text" name="searchName" id="searchName" 
                class="form-control d-inline-block w-50" 
