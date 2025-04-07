@@ -1,6 +1,10 @@
 .search-wrap.input-group-lg {
     position: relative;
 }
+.search-wrap.input-group-lg input {
+    border-color: #212529;
+}
+
 .search-wrap button.btn {
     min-width: 80px;
     border: initial;

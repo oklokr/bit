@@ -97,6 +97,6 @@ INSERT INTO bulletin_board (member_no, title, author, view_count) VALUES
 select member_no from members where id='user';
 
 -- ✅ 답글 데이터 삽입
-INSERT INTO replies (board_id, member_no, author, reply_title, reply_content, reply_order, reply_step, reply_level) VALUES 
+INSERT INTO replies (board_id, member_no, author, reply_title, reply_content, reply_ref, reply_step, reply_level) VALUES 
 (1, (SELECT member_no FROM members WHERE id = 'user'), 'user', '첫 번째 답글', '좋은 글 감사합니다.', 1, 0, 0),
 (1, (SELECT member_no FROM members WHERE id = 'user'), 'user', '두 번째 답글', '감사합니다!', 2, 1, 1);

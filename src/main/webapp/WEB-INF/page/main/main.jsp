@@ -4,7 +4,7 @@
     <h2>상품정보</h2>
     <div class="input-group-lg search-wrap">
         <input type="text" class="form-control" placeholder="검색어를 입력해주세요." aria-label="검색어를 입력해주세요." aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="handleSearch()">검색</button>
     </div>
 
     <ul class="category-list">
