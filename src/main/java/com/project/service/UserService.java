@@ -71,7 +71,8 @@ public class UserService {
         params.put("phoneNumber", phoneNumber);
         return userMapper.findByCompanyNameAndPhone(params);
     }
-    public UserDto findByIdAndPhone(String id, String phoneNumber) {
+    public UserDto findByIdAndEmail(String id, String email) {
+        System.out.println("findByIdAndEmail 호출 - ID: " + id + ", Email: " + email);
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         params.put("email", email);
@@ -79,7 +80,9 @@ public class UserService {
         System.out.println("findByIdAndEmail 결과: " + user);
         return user;
     }
-    public UserDto findByIdAndEmail(String id, String email) {
+    
+    public UserDto findByIdAndPhone(String id, String phoneNumber) {
+        System.out.println("findByIdAndPhone 호출 - ID: " + id + ", Phone: " + phoneNumber);
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         params.put("phoneNumber", phoneNumber);
