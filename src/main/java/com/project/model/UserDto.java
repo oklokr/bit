@@ -15,6 +15,7 @@ public class UserDto {
     private String companyName;
     private String password;
     private String email;
+    private String businessNumber;
     private String phoneNumber;
     private String address;
     private String detailedAddress;
