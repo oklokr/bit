@@ -7,6 +7,15 @@ function postRequestApi(url, obj, fn) {
     .then(fn)
 }
 
+function handleSearch() {
+    const keyword = document.querySelector(".search-wrap > input").value;
+    if (validate.isEmpty(keyword)) {
+        location.href = "/main/search";
+    } else {
+        location.href = "/main/search?keyword=" + keyword;
+    }
+}
+
 // 공통 유효성 검사 함수
 const validate = {
     isEmpty: value => {

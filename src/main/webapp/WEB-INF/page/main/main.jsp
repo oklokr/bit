@@ -4,7 +4,7 @@
     <h2>상품정보</h2>
     <div class="input-group-lg search-wrap">
         <input type="text" class="form-control" placeholder="검색어를 입력해주세요." aria-label="검색어를 입력해주세요." aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="handleSearch()">검색</button>
     </div>
 
     <ul class="category-list">
@@ -133,15 +133,21 @@
     }
 
     #product-items .inner li {
-        width: calc(100% / 4 - 15px);
+        min-width: calc(100% / 4 - 15px);
+        align-items: center;
     }
 
     #product-items .inner li .product-inner {
         display: flex;
-        width: 230px;
+        width: 184px;
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
+    }
+    @media (min-width: 1200px) {
+        #product-items .inner li .product-inner {
+            width: 230px;
+        }
     }
 
     #product-items .product-itme {

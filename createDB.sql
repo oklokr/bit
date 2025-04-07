@@ -119,7 +119,7 @@ CREATE TABLE replies (
     creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     reply_title VARCHAR(255),
     reply_content TEXT NOT NULL,
-    reply_order INT DEFAULT 0,
+    reply_ref INT DEFAULT 0,
     reply_step INT DEFAULT 0,
     reply_level INT DEFAULT 0,
     FOREIGN KEY (board_id) REFERENCES bulletin_board(board_id) ON DELETE CASCADE,
