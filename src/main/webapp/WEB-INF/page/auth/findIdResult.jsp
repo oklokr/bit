@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<<<<<<< HEAD
 <h2>아이디 찾기 결과</h2>
 
 <c:if test="${not empty userId}">
     <p>아이디: ${id}</p>
 </c:if>
-=======
-
 <%
     // URL에서 전달된 파라미터 값 읽기
     String id = request.getParameter("id");
@@ -14,7 +11,6 @@
     String certType = request.getParameter("cert_type");
     String certValue = request.getParameter("cert_value");
 %>
->>>>>>> lh
 
 <style>
     body {
