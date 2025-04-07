@@ -1,1 +1,2 @@
 /api/example       # 샘플 회원정보 조회
+/api/findId        # 아이디 찾기 조회
