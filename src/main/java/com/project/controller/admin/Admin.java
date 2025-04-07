@@ -23,7 +23,7 @@ public class Admin {
     public String pageRender(@RequestParam(required = false) String searchName, 
         @RequestParam(required=false) String pageNum, Model model) {
         int pageSize=10;
-        int pageBlock=5;
+        int pageBlock=3;
 
         int count=0; //전체 글 개수
         int currentPage=0; //계산용
