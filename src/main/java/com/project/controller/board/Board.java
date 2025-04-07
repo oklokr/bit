@@ -44,8 +44,6 @@ public class Board {
             end=count;
         }
 
-        //예제: 글번호 위로 갈수록 커지게
-        //number=count-(currentPage-1) * pageSize;
         number=(currentPage-1) * pageSize;
 
         pageCount = (count / pageSize) + (count % pageSize > 0 ? 1 : 0);
@@ -68,21 +66,11 @@ public class Board {
             Map<String,Integer> map = new HashMap<String,Integer>();
             start -= 1;
             map.put("start", start);
-            //map.put("end", end);
             map.put("pageSize", pageSize);
 
             List<BoardDto> dtos = boardDao.getArticles(map);
             model.addAttribute("dtos", dtos);
-
-            System.out.println("=== 게시글 목록 ===");
-            for (BoardDto dto : dtos) {
-                System.out.println(dto.getTitle() + " / " + dto.getCreationDate() + " / " + dto.getViewCount());
-            }
-    
         }
-
-       
-
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/board/board.jsp");
         return "layout/app";
