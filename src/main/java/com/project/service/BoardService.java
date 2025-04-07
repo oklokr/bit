@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,19 @@ public class BoardService {
     }
 
     public int insertReply(ReplyDto replyDto){
-        return boardmapper.insertReply(replyDto);
+        if (replyDto.getReply_level() == 0) {
+            int maxRef = boardmapper.getMaxReplyRef(replyDto.getBoard_id());
+            replyDto.setReply_ref(maxRef + 1);
+            replyDto.setReply_step(0);
+        } else if (replyDto.getReply_level() == 1) {
+            Map<String, Object> paramMap = new HashMap<>();
+            paramMap.put("board_id", replyDto.getBoard_id());
+            paramMap.put("reply_ref", replyDto.getReply_ref());
+
+            int maxStep = boardmapper.getMaxReplyStep(paramMap);
+            replyDto.setReply_step(maxStep + 1);
+        }
+       return boardmapper.insertReply(replyDto);
     }
+
 }

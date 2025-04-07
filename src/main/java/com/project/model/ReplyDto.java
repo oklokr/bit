@@ -15,8 +15,7 @@ public class ReplyDto {
     private Timestamp creation_date;
     private String reply_title;
     private String reply_content;
-    //같은 댓글인지 구분 = ref
-    private int reply_order;
+    private int reply_ref;
     private int reply_step;
     private int reply_level;
 }
