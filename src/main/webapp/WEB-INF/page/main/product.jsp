@@ -1,25 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    String productName = request.getParameter("productName");
+    String registrationDate = request.getParameter("registrationDate");
+%>
 <div class="container product-page">
     <h2>상품정보 등록</h2>
 
     <div class="filter">
         <div class="row">
-            <label for="inputEmail3" class="col-sm-2 col-form-label">상풍명</label>
+            <label for="productName" class="col-sm-2 col-form-label">상풍명</label>
             <div class="col-sm-8">
-                <input type="email" class="form-control" id="inputEmail3">
+                <input type="text" class="form-control" id="productName" value="<%= productName != null ? productName : "" %>">
             </div>
         </div>
         <div class="row">
-            <span for="inputEmail3" class="col-sm-2 col-form-label">등록일</span>
+            <span class="col-sm-2 col-form-label">등록일</span>
             <div class="col-sm-8">
                 <div class="input-group">
-                    <input id="datepicker" type="text" class="form-control">
-                    <label class="input-group-text" for="datepicker" ><i class="bi bi-calendar"></i></label>
+                    <input id="registrationDate" type="text" class="form-control" value="<%= registrationDate != null ? registrationDate : "" %>">
+                    <label class="input-group-text" for="registrationDate"><i class="bi bi-calendar"></i></label>
                </div> 
             </div>
         </div>
-        <button type="button" class="btn btn-primary btn-sm">조회</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="handleFilter()">조회</button>
     </div>
 
     <div class="table-wrap">
@@ -27,7 +31,7 @@
             <p class="total-txt">
                 총 <span></span>개
             </p>
-            <button type="button" class="btn btn-primary btn-sm">상품등록</button>
+            <a href="/main/productEdit" role="button" class="btn btn-primary btn-sm">상품등록</a>
         </div>
         <table>
             <thead>
@@ -40,17 +44,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>상품정보 번호</td>
-                    <td>카테고리</td>
-                    <td>
-                        <span class="image">
-                            <img src="" alt="">
-                        </span>
-                    </td>
-                    <td>상품명</td>
-                    <td>상품설명</td>
-                </tr>
             </tbody>
         </table>
         <ol class="pagination"></ol>
@@ -59,27 +52,99 @@
 
 <script>
 $(document).ready(function() {
-    $('#datepicker').datepicker({
+    $('#registrationDate').datepicker({
         autoclose : true,
+        clearBtn: true,
         language : "ko"
     });
-    $('#datepicker').on('changeDate', function() {
+    $('#registrationDate').on('changeDate', function() {
         $('#my_hidden_input').val(
-            $('#datepicker').datepicker('getFormattedDate')
+            $('#registrationDate').datepicker('getFormattedDate')
         );
     });
 })
 
+function getUrlParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param) || '';
+}
+
+function handleFilter() {
+    const productName = document.getElementById('productName').value.trim();
+    const registrationDate = document.getElementById('registrationDate').value.trim();
+
+    const urlParams = new URLSearchParams();
+    if (productName) {
+        urlParams.set('productName', productName);
+    }
+    if (registrationDate) {
+        urlParams.set('registrationDate', registrationDate);
+    }
+    urlParams.set('page', 1); // 필터 변경 시 페이지를 1로 초기화
+
+    window.location.search = urlParams.toString(); // URL 갱신 및 페이지 새로고침
+}
+
+function handlePagination(totalCount, currentPage, pageSize) {
+    const pagination = document.querySelector('.pagination');
+    pagination.innerHTML = ''; // 기존 페이지네이션 초기화
+    const totalPages = Math.ceil(totalCount / pageSize); // 전체 페이지 수 계산
+    for (let i = 1; i <= totalPages; i++) {
+        const pageItem = document.createElement('li');
+        pageItem.className = 'page-item';
+        const linkClass = (i === currentPage) ? 'active' : '';
+        pageItem.innerHTML = 
+            '<a href="?page=' + i + '&productName='+ getUrlParam('productName') +'&registrationDate='+ getUrlParam('registrationDate') +'" class="page-link ' + linkClass + '">' +
+                i +
+            '</a>';
+        pagination.appendChild(pageItem);
+    }
+}
+
 function handleSetProduct() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = parseInt(urlParams.get('page')) || 1;
+    const productName = urlParams.get('productName') || '';
+    const registrationDate = urlParams.get('registrationDate') || '';
+    const postData = {
+        page: page,
+        size: 10, // 페이지당 항목 수
+    };
+
+    if (productName) {
+        postData.productName = productName;
+    }
+    if (registrationDate) {
+        postData.registrationDate = registrationDate;
+    }
+
     postRequestApi('/api/mypage/info', {}, res => {
-        const postData = {
-            page: 1,
-            size: 24,
-            id: res.data.id
-        }
-        
+        if(validate.isEmpty(res.data.id)) return
+        postData.id = res.data.id
         postRequestApi('/api/main/product', postData, res => {
-            console.log(res);
+            const data = res.data.data;
+            document.querySelector('.total-txt > span').innerText = res.data.totalCount;
+            
+            const tbody = document.querySelector('.table-wrap table tbody');
+            tbody.innerHTML = ''; // 기존 데이터 초기화
+
+            data.forEach(item => {
+                console.log(item)
+                const row = document.createElement('tr');
+                row.innerHTML = 
+                "<td>"+ item.productId +"</td>"
+                + "<td>"+ item.categoryName +"</td>"
+                + "<td><span class='image'><img src='${item.imageUrl}' alt='상품 이미지'></span></td>"
+                + "<td>"+ item.productName +"</td>"
+                + "<td>"+ item.productDescription +"</td>"
+                console.log(row)
+                tbody.appendChild(row);
+
+                row.addEventListener("click", () => {
+                    location="/main/productEdit?id="+item.productId+""
+                })
+            });
+            handlePagination(res.data.totalCount, page, postData.size);
         });
     });
 }
@@ -147,13 +212,18 @@ document.addEventListener("DOMContentLoaded", handleLoad)
         padding: 16px 12px;
         font-weight: bold;
         background-color: #fcfcfc;
+        vertical-align: middle;
     }
     .table-wrap table thead tr th:not(:last-child) {
         border-right: 2px solid #dee2e6;
     }
 
     .table-wrap table tbody tr {
+        cursor: pointer;
         border-bottom: 2px solid #dee2e6;
+    }
+    .table-wrap table tbody tr:hover td {
+        background-color: #00000005;
     }
     .table-wrap table tbody tr td {
         padding: 16px 12px;
@@ -162,7 +232,6 @@ document.addEventListener("DOMContentLoaded", handleLoad)
     .table-wrap table tbody tr td:not(:last-child) {
         border-right: 2px solid #dee2e6;
     }
-
     .table-wrap table .image {
         display: flex;
         width: 100px;
@@ -171,5 +240,8 @@ document.addEventListener("DOMContentLoaded", handleLoad)
         border-radius: 12px;
         background: #ccc;
     }
-
+    .table-wrap .pagination {
+        justify-content: center;
+        margin-top: 40px;
+    }
 </style>
