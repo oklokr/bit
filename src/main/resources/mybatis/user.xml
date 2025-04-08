@@ -50,4 +50,8 @@
             session_expiry_time = NULL
         WHERE session_id = #{sessionId}
     </update>
+
+    <select id="getUserInfo" parameterType="string" resultType="com.project.model.UserDto">
+        SELECT * FROM members WHERE session_id = #{sessionId}
+    </select>
 </mapper>

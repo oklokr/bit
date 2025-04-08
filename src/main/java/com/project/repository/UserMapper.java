@@ -28,5 +28,7 @@ public interface UserMapper {
     UserDto findByIdAndPhone(Map<String, String> params);
 
     void updatePassword(Map<String, String> params);
+
+    UserDto getUserInfo(String sessionId);
 }
 
