@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -98,5 +99,17 @@ public class UserService {
     }
     public boolean isUserIdDuplicate(String id) {
         return userMapper.existsByUserId(id);
+    }
+    public String generateRandomPassword(int length) {
+        String charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+        SecureRandom random = new SecureRandom();
+        StringBuilder password = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(charSet.length());
+            password.append(charSet.charAt(randomIndex));
+        }
+
+        return password.toString();
     }
 }
