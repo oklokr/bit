@@ -72,4 +72,9 @@
         SET image = #{image}, product_name = #{productName}, category_code = #{categoryCode}, product_description = #{productDescription}
         WHERE product_id = #{productId}
     </update>
+
+    <insert id="insertProductItem" parameterType="com.project.model.ProductDto">
+        INSERT INTO product_info (id, image, product_name, category_code, product_description, product_registration_date)
+        VALUES (#{id}, #{image}, #{productName}, #{categoryCode}, #{productDescription}, NOW())
+    </insert>
 </mapper>
