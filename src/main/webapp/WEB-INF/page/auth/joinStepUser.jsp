@@ -204,7 +204,7 @@
         });
 }
 </script>
-<form name="joinStepUser" action="/joinStepComp" method="post" onsubmit="return validateForm()">
+<form name="joinStepUser" action="/joinStepComp" method="get" onsubmit="return validateForm()">
     <table>
         <tr>
             <th style="padding-top: 10px; font-size: 25px; font-weight: 700;"> 사용자 정보입력 </th>
