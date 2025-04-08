@@ -119,4 +119,12 @@ public class UserService {
 
         return password.toString();
     }
+
+    public boolean existsByEmail(String email) {
+        return userMapper.existsByEmail(email); // UserMapper를 통해 이메일 중복 확인
+    }
+
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        return userMapper.existsByPhoneNumber(phoneNumber); // UserMapper를 통해 전화번호 중복 확인
+    }
 }

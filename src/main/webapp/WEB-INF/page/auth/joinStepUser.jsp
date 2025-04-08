@@ -130,45 +130,132 @@
     }
 </style>
 <script>
-    function validateForm() {
-    let isValid = true;
-    const fields = [
-        { id: 'companyName', message: '업체명을 입력해주세요.' },
-        { id: 'id', message: '아이디를 입력해주세요.' },
-        { id: 'password', message: '비밀번호를 입력해주세요.' },
-        { id: 'confirmPassword', message: '비밀번호 확인을 입력해주세요.' },
-        { id: 'email', message: '이메일을 입력해주세요.' },
-        { id: 'phoneNumber', message: '휴대전화번호를 입력해주세요.' } // 수정된 부분
-    ];
-
-    fields.forEach(field => {
-        const input = document.getElementById(field.id);
-        const error = document.getElementById(`${field.id}Error`);
-        if (!input.value.trim()) {
-            error.textContent = field.message; // 에러 메시지 표시
+    function validateForm(event) {
+        let isValid = true; // 전체 유효성 상태
+        let firstInvalidField = null; // 첫 번째 에러 필드를 저장
+    
+        const fields = [
+            { id: 'companyName', message: '업체명을 입력해주세요.' },
+            { id: 'id', message: '아이디를 입력해주세요.' },
+            { id: 'password', message: '비밀번호를 입력해주세요.' },
+            { id: 'confirmPassword', message: '비밀번호 확인을 입력해주세요.' },
+            { id: 'email', message: '이메일을 입력해주세요.' }
+        ];
+    
+        fields.forEach(field => {
+            const input = document.getElementById(field.id);
+            const error = document.getElementById(`${field.id}Error`);
+            if (!input || !error) {
+                isValid = false;
+                return;
+            }
+            if (!input.value.trim()) {
+                error.textContent = field.message;
+                if (!firstInvalidField) {
+                    firstInvalidField = input;
+                }
+                isValid = false;
+            } else {
+                error.textContent = '';
+            }
+        });
+    
+        // 비밀번호 확인 검증
+        const password = document.getElementById('password')?.value.trim();
+        const confirmPassword = document.getElementById('confirmPassword')?.value.trim();
+        if (password && confirmPassword && password !== confirmPassword) {
+            const error = document.getElementById('confirmPasswordError');
+            if (error) {
+                error.textContent = '비밀번호가 일치하지 않습니다.';
+            }
+            if (!firstInvalidField) {
+                firstInvalidField = document.getElementById('confirmPassword');
+            }
+            isValid = false;
+        }
+    
+        // 휴대전화 번호 검증
+        const tel1 = document.getElementById('tel1')?.value.trim();
+        const tel2 = document.getElementById('tel2')?.value.trim();
+        const tel3 = document.getElementById('tel3')?.value.trim();
+        const phoneNumber = `${tel1}-${tel2}-${tel3}`;
+    
+        if (!tel1 || !tel2 || !tel3) {
+            const error = document.getElementById('phoneNumberError');
+            if (error) {
+                error.textContent = '휴대전화번호를 모두 입력해주세요.';
+            }
+            if (!firstInvalidField) {
+                firstInvalidField = document.getElementById('tel1');
+            }
             isValid = false;
         } else {
-            error.textContent = ''; // 에러 메시지 초기화
+            const error = document.getElementById('phoneNumberError');
+            if (error) {
+                error.textContent = '';
+            }
         }
-    });
-
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    if (password && confirmPassword && password !== confirmPassword) {
-        document.getElementById('confirmPasswordError').textContent = '비밀번호가 일치하지 않습니다.';
-        isValid = false;
-    } else {
-        document.getElementById('confirmPasswordError').textContent = '';
+    
+        // 중복 확인 여부 체크
+        if (!isDuplicateChecked) {
+            alert('아이디 중복 확인을 완료해주세요.');
+            document.getElementById('id').focus();
+            event.preventDefault();
+            return false;
+        }
+    
+        // 이메일 중복 확인
+        const email = document.getElementById('email')?.value.trim();
+    if (email) {
+        fetch('/joinStepUser/checkDuplicateEmail', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email })
+        })
+            .then(response => {
+                console.log('Response status:', response.status); // 응답 상태 코드 확인
+                if (!response.ok) {
+                    return response.json().then(err => {
+                        console.error('Server error:', err); // 서버 오류 로그
+                        throw new Error(err.message || '서버 오류가 발생했습니다.');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response data:', data); // 서버 응답 데이터 확인
+                if (data.isDuplicate) {
+                    alert('이미 사용 중인 이메일입니다.');
+                    document.getElementById('email').focus();
+                    event.preventDefault();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error); // 네트워크 또는 기타 오류 로그
+                alert('이메일 중복 확인 중 오류가 발생했습니다.');
+                event.preventDefault();
+            });
+    }
+    
+        // 첫 번째 에러 필드에 포커스 설정
+        if (!isValid) {
+            if (firstInvalidField) {
+                firstInvalidField.focus();
+            }
+            alert('모든 필드를 올바르게 입력해주세요.');
+            event.preventDefault();
+            return false;
+        }
+    
+        return true; // 유효성 검사 성공 시 폼 제출 허용
     }
 
-    if (!isValid) {
-        alert('모든 필드를 올바르게 입력해주세요.');
-    }
 
-    return isValid;
-}
+let isDuplicateChecked = false;
 
-    function checkDuplicateId() {
+function checkDuplicateId() {
     const id = document.getElementById('id').value.trim();
     if (!id) {
         alert('아이디를 입력해주세요.');
@@ -194,17 +281,20 @@
         .then(data => {
             if (data.isDuplicate) {
                 alert(data.message); // 이미 사용 중인 아이디
+                isDuplicateChecked = false;
             } else {
                 alert(data.message); // 사용 가능한 아이디
+                isDuplicateChecked = true;
             }
         })
         .catch(error => {
             console.error('Error:', error);
             alert('중복 확인 중 오류가 발생했습니다.');
+            isDuplicateChecked = false;
         });
 }
 </script>
-<form name="joinStepUser" action="/joinStepComp" method="get" onsubmit="return validateForm()">
+<form name="joinStepUser" method="get" action="/joinResult" onsubmit="return validateForm(event)">
     <table>
         <tr>
             <th style="padding-top: 10px; font-size: 25px; font-weight: 700;"> 사용자 정보입력 </th>
@@ -269,17 +359,23 @@
         <tr>
             <td>
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
-                    <label for="phoneNumber" style="flex: 1; font-weight: bold; text-align: right;">휴대전화</label>
-                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="휴대전화번호를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
+                    <label for="tel1" style="flex: 1; font-weight: bold; text-align: right;">휴대전화</label>
+                    <div style="flex: 3; display: flex; gap: 5px;">
+                        <input type="text" id="tel1" name="tel1" maxlength="3" placeholder="010" style="width: 30%; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
+                        <span style="align-self: center;">-</span>
+                        <input type="text" id="tel2" name="tel2" maxlength="4" placeholder="1234" style="width: 30%; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
+                        <span style="align-self: center;">-</span>
+                        <input type="text" id="tel3" name="tel3" maxlength="4" placeholder="5678" style="width: 30%; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
+                    </div>
                     <div id="phoneNumberError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
-              <button type="button" onclick="location='/join'">이전</button>
-              <button type="submit" class="next">다음</button>
+                <button type="button" onclick="location='/join'">취소</button>
+                <button type="submit">다음</button>
             </td>
-        </tr>     
+        </tr>  
     </table>
 </form>

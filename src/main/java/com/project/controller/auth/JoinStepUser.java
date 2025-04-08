@@ -1,5 +1,6 @@
 package com.project.controller.auth;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,5 +50,20 @@ public class JoinStepUser {
             "isDuplicate", isDuplicate
         ));
     } 
-    
+    @PostMapping("/checkDuplicate")
+    public ResponseEntity<Map<String, Boolean>> checkDuplicate(@RequestBody Map<String, String> request) {
+    String email = request.get("email");
+    String phoneNumber = request.get("phoneNumber");
+
+    boolean isDuplicate = false;
+
+    // 이메일과 전화번호 중복 여부 확인 로직
+    if (userService.existsByEmail(email) || userService.existsByPhoneNumber(phoneNumber)) {
+        isDuplicate = true;
+    }
+
+    Map<String, Boolean> response = new HashMap<>();
+    response.put("isDuplicate", isDuplicate);
+    return ResponseEntity.ok(response);
+}
 }
