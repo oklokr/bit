@@ -15,4 +15,5 @@ public interface AdminMapper {
     public int countByName(String searchName);
     public int deleteUser(String id);
     public int changeMemberType(Map<String, Object> map);
+    public int resetPassword(String id);
 }
