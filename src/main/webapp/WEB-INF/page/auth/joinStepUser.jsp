@@ -79,89 +79,80 @@
         let isValid = true;
         let firstInvalidField = null;
 
-        const fields = [
-            { id: 'companyName', message: '업체명을 입력해주세요.' },
-            { id: 'id', message: '아이디를 입력해주세요.' },
-            { id: 'password', message: '비밀번호를 입력해주세요.' },
-            { id: 'confirmPassword', message: '비밀번호 확인을 입력해주세요.' },
-            { id: 'email', message: '이메일을 입력해주세요.' }
-        ];
-
-        fields.forEach(field => {
-            const input = document.getElementById(field.id);
-            const error = document.getElementById(`${field.id}Error`);
-            if (!input || !error) {
-                isValid = false;
-                return;
-            }
-            if (!input.value.trim()) {
-                error.textContent = field.message;
-                if (!firstInvalidField) {
-                    firstInvalidField = input;
-                }
-                isValid = false;
-            } else {
-                error.textContent = '';
-            }
-        });
-
-        const password = document.getElementById('password')?.value.trim();
-        const confirmPassword = document.getElementById('confirmPassword')?.value.trim();
-        if (password && confirmPassword && password !== confirmPassword) {
-            const error = document.getElementById('confirmPasswordError');
-            if (error) {
-                error.textContent = '비밀번호가 일치하지 않습니다.';
-            }
-            if (!firstInvalidField) {
-                firstInvalidField = document.getElementById('confirmPassword');
-            }
-            isValid = false;
-        }
-
-        const tel1 = document.getElementById('tel1')?.value.trim();
-        const tel2 = document.getElementById('tel2')?.value.trim();
-        const tel3 = document.getElementById('tel3')?.value.trim();
-
-        console.log("Tel1:", tel1); // 로그 추가
-        console.log("Tel2:", tel2); // 로그 추가
-        console.log("Tel3:", tel3); // 로그 추가
-
-        const phoneNumber = tel1 + '-' + tel2 + '-' + tel3;
-        console.log("Phone Number:", phoneNumber); // 로그 추가
-
-        if (!tel1 || !tel2 || !tel3) {
-            const error = document.getElementById('phoneNumberError');
-            if (error) {
-                error.textContent = '휴대전화번호를 모두 입력해주세요.';
-            }
-            if (!firstInvalidField) {
-                firstInvalidField = document.getElementById('tel1');
-            }
-            isValid = false;
-        } else {
-            const error = document.getElementById('phoneNumberError');
-            if (error) {
-                error.textContent = '';
-            }
-        }
-
-        if (!isDuplicateChecked) {
-            alert('아이디 중복 확인을 완료해주세요.');
-            document.getElementById('id').focus();
+        // 업체명 검증
+        const companyName = document.getElementById('companyName');
+        if (!companyName || !companyName.value.trim()) {
+            alert('업체명을 입력해주세요.');
+            companyName.focus();
             return false;
         }
 
+        // 아이디 검증
+        const id = document.getElementById('id');
+        if (!id || !id.value.trim()) {
+            alert('아이디를 입력해주세요.');
+            id.focus();
+            return false;
+        }
+
+        // 비밀번호 검증
+        const password = document.getElementById('password');
+        if (!password || !password.value.trim()) {
+            alert('비밀번호를 입력해주세요.');
+            password.focus();
+            return false;
+        }
+
+        // 비밀번호 확인 검증
+        const confirmPassword = document.getElementById('confirmPassword');
+        if (!confirmPassword || !confirmPassword.value.trim()) {
+            alert('비밀번호 확인을 입력해주세요.');
+            confirmPassword.focus();
+            return false;
+        }
+        if (password.value.trim() !== confirmPassword.value.trim()) {
+            alert('비밀번호가 일치하지 않습니다.');
+            confirmPassword.focus();
+            return false;
+        }
+
+        // 이메일 검증
+        const email = document.getElementById('email');
+        if (!email || !email.value.trim()) {
+            alert('이메일을 입력해주세요.');
+            email.focus();
+            return false;
+        }
+
+        // 전화번호 검증
+        const tel1 = document.getElementById('tel1')?.value.trim();
+        const tel2 = document.getElementById('tel2')?.value.trim();
+        const tel3 = document.getElementById('tel3')?.value.trim();
+        if (!tel1 || !tel2 || !tel3) {
+            alert('휴대전화번호를 모두 입력해주세요.');
+            document.getElementById('tel1').focus();
+            return false;
+        }
+        const phoneNumber = tel1 + '-' + tel2 + '-' + tel3;
+
+        // 아이디 중복 확인
+        if (!isDuplicateChecked) {
+            alert('아이디 중복 확인을 완료해주세요.');
+            id.focus();
+            return false;
+        }
+
+        // 이메일 및 전화번호 중복 확인
         try {
-            const email = document.getElementById('email')?.value.trim();
             const emailResponse = await fetch('/joinStepUser/checkDuplicateEmail', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: email })
+                body: JSON.stringify({ email: email.value.trim() })
             });
             const emailData = await emailResponse.json();
             if (emailData.isDuplicate) {
                 alert('이미 사용 중인 이메일입니다.');
-                document.getElementById('email').focus();
+                email.focus();
                 return false;
             }
 
@@ -170,29 +161,20 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phoneNumber: phoneNumber })
             });
-            console.log("Phone Number Sent:", phoneNumber); // 로그 추가
             const phoneData = await phoneResponse.json();
-            console.log("Phone Response Data:", phoneData); // 로그 추가
             if (phoneData.isDuplicate) {
                 alert('이미 사용 중인 전화번호입니다.');
                 document.getElementById('tel1').focus();
                 return false;
             }
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error during validation:', error);
             alert('중복 확인 중 오류가 발생했습니다.');
             return false;
         }
 
-        if (!isValid) {
-            if (firstInvalidField) {
-                firstInvalidField.focus();
-            }
-            alert('모든 필드를 올바르게 입력해주세요.');
-            return false;
-        }
-
-        document.forms['joinStepUser'].submit();
+        // 모든 검증 통과 시 폼 제출
+        event.target.submit();
     }
 
     let isDuplicateChecked = false;
@@ -210,20 +192,13 @@
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: id })
         })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(err => {
-                        throw new Error(err.message || '서버 오류가 발생했습니다.');
-                    });
-                }
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
                 if (data.isDuplicate) {
-                    alert(data.message);
+                    alert('이미 사용 중인 아이디입니다.');
                     isDuplicateChecked = false;
                 } else {
-                    alert(data.message);
+                    alert('사용 가능한 아이디입니다.');
                     isDuplicateChecked = true;
                 }
             })
@@ -253,7 +228,6 @@
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="companyName" style="flex: 1; font-weight: bold; text-align: right;">업체명</label>
                     <input type="text" id="companyName" name="companyName" placeholder="업체명을 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="companyNameError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
                 </div>
             </td>
         </tr>
@@ -264,8 +238,7 @@
                     <div style="flex: 3; display: flex; gap: 10px;">
                         <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
                         <button type="button" onclick="checkDuplicateId()" style="flex: 1; padding: 10px; background-color: #646464; color: white; border: none; border-radius: 5px; cursor: pointer;">중복확인</button>
-                    </div>
-                    <div id="idError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
+                    </div>                    
                 </div>
             </td>
         </tr>
@@ -273,8 +246,7 @@
             <td>
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="password" style="flex: 1; font-weight: bold; text-align: right;">비밀번호</label>
-                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="passwordError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
+                    <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">                   
                 </div>
             </td>
         </tr>
@@ -282,8 +254,7 @@
             <td>
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="confirmPassword" style="flex: 1; font-weight: bold; text-align: right;">비밀번호 확인</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인을 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="confirmPasswordError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인을 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">                    
                 </div>
             </td>
         </tr>
@@ -291,8 +262,7 @@
             <td>
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="email" style="flex: 1; font-weight: bold; text-align: right;">이메일</label>
-                    <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="emailError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
+                    <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">                    
                 </div>
             </td>
         </tr>
@@ -306,8 +276,7 @@
                         <input type="text" id="tel2" name="tel2" maxlength="4" placeholder="1234" style="width: 30%; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
                         <span style="align-self: center;">-</span>
                         <input type="text" id="tel3" name="tel3" maxlength="4" placeholder="5678" style="width: 30%; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    </div>
-                    <div id="phoneNumberError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
+                    </div>                    
                 </div>
             </td>
         </tr>
