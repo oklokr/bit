@@ -28,6 +28,7 @@ public class WebConfig implements WebMvcConfigurer {
             "/joinStepUser/**", 
             "/joinStepComp", 
             "/joinStepComp/**", 
+            "/findResult",
             "/resources/**", 
             "/css/**", 
             "/js/**", 
