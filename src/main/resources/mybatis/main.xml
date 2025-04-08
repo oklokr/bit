@@ -66,4 +66,10 @@
     <select id="getProductInfo" resultType="com.project.model.ProductDto">
         SELECT * FROM product_info WHERE product_id = #{productId}
     </select>
+
+    <update id="setProductItem" parameterType="com.project.model.ProductDto">
+        UPDATE product_info
+        SET image = #{image}, product_name = #{productName}, category_code = #{categoryCode}, product_description = #{productDescription}
+        WHERE product_id = #{productId}
+    </update>
 </mapper>

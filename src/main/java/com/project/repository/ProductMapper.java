@@ -14,4 +14,5 @@ public interface ProductMapper {
     public List<ProductDto> getProductList(Map<String, Object> params);
     public int getProductCount(Map<String, Object> params);
     public ProductDto getProductInfo(int productId);
+    public int setProductItem(Map<String, Object> params);
 }

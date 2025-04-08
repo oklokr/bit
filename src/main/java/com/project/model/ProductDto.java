@@ -12,7 +12,7 @@ public class ProductDto {
     private String id;
     private String image;
     private String productName;
-    private int categoryCode;
+    private String categoryCode;
     private String categoryName;
     private String productDescription;
     private Timestamp productRegistrationDate;
