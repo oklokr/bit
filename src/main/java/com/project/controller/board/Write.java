@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.project.model.BoardDto;
 import com.project.service.BoardService;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -27,18 +29,18 @@ public class Write{
     }
 
     @PostMapping("/board/write")
-    public String postMethodName(@ModelAttribute BoardDto boardDto, Model model ) {
+    public String postMethodName(@ModelAttribute BoardDto boardDto, Model model, HttpSession session) {
         // 작성일
 		boardDto.setCreationDate(new Timestamp(System.currentTimeMillis()));
 
         //원래 쿠키에서 가져와야.. 임시
         boardDto.setAuthor("user");
-        boardDto.setMemberNo("78e1ab57-1122-11f0-899e-c8418a1096fd");
+        boardDto.setMemberNo("87b2a502-1389-11f0-899e-c8418a1096fd");
         
         int result = boardDao.insertPost(boardDto);
-
-
-        return "redirect:/board/write?result=" + result;
+        session.setAttribute("writeResult", result);
+        model.addAttribute("contentPage", "/WEB-INF/page/board/write.jsp");
+        return "layout/app";
     }
     
 }

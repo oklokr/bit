@@ -99,13 +99,20 @@
 
 <script>
     window.onload = function() {
-        let deleteResult = "${deleteResult}";
-        if (deleteResult === "1") {
-            alert("${deletedName} 회원이 탈퇴되었습니다");
-            location.href = "/admin?pageNum=${pageNum}";
-        } else if (deleteResult === "0") {
-            alert("회원 탈퇴에 실패했습니다");
-            location.href = "/admin/detail?pageNum=${pageNum}&id=${failedId}"; // 목록 페이지로 이동
+        const deleteResult = "${deleteResult}";
+        if (deleteResult === "1" || deleteResult === "0") {
+            showResultModal(
+                deleteResult,
+                "처리 결과",
+                "${deletedName} 회원이 탈퇴되었습니다",
+                "회원 탈퇴에 실패했습니다",
+                function() {
+                    location.href = "/admin?pageNum=${pageNum}";
+                },
+                function() {
+                    location.href = "/admin/detail?pageNum=${pageNum}&id=${failedId}";
+                }
+            );
         }
     }
 </script>
