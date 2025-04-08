@@ -36,6 +36,18 @@
         FROM members
         WHERE id = #{id}
     </select>
+    
+    <select id="existsByEmail" resultType="boolean">
+    SELECT COUNT(*) > 0
+    FROM members
+    WHERE email = #{email}
+</select>
+
+<select id="existsByPhoneNumber" resultType="boolean">
+    SELECT COUNT(*) > 0
+    FROM members
+    WHERE phone_number = #{phoneNumber}
+</select>
 
     <!-- 세션 관련 쿼리문 -->
     <update id="updateSessionInfo">

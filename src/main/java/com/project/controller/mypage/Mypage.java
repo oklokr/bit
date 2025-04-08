@@ -18,8 +18,12 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class Mypage {
+    @Autowired
+    private UserService userService;
     @GetMapping("/mypage")
-    public String pageRender(Model model) {
+    public String myPage(HttpSession session, Model model){
+        UserDto userDto = userService.getUserInfo(session.getId());
+        model.addAttribute("userDto", userDto);
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/mypage/mypage.jsp");
         return "layout/app";

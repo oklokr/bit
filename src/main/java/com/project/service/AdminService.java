@@ -34,4 +34,8 @@ public class AdminService {
     public int changeMemberType(Map<String, Object> map){
         return userMapper.changeMemberType(map);
     }
+
+    public int resetPassword(String id){
+        return userMapper.resetPassword(id);
+    }
 }

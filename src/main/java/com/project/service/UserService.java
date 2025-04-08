@@ -119,4 +119,18 @@ public class UserService {
 
         return password.toString();
     }
+
+    public boolean existsByEmail(String email) {
+        System.out.println("Checking email in database: " + email); // 로그 추가
+        boolean result = userMapper.existsByEmail(email);
+        System.out.println("Email exists: " + result); // 로그 추가
+        return result;
+    }
+    
+    public boolean existsByPhoneNumber(String phoneNumber) {
+        System.out.println("Checking phone number in database: " + phoneNumber); // 로그 추가
+        boolean result = userMapper.existsByPhoneNumber(phoneNumber);
+        System.out.println("Phone number exists: " + result); // 로그 추가
+        return result;
+    }
 }
