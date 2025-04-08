@@ -131,68 +131,64 @@
 </style>
 <script>
     function validateForm() {
-    let isValid = true;
-    const fields = [
-        { id: 'companyName', message: '업체명을 입력해주세요.' },
-        { id: 'userId', message: '아이디를 입력해주세요.' },
-        { id: 'password', message: '비밀번호를 입력해주세요.' },
-        { id: 'confirmPassword', message: '비밀번호 확인을 입력해주세요.' },
-        { id: 'email', message: '이메일을 입력해주세요.' },
-        { id: 'phone', message: '휴대전화번호를 입력해주세요.' }
-    ];
+        let isValid = true;
+        const fields = [
+            { id: 'companyName', message: '업체명을 입력해주세요.' },
+            { id: 'id', message: '아이디를 입력해주세요.' },
+            { id: 'password', message: '비밀번호를 입력해주세요.' },
+            { id: 'confirmPassword', message: '비밀번호 확인을 입력해주세요.' },
+            { id: 'email', message: '이메일을 입력해주세요.' },
+            { id: 'phone', message: '휴대전화번호를 입력해주세요.' }
+        ];
 
-    fields.forEach(field => {
-        const input = document.getElementById(field.id);
-        const error = document.getElementById(`${field.id}Error`);
-        if (!input.value.trim()) {
-            error.textContent = field.message;
+        fields.forEach(field => {
+            const input = document.getElementById(field.id);
+            const error = document.getElementById(`${field.id}Error`);
+            if (!input.value.trim()) {
+                error.textContent = field.message;
+                isValid = false;
+            } else {
+                error.textContent = '';
+            }
+        });
+
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        if (password && confirmPassword && password !== confirmPassword) {
+            document.getElementById('confirmPasswordError').textContent = '비밀번호가 일치하지 않습니다.';
             isValid = false;
-        } else {
-            error.textContent = '';
         }
-    });
 
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
-    if (password && confirmPassword && password !== confirmPassword) {
-        document.getElementById('confirmPasswordError').textContent = '비밀번호가 일치하지 않습니다.';
-        isValid = false;
+        return isValid;
     }
 
-    const email = document.getElementById('email').value;
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        document.getElementById('emailError').textContent = '올바른 이메일 형식이 아닙니다.';
-        isValid = false;
-    }
-
-    const phone = document.getElementById('phone').value;
-    if (phone && !/^\d{10,11}$/.test(phone)) {
-        document.getElementById('phoneError').textContent = '올바른 전화번호 형식이 아닙니다.';
-        isValid = false;
-    }
-
-    if (isValid) {
-        alert('모든 입력이 유효합니다. 다음 단계로 이동합니다.');
-        return true; // 폼 제출 허용
-    }
-
-    return false; // 폼 제출 차단
-}
     function checkDuplicateId() {
-        const userId = document.getElementById('userId').value.trim();
-        if (!userId) {
+        const id = document.getElementById('id').value.trim();
+        if (!id) {
             alert('아이디를 입력해주세요.');
+            document.getElementById('id').focus();
             return;
         }
 
-        // 서버와 통신하여 중복 확인 (예: AJAX 요청)
-        // 아래는 예제 로직입니다.
-        const isDuplicate = false; // 서버에서 중복 여부를 반환한다고 가정
-        if (isDuplicate) {
-            alert('이미 사용 중인 아이디입니다.');
-        } else {
-            alert('사용 가능한 아이디입니다.');
-        }
+        fetch('/joinStepUser/checkDuplicateId', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ id: id })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.isDuplicate) {
+                    alert(data.message);
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('중복 확인 중 오류가 발생했습니다.');
+            });
     }
 </script>
 <form name="joinStepUser" onsubmit="return validateForm()">
@@ -214,19 +210,19 @@
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="companyName" style="flex: 1; font-weight: bold; text-align: right;">업체명</label>
                     <input type="text" id="companyName" name="companyName" placeholder="업체명을 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="companyNameError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
+                    <div id="companyNameError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
                 </div>
             </td>
         </tr>
         <tr>
             <td>
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
-                    <label for="userId" style="flex: 1; font-weight: bold; text-align: right;">아이디</label>
+                    <label for="id" style="flex: 1; font-weight: bold; text-align: right;">아이디</label>
                     <div style="flex: 3; display: flex; gap: 10px;">
-                        <input type="text" id="userId" name="userId" placeholder="아이디를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
+                        <input type="text" id="id" name="id" placeholder="아이디를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
                         <button type="button" onclick="checkDuplicateId()" style="flex: 1; padding: 10px; background-color: #646464; color: white; border: none; border-radius: 5px; cursor: pointer;">중복확인</button>
                     </div>
-                    <div id="userIdError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
+                    <div id="idError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
                 </div>
             </td>
         </tr>
@@ -235,7 +231,7 @@
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="password" style="flex: 1; font-weight: bold; text-align: right;">비밀번호</label>
                     <input type="password" id="password" name="password" placeholder="비밀번호를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="passwordError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
+                    <div id="passwordError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
                 </div>
             </td>
         </tr>
@@ -244,7 +240,7 @@
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="confirmPassword" style="flex: 1; font-weight: bold; text-align: right;">비밀번호 확인</label>
                     <input type="password" id="confirmPassword" name="confirmPassword" placeholder="비밀번호 확인을 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="confirmPasswordError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
+                    <div id="confirmPasswordError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
                 </div>
             </td>
         </tr>
@@ -253,7 +249,7 @@
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="email" style="flex: 1; font-weight: bold; text-align: right;">이메일</label>
                     <input type="email" id="email" name="email" placeholder="이메일을 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="emailError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
+                    <div id="emailError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
                 </div>
             </td>
         </tr>
@@ -262,7 +258,7 @@
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="phone" style="flex: 1; font-weight: bold; text-align: right;">휴대전화</label>
                     <input type="text" id="phone" name="phone" placeholder="휴대전화번호를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="phoneError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
+                    <div id="phoneError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
                 </div>
             </td>
         </tr>

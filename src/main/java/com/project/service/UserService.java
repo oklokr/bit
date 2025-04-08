@@ -96,4 +96,7 @@ public class UserService {
         params.put("password", randomPassword);
         userMapper.updatePassword(params);
     }
+    public boolean isUserIdDuplicate(String id) {
+        return userMapper.existsByUserId(id);
+    }
 }
