@@ -16,14 +16,14 @@ public class Edit {
     private BoardService boardDao;
 
     @GetMapping("/board/edit")
-    public String boardEdit(@RequestParam int board_id, @RequestParam String pageNum, 
+    public String boardEdit(@RequestParam int boardId, @RequestParam String pageNum, 
         @RequestParam int result, Model model) {
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("result", result);
         model.addAttribute("title", "main page");
-        BoardDto boardDto = boardDao.getArticle(board_id);
+        BoardDto boardDto = boardDao.getArticle(boardId);
 
-        model.addAttribute("board_id", board_id);
+        model.addAttribute("boardId", boardId);
         model.addAttribute("boardDto", boardDto);
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("contentPage", "/WEB-INF/page/board/edit.jsp");
@@ -37,7 +37,7 @@ public class Edit {
 
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("result", result);
-        model.addAttribute("board_id", id);
+        model.addAttribute("boardId", id);
         model.addAttribute("contentPage", "/WEB-INF/page/board/edit.jsp");
         return "layout/app";
     }
