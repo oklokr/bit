@@ -14,10 +14,8 @@
     <link rel="stylesheet" href="/css/common.css">
 </head>
 <body>
-    
-
     <div class="board-detail-page container">
-        <h3> 자유게시판</h3>
+        <h3> 자유게시판 </h3>
         <br>
         <table class="table">
             <tr>
@@ -91,6 +89,7 @@
                         
                                 <div class="text-end">
                                     <button type="submit" name="submit" class="btn btn-sm btn-secondary">답글 작성</button>
+                                    <button type="button" name="cancel" class="btn btn-sm btn-secondary">취소</button>
                                 </div>
                             </form>
                         </div>
@@ -221,6 +220,14 @@
             form.style.display = 'none';
         }
     }
+    document.querySelectorAll('button[name="cancel"]').forEach(cancelBtn => {
+        cancelBtn.addEventListener("click", function() {
+            const form = this.closest(".nested-reply-form");
+            if (form) {
+                form.style.display = "none";
+            }
+        });
+    });
 
 </script>
 
@@ -316,7 +323,7 @@
         box-shadow: none !important;
     }
 
-    .reply-table textarea {
+    textarea {
     resize: none !important;
     }
 

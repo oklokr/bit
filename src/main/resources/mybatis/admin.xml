@@ -42,4 +42,8 @@
         </set>
         where id = #{id}
     </update>
+
+    <update id="resetPassword" parameterType="String">
+        UPDATE members SET password = '1234' WHERE id = #{id}
+    </update>
 </mapper>

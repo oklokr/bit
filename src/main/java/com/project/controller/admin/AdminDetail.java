@@ -38,8 +38,7 @@ public class AdminDetail {
     public String resetPassword(@RequestParam String id, @RequestParam int pageNum, Model model, HttpSession session){
         UserDto user = userDao.getUserById(id);
         String name = user.getCompanyName();
-        //int result = userDao.updatePassword();
-        int result=1;
+        int result = adminDao.resetPassword(id);
         session.setAttribute("resetResult", result);
         model.addAttribute("name", name);
         model.addAttribute("id", id);
