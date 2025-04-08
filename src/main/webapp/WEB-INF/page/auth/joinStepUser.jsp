@@ -49,43 +49,6 @@
         background-color: #d3d3d3;
         margin: 5px;
     }
-    .logo {
-        width: 50px;
-        height: auto;
-    }
-    .link-group {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        font-size: 12px;
-        width: 100%;
-        white-space: nowrap;
-        margin: 5px;
-    }
-    .link-group a {
-        color: #000000;
-        text-decoration: underline;
-        cursor: pointer;
-    }
-    .link-group a:hover {
-        color: #FF0000;
-    }
-    td.button-td {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    #emailField, #phoneField {
-        text-align: center;
-        width: 100%;
-    }
-    #emailField input, #phoneField input {
-        width: 80%;
-        display: inline-block;
-    }
-    #phoneField input {
-        width: 30%;
-    }
     .steps {
         display: flex;
         justify-content: center;
@@ -158,7 +121,13 @@
         const tel1 = document.getElementById('tel1')?.value.trim();
         const tel2 = document.getElementById('tel2')?.value.trim();
         const tel3 = document.getElementById('tel3')?.value.trim();
-        const phoneNumber = `${tel1}-${tel2}-${tel3}`;
+
+        console.log("Tel1:", tel1); // 로그 추가
+        console.log("Tel2:", tel2); // 로그 추가
+        console.log("Tel3:", tel3); // 로그 추가
+
+        const phoneNumber = tel1 + '-' + tel2 + '-' + tel3;
+        console.log("Phone Number:", phoneNumber); // 로그 추가
 
         if (!tel1 || !tel2 || !tel3) {
             const error = document.getElementById('phoneNumberError');
@@ -201,7 +170,9 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phoneNumber: phoneNumber })
             });
+            console.log("Phone Number Sent:", phoneNumber); // 로그 추가
             const phoneData = await phoneResponse.json();
+            console.log("Phone Response Data:", phoneData); // 로그 추가
             if (phoneData.isDuplicate) {
                 alert('이미 사용 중인 전화번호입니다.');
                 document.getElementById('tel1').focus();
