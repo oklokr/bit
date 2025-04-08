@@ -131,67 +131,80 @@
 </style>
 <script>
     function validateForm() {
-        let isValid = true;
-        const fields = [
-            { id: 'companyName', message: '업체명을 입력해주세요.' },
-            { id: 'id', message: '아이디를 입력해주세요.' },
-            { id: 'password', message: '비밀번호를 입력해주세요.' },
-            { id: 'confirmPassword', message: '비밀번호 확인을 입력해주세요.' },
-            { id: 'email', message: '이메일을 입력해주세요.' },
-            { id: 'phone', message: '휴대전화번호를 입력해주세요.' }
-        ];
+    let isValid = true;
+    const fields = [
+        { id: 'companyName', message: '업체명을 입력해주세요.' },
+        { id: 'id', message: '아이디를 입력해주세요.' },
+        { id: 'password', message: '비밀번호를 입력해주세요.' },
+        { id: 'confirmPassword', message: '비밀번호 확인을 입력해주세요.' },
+        { id: 'email', message: '이메일을 입력해주세요.' },
+        { id: 'phoneNumber', message: '휴대전화번호를 입력해주세요.' } // 수정된 부분
+    ];
 
-        fields.forEach(field => {
-            const input = document.getElementById(field.id);
-            const error = document.getElementById(`${field.id}Error`);
-            if (!input.value.trim()) {
-                error.textContent = field.message;
-                isValid = false;
-            } else {
-                error.textContent = '';
-            }
-        });
-
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-        if (password && confirmPassword && password !== confirmPassword) {
-            document.getElementById('confirmPasswordError').textContent = '비밀번호가 일치하지 않습니다.';
+    fields.forEach(field => {
+        const input = document.getElementById(field.id);
+        const error = document.getElementById(`${field.id}Error`);
+        if (!input.value.trim()) {
+            error.textContent = field.message; // 에러 메시지 표시
             isValid = false;
+        } else {
+            error.textContent = ''; // 에러 메시지 초기화
         }
+    });
 
-        return isValid;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    if (password && confirmPassword && password !== confirmPassword) {
+        document.getElementById('confirmPasswordError').textContent = '비밀번호가 일치하지 않습니다.';
+        isValid = false;
+    } else {
+        document.getElementById('confirmPasswordError').textContent = '';
     }
+
+    if (!isValid) {
+        alert('모든 필드를 올바르게 입력해주세요.');
+    }
+
+    return isValid;
+}
 
     function checkDuplicateId() {
-        const id = document.getElementById('id').value.trim();
-        if (!id) {
-            alert('아이디를 입력해주세요.');
-            document.getElementById('id').focus();
-            return;
-        }
-
-        fetch('/joinStepUser/checkDuplicateId', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id: id })
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.isDuplicate) {
-                    alert(data.message);
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('중복 확인 중 오류가 발생했습니다.');
-            });
+    const id = document.getElementById('id').value.trim();
+    if (!id) {
+        alert('아이디를 입력해주세요.');
+        document.getElementById('id').focus();
+        return;
     }
+
+    fetch('/joinStepUser/checkDuplicateId', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => {
+                    throw new Error(err.message || '서버 오류가 발생했습니다.');
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.isDuplicate) {
+                alert(data.message); // 이미 사용 중인 아이디
+            } else {
+                alert(data.message); // 사용 가능한 아이디
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('중복 확인 중 오류가 발생했습니다.');
+        });
+}
 </script>
-<form name="joinStepUser" onsubmit="return validateForm()">
+<form name="joinStepUser" action="/joinStepComp" method="get" onsubmit="return validateForm()">
     <table>
         <tr>
             <th style="padding-top: 10px; font-size: 25px; font-weight: 700;"> 사용자 정보입력 </th>
@@ -256,9 +269,9 @@
         <tr>
             <td>
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
-                    <label for="phone" style="flex: 1; font-weight: bold; text-align: right;">휴대전화</label>
-                    <input type="text" id="phone" name="phone" placeholder="휴대전화번호를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="phoneError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
+                    <label for="phoneNumber" style="flex: 1; font-weight: bold; text-align: right;">휴대전화</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" placeholder="휴대전화번호를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
+                    <div id="phoneNumberError" class="error" style="flex: 1; color: red; font-size: 12px;" aria-live="polite"></div>
                 </div>
             </td>
         </tr>

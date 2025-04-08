@@ -29,6 +29,8 @@ public interface UserMapper {
 
     void updatePassword(Map<String, String> params);
 
+    UserDto getUserInfo(String sessionId);
+
     boolean existsByUserId(@Param("id") String id);
 }
 

@@ -2,6 +2,7 @@ package com.project.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -13,9 +14,26 @@ public class WebConfig implements WebMvcConfigurer {
     private SessionInterceptor sessionInterceptor;
 
     @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(sessionInterceptor).addPathPatterns("/**")
-        .excludePathPatterns("/login", "/findId", "/findPw", "/join", "/findIdResult", "/findPwResult",
-        "/joinStepUser", "/joinStepComp", "/resources/**");
+    public void addInterceptors(@NonNull InterceptorRegistry registry) {
+        registry.addInterceptor(sessionInterceptor).order(1)
+        .addPathPatterns("/**")
+        .excludePathPatterns(
+            "/login", 
+            "/findId", 
+            "/findPw", 
+            "/join", 
+            "/findIdResult", 
+            "/findPwResult",
+            "/joinStepUser", 
+            "/joinStepUser/**", 
+            "/joinStepComp", 
+            "/joinStepComp/**", 
+            "/findResult",
+            "/resources/**", 
+            "/css/**", 
+            "/js/**", 
+            "/images/**", 
+            "/favicon.ico"
+        );
     }
 }
