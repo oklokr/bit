@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.model.BoardDto;
 import com.project.service.BoardService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class Edit {
     @Autowired
@@ -31,12 +33,11 @@ public class Edit {
     }
 
     @PostMapping("/board/edit")
-    public String postBoardEdit(@ModelAttribute BoardDto boardDto, @RequestParam String pageNum, Model model){
+    public String postBoardEdit(@ModelAttribute BoardDto boardDto, @RequestParam String pageNum, Model model, HttpSession session){
         int result = boardDao.modifyPost(boardDto);
         int id = boardDto.getBoardId();
-
+        session.setAttribute("editResult", result);
         model.addAttribute("pageNum", pageNum);
-        model.addAttribute("result", result);
         model.addAttribute("boardId", id);
         model.addAttribute("contentPage", "/WEB-INF/page/board/edit.jsp");
         return "layout/app";

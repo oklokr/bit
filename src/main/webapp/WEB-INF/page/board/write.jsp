@@ -52,25 +52,11 @@
         <!-- 버튼 그룹 -->
         <div class="button-group d-flex">
             <div class="ms-auto">
-                <button type="button" name="submit" class="btn btn-primary" onclick="submitPost()">작성</button>
+                <button type="button" name="submit" class="btn btn-primary">작성</button>
                 <button type="reset" class="btn btn-primary" onclick="location='/board'">취소</button>
             </div>
         </div>
     </div>
-
-    <c:if test="${param.result == '0'}">
-        <script>
-            alert("게시글 작성에 실패했습니다.");
-        </script>
-    </c:if>
-
-    <c:if test="${param.result == '1'}">
-        <script>
-            alert("게시글 작성에 성공했습니다.");
-        </script>
-        <meta http-equiv="refresh" content="0; url=/board">
-    </c:if>
-
 </body>
 </html>
 
@@ -82,23 +68,47 @@
     let submit = document.querySelector("button[name='submit']");
     
     submit.addEventListener("click", (event) => {
-        let title = document.querySelector("input[name='titleInput']").value;
-        let content = quill.root.innerHTML;
-        let tag = /<[^>]*>/; 
+        event.preventDefault();  // 무조건 먼저 막아주고
+
+        let title = document.querySelector("input[name='titleInput']").value.trim();
+        let content = quill.root.innerHTML.trim();
+        let tag = /<[^>]*>/;
 
         if (!title) {
-            alert("제목을 입력하세요");
-            event.preventDefault();
-            document.querySelector("input[name='titleInput']").focus();
-        } else if (!content.trim()) {
-            alert("게시글 내용을 입력하세요");
-            event.preventDefault();
-        } else if (tag.test(title)) {
-            alert("제목에 태그를 포함할 수 없습니다");
-            event.preventDefault();
-        } else {
-            submitPost();  // 모든 검증 후 submitPost 함수 실행
+            showResultModal(
+                "0",
+                "입력 오류",
+                "",
+                "제목을 입력하세요.",
+                () => document.querySelector("input[name='titleInput']").focus()
+            );
+            return;
         }
+
+        if (!content || content === "<p><br></p>") {
+            showResultModal(
+                "0",
+                "입력 오류",
+                "",
+                "게시글 내용을 입력하세요.",
+                null
+            );
+            return;
+        }
+
+        if (tag.test(title)) {
+            showResultModal(
+                "0",
+                "입력 오류",
+                "",
+                "제목에 태그를 포함할 수 없습니다.",
+                () => document.querySelector("input[name='titleInput']").focus()
+            );
+            return;
+        }
+
+        // 모든 유효성 검사를 통과한 경우에만 제출
+        submitPost();
     });
 
     function submitPost() {
@@ -115,7 +125,24 @@
         document.writeform.submit();
     }
 
+    window.onload = function() {
+        const writeResult = "${writeResult}";
+        if (writeResult === "1" || writeResult === "0") {
+            showResultModal(
+                writeResult,
+                "처리 결과",
+                "게시글이 작성되었습니다.",
+                "게시글 작성에 실패했습니다.",
+                function() {
+                    location.href = "/board";
+                },
+                null // 또는 그냥 생략 가능
+            );
+        }
+    }
 </script>
+
+<% session.removeAttribute("writeResult"); %>
 
 <style>
     .table {
