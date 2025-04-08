@@ -74,11 +74,11 @@ public class FindPw {
 
             if (user != null) {
                 // 랜덤 비밀번호 생성
-                String randomPassword = generateRandomPassword(10);
-
+                String randomPassword = userService.generateRandomPassword(10);
+    
                 // 비밀번호 업데이트
                 userService.updatePassword(user.getId(), randomPassword);
-
+    
                 response.put("success", true);
                 response.put("password", randomPassword); // 생성된 비밀번호 반환
             } else {
@@ -94,19 +94,5 @@ public class FindPw {
 
         System.out.println("서버 응답 데이터: " + response);
         return response;
-    }
-
-    // 랜덤 비밀번호 생성 메서드
-    private String generateRandomPassword(int length) {
-        String charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
-        SecureRandom random = new SecureRandom();
-        StringBuilder password = new StringBuilder();
-
-        for (int i = 0; i < length; i++) {
-            int randomIndex = random.nextInt(charSet.length());
-            password.append(charSet.charAt(randomIndex));
-        }
-
-        return password.toString();
     }
 }

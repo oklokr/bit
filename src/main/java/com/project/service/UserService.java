@@ -1,5 +1,6 @@
 package com.project.service;
 
+import java.security.SecureRandom;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -71,7 +72,8 @@ public class UserService {
         params.put("phoneNumber", phoneNumber);
         return userMapper.findByCompanyNameAndPhone(params);
     }
-    public UserDto findByIdAndPhone(String id, String phoneNumber) {
+    public UserDto findByIdAndEmail(String id, String email) {
+        System.out.println("findByIdAndEmail 호출 - ID: " + id + ", Email: " + email);
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         params.put("email", email);
@@ -79,7 +81,9 @@ public class UserService {
         System.out.println("findByIdAndEmail 결과: " + user);
         return user;
     }
-    public UserDto findByIdAndEmail(String id, String email) {
+    
+    public UserDto findByIdAndPhone(String id, String phoneNumber) {
+        System.out.println("findByIdAndPhone 호출 - ID: " + id + ", Phone: " + phoneNumber);
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         params.put("phoneNumber", phoneNumber);
@@ -92,5 +96,20 @@ public class UserService {
         params.put("id", id);
         params.put("password", randomPassword);
         userMapper.updatePassword(params);
+    }
+    public boolean isUserIdDuplicate(String id) {
+        return userMapper.existsByUserId(id);
+    }
+    public String generateRandomPassword(int length) {
+        String charSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+        SecureRandom random = new SecureRandom();
+        StringBuilder password = new StringBuilder();
+
+        for (int i = 0; i < length; i++) {
+            int randomIndex = random.nextInt(charSet.length());
+            password.append(charSet.charAt(randomIndex));
+        }
+
+        return password.toString();
     }
 }
