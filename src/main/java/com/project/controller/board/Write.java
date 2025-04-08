@@ -46,6 +46,7 @@ public class Write{
         //boardDto.setMemberNo(userDto.getMem);
         //원래 쿠키에서 가져와야.. 임시
         boardDto.setAuthor("user");
+        
         //boardDto.setMemberNo("87b2a914-1389-11f0-899e-c8418a1096fd");
         
         int result = boardDao.insertPost(boardDto);
