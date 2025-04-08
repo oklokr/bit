@@ -98,6 +98,7 @@ public class UserService {
         userMapper.updatePassword(params);
     }
     public boolean isUserIdDuplicate(String id) {
+        System.out.println("Checking duplicate ID: " + id);
         return userMapper.existsByUserId(id);
     }
     public String generateRandomPassword(int length) {
