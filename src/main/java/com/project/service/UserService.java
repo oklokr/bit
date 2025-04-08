@@ -121,10 +121,16 @@ public class UserService {
     }
 
     public boolean existsByEmail(String email) {
-        return userMapper.existsByEmail(email); // UserMapper를 통해 이메일 중복 확인
+        System.out.println("Checking email in database: " + email); // 로그 추가
+        boolean result = userMapper.existsByEmail(email);
+        System.out.println("Email exists: " + result); // 로그 추가
+        return result;
     }
-
+    
     public boolean existsByPhoneNumber(String phoneNumber) {
-        return userMapper.existsByPhoneNumber(phoneNumber); // UserMapper를 통해 전화번호 중복 확인
+        System.out.println("Checking phone number in database: " + phoneNumber); // 로그 추가
+        boolean result = userMapper.existsByPhoneNumber(phoneNumber);
+        System.out.println("Phone number exists: " + result); // 로그 추가
+        return result;
     }
 }

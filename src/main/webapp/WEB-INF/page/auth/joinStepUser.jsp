@@ -1,139 +1,121 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <style>
     body {
-            margin: 0;
-            height: 100vh; 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            font-family: Arial, sans-serif;
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Arial, sans-serif;
     }
     table {
-            border-collapse: collapse;
-            border: 2px solid rgb(13, 125, 177);
-            margin: 0 auto;
-            width : 200%;
-            height: 300;
-        }
-
-    th, td{
-        padding-top : 10px;
-        padding-bottom : 20px;
-        padding-left : 10px;
-        padding-right : 10px;
-
+        border-collapse: collapse;
+        border: 2px solid rgb(13, 125, 177);
+        margin: 0 auto;
+        width: 200%;
+        height: 300px;
+    }
+    th, td {
+        padding: 10px 20px;
         text-align: center;
     }
-
-    th{
+    th {
         width: 60px;
     }
-
-    td{
-        width : 150%;
+    td {
+        width: 150%;
     }
-
     .input {
         width: 100%;
-        padding : 5px;
+        padding: 5px;
         box-sizing: border-box;
         border: 1px solid black;
         text-align: center;
-            }
-
+    }
     .inputbutton {
         padding: 8px 15px;
-            border: 1px solid rgb(122, 122, 122);
-            cursor : pointer;
-            box-sizing: border-box;
-            width : 40%;    
-            text-align: center;
-        }
-        .inputbutton[type="submit"] {
-            background-color: #d3d3d3;
-            width: 40%;
-            box-sizing: border-box;
-            margin : 5px;
-        }
-        .inputbutton[type="button"] {
-            background-color: #d3d3d3;
-            display: inline-block;
-            width: 40%;
-            margin: 5px;
-            box-sizing: border-box;
-        }
-
-        .logo {
-            width: 50px;
-            height: auto;
-        }
-
-        .link-group {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            font-size : 12px;
-            width : 100%;
-            white-space: nowrap;
-            margin: 5px;
-        }
-        .link-group a {
-            color: #000000;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        .link-group a:hover {
-            color: #FF0000;
-        }
-        td.button-td {
-        display: flex;
-        justify-content: space-between;  /* 버튼들을 가로로 배치하고 좌우 여백을 균등하게 설정 */
-        align-items: center;  /* 버튼들이 수직으로 가운데 정렬 */
-        }
-            /* 이메일 입력 필드와 전화번호 입력 필드 스타일 수정 */
-    #emailField, #phoneField {
-        text-align: center; /* 입력 필드를 테이블에서 중앙 정렬 */
-        width: 100%; /* 테이블 너비에 맞게 확장 */
+        border: 1px solid rgb(122, 122, 122);
+        cursor: pointer;
+        box-sizing: border-box;
+        width: 40%;
+        text-align: center;
     }
-
+    .inputbutton[type="submit"] {
+        background-color: #d3d3d3;
+        margin: 5px;
+    }
+    .inputbutton[type="button"] {
+        background-color: #d3d3d3;
+        margin: 5px;
+    }
+    .logo {
+        width: 50px;
+        height: auto;
+    }
+    .link-group {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        font-size: 12px;
+        width: 100%;
+        white-space: nowrap;
+        margin: 5px;
+    }
+    .link-group a {
+        color: #000000;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .link-group a:hover {
+        color: #FF0000;
+    }
+    td.button-td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #emailField, #phoneField {
+        text-align: center;
+        width: 100%;
+    }
     #emailField input, #phoneField input {
-        width: 80%; /* 입력 필드 너비를 제한 */
+        width: 80%;
         display: inline-block;
     }
-
     #phoneField input {
-        width: 30%; /* 전화번호 각 입력칸의 너비 */
+        width: 30%;
     }
     .steps {
         display: flex;
         justify-content: center;
-        align-items: center; /* 세로 가운데 정렬 */
+        align-items: center;
         margin-bottom: 20px;
     }
     .step {
-        width: 20px; /* 크기 줄임 */
-        height: 20px; /* 크기 줄임 */
-        line-height: 20px; /* 텍스트 가운데 정렬 */
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
         text-align: center;
-        border: 2px solid #007bff; /* 테두리 색상 */
-        border-radius: 50%; /* 동그라미 모양 */
+        border: 2px solid #007bff;
+        border-radius: 50%;
         margin: 0 5px;
-        font-size: 12px; /* 텍스트 크기 줄임 */
-        color: #007bff; /* 텍스트 색상 */
-        background-color: white; /* 배경색 */
+        font-size: 12px;
+        color: #007bff;
+        background-color: white;
         font-weight: bold;
     }
     .step.active {
-        background-color: #007bff; /* 활성화된 단계 배경색 */
-        color: white; /* 활성화된 단계 텍스트 색상 */
+        background-color: #007bff;
+        color: white;
     }
 </style>
 <script>
-    function validateForm(event) {
-        let isValid = true; // 전체 유효성 상태
-        let firstInvalidField = null; // 첫 번째 에러 필드를 저장
-    
+    async function validateForm(event) {
+        event.preventDefault();
+        let isValid = true;
+        let firstInvalidField = null;
+
         const fields = [
             { id: 'companyName', message: '업체명을 입력해주세요.' },
             { id: 'id', message: '아이디를 입력해주세요.' },
@@ -141,7 +123,7 @@
             { id: 'confirmPassword', message: '비밀번호 확인을 입력해주세요.' },
             { id: 'email', message: '이메일을 입력해주세요.' }
         ];
-    
+
         fields.forEach(field => {
             const input = document.getElementById(field.id);
             const error = document.getElementById(`${field.id}Error`);
@@ -159,8 +141,7 @@
                 error.textContent = '';
             }
         });
-    
-        // 비밀번호 확인 검증
+
         const password = document.getElementById('password')?.value.trim();
         const confirmPassword = document.getElementById('confirmPassword')?.value.trim();
         if (password && confirmPassword && password !== confirmPassword) {
@@ -173,13 +154,12 @@
             }
             isValid = false;
         }
-    
-        // 휴대전화 번호 검증
+
         const tel1 = document.getElementById('tel1')?.value.trim();
         const tel2 = document.getElementById('tel2')?.value.trim();
         const tel3 = document.getElementById('tel3')?.value.trim();
         const phoneNumber = `${tel1}-${tel2}-${tel3}`;
-    
+
         if (!tel1 || !tel2 || !tel3) {
             const error = document.getElementById('phoneNumberError');
             if (error) {
@@ -195,109 +175,98 @@
                 error.textContent = '';
             }
         }
-    
-        // 중복 확인 여부 체크
+
         if (!isDuplicateChecked) {
             alert('아이디 중복 확인을 완료해주세요.');
             document.getElementById('id').focus();
-            event.preventDefault();
             return false;
         }
-    
-        // 이메일 중복 확인
-        const email = document.getElementById('email')?.value.trim();
-    if (email) {
-        fetch('/joinStepUser/checkDuplicateEmail', {
+
+        try {
+            const email = document.getElementById('email')?.value.trim();
+            const emailResponse = await fetch('/joinStepUser/checkDuplicateEmail', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            });
+            const emailData = await emailResponse.json();
+            if (emailData.isDuplicate) {
+                alert('이미 사용 중인 이메일입니다.');
+                document.getElementById('email').focus();
+                return false;
+            }
+
+            const phoneResponse = await fetch('/joinStepUser/checkDuplicatePhone', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phoneNumber: phoneNumber })
+            });
+            const phoneData = await phoneResponse.json();
+            if (phoneData.isDuplicate) {
+                alert('이미 사용 중인 전화번호입니다.');
+                document.getElementById('tel1').focus();
+                return false;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('중복 확인 중 오류가 발생했습니다.');
+            return false;
+        }
+
+        if (!isValid) {
+            if (firstInvalidField) {
+                firstInvalidField.focus();
+            }
+            alert('모든 필드를 올바르게 입력해주세요.');
+            return false;
+        }
+
+        document.forms['joinStepUser'].submit();
+    }
+
+    let isDuplicateChecked = false;
+
+    function checkDuplicateId() {
+        const id = document.getElementById('id').value.trim();
+        if (!id) {
+            alert('아이디를 입력해주세요.');
+            document.getElementById('id').focus();
+            return;
+        }
+
+        fetch('/joinStepUser/checkDuplicateId', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email: email })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id })
         })
             .then(response => {
-                console.log('Response status:', response.status); // 응답 상태 코드 확인
                 if (!response.ok) {
                     return response.json().then(err => {
-                        console.error('Server error:', err); // 서버 오류 로그
                         throw new Error(err.message || '서버 오류가 발생했습니다.');
                     });
                 }
                 return response.json();
             })
             .then(data => {
-                console.log('Response data:', data); // 서버 응답 데이터 확인
                 if (data.isDuplicate) {
-                    alert('이미 사용 중인 이메일입니다.');
-                    document.getElementById('email').focus();
-                    event.preventDefault();
+                    alert(data.message);
+                    isDuplicateChecked = false;
+                } else {
+                    alert(data.message);
+                    isDuplicateChecked = true;
                 }
             })
             .catch(error => {
-                console.error('Error:', error); // 네트워크 또는 기타 오류 로그
-                alert('이메일 중복 확인 중 오류가 발생했습니다.');
-                event.preventDefault();
+                console.error('Error:', error);
+                alert('중복 확인 중 오류가 발생했습니다.');
+                isDuplicateChecked = false;
             });
     }
-    
-        // 첫 번째 에러 필드에 포커스 설정
-        if (!isValid) {
-            if (firstInvalidField) {
-                firstInvalidField.focus();
-            }
-            alert('모든 필드를 올바르게 입력해주세요.');
-            event.preventDefault();
-            return false;
-        }
-    
-        return true; // 유효성 검사 성공 시 폼 제출 허용
-    }
-
-
-let isDuplicateChecked = false;
-
-function checkDuplicateId() {
-    const id = document.getElementById('id').value.trim();
-    if (!id) {
-        alert('아이디를 입력해주세요.');
-        document.getElementById('id').focus();
-        return;
-    }
-
-    fetch('/joinStepUser/checkDuplicateId', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: id })
-    })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => {
-                    throw new Error(err.message || '서버 오류가 발생했습니다.');
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.isDuplicate) {
-                alert(data.message); // 이미 사용 중인 아이디
-                isDuplicateChecked = false;
-            } else {
-                alert(data.message); // 사용 가능한 아이디
-                isDuplicateChecked = true;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('중복 확인 중 오류가 발생했습니다.');
-            isDuplicateChecked = false;
-        });
-}
 </script>
 <form name="joinStepUser" method="get" action="/joinResult" onsubmit="return validateForm(event)">
     <table>
         <tr>
-            <th style="padding-top: 10px; font-size: 25px; font-weight: 700;"> 사용자 정보입력 </th>
+            <th style="padding-top: 10px; font-size: 25px; font-weight: 700;">사용자 정보입력</th>
         </tr>
         <tr>
             <td>
@@ -376,6 +345,6 @@ function checkDuplicateId() {
                 <button type="button" onclick="location='/join'">취소</button>
                 <button type="submit">다음</button>
             </td>
-        </tr>  
+        </tr>
     </table>
 </form>
