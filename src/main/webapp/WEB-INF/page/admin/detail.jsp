@@ -70,25 +70,22 @@
 
         <!-- 오른쪽: 초기화 + 탈퇴 버튼 그룹 -->
         <div class="d-flex gap-2 ms-auto">
-            <form action="${pageContext.request.contextPath}/admin/changeMemberType" method="post"
-                onsubmit="return confirm('${userDto.companyName}의 회원 유형을 변경하시겠습니까?')">
+            <form id="typeChangeForm" action="${pageContext.request.contextPath}/admin/changeMemberType" method="post">
                 <input type="hidden" name="id" value="${userDto.id}">
                 <input type="hidden" name="pageNum" value="${pageNum}">
-                <button type="submit" class="btn btn-secondary">회원유형 변경</button>
+                <button type="button" class="btn btn-secondary" id="changeMemBtn">회원유형 변경</button>
             </form>
 
-            <form action="${pageContext.request.contextPath}/admin/resetPassword" method="post" 
-                onsubmit="return confirm('${userDto.companyName}의 비밀번호 초기화를 하시겠습니까?')">
+            <form id="resetPasswordForm" action="${pageContext.request.contextPath}/admin/resetPassword" method="post">
                 <input type="hidden" name="id" value="${userDto.id}">
                 <input type="hidden" name="pageNum" value="${pageNum}">
-                <button type="submit" class="btn btn-secondary">비밀번호 초기화</button>
+                <button type="button" class="btn btn-secondary" id="resetPwBtn">비밀번호 초기화</button>
             </form>
 
-            <form action="${pageContext.request.contextPath}/admin/deleteUser" method="post" 
-                onsubmit="return confirm('${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?');">
+            <form id="deleteUserForm" action="${pageContext.request.contextPath}/admin/deleteUser" method="post">
                 <input type="hidden" name="id" value="${userDto.id}">
                 <input type="hidden" name="pageNum" value="${pageNum}">
-                <button type="submit" class="btn btn-danger">회원 탈퇴</button>
+                <button type="button" class="btn btn-danger" id="deleteMemBtn">회원 탈퇴</button>
             </form>
         </div>
     </div>
@@ -98,27 +95,76 @@
 </html>
 
 <script>
+    document.getElementById("changeMemBtn").addEventListener("click", (event)=>{
+        showResultModal(
+                "1", 
+                "회원유형 변경",
+                "${userDto.companyName}의 회원 유형을 변경하시겠습니까?",
+                null,
+                () => document.getElementById("typeChangeForm").submit(),
+                null,
+                "confirm"
+        );
+    });
+
+    document.getElementById("resetPwBtn").addEventListener("click", (event)=>{
+        showResultModal(
+                "1",
+                "비밀번호 초기화",
+                "${userDto.companyName}의 비밀번호 초기화를 하시겠습니까?",
+                null,
+                () => document.getElementById("resetPasswordForm").submit(),
+                null,
+                "confirm"
+        );
+    });
+
+    document.getElementById("deleteMemBtn").addEventListener("click", (event)=>{
+        showResultModal(
+                "1",
+                "회원 탈퇴퇴",
+                "${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?",
+                null,
+                () => document.getElementById("deleteUserForm").submit(),
+                null,
+                "confirm"
+        );
+    });
+
     window.onload = function() {
         let pageNum = "${pageNum}";
         let id = "${id}";
         let name = "${name}";
         let deleteResult = "${resetResult}";
         let changeResult = "${changeResult}";
-
-        if (deleteResult === "1") {
-            alert(name + " 회원의 비밀번호가 변경되었습니다");
-            location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-        } else if (deleteResult === "0") {
-            alert("비밀번호 변경에 실패했습니다");
-            location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+        if (deleteResult === "1" || deleteResult === "0") {
+            showResultModal(
+                deleteResult,
+                "처리 결과",
+                name + " 회원의 비밀번호가 변경되었습니다",
+                "비밀번호 변경에 실패했습니다",
+                function() {
+                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+                },
+                function() {
+                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+                }
+            );
         }
 
-        if (changeResult === "1") {
-            alert(name + " 회원의 회원 유형이 변경되었습니다");
-            location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-        } else if (changeResult === "0") {
-            alert("회원 유형 변경에 실패했습니다");
-            location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+        if (changeResult === "1" || changeResult === "0") {
+            showResultModal(
+                changeResult,
+                "처리 결과",
+                name + " 회원의 회원 유형이 변경되었습니다",
+                "회원 유형 변경에 실패했습니다",
+                function() {
+                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+                },
+                function() {
+                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+                }
+            );
         }
     }
 </script>

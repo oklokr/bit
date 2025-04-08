@@ -53,27 +53,93 @@
         <!-- 버튼 그룹 -->
         <div class="button-group d-flex">
             <div class="ms-auto">
-                <button type="button" name="submit" class="btn btn-primary" onclick="submitPost()">수정</button>
+                <button type="button" name="submit" class="btn btn-primary">수정</button>
                 <button type="reset" class="btn btn-primary" onclick="location='/board/detail?boardId=${boardId}&pageNum=${pageNum}'">취소</button>
             </div>
         </div>
     </div>
 
-    <c:if test="${result == '0'}">
-        <script>
-            alert("게시글 수정에 실패했습니다.");
-        </script>
-    </c:if>
-
-    <c:if test="${result == '1'}">
-        <script>
-            alert("게시글 수정에 성공했습니다.");
-        </script>
-        <meta http-equiv="refresh" content="0; url=/board/detail?boardId=${boardId}&pageNum=${pageNum}">
-    </c:if>
-
 </body>
 </html>
+
+<script>
+    const quill=new Quill('#editor',{
+        theme: 'snow'
+    })
+
+    window.onload = function() {
+        const content = `${boardDto.content}`;  // 기존 게시글 내용
+        quill.root.innerHTML = content; // Quill 에디터에 내용 삽입
+
+        const editResult = "${editResult}";
+        if (editResult === "1" || editResult === "0") {
+            showResultModal(
+                editResult,
+                "처리 결과",
+                "게시글이 수정되었습니다.",
+                "게시글 수정에 실패했습니다.",
+                function() {
+                    location.href = "/board/detail?boardId=${boardId}&pageNum=${pageNum}";
+                },
+                null // 또는 그냥 생략 가능
+            );
+        }
+    }
+
+    let submit = document.querySelector("button[name='submit']");
+    submit.addEventListener("click", (event) => {
+        event.preventDefault();  // 먼저 막아줌
+
+        let title = document.querySelector("input[name='titleInput']").value.trim();
+        let content = quill.root.innerHTML.trim();
+        let tag = /<[^>]*>/;
+
+        if (!title) {
+            showResultModal(
+                "0",
+                "입력 오류",
+                "",
+                "제목을 입력하세요.",
+                () => document.querySelector("input[name='titleInput']").focus()
+            );
+            return;
+        }
+
+        if (!content || content === "<p><br></p>") {
+            showResultModal(
+                "0",
+                "입력 오류",
+                "",
+                "게시글 내용을 입력하세요.",
+                null
+            );
+            return;
+        }
+
+        if (tag.test(title)) {
+            showResultModal(
+                "0",
+                "입력 오류",
+                "",
+                "제목에 태그를 포함할 수 없습니다.",
+                () => document.querySelector("input[name='titleInput']").focus()
+            );
+            return;
+        }
+        submitPost();  // 모든 검증 후에만 실행
+    });
+
+    function submitPost() {
+        const content = quill.root.innerHTML;
+        const title = document.querySelector('input[name="titleInput"]').value;
+        const boardId = "${boardDto.boardId}";
+        document.querySelector('#title').value = title;
+        document.querySelector('#content').value = content;
+        document.forms["editform"].submit();
+    }
+</script>
+
+<% session.removeAttribute("editResult"); %>
 
 <style>
     .table {
@@ -113,47 +179,3 @@
     }
 
 </style>
-<script>
-    const quill=new Quill('#editor',{
-        theme: 'snow'
-    })
-    window.onload = function() {
-        const content = `${boardDto.content}`;  // 기존 게시글 내용
-        quill.root.innerHTML = content; // Quill 에디터에 내용 삽입
-    }
-
-    let submit = document.querySelector("button[name='submit']");
-    submit.addEventListener("click", (event) => {
-        let title = document.querySelector("input[name='titleInput']").value;
-        let content = quill.root.innerHTML;
-        let tag = /<[^>]*>/; 
-
-        if (!title) {
-            alert("제목을 입력하세요");
-            event.preventDefault();
-            document.querySelector("input[name='titleInput']").focus();
-        } else if (!content.trim()) {
-            alert("게시글 내용을 입력하세요");
-            event.preventDefault();
-        } else if (tag.test(title)) {
-            alert("제목에 태그를 포함할 수 없습니다");
-            event.preventDefault();
-        } else {
-            submitPost();  // 모든 검증 후 submitPost 함수 실행
-        }
-    });
-
-    function submitPost() {
-        const content = quill.root.innerHTML;
-        const title = document.querySelector('input[name="titleInput"]').value;
-        const boardId = "${boardDto.boardId}";
-        
-        // 숨겨진 input에 값 설정
-        document.querySelector('#title').value = title;
-        document.querySelector('#content').value = content;
-
-        // 폼 제출
-        document.forms["editform"].submit();
-    }
-
-</script>

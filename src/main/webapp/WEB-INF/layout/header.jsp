@@ -19,7 +19,7 @@
                 <a href="/mypage/inventory">병원재고 관리</a>
             </li>
         </ul>
-        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">마이페이지 열기</button>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="handleGetUserInfo()">마이페이지 열기</button>
     </div>
 </header>
 
@@ -43,7 +43,7 @@
                     <li><a href="/main/product">상품정보 등록</a></li>
                     <li><a href="/board">자유게시판</a></li>
                     <li><a href="/mypage/inventory">병원재고 관리</a></li>
-                    <li><a href="/admin">회원 관리</a></li>
+                    <li data-view="admin"><a href="/admin">회원 관리</a></li>
                 </ul>
             </div>
         </div>  
@@ -51,6 +51,14 @@
 </div>
 
 <script>
+    function handleGetUserInfo() {
+        postRequestApi('/api/mypage/info', {}, res => {
+            if(validate.isEmpty(res.data.id)) return
+            document.querySelector(".info span").innerText = res.data.id + "님"
+            document.querySelector("li[data-view='admin']").style.display = res.data.memberType === 2 ? "block" : "none"
+        })
+    }
+
     document.addEventListener("DOMContentLoaded", () => {
         const currentPath = window.location.pathname;
         const menuLinks = document.querySelectorAll("header ul a");

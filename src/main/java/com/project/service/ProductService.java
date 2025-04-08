@@ -41,4 +41,8 @@ public class ProductService {
         params.put("categoryCode", categoryCode);
         return productMapper.getProductCount(params);
     }
+
+    public ProductDto getProductInfo(int productId) {
+        return productMapper.getProductInfo(productId);
+    }
 }

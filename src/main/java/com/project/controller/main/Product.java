@@ -5,13 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.project.model.UserDto;
 import com.project.service.ProductService;
-import com.project.service.UserService;
-
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 public class Product {
     @Autowired

@@ -173,23 +173,43 @@
         }
     }
     
-    let replyform = document.querySelector( "form[name='replyform']" );
+    let replyform = document.querySelector("form[name='replyform']");
     replyform.addEventListener("submit", (event) => {
         let title = document.querySelector("input[name='replyTitle']").value.trim();
         let content = document.querySelector("textarea[name='replyContent']").value.trim();
         let tag = /<[^>]*>/;
 
         if (!title) {
-            alert("제목을 입력하세요");
             event.preventDefault();
-            document.querySelector("input[name='replyTitle']").focus();
+            showResultModal(
+                "0",
+                "입력 오류",
+                "",
+                "제목을 입력하세요.",
+                function() {
+                    document.querySelector("input[name='replyTitle']").focus();
+                }
+            );
         } else if (!content) {
-            alert("답글 내용을 입력하세요");
             event.preventDefault();
-            document.querySelector("textarea[name='replyContent']").focus();
+            showResultModal(
+                "0",
+                "입력 오류",
+                "",
+                "답글 내용을 입력하세요.",
+                function() {
+                    document.querySelector("textarea[name='replyContent']").focus();
+                }
+            );
         } else if (tag.test(title) || tag.test(content)) {
-            alert("제목과 내용에 태그를 포함할 수 없습니다");
             event.preventDefault();
+            showResultModal(
+                "0",
+                "입력 오류",
+                "",
+                "제목과 내용에 태그를 포함할 수 없습니다.",
+                null
+            );
         }
     });
 

@@ -15,8 +15,6 @@ public interface UserMapper {
 
     void clearSessionInfo(@Param("sessionId") String sessionId);
     
-    UserDto findBySessionId(@Param("sessionId") String sessionId);
-    
     UserDto findByCompanyName(String companyName);
 
     UserDto findByCompanyNameAndEmail(Map<String, String> params);

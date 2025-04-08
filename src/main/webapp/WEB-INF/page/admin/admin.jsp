@@ -20,9 +20,16 @@
     <!-- 검색 -->
     <form action="${pageContext.request.contextPath}/admin" method="get" class="member-box mt-4 text-center">
         <label for="searchName" class="form-label me-2">회원명 :</label>
+        <c:if test="${searchName != null}">
+            <c:set var="placeholder" value="${searchName}"/>
+        </c:if>
+        <c:if test="${searchName == null}">
+            <c:set var="placeholder" value="회원명을 입력해주세요"/>
+        </c:if>
+
         <input type="text" name="searchName" id="searchName" 
                class="form-control d-inline-block w-50" 
-               placeholder="회원명을 입력해주세요.">
+               placeholder="${placeholder}">
         <button type="submit" class="btn btn-secondary">조회</button>
     </form>
 
@@ -99,13 +106,20 @@
 
 <script>
     window.onload = function() {
-        let deleteResult = "${deleteResult}";
-        if (deleteResult === "1") {
-            alert("${deletedName} 회원이 탈퇴되었습니다");
-            location.href = "/admin?pageNum=${pageNum}";
-        } else if (deleteResult === "0") {
-            alert("회원 탈퇴에 실패했습니다");
-            location.href = "/admin/detail?pageNum=${pageNum}&id=${failedId}"; // 목록 페이지로 이동
+        const deleteResult = "${deleteResult}";
+        if (deleteResult === "1" || deleteResult === "0") {
+            showResultModal(
+                deleteResult,
+                "처리 결과",
+                "${deletedName} 회원이 탈퇴되었습니다",
+                "회원 탈퇴에 실패했습니다",
+                function() {
+                    location.href = "/admin?pageNum=${pageNum}";
+                },
+                function() {
+                    location.href = "/admin/detail?pageNum=${pageNum}&id=${failedId}";
+                }
+            );
         }
     }
 </script>

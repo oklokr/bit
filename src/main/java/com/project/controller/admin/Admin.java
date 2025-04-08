@@ -76,6 +76,7 @@ public class Admin {
             List<UserDto> memberDtos = userDao.getUsers(map);
             model.addAttribute("memberDtos", memberDtos);
         }
+        model.addAttribute("searchName", searchName);
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/admin/admin.jsp");
         return "layout/app";

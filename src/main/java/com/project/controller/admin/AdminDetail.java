@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import com.project.controller.auth.FindId;
 import com.project.model.UserDto;
 import com.project.service.AdminService;
 import com.project.service.UserService;
@@ -19,17 +18,11 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminDetail {
-
-    private final FindId findId;
     @Autowired
     private UserService userDao;
     
     @Autowired
     private AdminService adminDao;
-
-    AdminDetail(FindId findId) {
-        this.findId = findId;
-    }
 
     @GetMapping("/admin/detail")
     public String pageRender(@RequestParam String id, @RequestParam int pageNum, Model model) {
