@@ -39,7 +39,7 @@
                             <span class="input-group-text" id="basic-addon1">작성자</span>
                             <input type="text" class="form-control" value="${boardDto.author}" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             <span class="input-group-text" id="basic-addon1">작성일</span>
-                            <input type="text" class="form-control" value="${boardDto.createionDate}" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                            <input type="text" class="form-control" value="${boardDto.creationDate}" aria-label="Username" aria-describedby="basic-addon1" readonly>
                         </div>
                     </th>
                 </tr>
