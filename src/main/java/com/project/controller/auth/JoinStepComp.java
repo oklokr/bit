@@ -1,8 +1,12 @@
 package com.project.controller.auth;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -12,5 +16,11 @@ public class JoinStepComp {
         model.addAttribute("title", "JoinStepComp Page");
         model.addAttribute("contentPage", "/WEB-INF/page/auth/joinStepComp.jsp");
         return "layout/app";
+    }
+    @PostMapping("/joinStepComp")
+    public String handleJoinStepComp(@RequestParam Map<String, String> params) {
+        // 폼 데이터 처리 로직
+        System.out.println("Received Data: " + params);
+        return "nextPage"; // 다음 페이지로 이동
     }
 }
