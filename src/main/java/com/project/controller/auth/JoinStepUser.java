@@ -27,10 +27,11 @@ public class JoinStepUser {
         return "layout/app";
     }
 
-    // 아이디 중복 확인
     @PostMapping("/checkDuplicateId")
     public ResponseEntity<Map<String, Object>> checkDuplicateId(@RequestBody Map<String, String> request) {
         String id = request.get("id");
+        System.out.println("Received ID: " + id); // 디버깅 로그 추가
+    
         if (id == null || id.trim().isEmpty()) {
             return ResponseEntity.badRequest().body(Map.of(
                 "status", "error",
@@ -38,12 +39,15 @@ public class JoinStepUser {
                 "isDuplicate", false
             ));
         }
-
+    
         boolean isDuplicate = userService.isUserIdDuplicate(id);
+        System.out.println("Is Duplicate: " + isDuplicate); // 디버깅 로그 추가
+    
         return ResponseEntity.ok(Map.of(
             "status", "success",
             "message", isDuplicate ? "이미 사용 중인 아이디입니다." : "사용 가능한 아이디입니다.",
             "isDuplicate", isDuplicate
         ));
-    }
+    } 
+    
 }

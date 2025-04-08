@@ -173,7 +173,13 @@
         alert("주소 검색 기능은 카카오 API와 연동됩니다.");
     }
 </script>
-<form name="joinStepComp" onsubmit="return validateForm()">
+<form name="joinStepComp" action="/joinComplete" method="post" onsubmit="return validateForm()">
+    <!-- joinStepUser에서 전달된 데이터 유지 -->
+    <input type="hidden" name="companyName" value="${param.companyName}">
+    <input type="hidden" name="id" value="${param.id}">
+    <input type="hidden" name="password" value="${param.password}">
+    <input type="hidden" name="email" value="${param.email}">
+    <input type="hidden" name="phoneNumber" value="${param.phoneNumber}">
     <table>
         <tr>
             <th style="padding-top: 10px; font-size: 25px; font-weight: 700;">사업자 정보입력</th>
