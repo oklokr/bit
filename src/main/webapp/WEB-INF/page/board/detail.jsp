@@ -158,13 +158,18 @@
 
 <script>
     window.onload = function() {
-        let deleteResult = "${deleteResult}";
-        
-        if (deleteResult === "1") {
-            alert("게시글이 삭제되었습니다.");
-            location.href = "/board?pageNum=${pageNum}"; // 목록 페이지로 이동
-        } else if (deleteResult === "0") {
-            alert("게시글 삭제에 실패했습니다.");
+        const deleteResult = "${deleteResult}";
+        if (deleteResult === "1" || deleteResult === "0") {
+            showResultModal(
+                deleteResult,
+                "처리 결과",
+                "게시글이 삭제되었습니다.",
+                "게시글 삭제에 실패했습니다.",
+                function() {
+                    location.href = "/board?pageNum=${pageNum}";
+                },
+                null // 또는 그냥 생략 가능
+            );
         }
     }
     
