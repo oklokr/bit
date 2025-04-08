@@ -20,9 +20,16 @@
     <!-- 검색 -->
     <form action="${pageContext.request.contextPath}/admin" method="get" class="member-box mt-4 text-center">
         <label for="searchName" class="form-label me-2">회원명 :</label>
+        <c:if test="${searchName != null}">
+            <c:set var="placeholder" value="${searchName}"/>
+        </c:if>
+        <c:if test="${searchName == null}">
+            <c:set var="placeholder" value="회원명을 입력해주세요"/>
+        </c:if>
+
         <input type="text" name="searchName" id="searchName" 
                class="form-control d-inline-block w-50" 
-               placeholder="회원명을 입력해주세요.">
+               placeholder="${placeholder}">
         <button type="submit" class="btn btn-secondary">조회</button>
     </form>
 

@@ -76,18 +76,16 @@
                 <button type="button" class="btn btn-secondary" id="changeMemBtn">회원유형 변경</button>
             </form>
 
-            <form action="${pageContext.request.contextPath}/admin/resetPassword" method="post" 
-                onsubmit="return confirm('${userDto.companyName}의 비밀번호 초기화를 하시겠습니까?')">
+            <form id="resetPasswordForm" action="${pageContext.request.contextPath}/admin/resetPassword" method="post">
                 <input type="hidden" name="id" value="${userDto.id}">
                 <input type="hidden" name="pageNum" value="${pageNum}">
-                <button type="submit" class="btn btn-secondary">비밀번호 초기화</button>
+                <button type="button" class="btn btn-secondary" id="resetPwBtn">비밀번호 초기화</button>
             </form>
 
-            <form action="${pageContext.request.contextPath}/admin/deleteUser" method="post" 
-                onsubmit="return confirm('${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?');">
+            <form id="deleteUserForm" action="${pageContext.request.contextPath}/admin/deleteUser" method="post">
                 <input type="hidden" name="id" value="${userDto.id}">
                 <input type="hidden" name="pageNum" value="${pageNum}">
-                <button type="submit" class="btn btn-danger">회원 탈퇴</button>
+                <button type="button" class="btn btn-danger" id="deleteMemBtn">회원 탈퇴</button>
             </form>
         </div>
     </div>
@@ -104,6 +102,30 @@
                 "${userDto.companyName}의 회원 유형을 변경하시겠습니까?",
                 null,
                 () => document.getElementById("typeChangeForm").submit(),
+                null,
+                "confirm"
+        );
+    });
+
+    document.getElementById("resetPwBtn").addEventListener("click", (event)=>{
+        showResultModal(
+                "1",
+                "비밀번호 초기화",
+                "${userDto.companyName}의 비밀번호 초기화를 하시겠습니까?",
+                null,
+                () => document.getElementById("resetPasswordForm").submit(),
+                null,
+                "confirm"
+        );
+    });
+
+    document.getElementById("deleteMemBtn").addEventListener("click", (event)=>{
+        showResultModal(
+                "1",
+                "회원 탈퇴퇴",
+                "${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?",
+                null,
+                () => document.getElementById("deleteUserForm").submit(),
                 null,
                 "confirm"
         );
