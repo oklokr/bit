@@ -21,7 +21,7 @@ public class UserService {
     private UserMapper userMapper;
 
     // 아이디 찾기
-    public UserDto getUserById(String id ) {
+    public UserDto getUserById(String id) {
         System.out.println("UserService - 조회할 ID: " + id);
         UserDto user = userMapper.getUserById(id);
         System.out.println("UserService - 조회된 UserDto: " + user);
@@ -48,7 +48,6 @@ public class UserService {
     public void clearSessionInfo(String sessionId) {
         userMapper.clearSessionInfo(sessionId);
     }
-
     public void refreshSession(UserDto user, HttpSession session) {
         Date now = new Date();
         Date newExpiryTime = new Date(now.getTime() + (30 * 60 * 1000));
@@ -56,6 +55,13 @@ public class UserService {
         session.setAttribute("user", userMapper.getUserById(user.getId()));
     }
     
+    // 세션 토큰으로 회원정보 조회
+    public UserDto getUserInfo(String sessionId) {
+        UserDto userInfo = userMapper.getUserInfo(sessionId);
+        return userInfo;
+    }
+
+
     public UserDto findByCompanyName(String companyName) {
         System.out.println("UserService - 조회할 업체명: " + companyName);
         return userMapper.findByCompanyName(companyName);
