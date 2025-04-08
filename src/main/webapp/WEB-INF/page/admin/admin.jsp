@@ -47,8 +47,11 @@
         </c:if>
         <c:if test="${count ne 0}">
             <c:forEach var="memberDto" items="${memberDtos}" varStatus="status">
-                <tr>
-                    <td><fmt:formatNumber value="${status.index + 1}" pattern="000"/></td>
+                <tr onclick="location.href='/admin/detail?id=${memberDto.id}&pageNum=${pageNum}'" style="cursor:pointer;">
+                    <td>
+                        ${number+1}
+                        <c:set var="number" value="${number+1}"/>
+                    </td>
                     <td>${memberDto.id}</td>
                     <td>${memberDto.companyName}</td>
                     <td>${memberDto.email}</td>
@@ -57,9 +60,9 @@
                     <td>${memberDto.address}</td>
                     <td>
                         <c:choose>
-                            <c:when test="${memberDto.memberType == 1}">1</c:when>
-                            <c:when test="${memberDto.memberType == 2}">2</c:when>
-                            <c:otherwise>관리자</c:otherwise>
+                            <c:when test="${memberDto.memberType == 1}">일반 회원</c:when>
+                            <c:when test="${memberDto.memberType == 2}">관리자</c:when>
+                            <c:otherwise></c:otherwise>
                         </c:choose>
                     </td>
                 </tr>
@@ -93,6 +96,22 @@
     
 </div>
 </body>
+
+<script>
+    window.onload = function() {
+        let deleteResult = "${deleteResult}";
+        if (deleteResult === "1") {
+            alert("${deletedName} 회원이 탈퇴되었습니다");
+            location.href = "/admin?pageNum=${pageNum}";
+        } else if (deleteResult === "0") {
+            alert("회원 탈퇴에 실패했습니다");
+            location.href = "/admin/detail?pageNum=${pageNum}&id=${failedId}"; // 목록 페이지로 이동
+        }
+    }
+</script>
+
+<%-- JSP에서 세션 값 삭제 (JavaScript 실행 이후) --%>
+<% session.removeAttribute("deleteResult"); %>
 
 <style>
     /* 헤더 */

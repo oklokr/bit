@@ -23,7 +23,15 @@ public class AdminService {
         }
     }
 
-    public List<UserDto > getUsers(Map<String, Object> map){
+    public List<UserDto> getUsers(Map<String, Object> map){
         return userMapper.getUsers(map);
+    }
+
+    public int deleteUser(String id){
+        return userMapper.deleteUser(id);
+    }
+
+    public int changeMemberType(Map<String, Object> map){
+        return userMapper.changeMemberType(map);
     }
 }

@@ -13,6 +13,6 @@ public interface AdminMapper {
     public List<UserDto > getUsers(Map<String, Object> map);
     public int countAll();
     public int countByName(String searchName);
-
-
+    public int deleteUser(String id);
+    public int changeMemberType(Map<String, Object> map);
 }

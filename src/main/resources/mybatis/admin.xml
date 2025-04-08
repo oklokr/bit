@@ -25,4 +25,21 @@
         </where>
         LIMIT #{pageSize} OFFSET #{start};
     </select>
+
+    <delete id="deleteUser" parameterType="String">
+		delete from members where id=#{id}
+	</delete>
+
+    <update id="changeMemberType" parameterType="map">
+        update members
+        <set>
+            <if test="memberType == 1">
+                member_type = 2
+            </if>
+            <if test="memberType == 2">
+                member_type = 1
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>
