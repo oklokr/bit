@@ -49,10 +49,15 @@
         WHERE phone_number = #{phoneNumber}
     </select>
 
-<insert id="insertUser" parameterType="com.project.model.UserDto">
-    INSERT INTO members (id, company_name, password, email, phone_number, business_number, address, detailed_address, postal_code, member_type, join_date)
-    VALUES (#{id}, #{companyName}, #{password}, #{email}, #{phoneNumber}, #{businessNumber}, #{address}, #{detailedAddress}, #{postalCode}, 1, NOW())
-</insert>
+    <insert id="insertUser" parameterType="com.project.model.UserDto">
+        INSERT INTO members (id, company_name, password, email, phone_number, business_number, address, detailed_address, postal_code, member_type, join_date)
+        VALUES (#{id}, #{companyName}, #{password}, #{email}, #{phoneNumber}, #{businessNumber}, #{address}, #{detailedAddress}, #{postalCode}, 1, NOW())
+    </insert>
+
+    <insert id="insertTermsAgreement">
+        INSERT INTO member_terms_agreement (id, terms_id, agreement_date)
+        VALUES (#{userId}, #{termsId}, NOW())
+    </insert>
 
     <!-- 세션 관련 쿼리문 -->
     <update id="updateSessionInfo">

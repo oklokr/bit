@@ -242,6 +242,8 @@
     <input type="hidden" name="tel1" value="${param.tel1}">
     <input type="hidden" name="tel2" value="${param.tel2}">
     <input type="hidden" name="tel3" value="${param.tel3}">
+    <input type="hidden" name="requiredTermAgreed" value="${param.requiredTermAgreed}">
+    <input type="hidden" name="optionalTermAgreed" value="${param.optionalTermAgreed}">
     <table>
         <tr>
             <th style="padding-top: 10px; font-size: 25px; font-weight: 700;">사업자 정보입력</th>

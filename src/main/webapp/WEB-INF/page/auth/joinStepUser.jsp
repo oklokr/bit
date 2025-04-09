@@ -210,6 +210,8 @@
     }
 </script>
 <form name="joinStepUser" method="post" action="/joinStepComp" onsubmit="return validateForm(event)">
+    <input type="hidden" name="requiredTermAgreed" value="${param.requiredTermAgreed}">
+    <input type="hidden" name="optionalTermAgreed" value="${param.optionalTermAgreed}">
     <table>
         <tr>
             <th style="padding-top: 10px; font-size: 25px; font-weight: 700;">사용자 정보입력</th>

@@ -144,11 +144,20 @@
 
     function validateAndProceed() {
         const requiredCheckbox = document.getElementById('required-term');
+        const optionalCheckbox = document.getElementById('optional-term');
+
         if (!requiredCheckbox.checked) {
             alert('필수 약관을 체크해주세요.');
             return;
         }
-        location.href = '/joinStepUser';
+
+        // 약관 동의 여부를 hidden 필드에 설정
+        document.getElementById('requiredTermAgreed').value = requiredCheckbox.checked;
+        document.getElementById('optionalTermAgreed').value = optionalCheckbox.checked;
+
+        // 다음 단계로 이동
+        document.forms['join'].action = '/joinStepUser';
+        document.forms['join'].submit();
     }
 </script>
 <form name="join">
@@ -167,7 +176,7 @@
         </tr>
         <tr>
             <td class="container">
-                <!-- 약관 모두 동의 테이블 -->
+                <!-- 약관 모두 동의 -->
                 <table style="width: 100%; height: 100%; border: 2px solid #60a9f7; margin-bottom: 20px;">
                     <tr>
                         <td style="text-align: center; font-size: 17px; font-weight: bold; padding: 20px;">
@@ -195,6 +204,8 @@
         </tr>
         <tr>
             <td>
+                <input type="hidden" id="requiredTermAgreed" name="requiredTermAgreed" value="false">
+                <input type="hidden" id="optionalTermAgreed" name="optionalTermAgreed" value="false">
                 <button type="button" onclick="location='/login'">취소</button>
                 <button type="button" onclick="validateAndProceed()">다음</button>
             </td>

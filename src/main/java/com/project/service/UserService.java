@@ -150,6 +150,11 @@ public class UserService {
         userMapper.insertUser(user); // UserMapper를 통해 DB에 저장
     }
 
+    public void saveTermsAgreement(String userId, int termsId) {
+        System.out.println("Saving terms agreement: userId=" + userId + ", termsId=" + termsId);
+        userMapper.insertTermsAgreement(userId, termsId);
+    }
+
     // 마이페이지 이벤토리
     public List<InventoryDto> getInventory(String id, String productName, int page, int size) {
         Map<String, Object> params = new HashMap<>();

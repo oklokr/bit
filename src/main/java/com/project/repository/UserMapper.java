@@ -39,6 +39,8 @@ public interface UserMapper {
 
     void insertUser(UserDto user);
 
+    void insertTermsAgreement(@Param("userId") String userId, @Param("termsId") int termsId);
+
 
     // 마이페이지 이벤토리 Query Mapper
     public List<InventoryDto> getInventory(Map<String, Object> param);
