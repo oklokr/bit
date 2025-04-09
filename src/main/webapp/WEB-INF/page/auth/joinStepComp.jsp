@@ -232,7 +232,7 @@
         }).open();
     }
 </script>
-<form name="joinStepComp" action="/findResult" method="post" onsubmit="return validateForm(event)">
+<form name="joinStepComp" action="/joinResult" method="post" onsubmit="return validateForm(event)">
     <!-- joinStepUser에서 전달된 데이터 유지 -->
     <input type="hidden" name="companyName" value="${param.companyName}">
     <input type="hidden" name="id" value="${param.id}">

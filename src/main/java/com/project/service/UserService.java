@@ -145,4 +145,8 @@ public class UserService {
         // 여기서는 간단히 형식만 검사합니다.
         return true;
     }
+
+    public void saveUser(UserDto user) {
+        userMapper.insertUser(user); // UserMapper를 통해 DB에 저장
+    }
 }
