@@ -133,4 +133,16 @@ public class UserService {
         System.out.println("Phone number exists: " + result); // 로그 추가
         return result;
     }
+
+    public boolean validateBusinessNumber(String businessNumber) {
+        // 사업자 번호 형식: 123-45-67890
+        String regex = "^[0-9]{3}-[0-9]{2}-[0-9]{5}$";
+        if (businessNumber == null || !businessNumber.matches(regex)) {
+            return false;
+        }
+
+        // 추가적인 유효성 검사 로직 (예: 사업자 번호의 체크섬 계산)
+        // 여기서는 간단히 형식만 검사합니다.
+        return true;
+    }
 }
