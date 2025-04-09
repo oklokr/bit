@@ -26,11 +26,11 @@
                     onclick="location='/board/write?result=${-1}'" type="button" value="글쓰기"/></th>
             </tr>
             <tr class="col-title">
-                <th style="width:7%">No</th>
-                <th style="width:50%">제목</th>
-                <th style="width:13%">작성자</th>
-                <th style="width:18%; white-space: nowrap;">작성일</th>
-                <th style="width:8%">조회수</th>
+                <th style="width:5%;">No</th>
+                <th style="width:50%;">제목</th>
+                <th style="width:20%;">작성자</th>
+                <th style="width:12%; white-space: nowrap;">작성일</th>
+                <th style="width:5%;">조회수</th>
             </tr>
             <c:if test="${count eq 0}">
                 <tr>
@@ -52,6 +52,9 @@
                             &nbsp; &nbsp;
                             <a href="/board/detail?boardId=${dto.boardId}&pageNum=${pageNum}" 
                                 class="board-title-link">
+                                <c:if test="${dto.viewCount gt 50}">
+                                    🦷
+                                </c:if>
                                 ${dto.title}
                             </a>    
                         </td> 

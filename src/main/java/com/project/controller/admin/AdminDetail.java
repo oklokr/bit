@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +25,18 @@ public class AdminDetail {
     @Autowired
     private AdminService adminDao;
 
+    @Value("${kakao.map.js-key}")
+    private String kakaoMapJsKey;
+
     @GetMapping("/admin/detail")
     public String pageRender(@RequestParam String id, @RequestParam int pageNum, Model model) {
         UserDto userDto = userDao.getUserById(id);
+        model.addAttribute("kakaoMapJsKey", kakaoMapJsKey);
         model.addAttribute("userDto", userDto);
+        model.addAttribute("companyName", userDto.getCompanyName());
+        model.addAttribute("address", userDto.getAddress());
+        model.addAttribute("detailedAddress", userDto.getDetailedAddress());
+        model.addAttribute("postalCode", userDto.getPostalCode());
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/admin/detail.jsp");
