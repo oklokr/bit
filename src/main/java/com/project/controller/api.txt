@@ -4,3 +4,4 @@
 /logout                             # 로그아웃
 /api/mypage/info                    # 회원정보 조회
 /joinStepUser/checkDuplicateId      # 아이디 중복 확인
+/checkBusinessNumber                # 사업자 번호 확인

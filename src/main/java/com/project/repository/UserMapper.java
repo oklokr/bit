@@ -37,6 +37,8 @@ public interface UserMapper {
     
     boolean existsByPhoneNumber(String phoneNumber); // 전화번호 중복 확인 쿼리
 
+    void insertUser(UserDto user);
+
 
     // 마이페이지 이벤토리 Query Mapper
     public List<InventoryDto> getInventory(Map<String, Object> param);

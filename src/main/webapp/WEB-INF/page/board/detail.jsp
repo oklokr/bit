@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -48,8 +49,14 @@
                         <div class="reply <c:if test='${replyDto.replyLevel == 1}'>reply-indent</c:if>">
                             <div class="meta d-flex justify-content-between align-items-center">
                                 <div>
-                                    작성자 : ${replyDto.author}
-                                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <c:if test="${replyDto.author == boardDto.author}">
+                                        작성자 : ${replyDto.author} (글쓴이)
+                                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    </c:if>
+                                    <c:if test="${replyDto.author != boardDto.author}">
+                                        작성자 : ${replyDto.author}
+                                        &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    </c:if>
                                     작성날짜 : <fmt:formatDate value="${replyDto.creationDate}" pattern="yyyy.MM.dd HH:mm"/>
                                 </div>
                                 
@@ -86,7 +93,7 @@
                                 <div class="mb-2">
                                     <textarea name="replyContent" class="form-control" placeholder="내용을 입력해주세요" rows="5" maxlength="250"></textarea>
                                 </div>
-                        
+
                                 <div class="text-end">
                                     <button type="submit" name="submit" class="btn btn-sm btn-secondary">답글 작성</button>
                                     <button type="button" name="cancel" class="btn btn-sm btn-secondary">취소</button>
@@ -141,12 +148,14 @@
             <button class="btn btn-secondary"
             onclick="location='/board?pageNum=${pageNum}'">목록</button>
 
-            <div class="ms-auto">
-                <button class="btn btn-primary"
-                onclick="location='/board/edit?boardId=${boardId}&result=${-1}&pageNum=${pageNum}'">수정</button>
-                <button class="btn btn-primary"
-                onclick="location='/board/delete?boardId=${boardId}&pageNum=${pageNum}'">삭제</button>
-            </div>
+            <c:if test="${boardDto.author == user}">
+                <div class="ms-auto">
+                    <button class="btn btn-primary" id = "modifyBtn"
+                    onclick="location='/board/edit?boardId=${boardId}&result=${-1}&pageNum=${pageNum}'">수정</button>
+                    <button class="btn btn-primary" id = "deleteBtn"
+                    onclick="location='/board/delete?boardId=${boardId}&pageNum=${pageNum}'">삭제</button>
+                </div>
+            </c:if>
         </div>
     
     </div>
@@ -171,6 +180,7 @@
             );
         }
     }
+
     
     let replyform = document.querySelector("form[name='replyform']");
     replyform.addEventListener("submit", (event) => {

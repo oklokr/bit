@@ -182,12 +182,12 @@
                 <div class="checkbox-group">
                     <label style="display: flex; align-items: center; justify-content: space-between;">
                         <input type="checkbox" id="required-term" class="terms-checkbox" onclick="updateAllTermsCheckbox()">
-                        약관 1번 제목 (필수)
+                        Bit Dental 약관 (필수)
                         <a href="/mainTerms" style="text-decoration: none; color: #007bff; font-size: 20px;">&gt;</a>
                     </label>
                     <label style="display: flex; align-items: center; justify-content: space-between;">
                         <input type="checkbox" id="optional-term" class="terms-checkbox" onclick="updateAllTermsCheckbox()">
-                        약관 2번 제목 (선택)
+                        Bit Dental 약관 (선택)
                         <a href="/subTerms" style="text-decoration: none; color: #007bff; font-size: 20px;">&gt;</a>
                     </label>
                 </div>
