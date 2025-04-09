@@ -1,6 +1,6 @@
 package com.project.model;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,5 +15,5 @@ public class ProductDto {
     private String categoryCode;
     private String categoryName;
     private String productDescription;
-    private Timestamp productRegistrationDate;
+    private Date productRegistrationDate;
 }
