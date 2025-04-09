@@ -129,51 +129,110 @@
         color: white; /* 활성화된 단계 텍스트 색상 */
     }
 </style>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    function validateForm() {
+    Kakao.init('a80fdcef65adf55bdfe4a0155d40fcb2'); // 발급받은 JavaScript 키로 초기화
+    let isBusinessNumberChecked = false; // 사업자 번호 확인 여부 플래그
+
+    async function validateForm(event) {
+        event.preventDefault();
         let isValid = true;
-        const fields = [
-            { id: 'businessNumber', message: '사업자 번호를 입력해주세요.' },
-            { id: 'address', message: '주소를 입력해주세요.' },
-            { id: 'detailedAddress', message: '상세주소를 입력해주세요.' },
-            { id: 'postalCode', message: '우편번호를 입력해주세요.' }
-        ];
 
-        for (const field of fields) {
-            const input = document.getElementById(field.id);
-            const error = document.getElementById(`${field.id}Error`);
-            if (!input.value.trim()) {
-                error.textContent = field.message;
-                input.focus();
-                isValid = false;
-                break;
+        // 사업자 번호 검증
+        const businessNumber1 = document.getElementById('businessNumber1').value.trim();
+        const businessNumber2 = document.getElementById('businessNumber2').value.trim();
+        const businessNumber3 = document.getElementById('businessNumber3').value.trim();
+
+        if (!businessNumber1 || !businessNumber2 || !businessNumber3) {
+            alert('사업자 번호를 모두 입력해주세요.');
+            document.getElementById('businessNumber1').focus();
+            return false;
+        }
+
+        const fullBusinessNumber = businessNumber1 + '-' + businessNumber2 + '-' + businessNumber3;
+        const businessNumberRegex = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
+        if (!businessNumberRegex.test(fullBusinessNumber)) {
+            alert('유효하지 않은 사업자 번호 형식입니다. 올바른 형식을 입력해주세요.');
+            document.getElementById('businessNumber1').focus();
+            return false;
+        }
+
+        // 사업자 번호 확인 버튼 체크 여부 검증
+        if (!isBusinessNumberChecked) {
+            alert('사업자 번호 확인을 완료해주세요.');
+            return false;
+        }
+
+        // 주소 검증
+        const address = document.getElementById('address').value.trim();
+        if (!address) {
+            alert('주소를 입력해주세요.');
+            document.getElementById('address').focus();
+            return false;
+        }
+
+        // 우편번호 검증
+        const postalCode = document.getElementById('postalCode').value.trim();
+        if (!postalCode) {
+            alert('우편번호를 입력해주세요.');
+            document.getElementById('postalCode').focus();
+            return false;
+        }
+
+        // 모든 검증 통과 시 폼 제출
+        alert('모든 입력이 유효합니다. 다음 단계로 이동합니다.');
+        event.target.submit();
+    }
+
+    async function checkBusinessNumber() {
+        const businessNumber1 = document.getElementById('businessNumber1').value.trim();
+        const businessNumber2 = document.getElementById('businessNumber2').value.trim();
+        const businessNumber3 = document.getElementById('businessNumber3').value.trim();
+
+        const fullBusinessNumber = businessNumber1 + '-' + businessNumber2 + '-' + businessNumber3;
+
+        try {
+            const response = await fetch('/checkBusinessNumber', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ businessNumber: fullBusinessNumber })
+            });
+            const data = await response.json();
+
+            if (data.isValid) {
+                alert("유효한 사업자 번호입니다.");
+                isBusinessNumberChecked = true; // 확인 완료 플래그 설정
+                return true;
             } else {
-                error.textContent = '';
+                alert("유효하지 않은 사업자 번호입니다.");
+                isBusinessNumberChecked = false; // 확인 실패 플래그 설정
+                return false;
             }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('사업자 번호 확인 중 오류가 발생했습니다.');
+            isBusinessNumberChecked = false; // 확인 실패 플래그 설정
+            return false;
         }
-
-        if (isValid) {
-            alert('모든 입력이 유효합니다. 다음 단계로 이동합니다.');
-            return true; // 폼 제출 허용
-        }
-
-        return false; // 폼 제출 차단
     }
-
-    function checkBusinessNumber() {
-        const businessNumber = document.getElementById("businessNumber").value.trim();
-        if (!businessNumber) {
-            alert("사업자 번호를 입력해주세요.");
-            return;
-        }
-        alert("사업자 번호 확인 완료!");
-    }
-
+    
     function searchAddress() {
-        alert("주소 검색 기능은 카카오 API와 연동됩니다.");
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 도로명 주소 또는 지번 주소를 가져옵니다.
+                const address = data.roadAddress ? data.roadAddress : data.jibunAddress;
+
+                // 주소 입력창에 값 설정
+                document.getElementById('address').value = address;
+
+                // 상세주소 입력창에 포커스 이동
+                document.getElementById('detailedAddress').focus();
+            }
+        }).open();
     }
 </script>
-<form name="joinStepComp" action="/findResult" method="get" onsubmit="return validateForm()">
+<form name="joinStepComp" action="/joinResult" method="post" onsubmit="return validateForm(event)">
     <!-- joinStepUser에서 전달된 데이터 유지 -->
     <input type="hidden" name="companyName" value="${param.companyName}">
     <input type="hidden" name="id" value="${param.id}">
@@ -197,12 +256,15 @@
         <tr>
             <td>
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
-                    <label for="businessNumber" style="flex: 1; font-weight: bold; text-align: right;">사업자 번호</label>
-                    <div style="flex: 3; display: flex; gap: 10px;">
-                        <input type="text" id="businessNumber" name="businessNumber" placeholder="사업자 번호를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
+                    <label for="businessNumber1" style="flex: 1; font-weight: bold; text-align: right;">사업자 번호</label>
+                    <div style="flex: 3; display: flex; gap: 5px;">
+                        <input type="text" id="businessNumber1" name="businessNumber1" maxlength="3" placeholder="123" style="width: 20%; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
+                        <span style="align-self: center;">-</span>
+                        <input type="text" id="businessNumber2" name="businessNumber2" maxlength="2" placeholder="45" style="width: 15%; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
+                        <span style="align-self: center;">-</span>
+                        <input type="text" id="businessNumber3" name="businessNumber3" maxlength="5" placeholder="67890" style="width: 30%; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
                         <button type="button" onclick="checkBusinessNumber()" style="flex: 1; padding: 10px; background-color: #646464; color: white; border: none; border-radius: 5px; cursor: pointer;">번호확인</button>
                     </div>
-                    <div id="businessNumberError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
                 </div>
             </td>
         </tr>
@@ -215,7 +277,6 @@
                         <input type="text" id="address" name="address" placeholder="주소를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
                         <button type="button" onclick="searchAddress()" style="flex: 1; padding: 10px; background-color: #646464; color: white; border: none; border-radius: 5px; cursor: pointer;">주소검색</button>
                     </div>
-                    <div id="addressError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
                 </div>
             </td>
         </tr>
@@ -225,7 +286,6 @@
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="detailedAddress" style="flex: 1; font-weight: bold; text-align: right;">상세주소</label>
                     <input type="text" id="detailedAddress" name="detailedAddress" placeholder="상세주소를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="detailedAddressError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
                 </div>
             </td>
         </tr>
@@ -235,7 +295,6 @@
                 <div class="form-group" style="display: flex; align-items: center; width: 100%; gap: 10px;">
                     <label for="postalCode" style="flex: 1; font-weight: bold; text-align: right;">우편번호</label>
                     <input type="text" id="postalCode" name="postalCode" placeholder="우편번호를 입력해주세요." style="flex: 3; padding: 10px; box-sizing: border-box; border: 1px solid #000000; border-radius: 5px;">
-                    <div id="postalCodeError" class="error" style="flex: 1; color: red; font-size: 12px;"></div>
                 </div>
             </td>
         </tr>

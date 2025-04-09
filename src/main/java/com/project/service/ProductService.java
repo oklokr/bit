@@ -21,7 +21,7 @@ public class ProductService {
         return productMapper.getCommonCode(commonCode);
     }
 
-    public List<ProductDto> getProductList(String id, String productName, Timestamp productRegistrationDate, String categoryCode, int page, int size) {
+    public List<ProductDto> getProductList(String id, String productName, String productRegistrationDate, String categoryCode, int page, int size) {
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);
         params.put("productName", productName);
@@ -33,7 +33,7 @@ public class ProductService {
         return productMapper.getProductList(params);
     }
 
-    public int getProductCount(String id, String productName, Timestamp productRegistrationDate, String categoryCode) {
+    public int getProductCount(String id, String productName, String productRegistrationDate, String categoryCode) {
         Map<String, Object> params = new HashMap<>();
         params.put("id", id);
         params.put("productName", productName);
