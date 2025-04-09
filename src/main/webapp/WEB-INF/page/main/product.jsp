@@ -18,7 +18,7 @@
             <span class="col-sm-2 col-form-label">등록일</span>
             <div class="col-sm-8">
                 <div class="input-group">
-                    <input id="registrationDate" type="text" class="form-control" value="<%= registrationDate != null ? registrationDate : "" %>">
+                    <input id="registrationDate" type="text" class="form-control" autocomplete='off' value="<%= registrationDate != null ? registrationDate : "" %>">
                     <label class="input-group-text" for="registrationDate"><i class="bi bi-calendar"></i></label>
                </div> 
             </div>
@@ -135,7 +135,7 @@ function handleSetProduct() {
         postData.productName = productName;
     }
     if (registrationDate) {
-        postData.registrationDate = registrationDate;
+        postData.productRegistrationDate = registrationDate;
     }
 
     postRequestApi('/api/mypage/info', {}, res => {
