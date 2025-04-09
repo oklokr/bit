@@ -37,7 +37,7 @@
                         <fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm" var="today"/>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">작성자</span>
-                            <input type="text" class="form-control" placeholder="작성자" name="authorInput" aria-label="Username" aria-describedby="basic-addon1" readonly>
+                            <input type="text" class="form-control" placeholder="${user}" name="authorInput" aria-label="Username" aria-describedby="basic-addon1" readonly>
                             <span class="input-group-text" id="basic-addon1">작성일</span>
                             <input type="text" class="form-control" placeholder="${today}" aria-label="Username" aria-describedby="basic-addon1" readonly>
                         </div>

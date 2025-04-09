@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.model.BoardDto;
 import com.project.model.ReplyDto;
+import com.project.model.UserDto;
 import com.project.service.BoardService;
+import com.project.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,9 +26,12 @@ public class BoardDetail {
     @Autowired
     private BoardService boardDao;
 
+    @Autowired
+    private UserService userDao;
+
 
     @GetMapping("/board/detail")
-    public String boardDetail(@RequestParam int boardId, @RequestParam String pageNum,
+    public String boardDetail(@RequestParam int boardId, @RequestParam String pageNum, HttpSession session,
     Model model) throws Exception {
         BoardDto boardDto = boardDao.getArticle(boardId);
         boardDao.addCount(boardId);
@@ -36,6 +41,9 @@ public class BoardDetail {
         List<ReplyDto> replyDtos = boardDao.getReplies(boardId);
         model.addAttribute("replyDtos", replyDtos);
 
+        String user = userDao.getUserInfo(session.getId()).getCompanyName();
+        
+        model.addAttribute("user", user);
         model.addAttribute("replyCount", replyCount);
         model.addAttribute("boardId", boardId);
         model.addAttribute("pageNum", pageNum);
@@ -57,10 +65,9 @@ public class BoardDetail {
 
     @PostMapping("/board/reply/write")
     public String postReply(@ModelAttribute ReplyDto replyDto, @RequestParam String pageNum, Model model, HttpSession session) {
-
-        //원래 쿠키에서 가져와야.. 임시
-        replyDto.setAuthor("user");
-        replyDto.setMemberNo("87b2a914-1389-11f0-899e-c8418a1096fd");
+        UserDto userDto = userDao.getUserInfo(session.getId());
+        replyDto.setAuthor(userDto.getCompanyName());
+        replyDto.setId(userDto.getId());
         
         replyDto.setCreationDate(new Timestamp(System.currentTimeMillis()));
         

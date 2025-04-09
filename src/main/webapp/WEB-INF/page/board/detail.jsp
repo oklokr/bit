@@ -75,7 +75,7 @@
                                 <input type="hidden" name="replyRef" value="${replyDto.replyRef}" />
                         
                                 <div class="small text-muted mb-2">
-                                    작성자: ${"User"} &nbsp;&nbsp;|&nbsp;&nbsp;
+                                    작성자: ${user} &nbsp;&nbsp;|&nbsp;&nbsp;
                                     작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/>
                                 </div>
                         
@@ -112,7 +112,7 @@
                     <tbody>
                         <tr>
                             <td colspan="2" class="small text-muted">
-                                작성자: ${"User"} &nbsp;&nbsp;|&nbsp;&nbsp;
+                                작성자: ${user} &nbsp;&nbsp;|&nbsp;&nbsp;
                                 작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/>
                             </td>
                         </tr>

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Component
 public class BoardDto {
     private int boardId;
-    private String memberNo;
+    private String id;
     private String title;
     private String content;
     private String author;

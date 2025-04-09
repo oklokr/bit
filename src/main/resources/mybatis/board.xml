@@ -10,14 +10,14 @@
     </select>
 
     <select id="getArticles" resultType="com.project.model.BoardDto">
-        SELECT board_id, member_no, title, content, author, creation_date, view_count
+        SELECT board_id, id, title, content, author, creation_date, view_count
         FROM bulletin_board
         ORDER BY creation_date DESC
         LIMIT #{pageSize} OFFSET #{start};
     </select>
 
     <select id="getArticle" parameterType="int" resultType="com.project.model.BoardDto">
-        SELECT board_id, member_no, title, content, author, creation_date, view_count
+        SELECT board_id, id, title, content, author, creation_date, view_count
         FROM bulletin_board
         WHERE board_id = #{boardId}
     </select>
@@ -29,8 +29,8 @@
     </update>
 
     <insert id="insertPost" parameterType="com.project.model.BoardDto">
-        INSERT INTO bulletin_board (member_no, title, content, author, creation_date)
-        VALUES (#{memberNo}, #{title}, #{content}, #{author}, #{creationDate})
+        INSERT INTO bulletin_board (id, title, content, author, creation_date)
+        VALUES (#{id}, #{title}, #{content}, #{author}, #{creationDate})
     </insert>
 
     <update id="modifyPost" parameterType="com.project.model.BoardDto">
@@ -49,7 +49,7 @@
     </select>
 
     <select id="getReplies" parameterType="int" resultType="com.project.model.ReplyDto">
-        SELECT reply_id, board_id, member_no, author, creation_date, reply_title, reply_content, reply_ref, reply_step, reply_level
+        SELECT reply_id, board_id, id, author, creation_date, reply_title, reply_content, reply_ref, reply_step, reply_level
         FROM replies
         WHERE board_id = #{boardId}
         ORDER BY reply_ref ASC, reply_step ASC;
@@ -70,7 +70,7 @@
     <insert id="insertReply" parameterType="com.project.model.ReplyDto">
         INSERT INTO replies (
             board_id,
-            member_no,
+            id,
             author,
             creation_date,
             reply_title,
@@ -81,7 +81,7 @@
         )
         VALUES (
             #{boardId},
-            #{memberNo},
+            #{id},
             #{author},
             #{creationDate},
             #{replyTitle},

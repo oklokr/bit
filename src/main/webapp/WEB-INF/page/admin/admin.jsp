@@ -39,11 +39,11 @@
             <tr>
                 <th style="width:5%;">No</th>
                 <th style="width:10%;">회원ID</th>
-                <th style="width:19%;">회사명</th>
+                <th style="width:15%;">회사명</th>
                 <th style="width:18%;">이메일</th>
                 <th style="width:12%;">전화번호</th>
                 <th style="width:12%;">사업자번호</th>
-                <th style="width:16%;">주소</th>
+                <th style="width:20%;">주소</th>
                 <th style="width:8%;">회원 유형</th>
             </tr>
         </thead>
