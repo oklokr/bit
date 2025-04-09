@@ -64,11 +64,11 @@ CREATE TABLE terms (
 
 -- ✅ 회원-약관 동의 테이블 생성
 CREATE TABLE member_terms_agreement (
-    member_no CHAR(36),
+    id VARCHAR(50),
     terms_id INT,
     agreement_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (member_no, terms_id),
-    FOREIGN KEY (member_no) REFERENCES members(member_no) ON DELETE CASCADE,
+    PRIMARY KEY (id, terms_id),
+    FOREIGN KEY (id) REFERENCES members(id) ON DELETE CASCADE,
     FOREIGN KEY (terms_id) REFERENCES terms(terms_id) ON DELETE CASCADE
 );
 
@@ -104,20 +104,20 @@ CREATE TABLE inventory (
 -- ✅ 자유 게시판 테이블 생성
 CREATE TABLE bulletin_board (
     board_id INT AUTO_INCREMENT PRIMARY KEY,
-    member_no CHAR(36),
+    id VARCHAR(50),
     title VARCHAR(255) NOT NULL,
     content VARCHAR(1000),
     author VARCHAR(100) NOT NULL,
     creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     view_count INT DEFAULT 0,
-    FOREIGN KEY (member_no) REFERENCES members(member_no) ON DELETE SET NULL
+    FOREIGN KEY (id) REFERENCES members(id) ON DELETE SET NULL
 );
 
 -- ✅ 답글 테이블 생성
 CREATE TABLE replies (
     reply_id INT AUTO_INCREMENT PRIMARY KEY,
     board_id INT NOT NULL,
-    member_no CHAR(36),
+    id VARCHAR(50),
     author VARCHAR(100) NOT NULL,
     creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     reply_title VARCHAR(255),
@@ -126,7 +126,7 @@ CREATE TABLE replies (
     reply_step INT DEFAULT 0,
     reply_level INT DEFAULT 0,
     FOREIGN KEY (board_id) REFERENCES bulletin_board(board_id) ON DELETE CASCADE,
-    FOREIGN KEY (member_no) REFERENCES members(member_no) ON DELETE SET NULL
+    FOREIGN KEY (id) REFERENCES members(id) ON DELETE SET NULL
 );
 
 -- ✅ 데이터 확인용 SELECT
@@ -139,9 +139,3 @@ SELECT * FROM product_info;
 SELECT * FROM terms;
 SELECT * FROM bulletin_board;
 SELECT * FROM replies;
-
-
-ALTER TABLE members
-ADD COLUMN session_id VARCHAR(255),
-ADD COLUMN last_access_time DATETIME,
-ADD COLUMN session_expiry_time DATETIME;
