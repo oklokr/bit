@@ -23,6 +23,18 @@ function logout() {
     })
 }
 
+function handleAddInventory(productId, stockQuantity) {
+    const postData = {
+        productId: productId
+    }
+    if(!validate.isEmpty(stockQuantity)) {
+        postData.stockQuantity = stockQuantity;
+    }
+    postRequestApi("/api/mypage/setInventory", postData, res => {
+        console.log(res);
+    })
+}
+
 // 공통 유효성 검사 함수
 const validate = {
     isEmpty: value => {

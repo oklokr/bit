@@ -38,16 +38,16 @@
     </select>
     
     <select id="existsByEmail" resultType="boolean">
-    SELECT COUNT(*) > 0
-    FROM members
-    WHERE email = #{email}
-</select>
+        SELECT COUNT(*) > 0
+        FROM members
+        WHERE email = #{email}
+    </select>
 
-<select id="existsByPhoneNumber" resultType="boolean">
-    SELECT COUNT(*) > 0
-    FROM members
-    WHERE phone_number = #{phoneNumber}
-</select>
+    <select id="existsByPhoneNumber" resultType="boolean">
+        SELECT COUNT(*) > 0
+        FROM members
+        WHERE phone_number = #{phoneNumber}
+    </select>
 
     <!-- 세션 관련 쿼리문 -->
     <update id="updateSessionInfo">
@@ -67,4 +67,63 @@
     <select id="getUserInfo" parameterType="string" resultType="com.project.model.UserDto">
         SELECT * FROM members WHERE session_id = #{sessionId}
     </select>
+
+    <!-- 마이페이지 이벤토리 쿼리문 -->
+    <insert id="insertInventory" parameterType="map">
+        INSERT INTO inventory (product_id, id, image, product_name, category_code, product_description, stock_quantity)
+        SELECT 
+            p.product_id,
+            #{id},
+            p.image,
+            p.product_name,
+            p.category_code,
+            p.product_description,
+            1
+        FROM product_info p
+        WHERE p.product_id = #{productId}
+        ON DUPLICATE KEY UPDATE
+            stock_quantity = stock_quantity + 1;
+    </insert>
+    <select id="getInventory" resultType="com.project.model.InventoryDto">
+        SELECT 
+            i.product_id,
+            i.id,
+            i.image,
+            i.product_name,
+            i.category_code,
+            c.common_name AS category_name,
+            i.product_description,
+            i.stock_quantity
+        FROM inventory i
+        LEFT JOIN common_codes c 
+            ON i.category_code = c.common_value
+        WHERE c.common_code = 'CATEGORY_TYPE'
+        AND i.id = #{id}
+        <if test="productName != null and productName != ''">
+            AND i.product_name LIKE CONCAT('%', #{productName}, '%')
+        </if>
+        ORDER BY i.inventory_registration_date DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="getInventoryCount" parameterType="map" resultType="int">
+        SELECT COUNT(*) 
+        FROM inventory i
+        LEFT JOIN common_codes c 
+            ON i.category_code = c.common_value
+        WHERE c.common_code = 'CATEGORY_TYPE'
+        AND i.id = #{id}
+        <if test="productName != null and productName != ''">
+            AND i.product_name LIKE CONCAT('%', #{productName}, '%')
+        </if>
+    </select>
+    <update id="updateInventory" parameterType="map">
+        UPDATE inventory
+        SET stock_quantity = #{stockQuantity}
+        WHERE product_id = #{productId} AND id = #{id};
+    </update>
+    <delete id="deleteInventory" parameterType="map">
+        DELETE FROM inventory WHERE product_id = #{productId} AND id = #{id};
+    </delete>
 </mapper>

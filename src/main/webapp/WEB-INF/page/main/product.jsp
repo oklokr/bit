@@ -7,7 +7,7 @@
 <div class="container product-page">
     <h2>상품정보 등록</h2>
 
-    <div class="filter">
+    <div class="filter-wrap">
         <div class="row">
             <label for="productName" class="col-sm-2 col-form-label">상풍명</label>
             <div class="col-sm-8">
@@ -172,8 +172,6 @@ function handleLoad() {
 }
 
 document.addEventListener("DOMContentLoaded", handleLoad)
-
-
 </script>
 
 <style>
@@ -183,85 +181,5 @@ document.addEventListener("DOMContentLoaded", handleLoad)
     .product-page h2 {
         font-weight: bold;
         text-align: center;
-    }
-    .product-page .filter {
-        display: flex;
-        align-items: center;
-        height: 68px;
-        padding: 0 32px;
-        margin-top: 40px;
-        border: 1px solid #dee2e6;
-        border-radius: 12px;
-    }
-    .product-page .filter .row {
-        flex: 1;
-    }
-    .product-page .filter > button {
-        min-width: 70px;
-    }
-
-    .table-wrap {
-        margin-top: 40px;
-    }
-    .table-wrap .top-area {
-        display: flex;
-        width: 100%;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 16px;
-    }
-    .table-wrap .top-area .total-txt {
-        margin-bottom: 0;
-    }
-    .table-wrap .top-area button {
-        display: block;
-        min-width: 80px;
-    }
-    .table-wrap table {
-        width: 100%;
-        text-align: center;
-    }
-    .table-wrap table thead tr {
-        border: 2px solid #dee2e6;
-        border-left: 0;
-        border-right: 0;
-    }
-    .table-wrap table thead tr th {
-        padding: 16px 12px;
-        font-weight: bold;
-        background-color: #fcfcfc;
-        vertical-align: middle;
-    }
-    .table-wrap table thead tr th:not(:last-child) {
-        border-right: 2px solid #dee2e6;
-    }
-
-    .table-wrap table tbody tr {
-        cursor: pointer;
-        border-bottom: 2px solid #dee2e6;
-    }
-    .table-wrap table tbody tr:hover td {
-        background-color: #00000005;
-    }
-    .table-wrap table tbody tr td {
-        padding: 16px 12px;
-        vertical-align: middle;
-        background-color: #fff;
-        transition: .2s ease-out;
-    }
-    .table-wrap table tbody tr td:not(:last-child) {
-        border-right: 2px solid #dee2e6;
-    }
-    .table-wrap table .image {
-        display: flex;
-        width: 100px;
-        height: 100px;
-        margin: 0 auto;
-        border-radius: 12px;
-        background: #ccc;
-    }
-    .table-wrap .pagination {
-        justify-content: center;
-        margin-top: 40px;
     }
 </style>

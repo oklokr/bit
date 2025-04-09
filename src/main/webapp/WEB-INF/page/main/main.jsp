@@ -77,6 +77,10 @@
                 + '</div>'
                 
                 currentGroup.querySelector('.inner').appendChild(productItem);
+
+                productItem.querySelector(".product-inner button").addEventListener("click", () => {
+                    handleAddInventory(item.productId);
+                });
             });
         }
         postRequestApi('/api/main/product', postData, setProductList);

@@ -72,6 +72,10 @@
                     + '</div>'
                     
                     productList.appendChild(productItem);
+
+                    productItem.querySelector(".product-inner button").addEventListener("click", () => {
+                        handleAddInventory(item.productId);
+                    });
                 })
                 content.append(productList)
             } else {

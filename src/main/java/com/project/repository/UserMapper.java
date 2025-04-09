@@ -1,10 +1,12 @@
 package com.project.repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.project.model.InventoryDto;
 import com.project.model.UserDto;
 
 public interface UserMapper {
@@ -34,5 +36,13 @@ public interface UserMapper {
     boolean existsByEmail(String email); // 이메일 중복 확인 쿼리
     
     boolean existsByPhoneNumber(String phoneNumber); // 전화번호 중복 확인 쿼리
+
+
+    // 마이페이지 이벤토리 Query Mapper
+    public List<InventoryDto> getInventory(Map<String, Object> param);
+    public int getInventoryCount(Map<String, Object> param);
+    public int insertInventory(Map<String, Object> param);
+    public int updateInventory(Map<String, Object> param);
+    public int deleteInventory(Map<String, Object> param);
 }
 

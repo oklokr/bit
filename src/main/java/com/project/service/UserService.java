@@ -3,12 +3,13 @@ package com.project.service;
 import java.security.SecureRandom;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.project.model.InventoryDto;
 import com.project.model.UserDto;
 import com.project.repository.UserMapper;
 
@@ -132,5 +133,42 @@ public class UserService {
         boolean result = userMapper.existsByPhoneNumber(phoneNumber);
         System.out.println("Phone number exists: " + result); // 로그 추가
         return result;
+    }
+
+
+    // 마이페이지 이벤토리
+    public List<InventoryDto> getInventory(String id, String productName, int page, int size) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        params.put("productName", productName);
+        params.put("offset", (page - 1) * size);
+        params.put("limit", size);
+
+        return userMapper.getInventory(params);
+    }
+    public int getInventoryCount(String id, String productName) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        params.put("productName", productName);
+        return userMapper.getInventoryCount(params);
+    }
+    public int insertInventory(String id, int productId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        params.put("productId", productId);
+        return userMapper.insertInventory(params);
+    }
+    public int updateInventory(String id, int productId, int stockQuantity) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        params.put("productId", productId);
+        params.put("stockQuantity", stockQuantity);
+        return userMapper.updateInventory(params);
+    }
+    public int deleteInventory(String id, int productId) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        params.put("productId", productId);
+        return userMapper.deleteInventory(params);
     }
 }

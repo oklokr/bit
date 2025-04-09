@@ -98,7 +98,8 @@ CREATE TABLE inventory (
     inventory_registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES product_info(product_id) ON DELETE CASCADE,
     FOREIGN KEY (id) REFERENCES members(id) ON DELETE CASCADE,
-    FOREIGN KEY (category_code) REFERENCES common_codes(common_code_id) ON DELETE SET NULL
+    FOREIGN KEY (category_code) REFERENCES common_codes(common_code_id) ON DELETE SET NULL,
+    UNIQUE KEY unique_inventory (id, product_id)
 );
 
 -- ✅ 자유 게시판 테이블 생성
