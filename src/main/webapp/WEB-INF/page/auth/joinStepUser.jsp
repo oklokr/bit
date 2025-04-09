@@ -282,7 +282,7 @@
         </tr>
         <tr>
             <td>
-                <button type="button" onclick="location='/join'">취소</button>
+                <button type="button" onclick="location='/join'">이전</button>
                 <button type="submit">다음</button>
             </td>
         </tr>

@@ -36,7 +36,9 @@ public class WebConfig implements WebMvcConfigurer {
             "/favicon.ico",
             "/joinResult",
             "/checkBusinessNumber",
-            "/joinStepSuccess"
+            "/joinStepSuccess",
+            "/mainTerms",
+            "/subTerms"  
         );
     }
 }
