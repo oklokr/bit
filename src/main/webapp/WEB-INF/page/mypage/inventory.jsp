@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    String productName = request.getParameter("productName");
+    String registrationDate = request.getParameter("registrationDate");
+%>
 <div class="container inventory-page">
     <h2>재고관리</h2>
 
@@ -6,10 +11,10 @@
         <div class="row">
             <label for="productName" class="col-sm-2 col-form-label">상풍명</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="productName">
+                <input type="text" class="form-control" id="productName" value="<%= productName != null ? productName : "" %>">
             </div>
         </div>
-        <button type="button" class="btn btn-primary btn-sm" >조회</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="handleFilter()">조회</button>
     </div>
 
     <div class="table-wrap">
