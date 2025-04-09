@@ -129,7 +129,10 @@
         color: white; /* 활성화된 단계 텍스트 색상 */
     }
 </style>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    Kakao.init('a80fdcef65adf55bdfe4a0155d40fcb2'); // 발급받은 JavaScript 키로 초기화
     let isBusinessNumberChecked = false; // 사업자 번호 확인 여부 플래그
 
     async function validateForm(event) {
@@ -213,9 +216,20 @@
             return false;
         }
     }
-
+    
     function searchAddress() {
-        alert("주소 검색 기능은 카카오 API와 연동됩니다.");
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 도로명 주소 또는 지번 주소를 가져옵니다.
+                const address = data.roadAddress ? data.roadAddress : data.jibunAddress;
+
+                // 주소 입력창에 값 설정
+                document.getElementById('address').value = address;
+
+                // 상세주소 입력창에 포커스 이동
+                document.getElementById('detailedAddress').focus();
+            }
+        }).open();
     }
 </script>
 <form name="joinStepComp" action="/findResult" method="post" onsubmit="return validateForm(event)">
