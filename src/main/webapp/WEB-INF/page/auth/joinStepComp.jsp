@@ -232,7 +232,7 @@
         }).open();
     }
 </script>
-<form name="joinStepComp" action="/joinResult" method="post" onsubmit="return validateForm(event)">
+<form name="joinStepComp" action="/joinStepSuccess" method="post" onsubmit="return validateForm(event)">
     <!-- joinStepUser에서 전달된 데이터 유지 -->
     <input type="hidden" name="companyName" value="${param.companyName}">
     <input type="hidden" name="id" value="${param.id}">
@@ -301,7 +301,7 @@
         <tr>
             <td>
               <button type="button" onclick="location='/joinStepUser'">이전</button>
-              <button type="submit" class="next">다음</button>
+              <button type="submit" class="next" onclick="joinStepSuccess()">완료</button>
             </td>
         </tr>     
     </table>

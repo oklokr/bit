@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.model.UserDto;
 import com.project.service.UserService;
@@ -48,38 +49,29 @@ public class JoinStepComp {
         response.put("isValid", isValid);
         return ResponseEntity.ok(response);
     }
-    @PostMapping("/joinResult")
-public String handleJoinResult(@RequestParam Map<String, String> params, Model model) {
-    // 입력 데이터 추출
-    String companyName = params.get("companyName");
-    String id = params.get("id");
-    String password = params.get("password");
-    String email = params.get("email");
-    String phoneNumber = params.get("phoneNumber");
-    String businessNumber = params.get("businessNumber1") + "-" +
-                            params.get("businessNumber2") + "-" +
-                            params.get("businessNumber3");
-    String address = params.get("address");
-    String detailedAddress = params.get("detailedAddress");
-    String postalCode = params.get("postalCode");
+    @PostMapping("/joinStepSuccess")
+public String JoinStepComphandle(@RequestParam Map<String, String> params, RedirectAttributes redirectAttributes) {
+    // 입력 데이터 출력 (디버깅용)
+    System.out.println("Received params: " + params);
 
-    // UserDto 객체 생성
+    // UserDto 객체 생성 및 데이터 설정
     UserDto user = new UserDto();
-    user.setCompanyName(companyName);
-    user.setId(id);
-    user.setPassword(password);
-    user.setEmail(email);
-    user.setPhoneNumber(phoneNumber);
-    user.setBusinessNumber(businessNumber);
-    user.setAddress(address);
-    user.setDetailedAddress(detailedAddress);
-    user.setPostalCode(postalCode);
+    user.setCompanyName(params.get("companyName"));
+    user.setId(params.get("id"));
+    user.setPassword(params.get("password"));
+    user.setEmail(params.get("email"));
+    user.setPhoneNumber(params.get("phoneNumber"));
+    user.setBusinessNumber(params.get("businessNumber1") + "-" + params.get("businessNumber2") + "-" + params.get("businessNumber3"));
+    user.setAddress(params.get("address"));
+    user.setDetailedAddress(params.get("detailedAddress"));
+    user.setPostalCode(params.get("postalCode"));
 
     // DB에 저장
     userService.saveUser(user);
 
-    // 결과 페이지로 이동
-    model.addAttribute("user", user);
-    return "auth/joinResult"; // joinResult.jsp로 이동
+    // 리다이렉트 시 데이터를 전달
+    redirectAttributes.addFlashAttribute("user", user);
+
+    return "redirect:/joinResult";
 }
 }
