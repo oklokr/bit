@@ -19,8 +19,11 @@ public class JoinStepComp {
     }
     @PostMapping("/joinStepComp")
     public String handleJoinStepComp(@RequestParam Map<String, String> params, Model model) {
+        System.out.println("Received params: " + params);
+
         model.addAttribute("title", "JoinStepComp Page");
         model.addAttribute("contentPage", "/WEB-INF/page/auth/joinStepComp.jsp");
+        
         return "layout/app";
     }
 }
