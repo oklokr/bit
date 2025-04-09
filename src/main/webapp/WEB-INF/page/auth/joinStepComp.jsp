@@ -132,7 +132,8 @@
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-    Kakao.init('a80fdcef65adf55bdfe4a0155d40fcb2'); // 발급받은 JavaScript 키로 초기화
+    const kakaoApiKey = '${kakao.map.js-key}';
+    Kakao.init(kakaoApiKey); // 발급받은 JavaScript 키로 초기화
     let isBusinessNumberChecked = false; // 사업자 번호 확인 여부 플래그
 
     async function validateForm(event) {
@@ -238,7 +239,9 @@
     <input type="hidden" name="id" value="${param.id}">
     <input type="hidden" name="password" value="${param.password}">
     <input type="hidden" name="email" value="${param.email}">
-    <input type="hidden" name="phoneNumber" value="${param.phoneNumber}">
+    <input type="hidden" name="tel1" value="${param.tel1}">
+    <input type="hidden" name="tel2" value="${param.tel2}">
+    <input type="hidden" name="tel3" value="${param.tel3}">
     <table>
         <tr>
             <th style="padding-top: 10px; font-size: 25px; font-weight: 700;">사업자 정보입력</th>

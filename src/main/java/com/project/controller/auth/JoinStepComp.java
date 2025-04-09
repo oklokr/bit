@@ -60,8 +60,13 @@ public String JoinStepComphandle(@RequestParam Map<String, String> params, Redir
     user.setId(params.get("id"));
     user.setPassword(params.get("password"));
     user.setEmail(params.get("email"));
-    user.setPhoneNumber(params.get("phoneNumber"));
-    user.setBusinessNumber(params.get("businessNumber1") + "-" + params.get("businessNumber2") + "-" + params.get("businessNumber3"));
+    // 전화번호 조합
+    String phoneNumber = params.get("tel1") + "-" + params.get("tel2") + "-" + params.get("tel3");
+    user.setPhoneNumber(phoneNumber);
+
+    // 사업자 번호 조합
+    String businessNumber = params.get("businessNumber1") + "-" + params.get("businessNumber2") + "-" + params.get("businessNumber3");
+    user.setBusinessNumber(businessNumber);
     user.setAddress(params.get("address"));
     user.setDetailedAddress(params.get("detailedAddress"));
     user.setPostalCode(params.get("postalCode"));

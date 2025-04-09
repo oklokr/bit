@@ -146,7 +146,7 @@
     document.getElementById("deleteMemBtn").addEventListener("click", (event)=>{
         showResultModal(
                 "1",
-                "회원 탈퇴퇴",
+                "회원 탈퇴",
                 "${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?",
                 null,
                 () => document.getElementById("deleteUserForm").submit(),
