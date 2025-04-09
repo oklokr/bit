@@ -12,40 +12,37 @@
             <dt>상품명</dt>
             <dd>
                 <c:if test='${empty id}'>
-                    <input type="text">
+                    <input type="text" placeholder="상품명을 입력해주세요." class="form-control" id="productName">
                 </c:if>
                 <c:if test="${not empty id}">
-                    <input type="text" value="${productInfo.productName}">
+                    <input type="text" placeholder="상품명을 입력해주세요." class="form-control" id="productName" value="${productInfo.productName}">
                 </c:if>
             </dd>
             <dt>상품설명</dt>
             <dd>
                 <c:if test='${empty id}'>
-                    신규
-                    <input type="text">
+                    <input type="text" placeholder="상품설명을 입력해주세요." class="form-control" id="productDescription">
                 </c:if>
                 <c:if test="${not empty id}">
-                    수정
-                    <input type="text" value="${productInfo.productDescription}">
+                    <input type="text" placeholder="상품설명을 입력해주세요." class="form-control" id="productDescription" value="${productInfo.productDescription}">
                 </c:if>
             </dd>
             <dt>카테고리 설정</dt>
             <dd>
                 <c:if test='${empty id}'>
-                    신규
                     <select class="form-select" aria-label="Default select">
+                        <option selected disabled>카테고리를 선택해주세요.</option>
                         <c:forEach var="code" items="${commonCodes}">
                             <option value="${code.commonValue}">${code.commonName}</option>
                         </c:forEach>
                     </select>
                 </c:if>
                 <c:if test="${not empty id}">
-                    수정
                     <select class="form-select" aria-label="Default select">
-                        
+                        <option selected disabled>카테고리를 선택해주세요.</option>
                         <c:forEach var="code" items="${commonCodes}">
                             <c:if test='${code.commonValue eq productInfo.categoryCode}'>
-                                <option checked value="${code.commonValue}">${code.commonName}</option>
+                                <option value="${code.commonValue}" selected>${code.commonName}</option>
                             </c:if>
                             <c:if test='${code.commonValue ne productInfo.categoryCode}'>
                                 <option value="${code.commonValue}">${code.commonName}</option>
@@ -61,10 +58,44 @@
         <h3 class="title">이미지 정보</h3>
         <dl>
             <dt>상품 이미지</dt>
-            <dd></dd>
+            <dd>
+                <c:if test='${empty id}'>
+                    <input type="text" placeholder="이미지URL 주소를 입력해주세요." class="form-control" id="image">
+                </c:if>
+                <c:if test="${not empty id}">
+                    <input type="text" placeholder="이미지URL 주소를 입력해주세요." class="form-control" id="image" value="${productInfo.image}">
+                </c:if>
+            </dd>
         </dl>
     </div>
+
+    <div class="btn-wrap">
+        <button type="button" class="btn btn-primary" onclick="history.back()">취소</button>
+        <button type="button" class="btn btn-outline-primary" onclick="handleEdit()">등록</button>
+    </div>
 </div>
+
+<script>
+    function handleEdit() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id')) || null;
+        const selectEl = document.querySelector(".form-select")
+        const postForm = {
+            productName: document.querySelector("#productName").value,
+            productDescription: document.querySelector("#productDescription").value,
+            categoryCode: selectEl.options[selectEl.selectedIndex].value,
+            image: document.querySelector("#image").value
+        }
+        if(!validate.isEmpty(productId)) {
+            postForm.productId = productId
+        }
+        postRequestApi("/api/main/productEdit", postForm, res => {
+            if(res.data.resultCode === 1) {
+                return location.href = "/main/product"
+            }
+        })
+    }
+</script>
 
 <style>
     .edit-page {
@@ -86,18 +117,36 @@
 
     .product-form dl {
         display: flex;
+        align-items: center;
         flex-wrap: wrap;
+    }
+    .product-form dl dt,
+    .product-form dl dd {
+        display: flex;
+        align-items: center;
+        min-height: 70px;
     }
 
     .product-form dl dt {
+        justify-content: center;
         width: 230px;
-        text-align: center;
         padding: 20px 12px;
         border: 1px solid #dee2e6;
     }
     .product-form dl dd {
         width: calc(100% - 230px);
-        border: 1px solid #dee2e6;
+        padding: 0 20px;
         margin-bottom: 0;
+        border: 1px solid #dee2e6;
+        
+    }
+    .edit-page .btn-wrap {
+        display: flex;
+        justify-content: end;
+        gap: 20px;
+    }
+    .edit-page .btn-wrap button {
+        margin-top: 50px;
+        min-width: 180px;
     }
 </style>

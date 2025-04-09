@@ -80,24 +80,44 @@ function handleFilter() {
     if (registrationDate) {
         urlParams.set('registrationDate', registrationDate);
     }
-    urlParams.set('page', 1); // 필터 변경 시 페이지를 1로 초기화
+    urlParams.set('page', 1);
 
-    window.location.search = urlParams.toString(); // URL 갱신 및 페이지 새로고침
+    window.location.search = urlParams.toString();
 }
 
 function handlePagination(totalCount, currentPage, pageSize) {
     const pagination = document.querySelector('.pagination');
-    pagination.innerHTML = ''; // 기존 페이지네이션 초기화
-    const totalPages = Math.ceil(totalCount / pageSize); // 전체 페이지 수 계산
-    for (let i = 1; i <= totalPages; i++) {
+    pagination.innerHTML = '';
+    const totalPages = Math.ceil(totalCount / pageSize);
+    const maxVisiblePages = 9;
+    const currentGroup = Math.ceil(currentPage / maxVisiblePages);
+    const startPage = (currentGroup - 1) * maxVisiblePages + 1;
+    const endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+
+    // 이전 그룹 버튼
+    if (currentGroup > 1) {
+        const prevGroupItem = document.createElement('li');
+        prevGroupItem.className = 'page-item';
+        prevGroupItem.innerHTML = "<a href='?page=" + (startPage - 1) + "&productName=" + encodeURIComponent(getUrlParam('productName')) + "&registrationDate=" + encodeURIComponent(getUrlParam('registrationDate')) + "' class='page-link'>&lt;</a>";
+        pagination.appendChild(prevGroupItem);
+    }
+
+    // 현재 그룹의 페이지 버튼
+    for (let i = startPage; i <= endPage; i++) {
         const pageItem = document.createElement('li');
         pageItem.className = 'page-item';
         const linkClass = (i === currentPage) ? 'active' : '';
         pageItem.innerHTML = 
-            '<a href="?page=' + i + '&productName='+ getUrlParam('productName') +'&registrationDate='+ getUrlParam('registrationDate') +'" class="page-link ' + linkClass + '">' +
-                i +
-            '</a>';
+            "<a href='?page=" + i + "&productName=" + encodeURIComponent(getUrlParam('productName')) + "&registrationDate=" + encodeURIComponent(getUrlParam('registrationDate')) + "' class='page-link " + linkClass + "'>" + i + "</a>";
         pagination.appendChild(pageItem);
+    }
+
+    // 다음 그룹 버튼
+    if (endPage < totalPages) {
+        const nextGroupItem = document.createElement('li');
+        nextGroupItem.className = 'page-item';
+        nextGroupItem.innerHTML = "<a href='?page=" + (endPage + 1) + "&productName=" + encodeURIComponent(getUrlParam('productName')) + "&registrationDate=" + encodeURIComponent(getUrlParam('registrationDate')) + "' class='page-link'>&gt;</a>";
+        pagination.appendChild(nextGroupItem);
     }
 }
 
@@ -108,7 +128,7 @@ function handleSetProduct() {
     const registrationDate = urlParams.get('registrationDate') || '';
     const postData = {
         page: page,
-        size: 10, // 페이지당 항목 수
+        size: 5, // 페이지당 항목 수
     };
 
     if (productName) {
@@ -129,7 +149,6 @@ function handleSetProduct() {
             tbody.innerHTML = ''; // 기존 데이터 초기화
 
             data.forEach(item => {
-                console.log(item)
                 const row = document.createElement('tr');
                 row.innerHTML = 
                 "<td>"+ item.productId +"</td>"
@@ -137,7 +156,6 @@ function handleSetProduct() {
                 + "<td><span class='image'><img src='${item.imageUrl}' alt='상품 이미지'></span></td>"
                 + "<td>"+ item.productName +"</td>"
                 + "<td>"+ item.productDescription +"</td>"
-                console.log(row)
                 tbody.appendChild(row);
 
                 row.addEventListener("click", () => {
@@ -228,6 +246,8 @@ document.addEventListener("DOMContentLoaded", handleLoad)
     .table-wrap table tbody tr td {
         padding: 16px 12px;
         vertical-align: middle;
+        background-color: #fff;
+        transition: .2s ease-out;
     }
     .table-wrap table tbody tr td:not(:last-child) {
         border-right: 2px solid #dee2e6;

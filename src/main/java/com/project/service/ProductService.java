@@ -45,4 +45,24 @@ public class ProductService {
     public ProductDto getProductInfo(int productId) {
         return productMapper.getProductInfo(productId);
     }
+
+    public int setProductItem(int productId, String image, String productName, String categoryCode, String productDescription) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("productId", productId);
+        params.put("image", image);
+        params.put("productName", productName);
+        params.put("categoryCode", categoryCode);
+        params.put("productDescription", productDescription);
+        return productMapper.setProductItem(params);
+    }
+
+    public int insertProductItem(String memberId, String image, String productName, String categoryCode, String productDescription) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", memberId);
+        params.put("image", image);
+        params.put("productName", productName);
+        params.put("categoryCode", categoryCode);
+        params.put("productDescription", productDescription);
+        return productMapper.insertProductItem(params);
+    }
 }

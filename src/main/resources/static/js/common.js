@@ -26,7 +26,7 @@ function logout() {
 // 공통 유효성 검사 함수
 const validate = {
     isEmpty: value => {
-        return value === null || value === undefined || value.trim() === '';
+        return !value || value === null || value === undefined || value === '';
     },
     isEmail: value => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
