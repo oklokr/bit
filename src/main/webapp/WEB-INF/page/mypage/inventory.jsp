@@ -4,8 +4,8 @@
     String productName = request.getParameter("productName");
     String registrationDate = request.getParameter("registrationDate");
 %>
-<div class="container inventory-page">
-    <h2>재고관리</h2>
+<div class="container page-wrap">
+    <h2 class="page-title">재고관리</h2>
 
     <div class="filter-wrap">
         <div class="row">
@@ -23,8 +23,8 @@
                 총 <span></span>개
             </p>
             <div class="btns">
-                <button type="button" class="btn btn-outline-primary btn-sm" onclick="handleDeleteInventory()">삭제</button>
-                <button type="button" class="btn btn-outline-primary btn-sm" onclick="handleSaveInventory()">적용</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="handleDeleteInventory()">삭제</button>
+                <button type="button" class="btn btn-outline-secondary btn-sm" onclick="handleSaveInventory()">적용</button>
             </div>
         </div>
         <table>
@@ -244,13 +244,3 @@ function handleLoad() {
 
 document.addEventListener("DOMContentLoaded", handleLoad)
 </script>
-
-<style>
-.inventory-page {
-    padding: 30px 0 60px;
-}
-.inventory-page h2 {
-    font-weight: bold;
-    text-align: center;
-}
-</style>

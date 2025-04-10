@@ -4,8 +4,8 @@
     String productName = request.getParameter("productName");
     String registrationDate = request.getParameter("registrationDate");
 %>
-<div class="container product-page">
-    <h2>상품정보 등록</h2>
+<div class="container page-wrap">
+    <h2 class="page-title">상품정보 등록</h2>
 
     <div class="filter-wrap">
         <div class="row">
@@ -31,7 +31,9 @@
             <p class="total-txt">
                 총 <span></span>개
             </p>
-            <a href="/main/productEdit" role="button" class="btn btn-outline-primary btn-sm">상품등록</a>
+            <div class="btns">
+                <a href="/main/productEdit" role="button" class="btn btn-outline-secondary btn-sm">상품등록</a>
+            </div>
         </div>
         <table>
             <thead>
@@ -179,13 +181,3 @@ function handleLoad() {
 
 document.addEventListener("DOMContentLoaded", handleLoad)
 </script>
-
-<style>
-    .product-page {
-        padding: 30px 0 60px;
-    }
-    .product-page h2 {
-        font-weight: bold;
-        text-align: center;
-    }
-</style>

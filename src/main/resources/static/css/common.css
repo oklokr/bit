@@ -1,3 +1,20 @@
+/* countainer Style */
+.page-wrap {
+    padding: 30px 0 60px;
+}
+.page-wrap .page-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* 카테고리 리스트 */
+.category-list {
+    display: flex;
+    gap: 8px;
+    padding: 30px 0;
+}
+
 /* 모달 Style */
 .common-modal .modal-dialog {
     margin-top: 30vh;
@@ -56,7 +73,7 @@
     flex: 1;
 }
 .filter-wrap > button {
-    min-width: 70px;
+    min-width: 86px;
     margin-left: auto;
 }
 /* 테이블 Style */
@@ -98,9 +115,9 @@
     align-items: center;
     gap: 8px;
 }
-.table-wrap .top-area button {
+.table-wrap .top-area .btn {
     display: block;
-    min-width: 80px;
+    min-width: 86px;
 }
 .table-wrap table {
     width: 100%;
@@ -120,7 +137,6 @@
 .table-wrap table thead tr th:not(:last-child) {
     border-right: 2px solid #dee2e6;
 }
-
 .table-wrap table tbody tr {
     cursor: pointer;
     border-bottom: 2px solid #dee2e6;
@@ -153,7 +169,108 @@
     justify-content: center;
     margin-top: 40px;
 }
-
 .table-wrap .count-cell {
     cursor: initial;
+}
+
+/* 테이블 Style type2 */
+.table-board-wrap .top-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.table-board-wrap td:not(.label) {
+    text-align: center;
+}
+.table-board-wrap td.label {
+    padding: 0 20px;
+}
+.table-board-wrap td,
+.table-board-wrap th {
+    vertical-align: middle;
+}
+
+.table-board-wrap .top-area .btn {
+    min-width: 86px;
+}
+
+.table-board-wrap table thead tr {
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+    font-weight: bold;
+}
+.table-board-wrap table tbody tr {
+    position: relative;
+}
+
+.table-board-wrap table tbody a {
+    text-indent: -9999px;;
+    color: transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: .2s ease-out;
+}
+.table-board-wrap table tbody a:hover {
+    background-color: #00000005;
+}
+
+/* 페이지네이션 */
+.page-wrap .pagination {
+    justify-content: center;
+    margin-top: 60px;
+}
+
+
+/* 정보 form Style */
+.data-form {
+    margin-top: 60px;
+}
+.data-form .title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+.data-form dl {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.data-form dl dt,
+.data-form dl dd {
+    display: flex;
+    align-items: center;
+    min-height: 70px;
+}
+.data-form dl dt {
+    justify-content: center;
+    width: 230px;
+    padding: 20px 12px;
+    border: 1px solid #dee2e6;
+}
+.data-form dl dd {
+    width: calc(100% - 230px);
+    padding: 0 20px;
+    margin-bottom: 0;
+    border: 1px solid #dee2e6;
+    
+}
+
+/* 하단 버튼 */
+.bottom-btns {
+    display: flex;
+    justify-content: end;
+    gap: 20px;
+    margin-top: 50px;
+}
+.bottom-btns button {
+    min-width: 180px;
+}
+
+.bottom-btns .left {
+    margin-right: auto;
 }

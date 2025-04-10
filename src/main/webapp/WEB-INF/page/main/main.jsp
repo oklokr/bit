@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="container main-wrap">
-    <h2>상품정보</h2>
+<div class="container main-wrap page-wrap">
+    <h2 class="page-title">상품정보</h2>
     <div class="input-group-lg search-wrap">
         <input type="text" class="form-control" placeholder="검색어를 입력해주세요." aria-label="검색어를 입력해주세요." aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="handleSearch()">검색</button>
@@ -63,11 +63,10 @@
                 }
                 const productItem = document.createElement('li');
                 productItem.className = 'product-itme';
-                console.log(item)
                 productItem.innerHTML = 
                 "<div class='product-inner'>"
                     +"<div class='product-img'>"
-                        + "<img src="+ item.image +" onerror='this.src='https://onsight.softballspa.com/content/images/thumbs/default-image_450.png'' class='img-fluid'>"
+                        + "<img src="+ item.image +" class='img-fluid'>"
                     + "</div>"
                     + "<p class='product-info'>"
                         + "<i>"+ item.categoryName +"</i>"
@@ -111,21 +110,8 @@
 </script>
 
 <style>
-    .main-wrap {
-        padding: 30px 62px 60px;
-    }
-    .main-wrap h2 {
-        font-weight: bold;
-        text-align: center;
-    }
-    .main-wrap .search-wrap {
+    .page-wrap .search-wrap {
         margin-top: 40px;
-    }
-
-    .category-list {
-        display: flex;
-        gap: 8px;
-        padding: 30px 0;
     }
 
     #product-items {
@@ -200,7 +186,7 @@
         margin-top: auto;
     }
     
-    .main-wrap .more {
+    .page-wrap .more {
         display: block;
         width: 360px;
         margin: 60px auto 0;

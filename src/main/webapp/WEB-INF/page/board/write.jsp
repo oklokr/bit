@@ -14,9 +14,8 @@
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-    <div class="board-write-page container">
-        <h3> 자유게시판 게시글 작성</h3>
-        <br>
+    <div class="container page-wrap">
+        <h3 class="page-title"> 자유게시판 게시글 작성</h3>
         <form name="writeform" method="POST" action="/board/write">
             <input type="hidden" name="title" id="title">
             <input type="hidden" name="content" id="content">
@@ -49,12 +48,9 @@
             </div>
         </form>
         
-        <!-- 버튼 그룹 -->
-        <div class="button-group d-flex">
-            <div class="ms-auto">
-                <button type="button" name="submit" class="btn btn-primary">작성</button>
-                <button type="reset" class="btn btn-primary" onclick="location='/board'">취소</button>
-            </div>
+        <div class="bottom-btns">
+            <button type="reset" class="btn btn-outline-primary" onclick="location='/board'">취소</button>
+            <button type="button" name="submit" class="btn btn-primary">작성</button>
         </div>
     </div>
 </body>
@@ -63,12 +59,6 @@
 <script>
     const quill = new Quill('#editor', {
         theme: 'snow',
-        modules: {
-            toolbar: [
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                ['bold', 'italic', 'underline', 'strike', 'link']
-            ]
-        }
     });
 
     let submit = document.querySelector("button[name='submit']");
@@ -137,24 +127,18 @@
 <% session.removeAttribute("writeResult"); %>
 
 <style>
+    .page-wrap form {
+        margin-top: 40px;
+    }
+
     .table {
         width: 100%;
         table-layout: fixed; /* 고정 레이아웃 */
         border-color:#fff;
     }
     
-    .board-write-page {
-        max-width: 800px; /* 페이지 최대 너비 제한 */
-        margin: 40px auto; /* 중앙 정렬 */
-        background: #fff; /* 배경 흰색 */
-        border-radius: 8px; /* 모서리 둥글게 */
-    }
-
-    .button-group{
-        margin-top: 10px;
-    }
-    .btn.btn-primary{
-        width: 120px;
+    .table th {
+        padding: .5em 0;
     }
 
     .form-control:focus {

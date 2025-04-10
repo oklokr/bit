@@ -4,13 +4,13 @@
     String id = request.getParameter("id");
     request.setAttribute("id", id);
 %>
-<div class="container edit-page">
-    <h2>
+<div class="container page-wrap">
+    <h2 class="page-title">
         상품정보 
         <c:if test='${empty id}'>등록</c:if>
         <c:if test="${not empty id}">수정</c:if>
     </h2>
-    <div class="product-form">
+    <div class="data-form">
         <h3 class="title">필수입력 정보</h3>
         <dl>
             <dt>상품명</dt>
@@ -58,7 +58,7 @@
         </dl>
     </div>
 
-    <div class="product-form">
+    <div class="data-form">
         <h3 class="title">이미지 정보</h3>
         <dl>
             <dt>상품 이미지</dt>
@@ -73,7 +73,7 @@
         </dl>
     </div>
 
-    <div class="btn-wrap">
+    <div class="bottom-btns">
         <button type="button" class="btn btn-primary" onclick="history.back()">취소</button>
         <button type="button" class="btn btn-outline-primary" onclick="handleEdit()">
             <c:if test='${empty id}'>등록</c:if>
@@ -125,57 +125,3 @@
         });
     }
 </script>
-
-<style>
-    .edit-page {
-        padding: 30px 0 60px;
-    }
-    .edit-page h2 {
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .product-form {
-        margin-top: 60px;
-    }
-    .product-form .title {
-        font-size: 22px;
-        font-weight: bold;
-        margin-bottom: 16px;
-    }
-
-    .product-form dl {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .product-form dl dt,
-    .product-form dl dd {
-        display: flex;
-        align-items: center;
-        min-height: 70px;
-    }
-
-    .product-form dl dt {
-        justify-content: center;
-        width: 230px;
-        padding: 20px 12px;
-        border: 1px solid #dee2e6;
-    }
-    .product-form dl dd {
-        width: calc(100% - 230px);
-        padding: 0 20px;
-        margin-bottom: 0;
-        border: 1px solid #dee2e6;
-        
-    }
-    .edit-page .btn-wrap {
-        display: flex;
-        justify-content: end;
-        gap: 20px;
-    }
-    .edit-page .btn-wrap button {
-        margin-top: 50px;
-        min-width: 180px;
-    }
-</style>

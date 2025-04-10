@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<div class="container search-page">
-    <h2>검색</h2>
+<div class="container page-wrap">
+    <h2 class="page-title">검색</h2>
     <div class="input-group-lg search-wrap">
         <input type="text" class="form-control" placeholder="검색어를 입력해주세요." aria-label="검색어를 입력해주세요." aria-describedby="button-addon2">
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="handleSearch()">검색</button>
@@ -91,7 +91,7 @@
             } else {
                 document.querySelector('.total').style.display = "none";
                 document.querySelector('.pagination').style.display = "none";
-                document.querySelector('.search-page').appendChild
+                document.querySelector('.page-wrap').appendChild
                 content.innerHTML = 
                 "<p class='msg-box'>"
                     + "<i class='bi bi-exclamation-circle'></i>"
@@ -159,20 +159,8 @@
 </script>
 
 <style>
-    .search-page {
-        padding: 30px 62px 60px;
-    }
-    .search-page h2 {
-        font-weight: bold;
-        text-align: center;
-    }
-    .search-page .search-wrap {
+    .page-wrap .search-wrap {
         margin-top: 40px;
-    }
-
-    .search-page .pagination {
-        justify-content: center;
-        margin-top: 60px;
     }
 
     .category-list {
@@ -240,12 +228,10 @@
         font-size: 14px;
         color: #666;
     }
-
     .product-list .product-itme button {
         width: 100%;
         margin-top: auto;
     }
-
     .msg-box {
         display: flex;
         align-items: center;

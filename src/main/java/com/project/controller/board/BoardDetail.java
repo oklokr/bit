@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.project.model.BoardDto;
 import com.project.model.ReplyDto;
@@ -18,6 +19,7 @@ import com.project.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -75,5 +77,18 @@ public class BoardDetail {
 
         session.setAttribute("ReplyResult", result);
         return "redirect:/board/detail?boardId=" + replyDto.getBoardId() + "&pageNum=" + pageNum;
+    }
+}
+
+
+@RestController
+class BoardApiController {
+    @Autowired
+    private BoardService boardService;
+
+    @PostMapping("/api/board/delete")
+    public int boardDelete(@RequestBody int boardId){
+        int result = boardService.deletePost(boardId);
+        return result;
     }
 }

@@ -2,350 +2,289 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>board_detail</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/common.js"></script>
-    <link rel="stylesheet" href="/css/common.css">
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<div class="container page-wrap">
+    <h3 class="page-title"> 자유게시판 </h3>
 
-</head>
-<body>
-    <div class="board-detail-page container">
-        <h3> 자유게시판 </h3>
-        <br>
-        <table class="table">
-            <tr>
-                <th colspan="2" class="title">${boardDto.title}</th>
-            </tr>
-            <tr>
-                <td>작성자 : ${boardDto.author}</td>
-                <td>작성날짜 : <fmt:formatDate value="${boardDto.creationDate}" pattern="yyyy-MM-dd HH:mm"/></td>
-            </tr>
-            <td colspan="2">
-                <div class="content">
-                    <c:out value="${boardDto.content}" escapeXml="false"/>
-                </div>
-            </td>
-        </table>
+    <dl class="board-content">
+        <dt>제목</dt>
+        <dd>${boardDto.title}</dd>
+        <dt>작성자</dt>
+        <dd>${boardDto.author}</dd>
+        <dt class="full">작성날짜</dt>
+        <dd><fmt:formatDate value="${boardDto.creationDate}" pattern="yyyy-MM-dd HH:mm"/></dd>
+        <dd>
+            <c:out value="${boardDto.content}" escapeXml="false"/>
+        </dd>
+    </dl>
 
-        <!-- 답글 섹션 -->
-        <div class="reply-section">
-            <strong style="display: block; margin-bottom: 10px;">
-                답글 (<fmt:formatNumber value="${replyCount}" pattern="###,###"/>개)
-            </strong>
-            <table class="reply-table">
-                <c:if test="${replyCount eq 0}">
-                    <tr>
-                        <td colspan = "2">
-                            답글이 존재하지 않습니다
-                            <br><br>
-                        </td>
-                    </tr>
-                </c:if>
-                <c:if test="${replyCount ne 0}">
-                    <c:forEach var="replyDto" items="${replyDtos}">
-                        <div class="reply <c:if test='${replyDto.replyLevel == 1}'>reply-indent</c:if>">
-                            <div class="meta d-flex justify-content-between align-items-center">
-                                <div>
-                                    <c:if test="${replyDto.author == boardDto.author}">
-                                        작성자 : ${replyDto.author} (글쓴이)
-                                        &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    </c:if>
-                                    <c:if test="${replyDto.author != boardDto.author}">
-                                        작성자 : ${replyDto.author}
-                                        &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    </c:if>
-                                    작성날짜 : <fmt:formatDate value="${replyDto.creationDate}" pattern="yyyy.MM.dd HH:mm"/>
-                                </div>
-                                
-                                <c:if test="${replyDto.replyLevel == 0}">
-                                    <button class="btn btn-sm btn-outline-secondary py-0 px-2" 
-                                            style="font-size: 0.75rem;" 
-                                            onclick="nestedReplyForm('${replyDto.replyRef}')">답글</button>
-                                </c:if>
-                            </div>
-                            <div class="title">
-                                ${replyDto.replyTitle}
-                            </div>
-                            <div class="content">
-                                ${replyDto.replyContent}
-                            </div>
-                        </div>
-                        <!-- 대댓글 작성 -->
-                        <div id="reply-form-${replyDto.replyRef}" class="reply-form nested-reply-form mt-2" style="display: none;">
-                            <form action="${pageContext.request.contextPath}/board/reply/write" method="post" name="replyform">
-                                <input type="hidden" name="boardId" value="${boardId}">
-                                <input type="hidden" name="replyLevel" value="1">
-                                <input type="hidden" name="pageNum" value="${pageNum}">
-                                <input type="hidden" name="replyRef" value="${replyDto.replyRef}" />
-                        
-                                <div class="small text-muted mb-2">
-                                    작성자: ${user} &nbsp;&nbsp;|&nbsp;&nbsp;
-                                    작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/>
-                                </div>
-                        
-                                <div class="mb-2">
-                                    <input type="text" name="replyTitle" class="form-control" placeholder="제목을 입력해주세요">
-                                </div>
-                        
-                                <div class="mb-2">
-                                    <textarea name="replyContent" class="form-control" placeholder="내용을 입력해주세요" rows="5" maxlength="250"></textarea>
-                                </div>
+    <div class="board-reply">
+        <strong class="title">
+            답글 (<fmt:formatNumber value="${replyCount}" pattern="###,###"/>개)
+        </strong>
+        <c:if test="${replyCount eq 0}">
+            <p class="none-txt">답글이 존재하지 않습니다</p>
+        </c:if>
+        <div class="reply-list">
+            <c:forEach var="replyDto" items="${replyDtos}">
+                <dl>
+                    <dt>작성자</dt>
+                    <dd>${replyDto.author} <c:if test="${replyDto.author == boardDto.author}">(글쓴이)</c:if></dd>
+                    <dt>작성날짜</dt>
+                    <dd><fmt:formatDate value="${replyDto.creationDate}" pattern="yyyy.MM.dd HH:mm"/></dd>
+                    <dt class="reply-list--title">${replyDto.replyTitle}</dt>
+                    <dd class="reply-list--content">${replyDto.replyContent}</dd>
+                    <dd class="reply-btn"><button class="btn btn-sm btn-outline-secondary" onclick="handleDisplayForm('${replyDto.replyRef}')">답글</button></dd>
+                </dl>
+                <form style="display:none" class='reply-form-${replyDto.replyRef}' action="${pageContext.request.contextPath}/board/reply/write" method="post" name="replyform">
+                    <input type="hidden" name="boardId" value="${boardId}">
+                    <input type="hidden" name="replyLevel" value="1">
+                    <input type="hidden" name="pageNum" value="${pageNum}">
+                    <input type="hidden" name="replyRef" value="${replyDto.replyRef}" />
+            
+                    <p class="small text-muted mb-3">
+                        <span>작성자: ${user}</span>
+                        <span>작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/></span>
+                    </p>
+            
+                    <div class="mb-3">
+                        <p class="form-label">제목</p>
+                        <input type="text" name="replyTitle" class="form-control" placeholder="제목을 입력해주세요">
+                    </div>
+            
+                    <div class="mb-3">
+                        <p class="form-label">내용</p>
+                        <textarea name="replyContent" class="form-control" placeholder="내용을 입력해주세요" rows="5" maxlength="250"></textarea>
+                    </div>
 
-                                <div class="text-end">
-                                    <button type="button" name="submit" class="btn btn-sm btn-secondary">답글 작성</button>
-                                    <button type="button" name="cancel" class="btn btn-sm btn-secondary">취소</button>
-                                </div>
-                            </form>
-                        </div>
-
-                    </c:forEach>
-                </c:if>
-            </table>
-
-            <!-- 답글 작성 폼 -->
-            <form action="${pageContext.request.contextPath}/board/reply/write" class = "reply-form" method="POST" class="mt-4" name="replyform">
-                <input type="hidden" name="boardId" value="${boardId}">
-                <input type="hidden" name="replyLevel" value="0">
-                <input type="hidden" name="pageNum" value="${pageNum}">
-                <table class="table reply-table">
-                    <thead>
-                        <tr>
-                            <strong style="display: block; margin-bottom: 10px;">답글 작성</strong>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="2" class="small text-muted">
-                                작성자: ${user} &nbsp;&nbsp;|&nbsp;&nbsp;
-                                작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input type="text" name="replyTitle" class="form-control" placeholder="제목을 입력해주세요">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <textarea name="replyContent" class="form-control" placeholder="내용을 입력해주세요" rows="5" maxlength="250"></textarea>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" class="text-end">
-                                <button type="button" name="submit" class="btn btn-primary">작성</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </form>
-        </div>  
-
-        <!-- 버튼 그룹 -->
-        <div class="button-group d-flex">
-            <button class="btn btn-secondary"
-            onclick="location='/board?pageNum=${pageNum}'">목록</button>
-
-            <c:if test="${boardDto.author == user}">
-                <div class="ms-auto">
-                    <button class="btn btn-primary" id = "modifyBtn"
-                    onclick="location='/board/edit?boardId=${boardId}&result=${-1}&pageNum=${pageNum}'">수정</button>
-                    <button class="btn btn-primary" id = "deleteBtn"
-                    onclick="location='/board/delete?boardId=${boardId}&pageNum=${pageNum}'">삭제</button>
-                </div>
-            </c:if>
+                    <div class="text-end">
+                        <button type="button" name="submit" class="btn btn-sm btn-secondary" data-submit-id="${replyDto.replyRef}">답글 작성</button>
+                        <button type="button" name="cancel" class="btn btn-sm btn-secondary" onclick="handleDisplayForm('${replyDto.replyRef}')">취소</button>
+                    </div>
+                </form>
+            </c:forEach>
         </div>
+
+        <!-- 답글 작성 폼 -->
+        <form class='reply-form-user' action="${pageContext.request.contextPath}/board/reply/write" class="reply-form" method="post" class="mt-4" name="replyform">
+            <input type="hidden" name="boardId" value="${boardId}">
+            <input type="hidden" name="replyLevel" value="0">
+            <input type="hidden" name="pageNum" value="${pageNum}">
+
+            <strong style="display: block; margin-bottom: 10px;">답글 작성</strong>
+
+            <p class="small text-muted mb-3">
+                <span>작성자: ${user}</span>
+                <span>작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/></span>
+            </p>
+
+            <div class="mb-3">
+                <p class="form-label">제목</p>
+                <input type="text" name="replyTitle" class="form-control" placeholder="제목을 입력해주세요">
+            </div>
     
+            <div class="mb-3">
+                <p class="form-label">내용</p>
+                <textarea name="replyContent" class="form-control" placeholder="내용을 입력해주세요" rows="5" maxlength="250"></textarea>
+            </div>
+
+            <button type="button" name="submit" class="btn btn-primary" data-submit-id="user">답글 작성</button>
+        </form>
     </div>
 
+    <!-- 버튼 그룹 -->
+     <div class="bottom-btns">
+        <div class="left">
+            <button class="btn btn-outline-primary" onclick="location='/board?pageNum=${pageNum}'">목록</button>
+        </div>
 
-</body>
-</html>
+        <c:if test="${boardDto.author == user}">
+            <button class="btn btn-outline-primary" id="deleteBtn" onclick="locationLink('delete', '${boardId}')">삭제</button>
+            <button class="btn btn-primary" id="modifyBtn" onclick="locationLink('edit', '/board/edit?boardId=${boardId}&result=${-1}&pageNum=${pageNum}')">수정</button>
+        </c:if>
+    </div>
+</div>
 
 <script>
-    window.onload = function() {
-        const deleteResult = "${deleteResult}";
-        if (deleteResult == "1") {
-            modal({
-                content: "게시글이 삭제되었습니다.",
-                fnConfirm: () => {
-                    location.href = "/board?pageNum=${pageNum}";
-                }
-            });
+    function locationLink(type, data) {
+        if(type === 'edit') {
+            location.href = data;
         }
-        if (deleteResult == "0") {
+        if(type === 'delete') {
             modal({
-                content: "게시글 삭제에 실패했습니다."
-            });
+                content: "게시글을 삭제하시겠습니까?",
+                type: "confirm",
+                fnConfirm: () =>  postRequestApi("/api/board/delete", data, res => {
+                    location.href = "/board"
+                })
+            })
         }
     }
 
-    function nestedReplyForm(replyId) {
-        const form = document.getElementById('reply-form-' + replyId);
-        if (form.style.display === 'none') {
-            form.style.display = 'block';
-        } else {
-            form.style.display = 'none';
-        }
+    function handleDisplayForm(replyId) {
+        const form = document.querySelector(".reply-form-"+replyId+"");
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
     }
-    document.querySelectorAll('button[name="cancel"]').forEach(cancelBtn => {
-        cancelBtn.addEventListener("click", function() {
-            const form = this.closest(".nested-reply-form");
-            if (form) {
-                form.style.display = "none";
-            }
-        });
-    });
 
-    document.querySelectorAll('button[name="submit"]').forEach(submitbutton => {
-        submitbutton.addEventListener("click", function() {
-            let form = this.closest(".nested-reply-form");
-            if (!form){
-                form =this.closest(".reply-form")
-            }
-            if (form) {
-                let title = form.querySelector("input[name='replyTitle']").value.trim();
-                let content = form.querySelector("textarea[name='replyContent']").value.trim();
-                let tag = /<[^>]*>/;
+    function handleSubmit() {
+        document.querySelectorAll('button[name="submit"]').forEach(el => {
+            el.addEventListener("click", e => {
+                const idData = el.getAttribute("data-submit-id")
+                if(validate.isEmpty(idData)) return
+                const replyForm = document.querySelector(".reply-form-"+idData+"");
+                const elTitle = validate.isEmpty(replyForm.querySelector("input[name='replyTitle']").value)
+                const elContent = validate.isEmpty(replyForm.querySelector("textarea[name='replyContent']").value)
+                const tag = /<[^>]*>/;
 
-                // 폼 검증
-                if (!title) {
-                    event.preventDefault();  // 이벤트 취소
-                    modal({
+                if(elTitle) {
+                    return modal({
                         title: "입력 오류",
                         content: "제목을 입력하세요.",
                         type: "message",
                         fnClose: function() {
-                            document.querySelector("input[name='replyTitle']").focus();
+                            replyForm.querySelector("input[name='replyTitle']").focus();
                         }
                     });
-                } else if (!content) {
-                    event.preventDefault();  // 이벤트 취소
-                    modal({
+                }
+
+                if(elContent) {
+                    return modal({
                         title: "입력 오류",
                         content: "답글 내용을 입력하세요.",
                         type: "message",
                         fnClose: function() {
-                            document.querySelector("textarea[name='replyContent']").focus();
+                            replyForm.querySelector("textarea[name='replyContent']").focus();
                         }
                     });
-                } else if (tag.test(title) || tag.test(content)) {
-                    event.preventDefault();  // 이벤트 취소
-                    modal({
+                    
+                }
+                if(tag.test(elTitle) || tag.test(elContent)) {
+                    return modal({
                         title: "입력 오류",
                         content: "제목과 내용에 태그를 포함할 수 없습니다.",
                         type: "message",
                         fnClose: null
                     });
                 }
-                document.form.submit();
-            }
+                HTMLFormElement.prototype.submit.call(replyForm);
+            })
         });
-    });
+    }
 
+    function handleLoad() {
+        handleSubmit();
+    }
+    
+    document.addEventListener('DOMContentLoaded', handleLoad);
 </script>
 
-<%-- JSP에서 세션 값 삭제 (JavaScript 실행 이후) --%>
-<% session.removeAttribute("deleteResult"); %>
-
 <style>
-    /* 기본 테이블 스타일 */
-    .table {
-        width: 100%;
-        table-layout: fixed;
+    .board-content {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 40px; 
+        border-bottom: 2px solid #ccc;
     }
-
-    /* 페이지 레이아웃 */
-    .board-detail-page {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 20px;
-        background: #fff;
-        border-radius: 8px;
-    }
-
-    th.title {
-        font-size: 1.4rem;
+    .board-content dt {
         font-weight: bold;
+        min-width: 150px;
     }
-
-    /* 게시글 내용 스타일 */
-    td.content {
-        min-height: 100px;
-        height: 100px;
-        padding: 10px;
-        word-wrap: break-word;
-        vertical-align: top;
+    .board-content dt.full + dd {
+        min-width: calc(100% - 150px);
     }
-
-    /* 답글 영역 */
-    .reply-section {
-        margin-top: 20px;
-        margin-bottom: 30px;
+    .board-content dt + dd {
+        min-width: calc(50% - 150px);
     }
-
-    .reply-section span {
-        font-size: 1.2rem;
-        font-weight: normal;
-        color: #666;
-        margin-bottom: 10px;
-    }
-
-    .reply-table {
+    .board-content dd + dd {
         width: 100%;
-        margin-top: 10px;
+    }
+    .board-content dt,
+    .board-content dd {
+        padding: 12px 20px;
         border-top: 1px solid #ccc;
-        padding-top: 10px;
+    }
+    .board-content dt {
+        text-align: center;
+        background-color: #eee;
+    }
+    .board-content dd {
+        margin: initial;
     }
 
-    .reply {
-        border-top: 1px solid #eee;
-        padding: 10px 0;
+    .board-content dd:last-of-type {
+        min-height: 500px;
     }
 
-    .reply.reply-indent {
-        margin-left: 20px;
+    /* 답글 리스트 영역 */
+    .board-reply .title {
+        font-size: 16px;
+    }
+    .board-reply .none-txt {
+        padding: 16px 0;
     }
 
-    .reply .meta {
-        font-size: 12px;
-        color: #666;
+    .board-reply .reply-list dl {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 20px 0;
+        margin-bottom: 0;
+        border-bottom: 1px solid #ccc;
+    }
+    .board-reply .reply-list dl dd {
+        margin-bottom: 0;
     }
 
-    .reply .title {
-        font-weight: bold;
-        margin-top: 5px;
+    .board-reply .reply-list dl dt:not(.reply-list--title),
+    .board-reply .reply-list dl dd:not(.reply-list--content) {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #ccc;
+    }
+    .board-reply .reply-list dl dt:not(.reply-list--title) {
+        margin-right: 12px;
+    }
+    .board-reply .reply-list dl dd:not(.reply-list--content) + dt:not(.reply-list--title)::before {
+        content: " | ";
+        margin: 0 5px;
+    }
+    .board-reply .reply-list dl .reply-btn {
+        margin-left: 12px;
     }
 
-    .reply .content {
-        margin-top: 3px;
+    .board-reply .reply-list form {
+        margin: 20px 0;
     }
 
-    /* 버튼 그룹 */
-    .button-group {
-        margin-top: 30px;
+    .reply-form-user {
+        padding: 30px 0;
+    }
+    .reply-form-user .btn {
+        display: block;
+        margin: 12px 0 0 auto;
     }
 
-    .form-control{
-        box-shadow: none !important;
+    .reply-list--title,
+    .reply-list--content {
+        width: 100%;
+        order: 1;
+        margin-top: 10px;
+    }
+    
+
+
+    /* 답글작성 영역 */
+    .reply-form {
+        padding-top: 24px;
+        margin-top: 24px;
+        border-top: 1px solid #ccc;
     }
 
-    textarea {
-    resize: none !important;
-    }
 
     .nested-reply-form {
-    margin-left: 20px;       /* 댓글보다 오른쪽으로 들여쓰기 */
-    padding: 10px;
-    font-size: 0.95rem;       /* 글자도 살짝 작게 */
-    margin-bottom: 20px;
-}
+        margin-left: 20px;       /* 댓글보다 오른쪽으로 들여쓰기 */
+        padding: 10px;
+        font-size: 0.95rem;       /* 글자도 살짝 작게 */
+        margin-bottom: 20px;
+    }
 </style>
 
