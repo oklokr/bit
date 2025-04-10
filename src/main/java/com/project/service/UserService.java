@@ -155,6 +155,11 @@ public class UserService {
         userMapper.insertTermsAgreement(userId, termsId);
     }
 
+    public boolean verifyPassword(String sessionId, String inputPassword) {
+        UserDto user = getUserInfo(sessionId);
+        return user.getPassword().equals(inputPassword);
+    }
+
     // 마이페이지 이벤토리
     public List<InventoryDto> getInventory(String id, String productName, int page, int size) {
         Map<String, Object> params = new HashMap<>();
