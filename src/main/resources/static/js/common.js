@@ -91,6 +91,7 @@ function modal(option) {
     footerEl.innerHTML = footerInner;
 
     document.querySelector(".btn[data-fn-type='close']")?.addEventListener("click", fnClose)
+    modalEl.addEventListener("hidden.bs.modal", () => fnClose, { once: true });
     document.querySelector(".btn[data-fn-type='confirm']")?.addEventListener("click", fnConfirm)
     modal.show();
 }

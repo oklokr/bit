@@ -5,7 +5,11 @@
     request.setAttribute("id", id);
 %>
 <div class="container edit-page">
-    <h2>상품정보 등록</h2>
+    <h2>
+        상품정보 
+        <c:if test='${empty id}'>등록</c:if>
+        <c:if test="${not empty id}">수정</c:if>
+    </h2>
     <div class="product-form">
         <h3 class="title">필수입력 정보</h3>
         <dl>
@@ -31,7 +35,7 @@
             <dd>
                 <c:if test='${empty id}'>
                     <select class="form-select" aria-label="Default select">
-                        <option selected disabled>카테고리를 선택해주세요.</option>
+                        <option value="" selected disabled>카테고리를 선택해주세요.</option>
                         <c:forEach var="code" items="${commonCodes}">
                             <option value="${code.commonValue}">${code.commonName}</option>
                         </c:forEach>
@@ -39,7 +43,7 @@
                 </c:if>
                 <c:if test="${not empty id}">
                     <select class="form-select" aria-label="Default select">
-                        <option selected disabled>카테고리를 선택해주세요.</option>
+                        <option value="" selected disabled>카테고리를 선택해주세요.</option>
                         <c:forEach var="code" items="${commonCodes}">
                             <c:if test='${code.commonValue eq productInfo.categoryCode}'>
                                 <option value="${code.commonValue}" selected>${code.commonName}</option>
@@ -71,7 +75,10 @@
 
     <div class="btn-wrap">
         <button type="button" class="btn btn-primary" onclick="history.back()">취소</button>
-        <button type="button" class="btn btn-outline-primary" onclick="handleEdit()">등록</button>
+        <button type="button" class="btn btn-outline-primary" onclick="handleEdit()">
+            <c:if test='${empty id}'>등록</c:if>
+            <c:if test="${not empty id}">수정</c:if>
+        </button>
     </div>
 </div>
 
@@ -89,8 +96,26 @@
         if(!validate.isEmpty(productId)) {
             postForm.productId = productId
         }
+
+        if(validate.isEmpty(postForm.productName)) {
+            return modal({content: "상품명을 입력해주세요.", type: "alert", fnClose: () => {
+                document.querySelector("#productName").focus();
+            }});
+        }
+        if(validate.isEmpty(postForm.productDescription)) {
+            return modal({content: "상품설명을 입력해주세요.", type: "alert", fnClose: () => {
+                document.querySelector("#productDescription").focus();
+            }});
+        }
+        if(validate.isEmpty(postForm.categoryCode)) {
+            return modal({content: "카테고리를 선택해주세요.", type: "alert", fnClose: () => {
+                document.querySelector(".form-select").focus();
+            }});
+        }
+
+        const modalMsg = productId ? '수정' : '등록'
         modal({
-            content: "상품정보를 등록하시겠습니까?",
+            content: "상품정보를 "+ modalMsg +"하시겠습니까?",
             type: "confirm",
             fnConfirm: () => postRequestApi("/api/main/productEdit", postForm, res => {
                 if(res.data.resultCode === 1) {

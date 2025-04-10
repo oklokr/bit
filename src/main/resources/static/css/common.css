@@ -1,4 +1,7 @@
 /* 모달 Style */
+.common-modal .modal-dialog {
+    margin-top: 30vh;
+}
 .common-modal .modal-content {
     border-radius: 8px;
 }

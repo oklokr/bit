@@ -31,7 +31,7 @@
             <p class="total-txt">
                 총 <span></span>개
             </p>
-            <a href="/main/productEdit" role="button" class="btn btn-primary btn-sm">상품등록</a>
+            <a href="/main/productEdit" role="button" class="btn btn-outline-primary btn-sm">상품등록</a>
         </div>
         <table>
             <thead>
