@@ -41,7 +41,7 @@
             내 정보
         </div>
         <div class="card-body">
-            <form id="userInfoForm" method="post" action="${pageContext.request.contextPath}/user/update">
+            <form id="userInfoForm" method="post" action="${pageContext.request.contextPath}/mypage/update">
                 <div class="row">
                     <!-- 사용자 정보 -->
                     <div class="col-md-6">
@@ -163,13 +163,25 @@
     let isBusinessNumberValidated = false; // 사업자 번호 확인 여부를 저장하는 변수
 
     document.getElementById('userInfoForm').addEventListener('submit', async function (event) {
-        event.preventDefault(); // 폼 제출 방지
+    event.preventDefault(); // 폼 제출 방지
+
     // 필드 값 가져오기
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
     const newPassword = document.querySelector('input[name="newPassword"]').value.trim();
     const confirmPassword = document.querySelector('input[name="confirmPassword"]').value.trim();
     const email = document.querySelector('input[name="email"]').value.trim();
     const phoneNumber = document.querySelector('input[name="phoneNumber"]').value.trim();
     const postalCode = document.querySelector('input[name="postalCode"]').value.trim();
+
+    // "병원" 또는 "관리자"를 숫자로 변환
+    data.memberType = data.memberType === '병원' ? 1 : data.memberType === '관리자' ? 2 : 0;
+
+    // 신규 비밀번호 처리
+    if (newPassword) {
+        data.password = newPassword; // 신규 비밀번호를 password 필드에 설정
+    }
 
     // 휴대전화 정규식
     const phoneRegex = /^010-\d{4}-\d{4}$/;
@@ -177,78 +189,83 @@
     // 유효성 검사
     if (!isBusinessNumberValidated) {
         alert('사업자 번호 확인을 먼저 진행해주세요.');
-        event.preventDefault(); // 폼 제출 방지
-        return false; // 다른 검사를 중단
+        return; // 폼 제출 중단
     }
 
     if (!newPassword) {
         alert('신규 비밀번호를 입력해주세요.');
-        event.preventDefault(); // 폼 제출 방지
-        return false; // 다른 검사를 중단
+        return; // 폼 제출 중단
     }
 
     if (!confirmPassword) {
         alert('비밀번호 확인을 입력해주세요.');
-        event.preventDefault(); // 폼 제출 방지
-        return false; // 다른 검사를 중단
+        return; // 폼 제출 중단
     }
 
     if (newPassword !== confirmPassword) {
         alert('비밀번호가 일치하지 않습니다.');
-        event.preventDefault(); // 폼 제출 방지
-        return false; // 다른 검사를 중단
+        return; // 폼 제출 중단
     }
 
     if (!email) {
         alert('이메일을 입력해주세요.');
-        event.preventDefault(); // 폼 제출 방지
-        return false; // 다른 검사를 중단
+        return; // 폼 제출 중단
     }
 
     if (!phoneNumber) {
         alert('휴대전화를 입력해주세요.');
-        event.preventDefault(); // 폼 제출 방지
-        return false; // 다른 검사를 중단
+        return; // 폼 제출 중단
     }
 
     if (!phoneRegex.test(phoneNumber)) {
         alert('휴대전화가 올바르지 않습니다. (예: 010-1234-5678)');
-        event.preventDefault(); // 폼 제출 방지
-        return false; // 다른 검사를 중단
+        return; // 폼 제출 중단
     }
 
     if (!postalCode) {
         alert('우편번호를 입력해주세요.');
-        event.preventDefault(); // 폼 제출 방지
-        return false; // 다른 검사를 중단
+        return; // 폼 제출 중단
     }
-// 이메일과 휴대전화 중복 확인
-try {
-            const response = await fetch('/api/validate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, phoneNumber, postalCode })
-            });
 
-            const result = await response.json();
-            if (!result.success) {
-                if (result.duplicateEmail) {
-                    alert('이미 사용 중인 이메일입니다. 다른 이메일을 입력해주세요.');
-                    return false; // 다른 검사를 중단
-                }
-                if (result.duplicatePhoneNumber) {
-                    alert('이미 사용 중인 전화번호입니다. 다른 전화번호를 입력해주세요.');
-                    return false; // 다른 검사를 중단
-                }
-                return false; // 유효성 검사 실패 시 폼 제출 중단
+    // 이메일과 휴대전화 중복 확인
+    try {
+        const validateResponse = await fetch('/api/validate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, phoneNumber, postalCode })
+        });
+
+        const validateResult = await validateResponse.json();
+        if (!validateResult.success) {
+            if (validateResult.duplicateEmail) {
+                alert('이미 사용 중인 이메일입니다. 다른 이메일을 입력해주세요.');
+                return; // 폼 제출 중단
             }
-
-            // 폼 제출
-            this.submit();
-        } catch (error) {
-            console.error('에러 발생:', error);
-            alert('서버와 통신 중 문제가 발생했습니다.');
+            if (validateResult.duplicatePhoneNumber) {
+                alert('이미 사용 중인 전화번호입니다. 다른 전화번호를 입력해주세요.');
+                return; // 폼 제출 중단
+            }
+            return; // 유효성 검사 실패 시 폼 제출 중단
         }
+
+        // 서버로 데이터 전송
+        const updateResponse = await fetch('/mypage/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        const updateResult = await updateResponse.json();
+        if (updateResult.success) {
+            alert(updateResult.message);
+            location.reload(); // 성공 시 페이지 새로고침
+        } else {
+            alert(updateResult.message);
+        }
+    } catch (error) {
+        console.error('에러 발생:', error);
+        alert('서버와 통신 중 문제가 발생했습니다.');
+    }
 });
 
     function exitReadMode() {
@@ -358,6 +375,7 @@ try {
             }
         }).open();
     }
+
 </script>
 </body>
 </html>
