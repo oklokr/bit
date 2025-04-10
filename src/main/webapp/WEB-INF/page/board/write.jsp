@@ -62,7 +62,13 @@
 
 <script>
     const quill = new Quill('#editor', {
-        theme: 'snow'
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                ['bold', 'italic', 'underline', 'strike', 'link']
+            ]
+        }
     });
 
     let submit = document.querySelector("button[name='submit']");
@@ -142,13 +148,6 @@
         margin: 40px auto; /* 중앙 정렬 */
         background: #fff; /* 배경 흰색 */
         border-radius: 8px; /* 모서리 둥글게 */
-    }
-
-    .board-write-page h3 {
-        text-align: center;
-        margin: 20px 0; /* 위아래 여백 */
-        align-items: center;
-        font-weight: bold;
     }
 
     .button-group{

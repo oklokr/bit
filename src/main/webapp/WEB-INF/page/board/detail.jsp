@@ -13,6 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/common.js"></script>
     <link rel="stylesheet" href="/css/common.css">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
 </head>
 <body>
     <div class="board-detail-page container">
@@ -26,9 +28,11 @@
                 <td>작성자 : ${boardDto.author}</td>
                 <td>작성날짜 : <fmt:formatDate value="${boardDto.creationDate}" pattern="yyyy-MM-dd HH:mm"/></td>
             </tr>
-            <tr>
-                <td colspan="2" class="content">${boardDto.content}</td>
-            </tr>
+            <td colspan="2">
+                <div class="content">
+                    <c:out value="${boardDto.content}" escapeXml="false"/>
+                </div>
+            </td>
         </table>
 
         <!-- 답글 섹션 -->
@@ -41,6 +45,7 @@
                     <tr>
                         <td colspan = "2">
                             답글이 존재하지 않습니다
+                            <br><br>
                         </td>
                     </tr>
                 </c:if>
@@ -264,13 +269,6 @@
         padding: 20px;
         background: #fff;
         border-radius: 8px;
-    }
-
-    /* 제목 스타일 */
-    .board-detail-page h3 {
-        text-align: center;
-        margin: 20px 0;
-        font-weight: bold;
     }
 
     th.title {
