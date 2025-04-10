@@ -17,7 +17,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.model.UserDto;
 import com.project.service.UserService;
 
-
 @Controller
 public class JoinStepComp {
 
@@ -30,6 +29,7 @@ public class JoinStepComp {
         model.addAttribute("contentPage", "/WEB-INF/page/auth/joinStepComp.jsp");
         return "layout/app";
     }
+
     @PostMapping("/joinStepComp")
     public String handleJoinStepComp(@RequestParam Map<String, String> params, Model model) {
         System.out.println("Received params: " + params);
@@ -39,7 +39,7 @@ public class JoinStepComp {
         
         return "layout/app";
     }
-    
+
     @PostMapping("/checkBusinessNumber")
     @ResponseBody
     public ResponseEntity<Map<String, Boolean>> checkBusinessNumber(@RequestBody Map<String, String> request) {
@@ -49,6 +49,7 @@ public class JoinStepComp {
         response.put("isValid", isValid);
         return ResponseEntity.ok(response);
     }
+
     @PostMapping("/joinStepSuccess")
 public String JoinStepComphandle(@RequestParam Map<String, String> params, RedirectAttributes redirectAttributes) {
     // 입력 데이터 출력 (디버깅용)
@@ -60,6 +61,7 @@ public String JoinStepComphandle(@RequestParam Map<String, String> params, Redir
     user.setId(params.get("id"));
     user.setPassword(params.get("password"));
     user.setEmail(params.get("email"));
+    
     // 전화번호 조합
     String phoneNumber = params.get("tel1") + "-" + params.get("tel2") + "-" + params.get("tel3");
     user.setPhoneNumber(phoneNumber);
@@ -71,8 +73,27 @@ public String JoinStepComphandle(@RequestParam Map<String, String> params, Redir
     user.setDetailedAddress(params.get("detailedAddress"));
     user.setPostalCode(params.get("postalCode"));
 
-    // DB에 저장
+    // DB에 회원 정보 저장
     userService.saveUser(user);
+
+    // 약관 동의 여부 저장
+    boolean requiredTermAgreed = Boolean.parseBoolean(params.get("requiredTermAgreed"));
+    boolean optionalTermAgreed = Boolean.parseBoolean(params.get("optionalTermAgreed"));
+
+    System.out.println("Required Term Agreed: " + requiredTermAgreed);
+    System.out.println("Optional Term Agreed: " + optionalTermAgreed);
+
+    // 필수 약관 동의 저장
+    if (requiredTermAgreed) {
+        System.out.println("Saving required terms agreement for user: " + user.getId());
+        userService.saveTermsAgreement(user.getId(), 1); // 필수 약관 ID: 1
+    }
+
+    // 선택 약관 동의 저장 (체크했을 경우에만)
+    if (optionalTermAgreed) {
+        System.out.println("Saving optional terms agreement for user: " + user.getId());
+        userService.saveTermsAgreement(user.getId(), 2); // 선택 약관 ID: 2
+    }
 
     // 리다이렉트 시 데이터를 전달
     redirectAttributes.addFlashAttribute("user", user);
