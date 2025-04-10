@@ -5,3 +5,6 @@
 /api/mypage/info                    # 회원정보 조회
 /joinStepUser/checkDuplicateId      # 아이디 중복 확인
 /checkBusinessNumber                # 사업자 번호 확인
+/api/check-duplicate                # 이메일, 휴대전화 중복확인
+/api/mypage/verify-password         # 마이페이지 비밀번호 확인 요청
+/api/validate                       # 마이페이지 유효성검사

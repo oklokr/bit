@@ -160,6 +160,14 @@ public class UserService {
         return user.getPassword().equals(inputPassword);
     }
 
+    public boolean isEmailDuplicate(String email) {
+        return userMapper.existsByEmail(email);
+    }
+    
+    public boolean isPhoneNumberDuplicate(String phoneNumber) {
+        return userMapper.existsByPhoneNumber(phoneNumber);
+    }
+
     // 마이페이지 이벤토리
     public List<InventoryDto> getInventory(String id, String productName, int page, int size) {
         Map<String, Object> params = new HashMap<>();
