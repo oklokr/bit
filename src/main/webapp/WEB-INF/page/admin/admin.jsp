@@ -120,6 +120,7 @@
                     location.href = "/admin/detail?pageNum=${pageNum}&id=${failedId}";
                 }
             );
+            
         }
     }
 </script>

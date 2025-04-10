@@ -120,39 +120,31 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapJsKey}&libraries=services,clusterer,drawing"></script>
 <script>
     document.getElementById("changeMemBtn").addEventListener("click", (event)=>{
-        showResultModal(
-                "1", 
-                "회원유형 변경",
-                "${userDto.companyName}의 회원 유형을 변경하시겠습니까?",
-                null,
-                () => document.getElementById("typeChangeForm").submit(),
-                null,
-                "confirm"
-        );
+        modal({
+            title: "회원유형 변경",
+            type: "confirm",
+            content: "${userDto.companyName}의 회원 유형을 변경하시겠습니까?",
+            fnConfirm: () => document.getElementById("typeChangeForm").submit()
+        });
+
     });
 
     document.getElementById("resetPwBtn").addEventListener("click", (event)=>{
-        showResultModal(
-                "1",
-                "비밀번호 초기화",
-                "${userDto.companyName}의 비밀번호 초기화를 하시겠습니까?",
-                null,
-                () => document.getElementById("resetPasswordForm").submit(),
-                null,
-                "confirm"
-        );
+        modal({
+            title: "비밀번호 초기화",
+            type: "confirm",
+            content: "${userDto.companyName}의 비밀번호 초기화를 하시겠습니까?",
+            fnConfirm: () => document.getElementById("resetPasswordForm").submit()
+        });
     });
 
     document.getElementById("deleteMemBtn").addEventListener("click", (event)=>{
-        showResultModal(
-                "1",
-                "회원 탈퇴",
-                "${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?",
-                null,
-                () => document.getElementById("deleteUserForm").submit(),
-                null,
-                "confirm"
-        );
+        modal({
+            title: "회원 탈퇴",
+            type: "confirm",
+            content: "${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?",
+            fnConfirm: () => document.getElementById("deleteUserForm").submit()
+        });
     });
 
     window.onload = function() {
@@ -161,20 +153,27 @@
         let name = "${name}";
         let deleteResult = "${resetResult}";
         let changeResult = "${changeResult}";
-        if (deleteResult === "1" || deleteResult === "0") {
-            showResultModal(
-                deleteResult,
-                "처리 결과",
-                name + " 회원의 비밀번호가 변경되었습니다",
-                "비밀번호 변경에 실패했습니다",
-                function() {
-                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-                },
-                function() {
-                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+        console.log(id+deleteResult);
+        if(deleteResult == "1")
+            modal({
+                type: "confirm",
+                content: name + " 회원의 비밀번호가 변경되었습니다",
+                fnConfirm: () => {
+                    setTimeout(() => {
+                        location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+                    }, 10); // 10ms 지연으로 이벤트 바인딩 시간 확보
                 }
-            );
-        }
+            });
+        if(deleteREsult == "0") modal({content: "비밀번호 변경에 실패했습니다"+id,
+            type: "confirm",
+                content: "비밀번호 변경에 실패했습니다",
+                fnConfirm: () => {
+                    setTimeout(() => {
+                        location.href = "/admin/detail?pageNum="+pageNum+"&id="+id;
+                    }, 10); // 10ms 지연으로 이벤트 바인딩 시간 확보
+                }
+        });
+
 
         if (changeResult === "1" || changeResult === "0") {
             showResultModal(
