@@ -151,43 +151,40 @@
         let pageNum = "${pageNum}";
         let id = "${id}";
         let name = "${name}";
-        let deleteResult = "${resetResult}";
+        let resetResult = "${resetResult}";
         let changeResult = "${changeResult}";
-        console.log(id+deleteResult);
-        if(deleteResult == "1")
+        if (resetResult == "1") {
             modal({
-                type: "confirm",
-                content: name + " 회원의 비밀번호가 변경되었습니다",
-                fnConfirm: () => {
-                    setTimeout(() => {
-                        location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-                    }, 10); // 10ms 지연으로 이벤트 바인딩 시간 확보
+                content: name + "회원의 비밀번호가 변경되었습니다",
+                fnClose: () => {
+                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
                 }
             });
-        if(deleteREsult == "0") modal({content: "비밀번호 변경에 실패했습니다"+id,
-            type: "confirm",
+        }
+        if (resetResult == "0") {
+            modal({
                 content: "비밀번호 변경에 실패했습니다",
-                fnConfirm: () => {
-                    setTimeout(() => {
-                        location.href = "/admin/detail?pageNum="+pageNum+"&id="+id;
-                    }, 10); // 10ms 지연으로 이벤트 바인딩 시간 확보
-                }
-        });
-
-
-        if (changeResult === "1" || changeResult === "0") {
-            showResultModal(
-                changeResult,
-                "처리 결과",
-                name + " 회원의 회원 유형이 변경되었습니다",
-                "회원 유형 변경에 실패했습니다",
-                function() {
-                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-                },
-                function() {
+                fnClose: () => {
                     location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
                 }
-            );
+            });
+        }
+
+        if (changeResult == "1") {
+            modal({
+                content: name + " 회원의 회원 유형이 변경되었습니다",
+                fnClose: () => {
+                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+                }
+            });
+        }
+        if (changeResult == "0") {
+            modal({
+                content: "회원 유형 변경에 실패했습니다",
+                fnClose: () => {
+                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+                }
+            });
         }
     }
 
@@ -201,8 +198,6 @@
                 center: new kakao.maps.LatLng(33.450701, 126.570667),
                 level: 3
             };
-
-            console.log(address);
             var map = new kakao.maps.Map(container, options);
 
             var geocoder = new kakao.maps.services.Geocoder();
