@@ -95,7 +95,7 @@
                                 </div>
 
                                 <div class="text-end">
-                                    <button type="submit" name="submit" class="btn btn-sm btn-secondary">답글 작성</button>
+                                    <button type="button" name="submit" class="btn btn-sm btn-secondary">답글 작성</button>
                                     <button type="button" name="cancel" class="btn btn-sm btn-secondary">취소</button>
                                 </div>
                             </form>
@@ -106,7 +106,7 @@
             </table>
 
             <!-- 답글 작성 폼 -->
-            <form action="${pageContext.request.contextPath}/board/reply/write" method="POST" class="mt-4" name="replyform">
+            <form action="${pageContext.request.contextPath}/board/reply/write" class = "reply-form" method="POST" class="mt-4" name="replyform">
                 <input type="hidden" name="boardId" value="${boardId}">
                 <input type="hidden" name="replyLevel" value="0">
                 <input type="hidden" name="pageNum" value="${pageNum}">
@@ -135,7 +135,7 @@
                         </tr>
                         <tr>
                             <td colspan="2" class="text-end">
-                                <button type="submit" name="submit" class="btn btn-primary">작성</button>
+                                <button type="button" name="submit" class="btn btn-primary">작성</button>
                             </td>
                         </tr>
                     </tbody>
@@ -181,47 +181,6 @@
         }
     }
 
-    
-    let replyform = document.querySelector("form[name='replyform']");
-    replyform.addEventListener("submit", (event) => {
-        let title = document.querySelector("input[name='replyTitle']").value.trim();
-        let content = document.querySelector("textarea[name='replyContent']").value.trim();
-        let tag = /<[^>]*>/;
-
-        if (!title) {
-            event.preventDefault();
-            showResultModal(
-                "0",
-                "입력 오류",
-                "",
-                "제목을 입력하세요.",
-                function() {
-                    document.querySelector("input[name='replyTitle']").focus();
-                }
-            );
-        } else if (!content) {
-            event.preventDefault();
-            showResultModal(
-                "0",
-                "입력 오류",
-                "",
-                "답글 내용을 입력하세요.",
-                function() {
-                    document.querySelector("textarea[name='replyContent']").focus();
-                }
-            );
-        } else if (tag.test(title) || tag.test(content)) {
-            event.preventDefault();
-            showResultModal(
-                "0",
-                "입력 오류",
-                "",
-                "제목과 내용에 태그를 포함할 수 없습니다.",
-                null
-            );
-        }
-    });
-
     function nestedReplyForm(replyId) {
         const form = document.getElementById('reply-form-' + replyId);
         if (form.style.display === 'none') {
@@ -235,6 +194,52 @@
             const form = this.closest(".nested-reply-form");
             if (form) {
                 form.style.display = "none";
+            }
+        });
+    });
+
+    document.querySelectorAll('button[name="submit"]').forEach(submitbutton => {
+        submitbutton.addEventListener("click", function() {
+            let form = this.closest(".nested-reply-form");
+            if (!form){
+                form =this.closest(".reply-form")
+            }
+            if (form) {
+                let title = form.querySelector("input[name='replyTitle']").value.trim();
+                let content = form.querySelector("textarea[name='replyContent']").value.trim();
+                let tag = /<[^>]*>/;
+
+                // 폼 검증
+                if (!title) {
+                    event.preventDefault();  // 이벤트 취소
+                    modal({
+                        title: "입력 오류",
+                        content: "제목을 입력하세요.",
+                        type: "message",
+                        fnClose: function() {
+                            document.querySelector("input[name='replyTitle']").focus();
+                        }
+                    });
+                } else if (!content) {
+                    event.preventDefault();  // 이벤트 취소
+                    modal({
+                        title: "입력 오류",
+                        content: "답글 내용을 입력하세요.",
+                        type: "message",
+                        fnClose: function() {
+                            document.querySelector("textarea[name='replyContent']").focus();
+                        }
+                    });
+                } else if (tag.test(title) || tag.test(content)) {
+                    event.preventDefault();  // 이벤트 취소
+                    modal({
+                        title: "입력 오류",
+                        content: "제목과 내용에 태그를 포함할 수 없습니다.",
+                        type: "message",
+                        fnClose: null
+                    });
+                }
+                document.form.submit();
             }
         });
     });
