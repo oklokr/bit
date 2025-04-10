@@ -167,17 +167,18 @@
 <script>
     window.onload = function() {
         const deleteResult = "${deleteResult}";
-        if (deleteResult === "1" || deleteResult === "0") {
-            showResultModal(
-                deleteResult,
-                "처리 결과",
-                "게시글이 삭제되었습니다.",
-                "게시글 삭제에 실패했습니다.",
-                function() {
+        if (deleteResult == "1") {
+            modal({
+                content: "게시글이 삭제되었습니다.",
+                fnConfirm: () => {
                     location.href = "/board?pageNum=${pageNum}";
-                },
-                null // 또는 그냥 생략 가능
-            );
+                }
+            });
+        }
+        if (deleteResult == "0") {
+            modal({
+                content: "게시글 삭제에 실패했습니다."
+            });
         }
     }
 
