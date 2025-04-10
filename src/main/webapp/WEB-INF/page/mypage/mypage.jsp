@@ -109,7 +109,12 @@
                             </tr>
                             <tr>
                                 <th>가입유형</th>
-                                <td><input type="text" class="form-control" name="memberType" value="${userDto.memberType}" readonly></td>
+                                <td>
+                                    <input type="text" class="form-control" name="memberType" 
+                                           value="${userDto.memberType == 1 ? '병원' : '관리자'}" 
+                                           readonly 
+                                           style="text-align: left;">
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -148,7 +153,11 @@
     </div>
 </div>
 
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    const kakaoApiKey = '${kakao.map.js-key}';
+    Kakao.init(kakaoApiKey); // 발급받은 JavaScript 키로 초기화
     let actionType = '';
 
     function openPasswordModal(action) {
@@ -241,8 +250,13 @@
     function searchAddress() {
         new daum.Postcode({
             oncomplete: function(data) {
+                // 도로명 주소 또는 지번 주소를 가져옵니다.
                 const address = data.roadAddress ? data.roadAddress : data.jibunAddress;
+
+                // 주소 입력창에 값 설정
                 document.querySelector('input[name="address"]').value = address;
+
+                // 상세주소 입력창에 포커스 이동
                 document.querySelector('input[name="detailedAddress"]').focus();
             }
         }).open();
