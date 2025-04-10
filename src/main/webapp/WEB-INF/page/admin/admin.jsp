@@ -107,19 +107,21 @@
 <script>
     window.onload = function() {
         const deleteResult = "${deleteResult}";
-        if (deleteResult === "1" || deleteResult === "0") {
-            showResultModal(
-                deleteResult,
-                "처리 결과",
-                "${deletedName} 회원이 탈퇴되었습니다",
-                "회원 탈퇴에 실패했습니다",
-                function() {
+        if (deleteResult == "1") {
+            modal({
+                content: "${deletedName} 회원이 탈퇴되었습니다",
+                fnConfirm: () => {
                     location.href = "/admin?pageNum=${pageNum}";
-                },
-                function() {
+                }
+            });
+        }
+        if (deleteResult == "0") {
+            modal({
+                content: "회원 탈퇴에 실패했습니다",
+                fnConfirm: () => {
                     location.href = "/admin/detail?pageNum=${pageNum}&id=${failedId}";
                 }
-            );
+            });
         }
     }
 </script>

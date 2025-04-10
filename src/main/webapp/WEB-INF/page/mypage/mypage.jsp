@@ -41,7 +41,7 @@
             내 정보
         </div>
         <div class="card-body">
-            <form id="userInfoForm" method="post" action="${pageContext.request.contextPath}/user/update">
+            <form id="userInfoForm" method="post" action="${pageContext.request.contextPath}/mypage/update">
                 <div class="row">
                     <!-- 사용자 정보 -->
                     <div class="col-md-6">
@@ -109,12 +109,18 @@
                             </tr>
                             <tr>
                                 <th>가입유형</th>
-                                <td><input type="text" class="form-control" name="memberType" value="${userDto.memberType}" readonly></td>
+                                <td>
+                                    <input type="text" class="form-control" name="memberType" 
+                                           value="${userDto.memberType == 1 ? '병원' : '관리자'}" 
+                                           readonly 
+                                           style="text-align: left;">
+                                </td>
                             </tr>
                         </table>
                     </div>
                 </div>
                 <div class="text-center mt-4">
+                    <button type="button" class="btn btn-secondary" onclick="exitReadMode()">나가기</button>
                     <button type="button" class="btn btn-danger" onclick="openPasswordModal('delete')">회원탈퇴</button>
                     <button type="button" class="btn btn-primary" onclick="openPasswordModal('edit')">수정</button>
                 </div>
@@ -148,8 +154,123 @@
     </div>
 </div>
 
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+    const kakaoApiKey = '${kakao.map.js-key}';
+    Kakao.init(kakaoApiKey); // 발급받은 JavaScript 키로 초기화
     let actionType = '';
+    let isBusinessNumberValidated = false; // 사업자 번호 확인 여부를 저장하는 변수
+
+    document.getElementById('userInfoForm').addEventListener('submit', async function (event) {
+    event.preventDefault(); // 폼 제출 방지
+
+    // 필드 값 가져오기
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    const newPassword = document.querySelector('input[name="newPassword"]').value.trim();
+    const confirmPassword = document.querySelector('input[name="confirmPassword"]').value.trim();
+    const email = document.querySelector('input[name="email"]').value.trim();
+    const phoneNumber = document.querySelector('input[name="phoneNumber"]').value.trim();
+    const postalCode = document.querySelector('input[name="postalCode"]').value.trim();
+
+    // "병원" 또는 "관리자"를 숫자로 변환
+    data.memberType = data.memberType === '병원' ? 1 : data.memberType === '관리자' ? 2 : 0;
+
+    // 신규 비밀번호 처리
+    if (newPassword) {
+        data.password = newPassword; // 신규 비밀번호를 password 필드에 설정
+    }
+
+    // 휴대전화 정규식
+    const phoneRegex = /^010-\d{4}-\d{4}$/;
+
+    // 유효성 검사
+    if (!isBusinessNumberValidated) {
+        alert('사업자 번호 확인을 먼저 진행해주세요.');
+        return; // 폼 제출 중단
+    }
+
+    if (!newPassword) {
+        alert('신규 비밀번호를 입력해주세요.');
+        return; // 폼 제출 중단
+    }
+
+    if (!confirmPassword) {
+        alert('비밀번호 확인을 입력해주세요.');
+        return; // 폼 제출 중단
+    }
+
+    if (newPassword !== confirmPassword) {
+        alert('비밀번호가 일치하지 않습니다.');
+        return; // 폼 제출 중단
+    }
+
+    if (!email) {
+        alert('이메일을 입력해주세요.');
+        return; // 폼 제출 중단
+    }
+
+    if (!phoneNumber) {
+        alert('휴대전화를 입력해주세요.');
+        return; // 폼 제출 중단
+    }
+
+    if (!phoneRegex.test(phoneNumber)) {
+        alert('휴대전화가 올바르지 않습니다. (예: 010-1234-5678)');
+        return; // 폼 제출 중단
+    }
+
+    if (!postalCode) {
+        alert('우편번호를 입력해주세요.');
+        return; // 폼 제출 중단
+    }
+
+    // 이메일과 휴대전화 중복 확인
+    try {
+        const validateResponse = await fetch('/api/validate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, phoneNumber, postalCode })
+        });
+
+        const validateResult = await validateResponse.json();
+        if (!validateResult.success) {
+            if (validateResult.duplicateEmail) {
+                alert('이미 사용 중인 이메일입니다. 다른 이메일을 입력해주세요.');
+                return; // 폼 제출 중단
+            }
+            if (validateResult.duplicatePhoneNumber) {
+                alert('이미 사용 중인 전화번호입니다. 다른 전화번호를 입력해주세요.');
+                return; // 폼 제출 중단
+            }
+            return; // 유효성 검사 실패 시 폼 제출 중단
+        }
+
+        // 서버로 데이터 전송
+        const updateResponse = await fetch('/mypage/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        const updateResult = await updateResponse.json();
+        if (updateResult.success) {
+            alert(updateResult.message);
+            location.reload(); // 성공 시 페이지 새로고침
+        } else {
+            alert(updateResult.message);
+        }
+    } catch (error) {
+        console.error('에러 발생:', error);
+        alert('서버와 통신 중 문제가 발생했습니다.');
+    }
+});
+
+    function exitReadMode() {
+        history.back(); // 이전 화면으로 바로 돌아가기
+    }
 
     function openPasswordModal(action) {
         actionType = action;
@@ -219,11 +340,26 @@
     }
 
     function confirmDelete() {
-        if (confirm("정말로 탈퇴하시겠습니까?")) {
-            alert("회원 탈퇴가 완료되었습니다.");
-            // 실제 탈퇴 처리 로직 추가 필요
-        }
+    if (confirm("정말로 탈퇴하시겠습니까?")) {
+        fetch('/api/mypage/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                window.location.href = '/login'; // 로그인 페이지로 이동
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('회원 탈퇴 중 문제가 발생했습니다.');
+        });
     }
+}
 
     function validateBusinessNumber() {
         const businessNumber = document.querySelector('input[name="businessNumber"]').value.trim();
@@ -231,22 +367,30 @@
 
         if (!businessNumberRegex.test(businessNumber)) {
             alert('유효하지 않은 사업자 번호 형식입니다. 올바른 형식을 입력해주세요.');
+            isBusinessNumberValidated = false; // 확인 실패
             return false;
         }
 
         alert('유효한 사업자 번호 형식입니다.');
+        isBusinessNumberValidated = true; // 확인 성공
         return true;
-    }
+    };
 
     function searchAddress() {
         new daum.Postcode({
             oncomplete: function(data) {
+                // 도로명 주소 또는 지번 주소를 가져옵니다.
                 const address = data.roadAddress ? data.roadAddress : data.jibunAddress;
+
+                // 주소 입력창에 값 설정
                 document.querySelector('input[name="address"]').value = address;
+
+                // 상세주소 입력창에 포커스 이동
                 document.querySelector('input[name="detailedAddress"]').focus();
             }
         }).open();
     }
+
 </script>
 </body>
 </html>

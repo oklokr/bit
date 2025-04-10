@@ -74,9 +74,29 @@
             session_expiry_time = NULL
         WHERE session_id = #{sessionId}
     </update>
+
     <select id="getUserInfo" parameterType="string" resultType="com.project.model.UserDto">
         SELECT * FROM members WHERE session_id = #{sessionId}
     </select>
+
+    <delete id="deleteUserById" parameterType="string">
+        DELETE FROM members WHERE id = #{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.project.model.UserDto">
+        UPDATE members
+        SET 
+            company_name = #{companyName},
+            password = #{password},
+            email = #{email},
+            phone_number = #{phoneNumber},
+            business_number = #{businessNumber},
+            address = #{address},
+            detailed_address = #{detailedAddress},
+            postal_code = #{postalCode},
+            member_type = #{memberType}
+        WHERE id = #{id}
+    </update>
 
     <!-- 마이페이지 이벤토리 쿼리문 -->
     <insert id="insertInventory" parameterType="map">

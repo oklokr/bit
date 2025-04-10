@@ -48,5 +48,9 @@ public interface UserMapper {
     public int insertInventory(Map<String, Object> param);
     public int updateInventory(Map<String, Object> param);
     public int deleteInventory(Map<String, Object> param);
+
+    void updateUser(UserDto userDto);
+
+    void deleteUserById(@Param("id") String id);
 }
 
