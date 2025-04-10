@@ -115,18 +115,18 @@ class MypageApiController {
         }
 
         // 비밀번호 업데이트 처리
-    if (userDto.getPassword() != null && !userDto.getPassword().equals("********")) {
-        currentUser.setPassword(userDto.getPassword()); // 신규 비밀번호 설정
-    }
-    // 다른 사용자 정보 업데이트
-    currentUser.setCompanyName(userDto.getCompanyName());
-    currentUser.setEmail(userDto.getEmail());
-    currentUser.setPhoneNumber(userDto.getPhoneNumber());
-    currentUser.setBusinessNumber(userDto.getBusinessNumber());
-    currentUser.setAddress(userDto.getAddress());
-    currentUser.setDetailedAddress(userDto.getDetailedAddress());
-    currentUser.setPostalCode(userDto.getPostalCode());
-    currentUser.setMemberType(userDto.getMemberType());
+        if (userDto.getPassword() != null && !userDto.getPassword().equals("********")) {
+            currentUser.setPassword(userDto.getPassword()); // 신규 비밀번호 설정
+        }
+        // 다른 사용자 정보 업데이트
+        currentUser.setCompanyName(userDto.getCompanyName());
+        currentUser.setEmail(userDto.getEmail());
+        currentUser.setPhoneNumber(userDto.getPhoneNumber());
+        currentUser.setBusinessNumber(userDto.getBusinessNumber());
+        currentUser.setAddress(userDto.getAddress());
+        currentUser.setDetailedAddress(userDto.getDetailedAddress());
+        currentUser.setPostalCode(userDto.getPostalCode());
+        currentUser.setMemberType(userDto.getMemberType());
 
         // 사용자 정보 업데이트
         userService.updateUserInfo(userDto);
@@ -134,6 +134,27 @@ class MypageApiController {
         Map<String, Object> response = new HashMap<>();
         response.put("success", true);
         response.put("message", "사용자 정보가 성공적으로 업데이트되었습니다.");
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/api/mypage/delete")
+    public ResponseEntity<Map<String, Object>> deleteUser(HttpSession session) {
+        String sessionId = session.getId();
+        UserDto currentUser = userService.getUserInfo(sessionId);
+
+        if (currentUser == null) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "사용자 세션이 유효하지 않습니다.");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        userService.deleteUser(currentUser.getId());
+        session.invalidate(); // 세션 무효화
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "회원 탈퇴가 완료되었습니다.");
         return ResponseEntity.ok(response);
     }
 }

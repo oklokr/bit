@@ -172,6 +172,10 @@ public class UserService {
         userMapper.updateUser(userDto);
     }
 
+    public void deleteUser(String id) {
+        userMapper.deleteUserById(id);
+    }
+
     // 마이페이지 이벤토리
     public List<InventoryDto> getInventory(String id, String productName, int page, int size) {
         Map<String, Object> params = new HashMap<>();

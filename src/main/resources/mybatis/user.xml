@@ -79,6 +79,10 @@
         SELECT * FROM members WHERE session_id = #{sessionId}
     </select>
 
+    <delete id="deleteUserById" parameterType="string">
+        DELETE FROM members WHERE id = #{id}
+    </delete>
+
     <update id="updateUser" parameterType="com.project.model.UserDto">
         UPDATE members
         SET 

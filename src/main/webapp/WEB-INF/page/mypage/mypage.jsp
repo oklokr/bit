@@ -340,11 +340,26 @@
     }
 
     function confirmDelete() {
-        if (confirm("정말로 탈퇴하시겠습니까?")) {
-            alert("회원 탈퇴가 완료되었습니다.");
-            // 실제 탈퇴 처리 로직 추가 필요
-        }
+    if (confirm("정말로 탈퇴하시겠습니까?")) {
+        fetch('/api/mypage/delete', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                window.location.href = '/login'; // 로그인 페이지로 이동
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('회원 탈퇴 중 문제가 발생했습니다.');
+        });
     }
+}
 
     function validateBusinessNumber() {
         const businessNumber = document.querySelector('input[name="businessNumber"]').value.trim();
