@@ -143,7 +143,11 @@
     height: 100px;
     margin: 0 auto;
     border-radius: 12px;
-    background: #ccc;
+    overflow: hidden;
+    border: 1px solid #ccc;
+}
+.table-wrap table .img {
+    width: 100%;
 }
 .table-wrap .pagination {
     justify-content: center;

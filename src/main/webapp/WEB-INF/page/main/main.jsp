@@ -63,10 +63,11 @@
                 }
                 const productItem = document.createElement('li');
                 productItem.className = 'product-itme';
+                console.log(item)
                 productItem.innerHTML = 
                 "<div class='product-inner'>"
                     +"<div class='product-img'>"
-                        + "<img src="+ item.categoryName +" alt='상품이미지' class='img-fluid'>"
+                        + "<img src="+ item.image +" onerror='this.src='https://onsight.softballspa.com/content/images/thumbs/default-image_450.png'' class='img-fluid'>"
                     + "</div>"
                     + "<p class='product-info'>"
                         + "<i>"+ item.categoryName +"</i>"
@@ -75,8 +76,13 @@
                     + "</p>"
                     + "<button type='button' class='btn btn-secondary btn-sm'>재고관리 추가</button>";
                 + '</div>'
-                
                 currentGroup.querySelector('.inner').appendChild(productItem);
+
+                document.querySelectorAll('.product-img img').forEach(img => {
+                    img.addEventListener('error', () => {
+                        img.src = 'https://onsight.softballspa.com/content/images/thumbs/default-image_450.png';
+                    });
+                });
 
                 productItem.querySelector(".product-inner button").addEventListener("click", () => {
                     modal({
@@ -165,10 +171,14 @@
     }
 
     #product-items .product-itme .product-img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         height: 230px;
         border-radius: 10px;
-        background-color: #eee;
+        border: 1px solid #eee;
+        overflow: hidden;
     }
     #product-items .product-itme .product-info {
         display: flex;

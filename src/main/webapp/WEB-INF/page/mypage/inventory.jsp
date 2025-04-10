@@ -124,7 +124,7 @@ function handleSetProduct() {
             row.innerHTML = 
             "<td><input type='checkbox' class='form-check-input' value='"+item.productId+"'></td>"
             + "<td>"+ item.categoryName +"</td>"
-            + "<td><span class='image'><img src='${item.imageUrl}' alt='상품 이미지'></span></td>"
+            + "<td><span class='image'><img src='${item.imageUrl}'></span></td>"
             + "<td>"+ item.productName +"</td>"
             + "<td>"+ item.productDescription +"</td>"
             + "<td class='count-cell'>"
@@ -140,6 +140,12 @@ function handleSetProduct() {
                 const checkbox = row.querySelector('.form-check-input');
                 checkbox.checked = !checkbox.checked; // 체크박스 상태 토글
             })
+
+            document.querySelectorAll('.image img').forEach(img => {
+                img.addEventListener('error', () => {
+                    img.src = 'https://onsight.softballspa.com/content/images/thumbs/default-image_450.png';
+                });
+            });
 
             // 버튼 이벤트 추가
             const decreaseBtn = row.querySelector('.decrease-btn');

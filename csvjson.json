@@ -2,7 +2,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.gunchinews.com/news/photo/200706/2704-2-3195.jpg",
     "product_name": "아가",
     "category_code": 1,
     "product_description": "우수한 정밀도 / 친수성 / 풍부한 탄성 / 재사용 가능",
@@ -11,7 +11,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalarirang.com/news/photo/201204/888_945_1535.jpg",
     "product_name": "알지네이트",
     "category_code": 1,
     "product_description": "취급용이 / 정확한 인상채득 / 착색이 되지않음 / 환자가 편안해함 / 저렴하고 경화시간 조절 가능",
@@ -20,7 +20,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://korean.sddent.com/photo/pt148538448-vinylpoly_siloxane_additional_silicone_impression_material_hydrophilic_light_body_type_3.jpg",
     "product_name": "폴리비닐실록산",
     "category_code": 1,
     "product_description": "크기 안정성 우수 / 흐름성 조절 용이 / 정밀도 우수 / 작업시간 6-8분",
@@ -29,7 +29,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalarirang.com/news/photo/201312/5646_6828_55.jpg",
     "product_name": "폴리에테르",
     "category_code": 1,
     "product_description": "종합 수축이 적음 / 크기 안정성 우수 / 친수성 / 임플란트나 빠른 경화 요구 시 사용",
@@ -38,7 +38,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.gckorea.co.kr/korean/clinical/images/handbook/IMG-stone1-1.jpg",
     "product_name": "보통석고",
     "category_code": 1,
     "product_description": "실습용과 모형 작업에 적합한 치과용 석고 / 별도의 강도를 요하지 않은 작업에 사용 / Base 작업에 사용",
@@ -47,7 +47,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://korock.kr/theme/ino/img/sub/korock03.png",
     "product_name": "경석고",
     "category_code": 1,
     "product_description": "뛰어난 미세부 재현성 부드러운 표면 / 낮은 팽찰률로 높은 작업성",
@@ -56,7 +56,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://dental2804.com/bbs/files/attach/images/238/603/598/85dd0697e8264e09656fed506ddbc970.jpg",
     "product_name": "초경석고",
     "category_code": 1,
     "product_description": "안정적이고 낮은 팽창률 / 결정 성장 시 초고강도 구현 가능 / 심미성 우수",
@@ -65,7 +65,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://kddental.co.kr/web/product/big/202206/930c38f0765426e165a2878439dba2e5.jpg",
     "product_name": "치과용 Z.O.E",
     "category_code": 1,
     "product_description": "임시 및 중간용 수복재 / 치수진정효과 / 임시접착",
@@ -74,7 +74,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://gemma.co.kr/static/images/products/dental/orthodontic_gemma_24/thumb1.jpg",
     "product_name": "교정용석고",
     "category_code": 1,
     "product_description": "치아교정을 위한 치수정밀성과 심미성 / 고강도 정밀 모형제작에 적합",
@@ -83,7 +83,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20210414/art_16178422130993_9247a5.jpg",
     "product_name": "Flowable Resin",
     "category_code": 2,
     "product_description": "교합 수복에 주로 사용되는 레진",
@@ -92,7 +92,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cdnus.globalso.com/esun3d/Hard-Tough-Resin_black1.jpg",
     "product_name": "Hard Resin",
     "category_code": 2,
     "product_description": "교합수복 또는 치아 성형이 필요한 부분에 레진 수복 시 주로 사용( ex. 전치부 레진 필링)",
@@ -101,7 +101,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://images.ctfassets.net/wfptrcrbtkd0/9d832cc16c855bcdc2d6319f87ba11a1/3a080aecc6de1d0d480cf356879dbda7/Ultra-Etch-Etchant-1.2ml-syringe-BOND-ETCH.jpg?w=1800&q=70&fm=webp",
     "product_name": "Etchant",
     "category_code": 2,
     "product_description": "에칭제, 레진테그를 만들기 위해 필요",
@@ -110,7 +110,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.acrodent.com/data/goods/1/2021/03/262_temp_16151852065959large.jpg",
     "product_name": "Sealant",
     "category_code": 2,
     "product_description": "치면의 미세한 열구에 치아 우식을 예방하고자 도포",
@@ -119,7 +119,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://biscoasia.com/images/products/pulpcap/theracal_lc_img_01.jpg",
     "product_name": "Theracal LC",
     "category_code": 2,
     "product_description": "Base와 Liner역할을 해주는 레진",
@@ -128,7 +128,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://multimedia.3m.com/mws/media/1064391J/3m-tm-scotchcast-tm-electrical-resin-parts-a-and-b.jpg?width=506",
     "product_name": "임시충전용 Resin",
     "category_code": 2,
     "product_description": "임시충전할 때 사용되는 레진",
@@ -137,7 +137,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cafe24.poxo.com/ec01/dentalmmall/pdHAR3Nfo463PahlnCQH4gAC9VOfZGwcCNJ7TBu2nctGDLe3j8W9RnBnkcwzRpxJ8rydUhMsalG8AocwWD28DA==/_/web/product/medium/202311/b268301610ea508be85d98eb29c6fdd0.jpg",
     "product_name": "Core Resin",
     "category_code": 2,
     "product_description": "치아에 Core를 세울 때 사용하는 레진",
@@ -146,7 +146,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cafe24.poxo.com/ec01/dentalmmall/pdHAR3Nfo463PahlnCQH4gAC9VOfZGwcCNJ7TBu2nctGDLe3j8W9RnBnkcwzRpxJ8rydUhMsalG8AocwWD28DA==/_/web/product/medium/202311/b268301610ea508be85d98eb29c6fdd0.jpg",
     "product_name": "기공용 Resin",
     "category_code": 2,
     "product_description": "기공물 제작에 주로 사용되는 레진",
@@ -155,7 +155,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://misobright.co.kr/images/b_31.jpg",
     "product_name": "교정 Bracket 장착용 Resin",
     "category_code": 2,
     "product_description": "치아 교정시 Bracket을 치면에 접착할 때 주로 사용하는 레진",
@@ -164,7 +164,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://dental2804.com/bbs/files/attach/images/238/603/598/85dd0697e8264e09656fed506ddbc970.jpg",
     "product_name": "전치부레진치",
     "category_code": 2,
     "product_description": "13,12,11,21,22,23 / 43,42,41,31,32,33",
@@ -173,7 +173,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20120417/art_1335402107.jpg",
     "product_name": "구치부레진치",
     "category_code": 2,
     "product_description": "17,16,15,14,24,25,26,27 / 47,46,45,44,34,35,36,37",
@@ -182,7 +182,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://m.seichong.com/web/product/big/202012/2d5a8f56b4c0b3ace2fe5acbedf7d50c.png",
     "product_name": "왁스분리제",
     "category_code": 3,
     "product_description": "왁스업 작업 후 분리를 용이하게 해줌",
@@ -191,7 +191,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://치과재료.kr/web/product/big/sungshim1137_8957.jpg",
     "product_name": "석고분리제",
     "category_code": 3,
     "product_description": "석고끼리의 결합을 막고 분리를 용이하게 해줌",
@@ -200,7 +200,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.buydental.co.kr:11055/pimg/det/B1509/B1509-260.jpg",
     "product_name": "포세린분리제",
     "category_code": 3,
     "product_description": "모형재와 포세린 사이의 분리를 용이하게 해줌",
@@ -209,8 +209,8 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
-    "product_name": "검분리제(이미지x)",
+    "image": "https://images.ctfassets.net/wfptrcrbtkd0/9d832cc16c855bcdc2d6319f87ba11a1/3a080aecc6de1d0d480cf356879dbda7/Ultra-Etch-Etchant-1.2ml-syringe-BOND-ETCH.jpg?w=1800&q=70&fm=webp",
+    "product_name": "검분리제",
     "category_code": 3,
     "product_description": "검 분리를 도와줌",
     "product_registration_date": ""
@@ -218,7 +218,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cafe24.poxo.com/ec01/dentalmmall/pdHAR3Nfo463PahlnCQH4gAC9VOfZGwcCNJ7TBu2nctGDLe3j8W9RnBnkcwzRpxJ8rydUhMsalG8AocwWD28DA==/_/web/product/medium/202311/b268301610ea508be85d98eb29c6fdd0.jpg",
     "product_name": "기포방지제",
     "category_code": 3,
     "product_description": "표면장력을 낮춰 기포를 안정화 시키는 역할",
@@ -227,7 +227,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20210414/art_16178422130993_9247a5.jpg",
     "product_name": "스캔파우더",
     "category_code": 3,
     "product_description": "구강의 깊은 부분까지 스캔될 수 있게 표면처리해줌",
@@ -236,7 +236,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.buydental.co.kr:11055/pimg/det/B1509/B1509-260.jpg",
     "product_name": "캐스팅표면처리제",
     "category_code": 3,
     "product_description": "열간가공과 냉간가공의 위험요소를 최소화하고, 마모와 스크래치에 대한 저항성 증가",
@@ -245,7 +245,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cafe24.poxo.com/ec01/dentalmmall/pdHAR3Nfo463PahlnCQH4gAC9VOfZGwcCNJ7TBu2nctGDLe3j8W9RnBnkcwzRpxJ8rydUhMsalG8AocwWD28DA==/_/web/product/medium/202311/b268301610ea508be85d98eb29c6fdd0.jpg",
     "product_name": "레진분리제",
     "category_code": 3,
     "product_description": "레진계 재료 사용시 분리를 용이하게 해주는 제품",
@@ -254,7 +254,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://korock.kr/theme/ino/img/sub/korock03.png",
     "product_name": "하드너",
     "category_code": 3,
     "product_description": "석고모형의 강도를 증가시켜줌",
@@ -263,7 +263,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://치과재료.kr/web/product/big/sungshim1137_8957.jpg",
     "product_name": "스페이서",
     "category_code": 3,
     "product_description": "석고모형의 얇은 층을 만들어 왁스분리를 돕는다",
@@ -272,7 +272,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.buydental.co.kr:11055/pimg/det/B1509/B1509-260.jpg",
     "product_name": "인레이왁스",
     "category_code": 4,
     "product_description": "와동을 수복하여 인레이 제작시 사용되는 왁스",
@@ -281,7 +281,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20210414/art_16178422130993_9247a5.jpg",
     "product_name": "캐스팅왁스",
     "category_code": 4,
     "product_description": "국부의치나 그 밖의 비슷한 장치물의 금속 주조물 제작을 위한 납원형 제작용으로 사용",
@@ -290,7 +290,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.gckorea.co.kr/korean/clinical/images/handbook/IMG-stone1-1.jpg",
     "product_name": "시트왁스",
     "category_code": 4,
     "product_description": "보철물의 형태용으로 쓰이며 다양한 두께로 접합이용이하다",
@@ -299,7 +299,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cdnus.globalso.com/esun3d/Hard-Tough-Resin_black1.jpg",
     "product_name": "모델링왁스",
     "category_code": 4,
     "product_description": "컴파운드 작업 후 마무리 왁스 코팅 시 사용",
@@ -308,7 +308,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://images.ctfassets.net/wfptrcrbtkd0/9d832cc16c855bcdc2d6319f87ba11a1/3a080aecc6de1d0d480cf356879dbda7/Ultra-Etch-Etchant-1.2ml-syringe-BOND-ETCH.jpg?w=1800&q=70&fm=webp",
     "product_name": "왁스업용왁스",
     "category_code": 4,
     "product_description": "왁스업 시 사용되는 기초적인 왁스",
@@ -317,7 +317,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://korock.kr/theme/ino/img/sub/korock03.png",
     "product_name": "베이스플레이트왁스",
     "category_code": 4,
     "product_description": "총의치 납의치 제작시 사용",
@@ -326,7 +326,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://치과재료.kr/web/product/big/sungshim1137_8957.jpg",
     "product_name": "박싱왁스",
     "category_code": 4,
     "product_description": "모형의 Base를 필요한 크기와 형태로 형성하기 위해 인상체 주위를 둘러싸는데 사용",
@@ -335,7 +335,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://images.ctfassets.net/wfptrcrbtkd0/9d832cc16c855bcdc2d6319f87ba11a1/3a080aecc6de1d0d480cf356879dbda7/Ultra-Etch-Etchant-1.2ml-syringe-BOND-ETCH.jpg?w=1800&q=70&fm=webp",
     "product_name": "유틸리티왁스",
     "category_code": 4,
     "product_description": "실온에서 성형성이 있어서 다양한 용도로 사용된다",
@@ -344,7 +344,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://images.ctfassets.net/wfptrcrbtkd0/9d832cc16c855bcdc2d6319f87ba11a1/3a080aecc6de1d0d480cf356879dbda7/Ultra-Etch-Etchant-1.2ml-syringe-BOND-ETCH.jpg?w=1800&q=70&fm=webp",
     "product_name": "스티키왁스",
     "category_code": 4,
     "product_description": "교의치의 납착을 위해 각 구조물을 임시 고정시킬 때 사용, 파절된 부분 수리에 사용",
@@ -353,7 +353,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://kddental.co.kr/web/product/big/202206/930c38f0765426e165a2878439dba2e5.jpg",
     "product_name": "Corrective 왁스 (수정 인상용 왁스)",
     "category_code": 4,
     "product_description": "주로 무치악 인상체나 총의치의 연조직면 부위의 결함을 찾아내는데 이용",
@@ -362,7 +362,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://m.seichong.com/web/product/big/202012/2d5a8f56b4c0b3ace2fe5acbedf7d50c.png",
     "product_name": "bite 왁스",
     "category_code": 4,
     "product_description": "상 하악의 교합관계를 정확히 기록하는데 사용",
@@ -371,7 +371,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://multimedia.3m.com/mws/media/1064391J/3m-tm-scotchcast-tm-electrical-resin-parts-a-and-b.jpg?width=506",
     "product_name": "치과용 메스",
     "category_code": 5,
     "product_description": "",
@@ -380,7 +380,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.gunchinews.com/news/photo/200706/2704-2-3195.jpg",
     "product_name": "알코올 램프",
     "category_code": 5,
     "product_description": "",
@@ -389,7 +389,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://dental2804.com/bbs/files/attach/images/238/603/598/85dd0697e8264e09656fed506ddbc970.jpg",
     "product_name": "석고 조각도",
     "category_code": 5,
     "product_description": "석고 카빙 시 사용",
@@ -398,7 +398,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://biscoasia.com/images/products/pulpcap/theracal_lc_img_01.jpg",
     "product_name": "왁스업조각도#1",
     "category_code": 5,
     "product_description": "",
@@ -407,7 +407,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://biscoasia.com/images/products/pulpcap/theracal_lc_img_01.jpg",
     "product_name": "왁스업조각도#2",
     "category_code": 5,
     "product_description": "",
@@ -416,7 +416,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalarirang.com/news/photo/201312/5646_6828_55.jpg",
     "product_name": "왁스업조각도#3",
     "category_code": 5,
     "product_description": "",
@@ -425,7 +425,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://dental2804.com/bbs/files/attach/images/238/603/598/85dd0697e8264e09656fed506ddbc970.jpg",
     "product_name": "왁스업조각도#4",
     "category_code": 5,
     "product_description": "",
@@ -434,7 +434,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.acrodent.com/data/goods/1/2021/03/262_temp_16151852065959large.jpg",
     "product_name": "왁스업조각도#5",
     "category_code": 5,
     "product_description": "",
@@ -443,7 +443,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://gemma.co.kr/static/images/products/dental/orthodontic_gemma_24/thumb1.jpg",
     "product_name": "컷백조각도",
     "category_code": 5,
     "product_description": "컷백 작업 시 사용",
@@ -452,7 +452,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cafe24.poxo.com/ec01/dentalmmall/pdHAR3Nfo463PahlnCQH4gAC9VOfZGwcCNJ7TBu2nctGDLe3j8W9RnBnkcwzRpxJ8rydUhMsalG8AocwWD28DA==/_/web/product/medium/202311/b268301610ea508be85d98eb29c6fdd0.jpg",
     "product_name": "총의치조각도",
     "category_code": 5,
     "product_description": "박싱 작업이나 넓은 부위 접착 시 사용",
@@ -461,7 +461,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://dental2804.com/bbs/files/attach/images/238/603/598/85dd0697e8264e09656fed506ddbc970.jpg",
     "product_name": "치과용 모터",
     "category_code": 5,
     "product_description": "",
@@ -470,7 +470,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://dental2804.com/bbs/files/attach/images/238/603/598/85dd0697e8264e09656fed506ddbc970.jpg",
     "product_name": "러버포인트바",
     "category_code": 5,
     "product_description": "",
@@ -479,7 +479,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://multimedia.3m.com/mws/media/1064391J/3m-tm-scotchcast-tm-electrical-resin-parts-a-and-b.jpg?width=506",
     "product_name": "러버휠",
     "category_code": 5,
     "product_description": "",
@@ -488,7 +488,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://korock.kr/theme/ino/img/sub/korock03.png",
     "product_name": "스톤포인트바",
     "category_code": 5,
     "product_description": "",
@@ -497,7 +497,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://gemma.co.kr/static/images/products/dental/orthodontic_gemma_24/thumb1.jpg",
     "product_name": "지르코니아바",
     "category_code": 5,
     "product_description": "",
@@ -506,7 +506,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20120417/art_1335402107.jpg",
     "product_name": "루즈",
     "category_code": 5,
     "product_description": "연마물의 광택을 내는데 사용",
@@ -515,7 +515,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20210414/art_16178422130993_9247a5.jpg",
     "product_name": "브러쉬",
     "category_code": 5,
     "product_description": "",
@@ -524,7 +524,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.buydental.co.kr:11055/pimg/det/B1509/B1509-260.jpg",
     "product_name": "퍼미스",
     "category_code": 5,
     "product_description": "치아 표면을 매끄럽게 하고 광택을 내는 역할",
@@ -533,7 +533,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.acrodent.com/data/goods/1/2021/03/262_temp_16151852065959large.jpg",
     "product_name": "덴쳐바",
     "category_code": 5,
     "product_description": "넓은부위 연마에 사용",
@@ -542,7 +542,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://gemma.co.kr/static/images/products/dental/orthodontic_gemma_24/thumb1.jpg",
     "product_name": "디스크",
     "category_code": 5,
     "product_description": "절단 작업에서 사용",
@@ -551,7 +551,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://misobright.co.kr/images/b_31.jpg",
     "product_name": "러버볼",
     "category_code": 6,
     "product_description": "",
@@ -560,7 +560,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://dental2804.com/bbs/files/attach/images/238/603/598/85dd0697e8264e09656fed506ddbc970.jpg",
     "product_name": "스파츌라",
     "category_code": 6,
     "product_description": "",
@@ -569,7 +569,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://misobright.co.kr/images/b_31.jpg",
     "product_name": "메탈 파샬 트레이(구치부)",
     "category_code": 6,
     "product_description": "",
@@ -578,7 +578,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://korean.sddent.com/photo/pt148538448-vinylpoly_siloxane_additional_silicone_impression_material_hydrophilic_light_body_type_3.jpg",
     "product_name": "메탈 파샬 트레이(전치부)",
     "category_code": 6,
     "product_description": "",
@@ -587,7 +587,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.buydental.co.kr:11055/pimg/det/B1509/B1509-260.jpg",
     "product_name": "메탈 풀 트레이",
     "category_code": 6,
     "product_description": "",
@@ -596,7 +596,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20210414/art_16178422130993_9247a5.jpg",
     "product_name": "바이트 트레이",
     "category_code": 6,
     "product_description": "지대치와 대합치를 한번에 채득할 수 있음",
@@ -605,7 +605,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cdnus.globalso.com/esun3d/Hard-Tough-Resin_black1.jpg",
     "product_name": "플라스틱 트레이",
     "category_code": 6,
     "product_description": "일회용 트레이",
@@ -614,7 +614,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://m.seichong.com/web/product/big/202012/2d5a8f56b4c0b3ace2fe5acbedf7d50c.png",
     "product_name": "바이브레이터",
     "category_code": 6,
     "product_description": "인상채득시 작은 진동을 주어 기포를 줄여주는 역할",
@@ -623,7 +623,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.acrodent.com/data/goods/1/2021/03/262_temp_16151852065959large.jpg",
     "product_name": "석고가위",
     "category_code": 6,
     "product_description": "모형에서 석고를 분리할 때 사용",
@@ -632,7 +632,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://biscoasia.com/images/products/pulpcap/theracal_lc_img_01.jpg",
     "product_name": "석고용 톱",
     "category_code": 6,
     "product_description": "트리밍 작업에서 사용",
@@ -641,7 +641,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cdnus.globalso.com/esun3d/Hard-Tough-Resin_black1.jpg",
     "product_name": "모델트리머",
     "category_code": 6,
     "product_description": "모델 하단부를 평평하게 만들기 위해 사용",
@@ -650,7 +650,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://m.seichong.com/web/product/big/202012/2d5a8f56b4c0b3ace2fe5acbedf7d50c.png",
     "product_name": "교합기(小)",
     "category_code": 7,
     "product_description": "교합운동만 가능한 작은사이즈의 교합기",
@@ -659,7 +659,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20210414/art_16178422130993_9247a5.jpg",
     "product_name": "교합기(中)",
     "category_code": 7,
     "product_description": "교합운동만 가능한 중간사이즈의 교합기",
@@ -668,7 +668,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://kddental.co.kr/web/product/big/202206/930c38f0765426e165a2878439dba2e5.jpg",
     "product_name": "교합기(大)",
     "category_code": 7,
     "product_description": "교합운동만 가능한 큰사이즈의 교합기",
@@ -677,7 +677,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://dental2804.com/bbs/files/attach/images/238/603/598/85dd0697e8264e09656fed506ddbc970.jpg",
     "product_name": "마그네틱교합기",
     "category_code": 7,
     "product_description": "측방운동이 가능하다",
@@ -686,7 +686,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.gckorea.co.kr/korean/clinical/images/handbook/IMG-stone1-1.jpg",
     "product_name": "C.S.A 조절성 교합기",
     "category_code": 7,
     "product_description": "전방운동 후방운동 측방운동 등 다양한 교합운동을 시킬수 있다",
@@ -695,7 +695,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://cdnus.globalso.com/esun3d/Hard-Tough-Resin_black1.jpg",
     "product_name": "교합지",
     "category_code": 7,
     "product_description": "교합점을 찍어 교합을 자세히 볼 수 있다",
@@ -704,7 +704,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://multimedia.3m.com/mws/media/1064391J/3m-tm-scotchcast-tm-electrical-resin-parts-a-and-b.jpg?width=506",
     "product_name": "싱글핀",
     "category_code": 8,
     "product_description": "",
@@ -713,7 +713,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.buydental.co.kr:11055/pimg/det/B1509/B1509-260.jpg",
     "product_name": "더블핀",
     "category_code": 8,
     "product_description": "",
@@ -722,7 +722,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://images.ctfassets.net/wfptrcrbtkd0/9d832cc16c855bcdc2d6319f87ba11a1/3a080aecc6de1d0d480cf356879dbda7/Ultra-Etch-Etchant-1.2ml-syringe-BOND-ETCH.jpg?w=1800&q=70&fm=webp",
     "product_name": "스마트베이스(편측용)",
     "category_code": 8,
     "product_description": "",
@@ -731,7 +731,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.gunchinews.com/news/photo/200706/2704-2-3195.jpg",
     "product_name": "스마트베이스(전치부)",
     "category_code": 8,
     "product_description": "",
@@ -740,7 +740,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "http://biscoasia.com/images/products/pulpcap/theracal_lc_img_01.jpg",
     "product_name": "스마트베이스(전악용)",
     "category_code": 8,
     "product_description": "",
@@ -749,7 +749,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://치과재료.kr/web/product/big/sungshim1137_8957.jpg",
     "product_name": "핀덱스",
     "category_code": 8,
     "product_description": "핀홀을 뚫기 위해서 사용",
@@ -758,7 +758,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://korean.sddent.com/photo/pt148538448-vinylpoly_siloxane_additional_silicone_impression_material_hydrophilic_light_body_type_3.jpg",
     "product_name": "보안경",
     "category_code": 9,
     "product_description": "",
@@ -767,7 +767,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://dental2804.com/bbs/files/attach/images/238/603/598/85dd0697e8264e09656fed506ddbc970.jpg",
     "product_name": "매몰링",
     "category_code": 9,
     "product_description": "원추대를 감싸 매몰제가 들어갈 공간을 만들어줌",
@@ -776,7 +776,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.acrodent.com/data/goods/1/2021/03/262_temp_16151852065959large.jpg",
     "product_name": "원추대",
     "category_code": 9,
     "product_description": "치과용 금속을 주조할 때 사용되는 용기로 납형을 고정하는 역할",
@@ -785,7 +785,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.gckorea.co.kr/korean/clinical/images/handbook/IMG-stone1-1.jpg",
     "product_name": "교정용 와이어",
     "category_code": 9,
     "product_description": "",
@@ -794,7 +794,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.buydental.co.kr:11055/pimg/det/B1509/B1509-260.jpg",
     "product_name": "어태치먼트",
     "category_code": 9,
     "product_description": "구강 내에서 보철물을 연결하고 유지, 안정시키기 위한 장치",
@@ -803,7 +803,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://images.ctfassets.net/wfptrcrbtkd0/9d832cc16c855bcdc2d6319f87ba11a1/3a080aecc6de1d0d480cf356879dbda7/Ultra-Etch-Etchant-1.2ml-syringe-BOND-ETCH.jpg?w=1800&q=70&fm=webp",
     "product_name": "U자형 칫솔",
     "category_code": 9,
     "product_description": "",
@@ -812,7 +812,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://multimedia.3m.com/mws/media/1064391J/3m-tm-scotchcast-tm-electrical-resin-parts-a-and-b.jpg?width=506",
     "product_name": "V자형 칫솔",
     "category_code": 9,
     "product_description": "",
@@ -821,7 +821,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://multimedia.3m.com/mws/media/1064391J/3m-tm-scotchcast-tm-electrical-resin-parts-a-and-b.jpg?width=506",
     "product_name": "마스크",
     "category_code": 9,
     "product_description": "",
@@ -830,7 +830,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://m.seichong.com/web/product/big/202012/2d5a8f56b4c0b3ace2fe5acbedf7d50c.png",
     "product_name": "에어프레셔",
     "category_code": 9,
     "product_description": "",
@@ -839,7 +839,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20120417/art_1335402107.jpg",
     "product_name": "진공믹싱기",
     "category_code": 9,
     "product_description": "기포가 생기지않도록 진공상태에서 믹싱을 도와주는 기기",
@@ -848,7 +848,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalarirang.com/news/photo/201204/888_945_1535.jpg",
     "product_name": "덴쳐 플라스크",
     "category_code": 9,
     "product_description": "의치나 보철물을 제작할 때 사용",
@@ -857,7 +857,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://m.seichong.com/web/product/big/202012/2d5a8f56b4c0b3ace2fe5acbedf7d50c.png",
     "product_name": "오일프레스",
     "category_code": 9,
     "product_description": "덴쳐플라스크의 압력을 높혀 오차율을 줄여준다",
@@ -866,7 +866,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://www.dentalnews.or.kr/data/photos/20210414/art_16178422130993_9247a5.jpg",
     "product_name": "러버댐",
     "category_code": 9,
     "product_description": "왁스 작업물을 잡기 용이하게 만들어줌",
@@ -875,7 +875,7 @@
   {
     "product_id": "",
     "id": "user",
-    "image": "",
+    "image": "https://kddental.co.kr/web/product/big/202206/930c38f0765426e165a2878439dba2e5.jpg",
     "product_name": "교정용 플라이어",
     "category_code": 9,
     "product_description": "교정용 와이어를 구부리는데 사용된다",

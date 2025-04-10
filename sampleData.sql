@@ -36,14 +36,14 @@ INSERT INTO member_terms_agreement (id, terms_id) VALUES
 ('admin', 1);
 
 -- ✅ 상품 정보 데이터 삽입
-INSERT INTO product_info (id, image, product_name, category_code, product_description) VALUES 
-('user', 'image1.jpg', '노트북', 3, '최신형 노트북입니다.'),
-('user', 'image2.jpg', '책상', 4, '튼튼한 책상입니다.');
+-- INSERT INTO product_info (id, image, product_name, category_code, product_description) VALUES 
+-- ('user', 'image1.jpg', '노트북', 3, '최신형 노트북입니다.'),
+-- ('user', 'image2.jpg', '책상', 4, '튼튼한 책상입니다.');
 
 -- ✅ 재고 데이터 삽입
-INSERT INTO inventory (product_id, id, image, product_name, category_code, product_description, stock_quantity) VALUES 
-(1, 'user', 'image1.jpg', '노트북', 3, '최신형 노트북입니다.', 10),
-(2, 'user', 'image2.jpg', '책상', 4, '튼튼한 책상입니다.', 5);
+-- INSERT INTO inventory (product_id, id, image, product_name, category_code, product_description, stock_quantity) VALUES 
+-- (1, 'user', 'image1.jpg', '노트북', 3, '최신형 노트북입니다.', 10),
+-- (2, 'user', 'image2.jpg', '책상', 4, '튼튼한 책상입니다.', 5);
 
 -- ✅ 자유 게시판 데이터 삽입
 INSERT INTO bulletin_board (id, title, author, view_count) VALUES 

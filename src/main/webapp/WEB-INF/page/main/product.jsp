@@ -153,10 +153,16 @@ function handleSetProduct() {
                 row.innerHTML = 
                 "<td>"+ item.productId +"</td>"
                 + "<td>"+ item.categoryName +"</td>"
-                + "<td><span class='image'><img src='${item.imageUrl}' alt='상품 이미지'></span></td>"
+                + "<td><span class='image'><img src='"+item.image+"'></span></td>"
                 + "<td>"+ item.productName +"</td>"
                 + "<td>"+ item.productDescription +"</td>"
                 tbody.appendChild(row);
+
+                document.querySelectorAll('.image img').forEach(img => {
+                    img.addEventListener('error', () => {
+                        img.src = 'https://onsight.softballspa.com/content/images/thumbs/default-image_450.png';
+                    });
+                });
 
                 row.addEventListener("click", () => {
                     location="/main/productEdit?id="+item.productId+""
