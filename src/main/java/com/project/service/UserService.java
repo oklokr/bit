@@ -168,6 +168,10 @@ public class UserService {
         return userMapper.existsByPhoneNumber(phoneNumber);
     }
 
+    public void updateUserInfo(UserDto userDto) {
+        userMapper.updateUser(userDto);
+    }
+
     // 마이페이지 이벤토리
     public List<InventoryDto> getInventory(String id, String productName, int page, int size) {
         Map<String, Object> params = new HashMap<>();

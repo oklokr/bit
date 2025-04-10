@@ -101,4 +101,39 @@ class MypageApiController {
 
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/mypage/update")
+    public ResponseEntity<Map<String, Object>> updateUserInfo(@RequestBody UserDto userDto, HttpSession session) {
+        String sessionId = session.getId();
+        UserDto currentUser = userService.getUserInfo(sessionId);
+
+        if (currentUser == null) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("success", false);
+            response.put("message", "사용자 세션이 유효하지 않습니다.");
+            return ResponseEntity.badRequest().body(response);
+        }
+
+        // 비밀번호 업데이트 처리
+    if (userDto.getPassword() != null && !userDto.getPassword().equals("********")) {
+        currentUser.setPassword(userDto.getPassword()); // 신규 비밀번호 설정
+    }
+    // 다른 사용자 정보 업데이트
+    currentUser.setCompanyName(userDto.getCompanyName());
+    currentUser.setEmail(userDto.getEmail());
+    currentUser.setPhoneNumber(userDto.getPhoneNumber());
+    currentUser.setBusinessNumber(userDto.getBusinessNumber());
+    currentUser.setAddress(userDto.getAddress());
+    currentUser.setDetailedAddress(userDto.getDetailedAddress());
+    currentUser.setPostalCode(userDto.getPostalCode());
+    currentUser.setMemberType(userDto.getMemberType());
+
+        // 사용자 정보 업데이트
+        userService.updateUserInfo(userDto);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", true);
+        response.put("message", "사용자 정보가 성공적으로 업데이트되었습니다.");
+        return ResponseEntity.ok(response);
+    }
 }
