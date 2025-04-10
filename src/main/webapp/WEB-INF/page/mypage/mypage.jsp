@@ -120,6 +120,7 @@
                     </div>
                 </div>
                 <div class="text-center mt-4">
+                    <button type="button" class="btn btn-secondary" onclick="exitReadMode()">나가기</button>
                     <button type="button" class="btn btn-danger" onclick="openPasswordModal('delete')">회원탈퇴</button>
                     <button type="button" class="btn btn-primary" onclick="openPasswordModal('edit')">수정</button>
                 </div>
@@ -250,7 +251,9 @@ try {
         }
 });
 
-
+    function exitReadMode() {
+        history.back(); // 이전 화면으로 바로 돌아가기
+    }
 
     function openPasswordModal(action) {
         actionType = action;
