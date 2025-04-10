@@ -79,7 +79,11 @@
                 currentGroup.querySelector('.inner').appendChild(productItem);
 
                 productItem.querySelector(".product-inner button").addEventListener("click", () => {
-                    handleAddInventory(item.productId);
+                    modal({
+                        content: "병원재고 관리에 추가하시겠습니까?",
+                        type: "confirm",
+                        fnConfirm: () => handleAddInventory(item.productId)
+                    });
                 });
             });
         }

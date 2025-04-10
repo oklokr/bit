@@ -50,6 +50,51 @@ const validate = {
     }
 };
 
+function modal(option) {
+    const {title, content, type = "message", backdrop, keyboard, fnClose, fnConfirm} = option;
+    const modal = new bootstrap.Modal(document.getElementById("resultModal"), {
+        backdrop: backdrop ? true : false || true,
+        keyboard: keyboard || true,
+    });
+
+    const modalEl = document.querySelector(".common-modal");
+    const titleEl = document.getElementById("resultModalLabel");
+    const contentEl = document.getElementById("modalBody");
+    const footerEl = document.querySelector(".modal-footer");
+    let titleInner = ""
+    let contentInner = null;;
+    let footerInner = ""
+
+    
+    modalEl.classList.remove("modal-message", "modal-alert", "modal-confirm");
+
+    if(type === "message") {
+        modalEl.classList.add("modal-message")
+        contentInner = "<p style='margin-bottom: 0; text-align:center;'>"+content+"</p>"
+        footerInner = "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='close'>확인</button>"
+    }
+    if(type === "alert") {
+        modalEl.classList.add("modal-alert")
+        titleInner = title || "알림";
+        footerInner = "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='close'>확인</button>"
+    }
+    if(type === "confirm") {
+        modalEl.classList.add("modal-confirm")
+        titleInner = title || "알림";
+        footerInner = 
+        "<button type='button' class='btn btn-outline-primary' data-bs-dismiss='modal' data-fn-type='close'>취소</button>"
+        + "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='confirm'>확인</button>"
+    }
+    
+    titleEl.innerText = titleInner;
+    contentEl.innerHTML = contentInner || content;
+    footerEl.innerHTML = footerInner;
+
+    document.querySelector(".btn[data-fn-type='close']")?.addEventListener("click", fnClose)
+    document.querySelector(".btn[data-fn-type='confirm']")?.addEventListener("click", fnConfirm)
+    modal.show();
+}
+
 function showResultModal(resultValue, title, successMessage, failMessage, callbackOnSuccess, callbackOnFail, mode = 'close') {
     const modalEl = document.getElementById("resultModal");
     const modalTitle = document.getElementById("resultModalLabel");

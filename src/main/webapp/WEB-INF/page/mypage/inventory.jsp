@@ -201,16 +201,10 @@ function handleSaveInventory() {
         }
     });
 
-    if (postForm.length === 0) {
-        alert('변경된 재고가 없습니다.');
-        return;
-    }
-
-    console.log(postForm)
+    if (postForm.length === 0) return modal({ content: "변경된 재고가 없습니다." });
 
     postRequestApi('/api/mypage/updateInventory', postForm, res => {
-        alert('재고가 업데이트 되었습니다.');
-        handleSetProduct();
+        modal({ content: "재고가 업데이트 되었습니다.",  fnClose: () => handleSetProduct()});
     });
 }
 
@@ -227,16 +221,14 @@ function handleDeleteInventory() {
         }
     });
 
-    if (deleteData.length === 0) {
-        alert('삭제할 상품을 선택해주세요.');
-        return;
-    }
+    if (deleteData.length === 0) return modal({ content: "삭제할 상품을 선택해주세요." });
 
-    console.log(deleteData)
-
-    postRequestApi('/api/mypage/deleteInventory', deleteData, res => {
-        alert('상품이 삭제되었습니다.');
-        handleSetProduct();
+    modal({
+        content: "삭제하시겠습니까?",
+        type: "confirm",
+        fnConfirm: () => postRequestApi('/api/mypage/deleteInventory', deleteData, res => {
+            handleSetProduct();
+        })
     });
 }
 

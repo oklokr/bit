@@ -1,3 +1,23 @@
+/* 모달 Style */
+.common-modal .modal-content {
+    border-radius: 8px;
+}
+.common-modal .modal-footer {
+    justify-content: center;
+    border-top : initial;
+}
+.common-modal .modal-footer button {
+    width: calc(50% - 8px);
+}
+.common-modal.modal-message .modal-header {
+    border-bottom : initial;
+}
+
+.common-modal.modal-message .modal-dialog {
+    max-width: 400px;
+}
+
+/* 검색 Style */
 .search-wrap.input-group-lg {
     position: relative;
 }
@@ -18,6 +38,7 @@
     background-size: 28px 28px;
 }
 
+/* 필터 Style */
 .filter-wrap {
     display: flex;
     align-items: center;
@@ -35,7 +56,7 @@
     min-width: 70px;
     margin-left: auto;
 }
-
+/* 테이블 Style */
 .table-wrap {
     margin-top: 40px;
 }

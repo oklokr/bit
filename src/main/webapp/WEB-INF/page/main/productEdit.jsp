@@ -89,11 +89,15 @@
         if(!validate.isEmpty(productId)) {
             postForm.productId = productId
         }
-        postRequestApi("/api/main/productEdit", postForm, res => {
-            if(res.data.resultCode === 1) {
-                return location.href = "/main/product"
-            }
-        })
+        modal({
+            content: "상품정보를 등록하시겠습니까?",
+            type: "confirm",
+            fnConfirm: () => postRequestApi("/api/main/productEdit", postForm, res => {
+                if(res.data.resultCode === 1) {
+                    return location.href = "/main/product"
+                }
+            })
+        });
     }
 </script>
 

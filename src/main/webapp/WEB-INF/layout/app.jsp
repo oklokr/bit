@@ -39,12 +39,12 @@
     </c:if>
 
     <!-- Modal -->
-    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+    <div class="common-modal modal fade" id="resultModal" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
             
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="resultModalLabel"><!-- JS title --></h1>
+                    <strong class="modal-title fs-5" id="resultModalLabel"><!-- JS title --></strong>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
                 </div>
                 
