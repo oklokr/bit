@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.model.UserDto;
@@ -54,4 +55,17 @@ class MypageApiController {
         response.put("sessionExpiryTime", userInfo.getSessionExpiryTime());
         return response;
     }
+
+    @PostMapping("/api/mypage/verify-password")
+    public Map<String, Object> verifyPassword(HttpServletRequest request, @RequestBody Map<String, String> requestBody) {
+        HttpSession session = request.getSession();
+        String sessionId = session.getId();
+        String inputPassword = requestBody.get("password");
+
+        boolean isPasswordCorrect = userService.verifyPassword(sessionId, inputPassword);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("success", isPasswordCorrect);
+        return response;
+}
 }
