@@ -62,51 +62,42 @@
 
 <script>
     const quill = new Quill('#editor', {
-        theme: 'snow'
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                ['bold', 'italic', 'underline', 'strike', 'link']
+            ]
+        }
     });
 
     let submit = document.querySelector("button[name='submit']");
     
     submit.addEventListener("click", (event) => {
-        event.preventDefault();  // 무조건 먼저 막아주고
-
         let title = document.querySelector("input[name='titleInput']").value.trim();
-        let content = quill.root.innerHTML.trim();
-        let tag = /<[^>]*>/;
-
+        let content = quill.getText().trim();  
+        event.preventDefault();  // 이벤트 취소
         if (!title) {
-            showResultModal(
-                "0",
-                "입력 오류",
-                "",
-                "제목을 입력하세요.",
-                () => document.querySelector("input[name='titleInput']").focus()
-            );
+            modal({
+                title: "입력 오류",
+                content: "제목을 입력하세요.",
+                type: "message",
+                fnClose: function() {
+                    document.querySelector("input[name='replyTitle']").focus();
+                }
+            });
+            return;
+        } else if (!content) {
+            modal({
+                title: "입력 오류",
+                content: "내용을 입력하세요.",
+                type: "message",
+                fnClose: function() {
+                    document.querySelector("textarea[name='replyContent']").focus();
+                }
+            });
             return;
         }
-
-        if (!content || content === "<p><br></p>") {
-            showResultModal(
-                "0",
-                "입력 오류",
-                "",
-                "게시글 내용을 입력하세요.",
-                null
-            );
-            return;
-        }
-
-        if (tag.test(title)) {
-            showResultModal(
-                "0",
-                "입력 오류",
-                "",
-                "제목에 태그를 포함할 수 없습니다.",
-                () => document.querySelector("input[name='titleInput']").focus()
-            );
-            return;
-        }
-
         // 모든 유효성 검사를 통과한 경우에만 제출
         submitPost();
     });
@@ -127,17 +118,18 @@
 
     window.onload = function() {
         const writeResult = "${writeResult}";
-        if (writeResult === "1" || writeResult === "0") {
-            showResultModal(
-                writeResult,
-                "처리 결과",
-                "게시글이 작성되었습니다.",
-                "게시글 작성에 실패했습니다.",
-                function() {
+        if (writeResult == "1") {
+            modal({
+                content: "게시글이 작성되었습니다.",
+                fnClose: () => {
                     location.href = "/board";
-                },
-                null // 또는 그냥 생략 가능
-            );
+                }
+            });
+        }
+        if (writeResult == "0") {
+            modal({
+                content: "게시글 작성에 실패했습니다."
+            });
         }
     }
 </script>
@@ -156,13 +148,6 @@
         margin: 40px auto; /* 중앙 정렬 */
         background: #fff; /* 배경 흰색 */
         border-radius: 8px; /* 모서리 둥글게 */
-    }
-
-    .board-write-page h3 {
-        text-align: center;
-        margin: 20px 0; /* 위아래 여백 */
-        align-items: center;
-        font-weight: bold;
     }
 
     .button-group{

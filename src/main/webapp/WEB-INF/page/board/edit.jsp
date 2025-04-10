@@ -63,70 +63,63 @@
 </html>
 
 <script>
-    const quill=new Quill('#editor',{
-        theme: 'snow'
-    })
+    const quill = new Quill('#editor', {
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                ['bold', 'italic', 'underline', 'strike', 'link']
+            ]
+        }
+    });
 
     window.onload = function() {
         const content = `${boardDto.content}`;  // 기존 게시글 내용
         quill.root.innerHTML = content; // Quill 에디터에 내용 삽입
-
+        
         const editResult = "${editResult}";
-        if (editResult === "1" || editResult === "0") {
-            showResultModal(
-                editResult,
-                "처리 결과",
-                "게시글이 수정되었습니다.",
-                "게시글 수정에 실패했습니다.",
-                function() {
+        if (editResult == "1") {
+            modal({
+                content: "게시글이 수정되었습니다.",
+                fnClose: () => {
                     location.href = "/board/detail?boardId=${boardId}&pageNum=${pageNum}";
-                },
-                null // 또는 그냥 생략 가능
-            );
+                }
+            });
+        }
+        if (editResult == "0") {
+            modal({
+                content: "게시글 수정에 실패했습니다."
+            });
         }
     }
 
-    let submit = document.querySelector("button[name='submit']");
-    submit.addEventListener("click", (event) => {
-        event.preventDefault();  // 먼저 막아줌
-
+    document.querySelector('button[name="submit"]').addEventListener("click", function() {
         let title = document.querySelector("input[name='titleInput']").value.trim();
-        let content = quill.root.innerHTML.trim();
-        let tag = /<[^>]*>/;
-
+        let content = quill.getText().trim();  
+        event.preventDefault();
+        // 폼 검증
         if (!title) {
-            showResultModal(
-                "0",
-                "입력 오류",
-                "",
-                "제목을 입력하세요.",
-                () => document.querySelector("input[name='titleInput']").focus()
-            );
+            modal({
+                title: "입력 오류",
+                content: "제목을 입력하세요.",
+                type: "message",
+                fnClose: function() {
+                    document.querySelector("input[name='replyTitle']").focus();
+                }
+            });
+            return;
+        } else if (!content) {
+            modal({
+                title: "입력 오류",
+                content: "답글 내용을 입력하세요.",
+                type: "message",
+                fnClose: function() {
+                    document.querySelector("textarea[name='replyContent']").focus();
+                }
+            });
             return;
         }
-
-        if (!content || content === "<p><br></p>") {
-            showResultModal(
-                "0",
-                "입력 오류",
-                "",
-                "게시글 내용을 입력하세요.",
-                null
-            );
-            return;
-        }
-
-        if (tag.test(title)) {
-            showResultModal(
-                "0",
-                "입력 오류",
-                "",
-                "제목에 태그를 포함할 수 없습니다.",
-                () => document.querySelector("input[name='titleInput']").focus()
-            );
-            return;
-        }
-        submitPost();  // 모든 검증 후에만 실행
+        submitPost();
     });
 
     function submitPost() {
@@ -153,13 +146,6 @@
         margin: 40px auto; /* 중앙 정렬 */
         background: #fff; /* 배경 흰색 */
         border-radius: 8px; /* 모서리 둥글게 */
-    }
-
-    .board-edit-page h3 {
-        text-align: center;
-        margin: 20px 0; /* 위아래 여백 */
-        align-items: center;
-        font-weight: bold;
     }
 
     .button-group{
