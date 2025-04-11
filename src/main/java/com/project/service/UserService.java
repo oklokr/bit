@@ -29,12 +29,12 @@ public class UserService {
         return user;
     }
     // 아이디 && 비밀번호 유효성 검사
-    public String authenticate(String id, String password) {
+    public int authenticate(String id, String password) {
         UserDto user = userMapper.getUserById(id);
         if (user == null || !user.getPassword().equals(password)) {
-            return "아이디 또는 비밀번호가 잘못되었습니다.";
+            return 0;
         }
-        return "SUCCESS";
+        return 1;
     }
     // 로그아웃 로직
     public String logout(HttpServletRequest request) {
@@ -46,8 +46,9 @@ public class UserService {
         }
         return "redirect:/login";
     }
-    public void clearSessionInfo(String sessionId) {
-        userMapper.clearSessionInfo(sessionId);
+    public int clearSessionInfo(String sessionId) {
+        int result = userMapper.clearSessionInfo(sessionId);
+        return result;
     }
     public void refreshSession(UserDto user, HttpSession session) {
         Date now = new Date();

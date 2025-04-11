@@ -22,16 +22,22 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
-        HttpSession session = request.getSession(false);
+        System.out.println("Request URI: " + request.getRequestURI());
+        String requestURI = request.getRequestURI();
 
+        // 로그인 API는 세션 검사 제외
+        if ("/api/login".equals(requestURI)) {
+            return true;
+        }
+
+        HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/login");
             return false;
         }
 
         UserDto user = (UserDto) session.getAttribute("user");
-        
-        if(user.getSessionExpiryTime().before(new Date())) {
+        if (user.getSessionExpiryTime().before(new Date())) {
             session.invalidate();
             response.sendRedirect("/login");
             return false;

@@ -1,11 +1,14 @@
 package com.project.controller.auth;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.project.model.UserDto;
 import com.project.service.UserService;
@@ -15,9 +18,6 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class Login {
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/login")
     public String pageRender(Model model) {
         model.addAttribute("title", "Login Page");
@@ -25,36 +25,38 @@ public class Login {
         model.addAttribute("defaultLayout", "false");
         return "layout/app";
     }
+}
 
-    @PostMapping("/login")
-    public String loginProcess(@RequestParam String id,
-        @RequestParam String password,
-        HttpServletRequest request,
-        Model model) {
-        String result = userService.authenticate(id, password);
+@RestController
+class LoginRestController {
+    @Autowired
+    private UserService userService;
 
-        if ("SUCCESS".equals(result)) {
-            HttpSession session = request.getSession();
+    @PostMapping("/api/login")
+    public int login(@RequestBody Map<String, String> RequestBody, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String id = RequestBody.get("id");
+        String passwd = RequestBody.get("passwd");
+        int result = userService.authenticate(id, passwd);
+        if(result == 1) {
             UserDto user = userService.getUserById(id);
             userService.refreshSession(user, session);
-
-            return "redirect:/main";
+            return 1;
         } else {
-            model.addAttribute("title", "Login Page");
-            model.addAttribute("errorMessage", result);
-            model.addAttribute("contentPage", "/WEB-INF/page/auth/login.jsp");
-            return "layout/app";
+            return 0;
         }
     }
 
-    @PostMapping("/logout")
-    public String logout(HttpServletRequest request) {
+    @PostMapping("/api/logout")
+    public int logout(HttpServletRequest request) {
         HttpSession session = request.getSession();
         if(session != null) {
             String sessionId = session.getId();
-            userService.clearSessionInfo(sessionId);
+            int result = userService.clearSessionInfo(sessionId);
             session.invalidate();
+
+            return result;
         }
-        return "redirect:/login";
+        return 0;
     }
 }
