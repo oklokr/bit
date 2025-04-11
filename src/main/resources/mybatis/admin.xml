@@ -44,6 +44,6 @@
     </update>
 
     <update id="resetPassword" parameterType="String">
-        UPDATE members SET password = '1234' WHERE id = #{id}
+        UPDATE members SET password = '1111' WHERE id = #{id}
     </update>
 </mapper>
