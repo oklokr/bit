@@ -31,12 +31,13 @@ public class SessionInterceptor implements HandlerInterceptor {
         }
 
         HttpSession session = request.getSession(false);
+        UserDto user = (UserDto) session.getAttribute("user");
+
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect("/login");
             return false;
         }
 
-        UserDto user = (UserDto) session.getAttribute("user");
         if (user.getSessionExpiryTime().before(new Date())) {
             session.invalidate();
             response.sendRedirect("/login");

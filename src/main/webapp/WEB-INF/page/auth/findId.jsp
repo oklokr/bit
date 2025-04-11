@@ -9,13 +9,13 @@
                 <span class="error-msg"></span>
             </div>
             <div class="input-item">
-                <span class="label" for="companyNanme">인증방법</span>
+                <span class="label">인증방법</span>
 
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="type" id="email" checked>
                     <label class="form-check-label" for="email">이메일</label>
                     <div class="input-item">
-                        <input id="id" type="text" class="form-control" placeholder="이메일을 입력해주세요." maxlength="30" autofocus>
+                        <input id="emailInput" type="text" class="form-control" placeholder="이메일을 입력해주세요." maxlength="30" autofocus>
                         <span class="error-msg"></span>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <input class="form-check-input" type="radio" name="type" id="phone">
                     <label class="form-check-label" for="phone">휴대폰</label>
                     <div class="input-item">
-                        <input id="id" type="text" class="form-control" placeholder="전화번호를 입력해주세요." maxlength="13" autofocus>
+                        <input id="phoneInput" type="text" class="form-control" placeholder="전화번호를 입력해주세요." maxlength="13" autofocus>
                         <span class="error-msg"></span>
                     </div>
                 </div>
@@ -78,13 +78,13 @@
             handleError(companyNameEl, "&#8251; 업체명을 입력해주세요.")
         }
 
-        if( emailChecked && validate.isEmpty(companyNameEl.value) ) {
+        if( emailChecked && validate.isEmpty(emailEl.value) ) {
             handleError(emailEl, "&#8251; 이메일을 입력해주세요.")
         } else if( emailChecked && !validate.isEmail(emailEl.value) ) {
             handleError(emailEl, "&#8251; 이메일 형식이 아닙니다.")
         }
 
-        if( phoneChecked && validate.isEmpty(companyNameEl.value) ) {
+        if( phoneChecked && validate.isEmpty(phoneEl.value) ) {
             handleError(phoneEl, "&#8251; 전화번호를 입력해주세요.")
         } else if( phoneChecked && !validate.isPhoneNumber(phoneEl.value) ) {
             handleError(phoneEl, "&#8251; 전화번호 형식이 아닙니다.")

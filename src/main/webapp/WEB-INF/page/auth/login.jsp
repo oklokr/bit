@@ -17,7 +17,7 @@
             <button class="btn btn-primary">로그인</button>
             <ul>
                 <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/auth/findId">아이디 찾기</a></li>
-                <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/findPw">비밀번호 찾기</a></li>
+                <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/auth/findPw">비밀번호 찾기</a></li>
                 <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/join">회원가입</a></li>
             </ul>
         </div>
@@ -62,7 +62,7 @@
 </script>
 
 <style>
-    
+
 .auth-page .logo {
     width: 140px;
     height: 140px;
