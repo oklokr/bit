@@ -32,12 +32,10 @@
         if(validate.isEmpty(idEl.value)) {
             idEl.focus()
             idEl.nextElementSibling.innerText = "아이디를 입력해주세요."
-            return
         }
         if(validate.isEmpty(pwEl.value)) {
             pwEl.focus()
             pwEl.nextElementSibling.innerText = "비밀번호를 입력해주세요."
-            return
         }
 
         postRequestApi("/api/login", {
@@ -134,6 +132,22 @@
     margin-top: 24px;
     padding: 0;
     gap: 30px;
+}
+
+.login-wrap ul li {
+    position: relative;
+}
+
+.login-wrap ul li:not(:last-child)::before {
+    content: "";
+    width: 1px;
+    height: 12px;
+    background: #ccc;
+    position: absolute;
+    top: 3px;
+    right: -15px;
+    bottom: 0;
+    margin: auto;
 }
 
 .login-wrap ul a {
