@@ -293,9 +293,11 @@
     margin: 0 auto;
 }
 .auth-page.login {
-    
     justify-content: flex-start;
     padding: 60px 0;
+}
+.auth-page.signup {
+    max-width: 600px;
 }
 
 .auth-page .content {

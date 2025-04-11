@@ -18,7 +18,7 @@
             <ul>
                 <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/auth/findId">아이디 찾기</a></li>
                 <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/auth/findPw">비밀번호 찾기</a></li>
-                <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/join">회원가입</a></li>
+                <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/auth/join">회원가입</a></li>
             </ul>
         </div>
     </div>
