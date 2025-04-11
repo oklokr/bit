@@ -129,13 +129,8 @@
         color: white; /* 활성화된 단계 텍스트 색상 */
     }
 </style>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    const kakaoApiKey = '${kakao.map.js-key}';
-    Kakao.init(kakaoApiKey); // 발급받은 JavaScript 키로 초기화
-    let isBusinessNumberChecked = false; // 사업자 번호 확인 여부 플래그
 
+<script>
     async function validateForm(event) {
         event.preventDefault();
         let isValid = true;

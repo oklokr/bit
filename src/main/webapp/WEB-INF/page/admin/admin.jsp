@@ -1,36 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>admin</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/common.js"></script>
-    <link rel="stylesheet" href="/css/common.css">
-</head>
-<body>
-<div class="container mt-5">
-    <h4><strong>회원관리</strong></h4>
+<div class="container page-wrap">
+    <h2 class="page-title">회원관리</h2>
 
     <!-- 검색 -->
-    <form action="${pageContext.request.contextPath}/admin" method="get" class="member-box mt-4 text-center">
-        <label for="searchName" class="form-label me-2">회원명 :</label>
-        <c:if test="${searchName != null}">
-            <c:set var="placeholder" value="${searchName}"/>
-        </c:if>
-        <c:if test="${searchName == null}">
-            <c:set var="placeholder" value="회원명을 입력해주세요"/>
-        </c:if>
-
-        <input type="text" name="searchName" id="searchName" 
-               class="form-control d-inline-block w-50" 
-               placeholder="${placeholder}">
-        <button type="submit" class="btn btn-secondary">조회</button>
+    <form action="${pageContext.request.contextPath}/admin" method="get" class="filter-wrap">
+        <div class="row">
+            <label for="searchName" class="col-sm-2 col-form-label">회원명</label>
+            <c:if test="${searchName != null}">
+                <c:set var="placeholder" value="${searchName}"/>
+            </c:if>
+            <c:if test="${searchName == null}">
+                <c:set var="placeholder" value="회원명을 입력해주세요"/>
+            </c:if>
+    
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="searchName" id="searchName" placeholder="${placeholder}">
+            </div>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-sm">조회</button>
     </form>
 
     <!-- 회원 테이블 -->
@@ -102,7 +92,6 @@
     </div>
     
 </div>
-</body>
 
 <script>
     window.onload = function() {
@@ -176,5 +165,3 @@
     }
 
 </style>
-
-</html>

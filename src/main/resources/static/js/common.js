@@ -1,3 +1,6 @@
+// const kakaoApiKey = '${kakao.map.js-key}';
+// Kakao.init(kakaoApiKey); // 발급받은 JavaScript 키로 초기화
+
 function postRequestApi(url, obj, fn) {
     axios.post(
         url,

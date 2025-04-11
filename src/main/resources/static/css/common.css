@@ -6,6 +6,9 @@
     font-weight: bold;
     text-align: center;
 }
+.page-wrap .page-title.left {
+    text-align: left;
+}
 
 
 /* 카테고리 리스트 */
