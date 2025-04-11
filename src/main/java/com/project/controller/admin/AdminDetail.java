@@ -46,52 +46,6 @@ public class AdminDetail {
         model.addAttribute("contentPage", "/WEB-INF/page/admin/detail.jsp");
         return "layout/app";
     }
-
-    // @PostMapping("/admin/resetPassword")
-    // public String resetPassword(@RequestParam String id, @RequestParam int pageNum, Model model, HttpSession session){
-    //     UserDto user = userDao.getUserById(id);
-    //     String name = user.getCompanyName();
-    //     int result = adminDao.resetPassword(id);
-    //     session.setAttribute("resetResult", result);
-    //     model.addAttribute("name", name);
-    //     model.addAttribute("id", id);
-    //     model.addAttribute("pageNum", pageNum);
-    //     model.addAttribute("title", "main page");
-    //     model.addAttribute("contentPage", "/WEB-INF/page/admin/detail.jsp");
-    //     return "layout/app";
-    // }
-
-    // @PostMapping("/admin/deleteUser")
-    // public String deleteUser(@RequestParam String id, Model model, HttpSession session){
-    //     UserDto user = userDao.getUserById(id);
-    //     String name = user.getCompanyName();
-    //     int result = adminDao.deleteUser(id);
-    //     session.setAttribute("deleteResult", result);
-    //     model.addAttribute("deletedName", name);
-    //     model.addAttribute("failedId", id);
-    //     model.addAttribute("title", "main page");
-    //     model.addAttribute("contentPage", "/WEB-INF/page/admin/admin.jsp");
-    //     return "layout/app";
-    // }
-
-    // @PostMapping("/admin/changeMemberType")
-    // public String changeMemberType(@RequestParam String id, @RequestParam int pageNum, Model model, HttpSession session){
-    //     UserDto user = userDao.getUserById(id);
-    //     Map<String,Object> map = new HashMap<>();
-    //     map.put("id", id);
-    //     map.put("memberType", user.getMemberType());
-    //     int result = adminDao.changeMemberType(map);
-
-    //     model.addAttribute("name", user.getCompanyName());
-    //     session.setAttribute("changeResult", result);
-    //     model.addAttribute("pageNum", pageNum);
-    //     model.addAttribute("id", id);
-    //     model.addAttribute("title", "main page");
-    //     model.addAttribute("contentPage", "/WEB-INF/page/admin/detail.jsp");
-    //     return "layout/app";
-    // }
-
-    
 }
 
 @RestController

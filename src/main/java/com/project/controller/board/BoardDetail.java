@@ -55,16 +55,6 @@ public class BoardDetail {
         return "layout/app";
     }
 
-    // @GetMapping("/board/delete")
-    // public String boardDelete(@RequestParam int boardId, @RequestParam String pageNum, Model model, HttpSession session){
-    //     int result = boardDao.deletePost(boardId);
-    //     session.setAttribute("deleteResult", result);
-    //     model.addAttribute("pageNum", pageNum);
-    //     model.addAttribute("title", "main page");
-    //     model.addAttribute("contentPage", "/WEB-INF/page/board/detail.jsp");
-    //     return "layout/app";
-    // }
-
     @PostMapping("/board/reply/write")
     public String postReply(@ModelAttribute ReplyDto replyDto, @RequestParam String pageNum, Model model, HttpSession session) {
         UserDto userDto = userDao.getUserInfo(session.getId());
