@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="auth-page login">
     <h1 class="logo">Bit Dental</h1>
-    <div class="login-wrap">
+    <div class="content">
         <h2 class="page-title">로그인</h1>
         <div class="login-form">
             <div class="login-form__input">
@@ -16,7 +16,7 @@
             </div>
             <button class="btn btn-primary">로그인</button>
             <ul>
-                <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/findId">아이디 찾기</a></li>
+                <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/auth/findId">아이디 찾기</a></li>
                 <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/findPw">비밀번호 찾기</a></li>
                 <li><a href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}/join">회원가입</a></li>
             </ul>
@@ -31,11 +31,11 @@
 
         if(validate.isEmpty(idEl.value)) {
             idEl.focus()
-            idEl.nextElementSibling.innerText = "아이디를 입력해주세요."
+            idEl.nextElementSibling.innerHTML = "&#8251; 아이디를 입력해주세요."
         }
         if(validate.isEmpty(pwEl.value)) {
             pwEl.focus()
-            pwEl.nextElementSibling.innerText = "비밀번호를 입력해주세요."
+            pwEl.nextElementSibling.innerHTML = "&#8251; 비밀번호를 입력해주세요."
         }
 
         postRequestApi("/api/login", {
@@ -47,7 +47,7 @@
         })
     }
     function handleLoad() {
-        const loginButton = document.querySelector('.login-wrap .btn');
+        const loginButton = document.querySelector('.btn');
         const idInput = document.getElementById('id');
         const passwdInput = document.getElementById('passwd');
 
@@ -62,19 +62,7 @@
 </script>
 
 <style>
-.auth-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-    margin: 0 auto;
-}
-.auth-page.login {
-    max-width:  450px;
-    justify-content: flex-start;
-    padding: 60px 0;
-}
-
+    
 .auth-page .logo {
     width: 140px;
     height: 140px;
@@ -85,18 +73,7 @@
     background-size: 100%;
 }
 
-.login-wrap {
-    padding: 24px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.login-wrap .page-title {
-    text-align: center;
-    font-weight: bold;
-    margin: 16px 0 30px;
-}
-
-.login-wrap .btn {
+.content .btn {
     width: 100%;
     margin-top: 24px;
 }
@@ -121,12 +98,13 @@
 }
 .login-form__input .error-msg {
     font-size: 14px;
+    color: #dc3545;
     position: absolute;
     bottom: -2px;
     left: 92px;
 }
 
-.login-wrap ul {
+.content ul {
     display: flex;
     justify-content: center;
     margin-top: 24px;
@@ -134,11 +112,11 @@
     gap: 30px;
 }
 
-.login-wrap ul li {
+.content ul li {
     position: relative;
 }
 
-.login-wrap ul li:not(:last-child)::before {
+.content ul li:not(:last-child)::before {
     content: "";
     width: 1px;
     height: 12px;
@@ -150,13 +128,13 @@
     margin: auto;
 }
 
-.login-wrap ul a {
+.content ul a {
     color: #333;
     font-size: 14px;
     text-decoration: none;
 }
 
-.login-wrap ul a:hover {
+.content ul a:hover {
     text-decoration: underline;
     color: #007bff;
 }

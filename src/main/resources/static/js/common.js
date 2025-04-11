@@ -48,10 +48,20 @@ const validate = {
         return emailRegex.test(value);
     },
     isPhoneNumber: value => {
-        const phoneRegex = /^\d{10,11}$/; // 한국 전화번호 형식 (10~11자리 숫자)
+        const phoneRegex = /^(010-\d{3,4}-\d{4}|\d{10,11})$/; // 010-0000-0000 형식 또는 10~11자리 숫자
         return phoneRegex.test(value);
     }
 };
+
+function formatPhoneNumber(phoneNumber) {
+    return phoneNumber
+        .replace(/[^0-9]/g, '') // 숫자만 남기기
+        .replace(/^(\d{3})(\d{0,4})(\d{0,4})$/, (match, p1, p2, p3) => {
+            if (p3) return `${p1}-${p2}-${p3}`;
+            else if (p2) return `${p1}-${p2}`;
+            else return p1;
+        });
+}
 
 function modal(option) {
     const {title, content, type = "message", backdrop, keyboard, fnClose, fnConfirm} = option;

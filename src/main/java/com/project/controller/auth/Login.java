@@ -33,10 +33,10 @@ class LoginRestController {
     private UserService userService;
 
     @PostMapping("/api/login")
-    public int login(@RequestBody Map<String, String> RequestBody, HttpServletRequest request) {
+    public int login(@RequestBody Map<String, String> requestBody, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        String id = RequestBody.get("id");
-        String passwd = RequestBody.get("passwd");
+        String id = requestBody.get("id");
+        String passwd = requestBody.get("passwd");
         int result = userService.authenticate(id, passwd);
         if(result == 1) {
             UserDto user = userService.getUserById(id);
