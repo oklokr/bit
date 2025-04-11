@@ -10,35 +10,38 @@ import com.project.interceptor.SessionInterceptor;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
+
+    private static final String[] EXCLUDE_PATHS = {
+        "/login",
+        "/api/login",
+        "/findId",
+        "/findPw",
+        "/join",
+        "/findIdResult",
+        "/findPwResult",
+        "/joinStepUser/**",
+        "/joinStepComp/**",
+        "/findResult",
+        "/resources/**",
+        "/css/**",
+        "/js/**",
+        "/images/**",
+        "/favicon.ico",
+        "/joinResult",
+        "/checkBusinessNumber",
+        "/joinStepSuccess",
+        "/mainTerms",
+        "/subTerms"
+    };
+
     @Autowired
     private SessionInterceptor sessionInterceptor;
 
     @Override
     public void addInterceptors(@NonNull InterceptorRegistry registry) {
-        registry.addInterceptor(sessionInterceptor).order(1)
+        registry.addInterceptor(sessionInterceptor)
+        .order(1)
         .addPathPatterns("/**")
-        .excludePathPatterns(
-            "/login", 
-            "/findId", 
-            "/findPw", 
-            "/join", 
-            "/findIdResult", 
-            "/findPwResult",
-            "/joinStepUser", 
-            "/joinStepUser/**", 
-            "/joinStepComp", 
-            "/joinStepComp/**", 
-            "/findResult",
-            "/resources/**", 
-            "/css/**", 
-            "/js/**", 
-            "/images/**", 
-            "/favicon.ico",
-            "/joinResult",
-            "/checkBusinessNumber",
-            "/joinStepSuccess",
-            "/mainTerms",
-            "/subTerms"  
-        );
+        .excludePathPatterns(EXCLUDE_PATHS);
     }
 }

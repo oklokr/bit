@@ -20,7 +20,7 @@ function handleSearch() {
 }
 
 function logout() {
-    postRequestApi("logout", null, res => {
+    postRequestApi("/api/logout", null, res => {
         if(res.status !== 200) return alert("네트워크 오류입니다.");
         location.href = "/login";
     })

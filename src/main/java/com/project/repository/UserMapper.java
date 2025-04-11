@@ -15,7 +15,7 @@ public interface UserMapper {
     void updateSessionInfo(@Param("id") String id, @Param("sessionId") String sessionId,
         @Param("lastAccessTime") Date lastAccessTime, @Param("expiryTime") Date expiryTime);
 
-    void clearSessionInfo(@Param("sessionId") String sessionId);
+    int clearSessionInfo(@Param("sessionId") String sessionId);
     
     UserDto findByCompanyName(String companyName);
 
