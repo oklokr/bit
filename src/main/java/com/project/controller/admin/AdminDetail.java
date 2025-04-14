@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.project.model.UserDto;
 import com.project.service.AdminService;
 import com.project.service.UserService;
@@ -33,6 +36,7 @@ public class AdminDetail {
         UserDto userDto = userDao.getUserById(id);
         model.addAttribute("kakaoMapJsKey", kakaoMapJsKey);
         model.addAttribute("userDto", userDto);
+        model.addAttribute("id", userDto.getId());
         model.addAttribute("companyName", userDto.getCompanyName());
         model.addAttribute("address", userDto.getAddress());
         model.addAttribute("detailedAddress", userDto.getDetailedAddress());
@@ -42,50 +46,37 @@ public class AdminDetail {
         model.addAttribute("contentPage", "/WEB-INF/page/admin/detail.jsp");
         return "layout/app";
     }
+}
 
-    @PostMapping("/admin/resetPassword")
-    public String resetPassword(@RequestParam String id, @RequestParam int pageNum, Model model, HttpSession session){
-        UserDto user = userDao.getUserById(id);
-        String name = user.getCompanyName();
-        int result = adminDao.resetPassword(id);
-        session.setAttribute("resetResult", result);
-        model.addAttribute("name", name);
-        model.addAttribute("id", id);
-        model.addAttribute("pageNum", pageNum);
-        model.addAttribute("title", "main page");
-        model.addAttribute("contentPage", "/WEB-INF/page/admin/detail.jsp");
-        return "layout/app";
-    }
+@RestController
+class AdminApiController {
+    @Autowired
+    private AdminService adminDao;
 
-    @PostMapping("/admin/deleteUser")
-    public String deleteUser(@RequestParam String id, @RequestParam int pageNum, Model model, HttpSession session){
-        UserDto user = userDao.getUserById(id);
-        String name = user.getCompanyName();
+    @Autowired
+    private UserService userDao;
+
+    @PostMapping("/api/admin/delete")
+    public int deleteUser(@RequestBody String id){
+        System.out.println("아이디는"+id);
+        id = id.replace("\"", "");
         int result = adminDao.deleteUser(id);
-        session.setAttribute("deleteResult", result);
-        model.addAttribute("deletedName", name);
-        model.addAttribute("pageNum", pageNum);
-        model.addAttribute("failedId", id);
-        model.addAttribute("title", "main page");
-        model.addAttribute("contentPage", "/WEB-INF/page/admin/admin.jsp");
-        return "layout/app";
+        System.out.println("실행결과: "+result);
+        return result;
     }
 
-    @PostMapping("/admin/changeMemberType")
-    public String changeMemberType(@RequestParam String id, @RequestParam int pageNum, Model model, HttpSession session){
-        UserDto user = userDao.getUserById(id);
-        System.out.println(id);
-        Map<String,Object> map = new HashMap<>();
-        map.put("id", id);
-        map.put("memberType", user.getMemberType());
-        int result = adminDao.changeMemberType(map);
+    @PostMapping("/api/admin/reset")
+    public int resetPw(@RequestBody String id){
+        System.out.println("비밀번호 리셋"+id);
+        id = id.replace("\"", "");
+        int result=adminDao.resetPassword(id);
+        System.out.println("비밀번호 리셋 실행결과:"+result);
+        return result;
+    }
 
-        model.addAttribute("name", user.getCompanyName());
-        session.setAttribute("changeResult", result);
-        model.addAttribute("pageNum", pageNum);
-        model.addAttribute("id", id);
-        model.addAttribute("title", "main page");
-        model.addAttribute("contentPage", "/WEB-INF/page/admin/detail.jsp");
-        return "layout/app";
+    @PostMapping("/api/admin/change")
+    public int changeMemberType(@RequestBody Map<String, Object> userMap){
+        int result = adminDao.changeMemberType(userMap);
+        return result;
     }
 }

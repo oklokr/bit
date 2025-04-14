@@ -81,10 +81,7 @@
             </div>
         </div>
     </div>
-    
 
-
-    
    <!-- 버튼 -->
     <div class="mt-4 d-flex justify-content-between align-items-center">
         <!-- 왼쪽: 목록 버튼 -->
@@ -94,23 +91,9 @@
 
         <!-- 오른쪽: 초기화 + 탈퇴 버튼 그룹 -->
         <div class="d-flex gap-2 ms-auto">
-            <form id="typeChangeForm" action="${pageContext.request.contextPath}/admin/changeMemberType" method="post">
-                <input type="hidden" name="id" value="${userDto.id}">
-                <input type="hidden" name="pageNum" value="${pageNum}">
-                <button type="button" class="btn btn-secondary" id="changeMemBtn">회원유형 변경</button>
-            </form>
-
-            <form id="resetPasswordForm" action="${pageContext.request.contextPath}/admin/resetPassword" method="post">
-                <input type="hidden" name="id" value="${userDto.id}">
-                <input type="hidden" name="pageNum" value="${pageNum}">
-                <button type="button" class="btn btn-secondary" id="resetPwBtn">비밀번호 초기화</button>
-            </form>
-
-            <form id="deleteUserForm" action="${pageContext.request.contextPath}/admin/deleteUser" method="post">
-                <input type="hidden" name="id" value="${userDto.id}">
-                <input type="hidden" name="pageNum" value="${pageNum}">
-                <button type="button" class="btn btn-danger" id="deleteMemBtn">회원 탈퇴</button>
-            </form>
+            <button class="btn btn-secondary" onclick="locationLink('changeUser', '${id}')">회원유형 변경</button>
+            <button class="btn btn-secondary" onclick="locationLink('resetPw', '${id}')">비밀번호 초기화</button>
+            <button class="btn btn-danger" onclick="locationLink('deleteUser', '${id}')">회원 탈퇴</button>
         </div>
     </div>
 
@@ -119,72 +102,47 @@
 </html>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapJsKey}&libraries=services,clusterer,drawing"></script>
 <script>
-    document.getElementById("changeMemBtn").addEventListener("click", (event)=>{
-        modal({
-            title: "회원유형 변경",
-            type: "confirm",
-            content: "${userDto.companyName}의 회원 유형을 변경하시겠습니까?",
-            fnConfirm: () => document.getElementById("typeChangeForm").submit()
-        });
-
-    });
-
-    document.getElementById("resetPwBtn").addEventListener("click", (event)=>{
-        modal({
-            title: "비밀번호 초기화",
-            type: "confirm",
-            content: "${userDto.companyName}의 비밀번호 초기화를 하시겠습니까?",
-            fnConfirm: () => document.getElementById("resetPasswordForm").submit()
-        });
-    });
-
-    document.getElementById("deleteMemBtn").addEventListener("click", (event)=>{
-        modal({
-            title: "회원 탈퇴",
-            type: "confirm",
-            content: "${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?",
-            fnConfirm: () => document.getElementById("deleteUserForm").submit()
-        });
-    });
-
-    window.onload = function() {
+    function locationLink(type, data) {
         let pageNum = "${pageNum}";
         let id = "${id}";
-        let name = "${name}";
-        let resetResult = "${resetResult}";
-        let changeResult = "${changeResult}";
-        if (resetResult == "1") {
-            modal({
-                content: name + "회원의 비밀번호가 변경되었습니다",
-                fnClose: () => {
-                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-                }
-            });
-        }
-        if (resetResult == "0") {
-            modal({
-                content: "비밀번호 변경에 실패했습니다",
-                fnClose: () => {
-                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-                }
-            });
-        }
+        let memberType = "${userDto.memberType}";
+        const userObj = {
+            id: data,
+            memberType: memberType
+        };
 
-        if (changeResult == "1") {
+        if (type === 'changeUser') {
             modal({
-                content: name + " 회원의 회원 유형이 변경되었습니다",
-                fnClose: () => {
+                content: data+memberType+"${userDto.companyName}의 회원 유형을 변경하시겠습니까?",
+                type: "confirm",
+                fnConfirm: () =>  postRequestApi("/api/admin/change", userObj, res => {
                     location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-                }
-            });
+                })
+            })
         }
-        if (changeResult == "0") {
+        if(type === 'resetPw') {
             modal({
-                content: "회원 유형 변경에 실패했습니다",
-                fnClose: () => {
+                content: "${userDto.companyName}의 비밀번호 초기화를 하시겠습니까?",
+                type: "confirm",
+                fnConfirm: () =>  postRequestApi("/api/admin/reset", data, res => {
                     location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-                }
-            });
+                })
+            })
+        }
+        if(type === 'deleteUser') {
+            modal({
+                content: "${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?",
+                type: "confirm",
+                fnConfirm: () =>  postRequestApi("/api/admin/delete", data, res => {
+                    modal({
+                        content: "${userDto.companyName}의 회원 탈퇴가 완료되었습니다.",
+                        type: "alert",
+                        fnClose: () =>  {
+                            location.href = "/admin?pageNum=" + pageNum;
+                        }
+                    })
+                })
+            })
         }
     }
 
@@ -257,13 +215,8 @@
 
             
         });
+
 </script>
-
-
-<%-- JSP에서 세션 값 삭제 (JavaScript 실행 이후) --%>
-<% session.removeAttribute("resetResult"); %>
-<% session.removeAttribute("changeResult"); %>
-
 <style>
     h5 {
         font-size: 1.4rem;

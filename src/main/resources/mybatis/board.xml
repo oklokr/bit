@@ -49,16 +49,16 @@
     </select>
 
     <select id="getReplies" parameterType="int" resultType="com.project.model.ReplyDto">
-        SELECT reply_id, board_id, id, author, creation_date, reply_title, reply_content, reply_ref, reply_step, reply_level
+        SELECT reply_id, board_id, id, author, creation_date, reply_title, reply_content, reply_ref, reply_step, reply_level, reply_state
         FROM replies
         WHERE board_id = #{boardId}
         ORDER BY reply_ref ASC, reply_step ASC;
     </select>
 
-    <select id="getMaxReplyRef" parameterType="int" resultType="int">
+    <select id="getMaxReplyRef" resultType="int">
         SELECT COALESCE(MAX(reply_ref), 0)
         FROM replies
-        WHERE reply_level = 0 AND board_id = #{boardId}
+        WHERE reply_level = 0 
     </select>
 
     <select id="getMaxReplyStep" resultType="int">
@@ -92,4 +92,43 @@
         )
     </insert>
 
+    <select id="getReply" parameterType="int" resultType="com.project.model.ReplyDto">
+        SELECT *
+        FROM replies
+        WHERE reply_id = #{replyId}
+    </select>
+
+    <select id="getRootReply" parameterType="int" resultType="int">
+        SELECT count(*)
+        FROM replies
+        WHERE reply_ref = #{replyRef} AND reply_level = 0
+    </select>
+
+    <select id="getNestedReplyCount" parameterType="int">
+        select count(*) from replies
+        where reply_ref = #{replyRef} and reply_level = 1
+    </select>
+
+    <update id="deleteRootReply">
+        update replies
+        set reply_state = 1, reply_title = #{replyTitle}, reply_content = #{replyContent}
+        where reply_id = #{replyId}
+    </update>
+
+    <update id="deleteReply" parameterType="int">
+        delete from replies
+        where reply_id = #{replyId}
+    </update>
+
+    <select id="getRootReplyState" parameterType="int" resultType="int">
+        SELECT reply_state
+        FROM replies
+        WHERE reply_ref = #{replyRef} AND reply_level = 0
+    </select>
+
+    <select id="getRootReplyId" parameterType="int" resultType="int">
+        SELECT reply_id
+        FROM replies
+        WHERE reply_ref = #{replyRef} AND reply_level = 0
+    </select>
 </mapper>
