@@ -74,10 +74,10 @@
         border-bottom: 1px solid #ccc;
     }
     header h1 {
-        width: 68px;
+        width: 120px;
         height: 100%;
         margin: initial;
-        background: url('/images/logo.png') no-repeat center center;
+        background: url('/images/logo2.png') no-repeat center center;
         background-size: 100%;
     }
     header h1 a {

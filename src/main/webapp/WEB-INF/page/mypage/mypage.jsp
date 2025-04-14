@@ -61,13 +61,13 @@
                 </dd>
             </dl>
         </div>
-        
+
+        <div class="bottom-btns">
+            <button type="button" class="btn btn-danger" onclick="openPasswordModal('delete')">회원탈퇴</button>
+            <button type="button" class="btn btn-primary" onclick="openPasswordModal('edit')">수정</button>
+        </div>
     </form>
     
-    <div class="bottom-btns">
-        <button type="button" class="btn btn-danger" onclick="openPasswordModal('delete')">회원탈퇴</button>
-        <button type="button" class="btn btn-primary" onclick="openPasswordModal('edit')">수정</button>
-    </div>
 </div>
 
 <!-- 비밀번호 확인 모달 -->
@@ -334,10 +334,15 @@
 <style>
     #userInfoForm {
         display: flex;
+        flex-wrap: wrap;
         gap: 20px;
     }
     #userInfoForm .data-form {
         flex: 1;
+    }
+
+    #userInfoForm .bottom-btns {
+        width: 100%;
     }
     .input-group {
         display: flex;
