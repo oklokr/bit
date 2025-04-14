@@ -23,7 +23,7 @@
         FROM product_info p
         LEFT JOIN common_codes c 
             ON p.category_code = c.common_value
-        WHERE c.common_code = 'CATEGORY_TYPE'
+        WHERE c.common_code = 'CATEGORY_TYPE' AND p.category_code = c.common_value
         <if test="id != null and id != ''">
             AND p.id = #{id}
         </if>
@@ -48,7 +48,7 @@
         FROM product_info p
         LEFT JOIN common_codes c 
             ON p.category_code = c.common_value
-        WHERE c.common_code = 'CATEGORY_TYPE'
+        WHERE c.common_code = 'CATEGORY_TYPE' AND p.category_code = c.common_value
         <if test="id != null and id != ''">
             AND p.id = #{id}
         </if>

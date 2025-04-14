@@ -50,6 +50,10 @@ const validate = {
     isPhoneNumber: value => {
         const phoneRegex = /^(010-\d{3,4}-\d{4}|\d{10,11})$/; // 010-0000-0000 형식 또는 10~11자리 숫자
         return phoneRegex.test(value);
+    },
+    isBusinessNumber: value => {
+        const businessNumber = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
+        return businessNumber.test(value)
     }
 };
 
@@ -61,6 +65,28 @@ function formatPhoneNumber(phoneNumber) {
             else if (p2) return `${p1}-${p2}`;
             else return p1;
         });
+}
+
+function formatBusinessNumber(businessNumber) {
+    return businessNumber
+        .replace(/[^0-9]/g, '') // 숫자만 남기기
+        .replace(/^(\d{3})(\d{0,2})(\d{0,5})$/, (match, p1, p2, p3) => {
+            if (p3) return `${p1}-${p2}-${p3}`;
+            else if (p2) return `${p1}-${p2}`;
+            else return p1;
+        });
+}
+
+function termsModal(termsType) {
+    console.log(termsType)
+    const modal = new bootstrap.Modal(document.getElementById("termsModal"));
+
+    postRequestApi("/api/main/getTermsList", { termsType: termsType }, res => {
+        document.querySelector("#termsModalLabel").innerText = res.data.termsTitle;
+        document.querySelector(".modal-body").innerHTML = res.data.termsContent;
+    })
+
+    modal.show();
 }
 
 function modal(option) {

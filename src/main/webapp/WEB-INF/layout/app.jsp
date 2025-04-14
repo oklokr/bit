@@ -62,6 +62,21 @@
         </div>
     </div>
 
+
+    <!-- 약관 -->
+    <div class="modal fade modal-fullscreen" id="termsModal" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true" data-name="terms-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="title">
+                        <strong class="modal-title fs-5" id="termsModalLabel"></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </p>
+                </div>
+                <div class="modal-body"></div>
+            </div>  
+        </div>
+    </div>
 </body>
 </html>
 

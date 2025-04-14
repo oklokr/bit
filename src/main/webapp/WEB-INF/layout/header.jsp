@@ -23,7 +23,7 @@
     </div>
 </header>
 
-<div class="modal fade modal-fullscreen" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-name="mypage-modal">
+<div class="mypage-modal modal fade modal-fullscreen" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-name="mypage-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -144,48 +144,48 @@
         background-size: 100%;
     }
 
-    .modal[data-name="mypage-modal"] .modal-dialog {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-dialog {
         margin: initial;
         margin-left: auto;
 
-        --bs-modal-width: 380px;
+        width: 380px;
     }
-    .modal[data-name="mypage-modal"] .modal-header {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-header {
         flex-direction: column;
         padding: 0 16px;
         border: initial;
     }
-    .modal[data-name="mypage-modal"] .modal-header > p {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-header > p {
         width: 100%;
     }
-    .modal[data-name="mypage-modal"] .modal-header .title {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-header .title {
         display: flex;
         align-items: center;
         padding: 16px 0;
         margin: initial;
     }
-    .modal[data-name="mypage-modal"] .modal-header .info {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-header .info {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-    .modal[data-name="mypage-modal"] .modal-body {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-body {
         padding-top: initial;
     }
 
-    .modal[data-name="mypage-modal"] .modal-body .btn-primary {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-body .btn-primary {
         display: block;
         width: 100%;
     }
 
-    .modal[data-name="mypage-modal"] .modal-body .link-wrap {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-body .link-wrap {
         padding: initial;
         margin-top: 30px;
     }
-    .modal[data-name="mypage-modal"] .modal-body .link-wrap li {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-body .link-wrap li {
         border-bottom: 1px solid #212529;
     }
-    .modal[data-name="mypage-modal"] .modal-body .link-wrap a {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-body .link-wrap a {
         display: block;
         text-decoration: initial;
         color: #212529;
@@ -193,14 +193,14 @@
         transition: 0.3s;
     }
 
-    .modal[data-name="mypage-modal"] .modal-body ul.link-wrap li:hover {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-body ul.link-wrap li:hover {
         border-color: #007bff;
     }
-    .modal[data-name="mypage-modal"] .modal-body ul.link-wrap li:hover a {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-body ul.link-wrap li:hover a {
         color: #007bff;
         font-weight: 600;
     }
-    .modal[data-name="mypage-modal"] .modal-body ul.link-wrap li:hover a.active {
+    .mypage-modal.modal[data-name="mypage-modal"] .modal-body ul.link-wrap li:hover a.active {
         color: #007bff;
         font-weight: 600;
     }

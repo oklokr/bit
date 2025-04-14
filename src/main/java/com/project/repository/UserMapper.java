@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.project.model.InventoryDto;
+import com.project.model.TermsDto;
 import com.project.model.UserDto;
 
 public interface UserMapper {
@@ -37,10 +38,11 @@ public interface UserMapper {
     
     boolean existsByPhoneNumber(String phoneNumber); // 전화번호 중복 확인 쿼리
 
-    void insertUser(UserDto user);
+    int insertUser(UserDto user);
 
-    void insertTermsAgreement(@Param("userId") String userId, @Param("termsId") int termsId);
+    int insertTermsAgreement(String userId, int termsId);
 
+    public List<TermsDto> getTermsList(String termsType); // 약관 리스트 조회
 
     // 마이페이지 이벤토리 Query Mapper
     public List<InventoryDto> getInventory(Map<String, Object> param);

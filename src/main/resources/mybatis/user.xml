@@ -54,6 +54,15 @@
         VALUES (#{id}, #{companyName}, #{password}, #{email}, #{phoneNumber}, #{businessNumber}, #{address}, #{detailedAddress}, #{postalCode}, 1, NOW())
     </insert>
 
+    <select id="getTermsList" resultType="com.project.model.TermsDto">
+        SELECT * FROM terms
+        <where>
+            <if test="termsId != null">
+                terms_id = #{termsId}
+            </if>
+        </where>
+    </select>
+
     <insert id="insertTermsAgreement">
         INSERT INTO member_terms_agreement (id, terms_id, agreement_date)
         VALUES (#{userId}, #{termsId}, NOW())

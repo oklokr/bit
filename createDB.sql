@@ -29,7 +29,9 @@ CREATE TABLE common_codes (
     creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     common_id INT,
     FOREIGN KEY (common_code) REFERENCES common(common_code) ON DELETE CASCADE,
-    FOREIGN KEY (common_id) REFERENCES common(common_id) ON DELETE CASCADE
+    FOREIGN KEY (common_id) REFERENCES common(common_id) ON DELETE CASCADE,
+    KEY unique_common_code_value (common_code, common_value), -- 복합 인덱스 추가
+    KEY idx_common_value (common_value) -- 단독 인덱스 추가
 );
 
 -- ✅ 회원 테이블 생성
@@ -38,18 +40,18 @@ CREATE TABLE members (
     id VARCHAR(50) UNIQUE NOT NULL,  
     company_name VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(100) NOT NULL,
     phone_number VARCHAR(20) NOT NULL,
     business_number VARCHAR(20) NOT NULL,
     address VARCHAR(255) NOT NULL,
     detailed_address VARCHAR(255),
     postal_code VARCHAR(20) NOT NULL,
-    member_type INT NULL,  
+    member_type VARCHAR(255) NULL,
     join_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     session_id VARCHAR(255),
     last_access_time DATETIME,
     session_expiry_time DATETIME,
-    FOREIGN KEY (member_type) REFERENCES common_codes(common_code_id) ON DELETE SET NULL
+    FOREIGN KEY (member_type) REFERENCES common_codes (common_value) ON DELETE SET NULL
 );
 
 -- ✅ 약관 테이블 생성
@@ -57,9 +59,10 @@ CREATE TABLE terms (
     terms_id INT AUTO_INCREMENT PRIMARY KEY,
     terms_title VARCHAR(255) NOT NULL,
     terms_content TEXT NOT NULL,
-    terms_type INT NULL,  
+    terms_type VARCHAR(255) NULL,
+    terms_required VARCHAR(1) NOT NULL,
     creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (terms_type) REFERENCES common_codes(common_code_id) ON DELETE SET NULL
+    FOREIGN KEY (terms_type) REFERENCES common_codes (common_value) ON DELETE SET NULL
 );
 
 -- ✅ 회원-약관 동의 테이블 생성
@@ -78,11 +81,11 @@ CREATE TABLE product_info (
     id VARCHAR(50),
     image VARCHAR(255),
     product_name VARCHAR(255) NOT NULL,
-    category_code INT NULL,  
+    category_code VARCHAR(255) NULL,
     product_description TEXT,
     product_registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id) REFERENCES members(id) ON DELETE CASCADE,
-    FOREIGN KEY (category_code) REFERENCES common_codes(common_code_id) ON DELETE SET NULL
+    FOREIGN KEY (category_code) REFERENCES common_codes(common_value) ON DELETE SET NULL
 );
 
 -- ✅ 재고 관리 테이블 생성
@@ -92,13 +95,13 @@ CREATE TABLE inventory (
     id VARCHAR(50),
     image VARCHAR(255),
     product_name VARCHAR(255) NOT NULL,
-    category_code INT NULL,  
+    category_code VARCHAR(255) NULL,  
     product_description TEXT,
     stock_quantity INT NOT NULL DEFAULT 0,
     inventory_registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES product_info(product_id) ON DELETE CASCADE,
     FOREIGN KEY (id) REFERENCES members(id) ON DELETE CASCADE,
-    FOREIGN KEY (category_code) REFERENCES common_codes(common_code_id) ON DELETE SET NULL,
+    FOREIGN KEY (category_code) REFERENCES common_codes(common_value) ON DELETE SET NULL,
     UNIQUE KEY unique_inventory (id, product_id)
 );
 

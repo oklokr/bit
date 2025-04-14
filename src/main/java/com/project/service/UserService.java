@@ -8,8 +8,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.model.InventoryDto;
+import com.project.model.TermsDto;
 import com.project.model.UserDto;
 import com.project.repository.UserMapper;
 
@@ -20,6 +22,41 @@ import jakarta.servlet.http.HttpSession;
 public class UserService {
     @Autowired
     private UserMapper userMapper;
+
+    @Transactional
+    public int registerUserWithTerms(Map<String, Object> requestBody) {
+        UserDto user = new UserDto();
+        user.setId((String) requestBody.get("id"));
+        user.setCompanyName((String) requestBody.get("companyName"));
+        user.setPassword((String) requestBody.get("password"));
+        user.setEmail((String) requestBody.get("email"));
+        user.setBusinessNumber((String) requestBody.get("businessNumber"));
+        user.setPhoneNumber((String) requestBody.get("phoneNumber"));
+        user.setAddress((String) requestBody.get("address"));
+        user.setDetailedAddress((String) requestBody.get("detailedAddress"));
+        user.setPostalCode((String) requestBody.get("postalCode"));
+
+        // 사용자 저장
+        if (userMapper.insertUser(user) != 1) return 0;
+        Object termsListObj = requestBody.get("termsList");
+        if (!(termsListObj instanceof List)) return 0;
+
+        List<?> termsList = (List<?>) termsListObj;
+        for (Object itemObj : termsList) {
+            if (!(itemObj instanceof Map)) return 0;
+            Map<?, ?> item = (Map<?, ?>) itemObj;
+            String termsType = String.valueOf(item.get("termsType"));
+            String checkedStr = String.valueOf(item.get("checked"));
+            int checked = "1".equals(checkedStr) ? 1 : 0;
+            if (termsType != null && checked == 1) {
+                List<TermsDto> terms = userMapper.getTermsList(termsType);
+                for (TermsDto term : terms) {
+                    userMapper.insertTermsAgreement(user.getId(), term.getTermsId());
+                }
+            }
+        }
+        return 1;
+    }
 
     // 회원정보 조회
     public UserDto getUserById(String id) {
@@ -145,13 +182,12 @@ public class UserService {
         return true;
     }
 
-    public void saveUser(UserDto user) {
-        userMapper.insertUser(user); // UserMapper를 통해 DB에 저장
+    public int saveUser(UserDto user) {
+        return userMapper.insertUser(user); // UserMapper를 통해 DB에 저장
     }
 
-    public void saveTermsAgreement(String userId, int termsId) {
-        System.out.println("Saving terms agreement: userId=" + userId + ", termsId=" + termsId);
-        userMapper.insertTermsAgreement(userId, termsId);
+    public int saveTermsAgreement(String userId, int termsId) {
+        return userMapper.insertTermsAgreement(userId, termsId);
     }
 
     public boolean verifyPassword(String sessionId, String inputPassword) {
@@ -173,6 +209,10 @@ public class UserService {
 
     public void deleteUser(String id) {
         userMapper.deleteUserById(id);
+    }
+
+    public List<TermsDto> getTermsList(String termsType) {
+        return userMapper.getTermsList(termsType);
     }
 
     // 마이페이지 이벤토리

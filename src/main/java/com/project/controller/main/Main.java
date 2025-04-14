@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.model.ProductDto;
 import com.project.model.ProductRequestParam;
+import com.project.model.TermsDto;
 import com.project.service.ProductService;
+import com.project.service.UserService;
 
 @Controller
 public class Main {
@@ -33,6 +35,8 @@ public class Main {
 class ProductApiController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UserService userService;
 
     @PostMapping("/api/main/product")
     public Map<String, Object> getProductList(@RequestBody ProductRequestParam filterRequest) {
@@ -55,5 +59,12 @@ class ProductApiController {
         response.put("data", productList);
         response.put("totalCount", totalCount);
         return response;
-    } 
+    }
+
+    @PostMapping("/api/main/getTermsList")
+    public TermsDto getTermsList(@RequestBody Map<String, String> params) {
+        String termsType = params.get("termsType");
+        List<TermsDto> termsList = userService.getTermsList(termsType);
+        return termsList.get(0);
+    }
 }
