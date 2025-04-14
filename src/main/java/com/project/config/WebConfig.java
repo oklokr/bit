@@ -13,15 +13,10 @@ public class WebConfig implements WebMvcConfigurer {
 
     private static final String[] EXCLUDE_PATHS = {
         "/login",
-        "/api/login",
-        "/findId",
-        "/findPw",
-        "/join",
-        "/findIdResult",
-        "/findPwResult",
         "/joinStepUser/**",
         "/joinStepComp/**",
         "/findResult",
+        "/auth/**",
         "/resources/**",
         "/css/**",
         "/js/**",
@@ -31,7 +26,9 @@ public class WebConfig implements WebMvcConfigurer {
         "/checkBusinessNumber",
         "/joinStepSuccess",
         "/mainTerms",
-        "/subTerms"
+        "/subTerms",
+        "/api/login",
+        "/api/auth/**"
     };
 
     @Autowired

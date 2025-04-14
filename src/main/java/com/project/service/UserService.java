@@ -21,7 +21,7 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    // 아이디 찾기
+    // 회원정보 조회
     public UserDto getUserById(String id) {
         System.out.println("UserService - 조회할 ID: " + id);
         UserDto user = userMapper.getUserById(id);
@@ -62,8 +62,6 @@ public class UserService {
         UserDto userInfo = userMapper.getUserInfo(sessionId);
         return userInfo;
     }
-
-
     public UserDto findByCompanyName(String companyName) {
         System.out.println("UserService - 조회할 업체명: " + companyName);
         return userMapper.findByCompanyName(companyName);
