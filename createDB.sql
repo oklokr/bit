@@ -126,6 +126,7 @@ CREATE TABLE replies (
     reply_ref INT DEFAULT 0,
     reply_step INT DEFAULT 0,
     reply_level INT DEFAULT 0,
+    reply_state INT DEFAULT 0,
     FOREIGN KEY (board_id) REFERENCES bulletin_board(board_id) ON DELETE CASCADE,
     FOREIGN KEY (id) REFERENCES members(id) ON DELETE SET NULL
 );

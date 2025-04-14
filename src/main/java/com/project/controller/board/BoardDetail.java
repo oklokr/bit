@@ -81,4 +81,10 @@ class BoardApiController {
         int result = boardService.deletePost(boardId);
         return result;
     }
+
+    @PostMapping("/api/board/reply/delete")
+    public int replyDelete(@RequestBody int replyId){
+        int result = boardService.deleteReply(replyId);
+        return result;
+    }
 }

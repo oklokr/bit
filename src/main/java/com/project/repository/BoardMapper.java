@@ -19,6 +19,12 @@ public interface BoardMapper {
     public int getReplyCount(int boardId);
     public List<ReplyDto> getReplies(int boardId);
     public int insertReply(ReplyDto replyDto);
-    public int getMaxReplyRef(int boardId);
+    public int getMaxReplyRef();
     public int getMaxReplyStep(Map<String, Object> paramMap);
+    public int deleteReply(int replyId);
+    public ReplyDto getReply(int replyId);
+    public int getRootReplyState(int replyRef);
+    public int getNestedReplyCount(int replyRef);
+    public int deleteRootReply(Map<String, Object> map);
+    public int getRootReplyId(int replyRef);
 }
