@@ -310,3 +310,8 @@
     font-weight: bold;
     margin: 16px 0 30px;
 }
+
+/* board Style */
+.reply.reply-indent {
+    margin-left: 30px;
+}

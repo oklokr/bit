@@ -26,41 +26,51 @@
         </c:if>
         <div class="reply-list">
             <c:forEach var="replyDto" items="${replyDtos}">
-                <dl>
-                    <dt>작성자</dt>
-                    <dd>${replyDto.author} <c:if test="${replyDto.author == boardDto.author}">(글쓴이)</c:if></dd>
-                    <dt>작성날짜</dt>
-                    <dd><fmt:formatDate value="${replyDto.creationDate}" pattern="yyyy.MM.dd HH:mm"/></dd>
-                    <dt class="reply-list--title">${replyDto.replyTitle}</dt>
-                    <dd class="reply-list--content">${replyDto.replyContent}</dd>
-                    <dd class="reply-btn"><button class="btn btn-sm btn-outline-secondary" onclick="handleDisplayForm('${replyDto.replyRef}')">답글</button></dd>
-                </dl>
-                <form style="display:none" class='reply-form-${replyDto.replyRef}' action="${pageContext.request.contextPath}/board/reply/write" method="post" name="replyform">
-                    <input type="hidden" name="boardId" value="${boardId}">
-                    <input type="hidden" name="replyLevel" value="1">
-                    <input type="hidden" name="pageNum" value="${pageNum}">
-                    <input type="hidden" name="replyRef" value="${replyDto.replyRef}" />
-            
-                    <p class="small text-muted mb-3">
-                        <span>작성자: ${user}</span>
-                        <span>작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/></span>
-                    </p>
-            
-                    <div class="mb-3">
-                        <p class="form-label">제목</p>
-                        <input type="text" name="replyTitle" class="form-control" placeholder="제목을 입력해주세요">
-                    </div>
-            
-                    <div class="mb-3">
-                        <p class="form-label">내용</p>
-                        <textarea name="replyContent" class="form-control" placeholder="내용을 입력해주세요" rows="5" maxlength="250"></textarea>
-                    </div>
+                <div class="reply <c:if test='${replyDto.replyLevel == 1}'>reply-indent</c:if>">
+                    <dl>
+                        <dt>작성자</dt>
+                        <dd>${replyDto.author} <c:if test="${replyDto.author == boardDto.author}">(글쓴이)</c:if></dd>
+                        <dt>작성날짜</dt>
+                        <dd><fmt:formatDate value="${replyDto.creationDate}" pattern="yyyy.MM.dd HH:mm"/></dd>
+                        <dt class="reply-list--title">${replyDto.replyTitle}</dt>
+                        <dd class="reply-list--content">${replyDto.replyContent}</dd>
+                        <c:if test="${replyDto.replyState == 0}">
+                            <c:if test="${replyDto.replyLevel == 0}">
+                                <dd class="reply-btn"><button class="btn btn-sm btn-outline-secondary" onclick="handleDisplayForm('${replyDto.replyRef}')">답글</button></dd>
+                            </c:if>
+                            <c:if test="${replyDto.author == user}">
+                                <dd class="reply-delete-btn"><button class="btn btn-sm btn-outline-secondary" onclick="locationLink('reply_delete', '${replyDto.replyId}')">삭제</button></dd>
+                            </c:if>
+                        </c:if>
+                    </dl>
+                    <form style="display:none" class='reply-form-${replyDto.replyRef}' action="${pageContext.request.contextPath}/board/reply/write" method="post" name="replyform">
+                        <input type="hidden" name="boardId" value="${boardId}">
+                        <input type="hidden" name="replyLevel" value="1">
+                        <input type="hidden" name="pageNum" value="${pageNum}">
+                        <input type="hidden" name="replyRef" value="${replyDto.replyRef}" />
+                
+                        <p class="small text-muted mb-3">
+                            <span>작성자: ${user}</span>
+                            <span>작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/></span>
+                        </p>
+                
+                        <div class="mb-3">
+                            <p class="form-label">제목</p>
+                            <input type="text" name="replyTitle" class="form-control" placeholder="제목을 입력해주세요">
+                        </div>
+                
+                        <div class="mb-3">
+                            <p class="form-label">내용</p>
+                            <textarea name="replyContent" class="form-control" placeholder="내용을 입력해주세요" rows="5" maxlength="250"></textarea>
+                        </div>
 
-                    <div class="text-end">
-                        <button type="button" name="submit" class="btn btn-sm btn-secondary" data-submit-id="${replyDto.replyRef}">답글 작성</button>
-                        <button type="button" name="cancel" class="btn btn-sm btn-secondary" onclick="handleDisplayForm('${replyDto.replyRef}')">취소</button>
-                    </div>
-                </form>
+                        <div class="text-end">
+                            <button type="button" name="submit" class="btn btn-sm btn-secondary" data-submit-id="${replyDto.replyRef}">답글 작성</button>
+                            <button type="button" name="cancel" class="btn btn-sm btn-secondary" onclick="handleDisplayForm('${replyDto.replyRef}')">취소</button>
+                        </div>
+
+                    </form>
+                </div>
             </c:forEach>
         </div>
 
@@ -71,7 +81,7 @@
             <input type="hidden" name="pageNum" value="${pageNum}">
 
             <strong style="display: block; margin-bottom: 10px;">답글 작성</strong>
-
+            
             <p class="small text-muted mb-3">
                 <span>작성자: ${user}</span>
                 <span>작성일자: <fmt:formatDate value="<%= new java.util.Date() %>" pattern="yyyy.MM.dd HH:mm"/></span>
@@ -114,7 +124,28 @@
                 content: "게시글을 삭제하시겠습니까?",
                 type: "confirm",
                 fnConfirm: () =>  postRequestApi("/api/board/delete", data, res => {
-                    location.href = "/board"
+                    modal({
+                        content: "게시글이 삭제되었습니다",
+                        type: "alert",
+                        fnClose: () =>  {
+                            location.href = "/board";
+                        }
+                    })
+                })
+            })
+        }
+        if(type === 'reply_delete') {
+            modal({
+                content: "답글을 삭제하시겠습니까?",
+                type: "confirm",
+                fnConfirm: () =>  postRequestApi("/api/board/reply/delete", data, res => {
+                    modal({
+                        content: "답글이 삭제되었습니다.",
+                        type: "alert",
+                        fnClose: () =>  {
+                            location.reload();
+                        }
+                    })
                 })
             })
         }

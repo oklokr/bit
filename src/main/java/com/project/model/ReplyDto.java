@@ -18,4 +18,5 @@ public class ReplyDto {
     private int replyRef;
     private int replyStep;
     private int replyLevel;
+    private int replyState;
 }
