@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class Write{
     @Autowired
-    private BoardService boardDao;
+    private BoardService boardService;
 
     @Autowired
-    private UserService userDao;
+    private UserService userService;
 
     @GetMapping("/board/write")
     public String pageRender(Model model, HttpSession session) {
-        String user = userDao.getUserInfo(session.getId()).getCompanyName();
+        String user = userService.getUserInfo(session.getId()).getCompanyName();
         model.addAttribute("user", user);
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/board/write.jsp");
@@ -33,12 +33,12 @@ public class Write{
 
     @PostMapping("/board/write")
     public String postMethodName(@ModelAttribute BoardDto boardDto, Model model, HttpSession session) {
-        UserDto userDto = userDao.getUserInfo(session.getId());
+        UserDto userDto = userService.getUserInfo(session.getId());
         boardDto.setAuthor(userDto.getCompanyName());
         boardDto.setId(userDto.getId());
         boardDto.setCreationDate(new Timestamp(System.currentTimeMillis()));
 
-        int result = boardDao.insertPost(boardDto);
+        int result = boardService.insertPost(boardDto);
         session.setAttribute("writeResult", result);
         model.addAttribute("contentPage", "/WEB-INF/page/board/write.jsp");
         return "layout/app";

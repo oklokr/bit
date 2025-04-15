@@ -26,24 +26,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 @Controller
 public class BoardDetail {
     @Autowired
-    private BoardService boardDao;
+    private BoardService boardService;
 
     @Autowired
-    private UserService userDao;
+    private UserService userService;
 
 
     @GetMapping("/board/detail")
     public String boardDetail(@RequestParam int boardId, @RequestParam String pageNum, HttpSession session,
     Model model) throws Exception {
-        BoardDto boardDto = boardDao.getArticle(boardId);
-        boardDao.addCount(boardId);
+        BoardDto boardDto = boardService.getArticle(boardId);
+        boardService.addCount(boardId);
         int replyCount = 0;
-        replyCount = boardDao.getReplyCount(boardId);
+        replyCount = boardService.getReplyCount(boardId);
 
-        List<ReplyDto> replyDtos = boardDao.getReplies(boardId);
+        List<ReplyDto> replyDtos = boardService.getReplies(boardId);
         model.addAttribute("replyDtos", replyDtos);
 
-        String user = userDao.getUserInfo(session.getId()).getCompanyName();
+        String user = userService.getUserInfo(session.getId()).getCompanyName();
         
         model.addAttribute("user", user);
         model.addAttribute("replyCount", replyCount);
@@ -57,13 +57,13 @@ public class BoardDetail {
 
     @PostMapping("/board/reply/write")
     public String postReply(@ModelAttribute ReplyDto replyDto, @RequestParam String pageNum, Model model, HttpSession session) {
-        UserDto userDto = userDao.getUserInfo(session.getId());
+        UserDto userDto = userService.getUserInfo(session.getId());
         replyDto.setAuthor(userDto.getCompanyName());
         replyDto.setId(userDto.getId());
         
         replyDto.setCreationDate(new Timestamp(System.currentTimeMillis()));
         
-        int result=boardDao.insertReply(replyDto);
+        int result=boardService.insertReply(replyDto);
 
         session.setAttribute("ReplyResult", result);
         return "redirect:/board/detail?boardId=" + replyDto.getBoardId() + "&pageNum=" + pageNum;

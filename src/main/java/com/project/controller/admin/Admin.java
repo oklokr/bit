@@ -15,9 +15,8 @@ import com.project.service.AdminService;
 
 @Controller
 public class Admin {
-    //임시 여기를 UserService로 수정
     @Autowired
-    private AdminService userDao;
+    private AdminService adminService;
 
     @GetMapping("/admin")
     public String pageRender(@RequestParam(required = false) String searchName, 
@@ -35,7 +34,7 @@ public class Admin {
         int endPage = 0; //출력 페이지 끝
 
 
-        count = userDao.getCount(searchName);
+        count = adminService.getCount(searchName);
 
         if (pageNum == null || pageNum.equals("")){
             pageNum="1";
@@ -73,7 +72,7 @@ public class Admin {
             map.put("pageSize", pageSize);
             map.put("searchName", searchName);
 
-            List<UserDto> memberDtos = userDao.getUsers(map);
+            List<UserDto> memberDtos = adminService.getUsers(map);
             model.addAttribute("memberDtos", memberDtos);
         }
         model.addAttribute("searchName", searchName);

@@ -16,7 +16,7 @@ import com.project.service.BoardService;
 @Controller
 public class Board {
     @Autowired
-    private BoardService boardDao;
+    private BoardService boardService;
 
     @GetMapping("/board")
     public String board(@RequestParam(required=false) String pageNum, Model model) {
@@ -32,7 +32,7 @@ public class Board {
         int startPage = 0; //출력 페이지 시작 
         int endPage = 0; //출력 페이지 끝
 
-        count = boardDao.getCount();
+        count = boardService.getCount();
 
         if (pageNum == null || pageNum.equals("")){
             pageNum="1";
@@ -68,7 +68,7 @@ public class Board {
             map.put("start", start);
             map.put("pageSize", pageSize);
 
-            List<BoardDto> dtos = boardDao.getArticles(map);
+            List<BoardDto> dtos = boardService.getArticles(map);
             model.addAttribute("dtos", dtos);
         }
         model.addAttribute("title", "main page");
