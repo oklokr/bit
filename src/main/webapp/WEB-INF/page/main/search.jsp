@@ -214,6 +214,9 @@
         border-radius: 10px;
         border: 1px solid #eee;
     }
+    .product-list .product-itme .product-img img {
+        width: 100%;
+    }
     .product-list .product-itme .product-info {
         display: flex;
         flex-direction: column;

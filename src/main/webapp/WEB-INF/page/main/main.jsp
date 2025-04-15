@@ -166,6 +166,9 @@
         border: 1px solid #eee;
         overflow: hidden;
     }
+    #product-items .product-itme .product-img img {
+        width: 100%;
+    }
     #product-items .product-itme .product-info {
         display: flex;
         flex-direction: column;
