@@ -18,7 +18,7 @@ public class Edit {
     private BoardService boardService;
 
     @GetMapping("/board/edit")
-    public String boardEdit(@RequestParam int boardId, @RequestParam String pageNum, 
+    public String pageRender(@RequestParam int boardId, @RequestParam String pageNum, 
         @RequestParam int result, Model model) {
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("result", result);
