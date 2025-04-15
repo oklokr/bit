@@ -200,6 +200,7 @@
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid #ccc;
+    overflow: hidden;
 }
 .table-wrap table .img {
     width: 100%;

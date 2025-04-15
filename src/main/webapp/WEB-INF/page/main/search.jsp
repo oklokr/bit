@@ -213,6 +213,7 @@
         height: 230px;
         border-radius: 10px;
         border: 1px solid #eee;
+        overflow: hidden;
     }
     .product-list .product-itme .product-img img {
         width: 100%;
