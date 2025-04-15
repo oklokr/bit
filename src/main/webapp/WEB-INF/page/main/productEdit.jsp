@@ -74,6 +74,10 @@
     </div>
 
     <div class="bottom-btns">
+        <c:if test='${isAdmin}'>
+            <button type="button" class="btn btn-primary left" onclick="handleDelete()">삭제</button>
+        </c:if>
+        
         <button type="button" class="btn btn-primary" onclick="history.back()">취소</button>
         <button type="button" class="btn btn-outline-primary" onclick="handleEdit()">
             <c:if test='${empty id}'>등록</c:if>
@@ -83,7 +87,21 @@
 </div>
 
 <script>
+    function handleDelete() {
+        const confirm = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            postRequestApi("/api/main/productDelete", {
+                productId: parseInt(urlParams.get('id'))
+            }, res => {
+                if(res.data.resultCode !== 1) return
+                modal({content: "삭제되었습니다.", fnClose: () => location.href = "/main/product"})
+                console.log('삭제');
+            })
+        }
+        modal({type: "confirm", title: "경고", content: "해당 상품과 연관된 회원의 정보가 사라집니다<br>삭제하시겠습니까?", fnConfirm: () => confirm()})
+    }
     function handleEdit() {
+        console.log('test');
         const urlParams = new URLSearchParams(window.location.search);
         const productId = parseInt(urlParams.get('id')) || null;
         const selectEl = document.querySelector(".form-select")

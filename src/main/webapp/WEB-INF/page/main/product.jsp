@@ -172,6 +172,18 @@ function handleSetProduct() {
                     location="/main/productEdit?id="+item.productId+""
                 })
             });
+            
+            if(res.data.totalCount < 1) {
+            tbody.innerHTML = 
+                '<tr>'
+                    + '<td colspan="6">'
+                        + '<p class="msg-box" style="margin-bottom: 0;">'
+                            + '<span style="color: #bbb">등록한 상품이 없습니다.</span>'
+                        + '</p>'
+                    + '</td>'
+                + '</tr>';
+            }
+
             handlePagination(res.data.totalCount, page, postData.size);
         });
     });

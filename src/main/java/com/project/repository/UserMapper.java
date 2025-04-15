@@ -58,5 +58,6 @@ public interface UserMapper {
     void modifyBoard(String id);
 
     void modifyReply(String id);
+    void forceDeleteInventory(int productId);
 }
 

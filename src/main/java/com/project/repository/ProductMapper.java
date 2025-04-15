@@ -16,4 +16,5 @@ public interface ProductMapper {
     public ProductDto getProductInfo(int productId);
     public int setProductItem(Map<String, Object> params);
     public int insertProductItem(Map<String, Object> params);
+    public int deleteProduct(int productId);
 }

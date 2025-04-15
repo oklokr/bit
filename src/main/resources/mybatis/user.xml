@@ -173,6 +173,7 @@
     <delete id="deleteInventory" parameterType="map">
         DELETE FROM inventory WHERE product_id = #{productId} AND id = #{id};
     </delete>
-
-    
+    <delete id="forceDeleteInventory">
+        DELETE FROM inventory WHERE product_id = #{productId}
+    </delete>
 </mapper>

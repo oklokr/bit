@@ -73,16 +73,6 @@ public class UserService {
         }
         return 1;
     }
-    // 로그아웃 로직
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session != null) {
-            String sessionId = session.getId();
-            this.clearSessionInfo(sessionId);
-            session.invalidate();
-        }
-        return "redirect:/login";
-    }
     public int clearSessionInfo(String sessionId) {
         int result = userMapper.clearSessionInfo(sessionId);
         return result;

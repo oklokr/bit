@@ -93,7 +93,7 @@ CREATE TABLE inventory (
     inventory_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT,
     id VARCHAR(50),
-    image VARCHAR(255),
+    image TEXT,
     product_name VARCHAR(255) NOT NULL,
     category_code VARCHAR(255) NULL,  
     product_description TEXT,

@@ -34,17 +34,18 @@ public class ProductEdit {
     public String PageRender(@RequestParam(value="id", required = false) Integer id, Model model, HttpSession session) {
         String sessionId = session.getId();
         String userId = userService.getUserInfo(sessionId).getId();
-        boolean isAdmin = userService.getUserInfo(sessionId).getMemberType() != 2;
-        ProductDto item = productService.getProductInfo(id);
+        boolean isAdmin = userService.getUserInfo(sessionId).getMemberType() == 2;
 
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/main/productEdit.jsp");
         model.addAttribute("commonCodes", productService.getCommonCode("CATEGORY_TYPE"));
+        model.addAttribute("isAdmin", isAdmin);
 
         // id가 있을 경우 해당 상품 정보를 가져옴
         if (id != null) {
+            ProductDto item = productService.getProductInfo(id);
             model.addAttribute("productInfo", item);
-            if(!userId.equals(item.getId()) && isAdmin) {
+            if(!userId.equals(item.getId()) && !isAdmin) {
                 return "error";
             }
         } else {
@@ -88,6 +89,14 @@ class ProductEditController {
             );
         }
 
+        Map<String, Object> response = new HashMap<>();
+        response.put("resultCode", result);
+        return response;
+    }
+    
+    @PostMapping("/api/main/productDelete")
+    public Map<String, Object> postMethodName(@RequestBody Map<String, Object> requestBody) {
+        int result = productService.deleteProduct((int) requestBody.get("productId"));
         Map<String, Object> response = new HashMap<>();
         response.put("resultCode", result);
         return response;

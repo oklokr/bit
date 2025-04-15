@@ -77,4 +77,8 @@
         INSERT INTO product_info (id, image, product_name, category_code, product_description, product_registration_date)
         VALUES (#{id}, #{image}, #{productName}, #{categoryCode}, #{productDescription}, NOW())
     </insert>
+
+    <delete id="deleteProduct">
+        DELETE FROM product_info WHERE product_id = #{productId}
+    </delete>
 </mapper>

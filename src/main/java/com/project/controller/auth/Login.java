@@ -26,8 +26,8 @@ public class Login {
         response.setDateHeader("Expires", 0);
 
         UserDto user = (UserDto) session.getAttribute("user");
-        System.out.println(user);
         if (user != null) return "redirect:/main";
+
         model.addAttribute("title", "Login Page");
         model.addAttribute("contentPage", "/WEB-INF/page/auth/login.jsp");
         model.addAttribute("defaultLayout", "false");

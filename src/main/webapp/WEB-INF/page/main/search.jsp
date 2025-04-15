@@ -235,18 +235,4 @@
         width: 100%;
         margin-top: auto;
     }
-    .msg-box {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        height: 300px;
-        font-size: 2em;
-        gap: 30px;
-        font-weight: bold;
-    }
-    .msg-box i {
-        font-size: 5em;
-        color: #ccc;
-    }
 </style>

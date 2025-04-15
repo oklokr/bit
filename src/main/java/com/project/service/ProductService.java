@@ -10,11 +10,15 @@ import org.springframework.stereotype.Service;
 import com.project.model.CommonCodeDto;
 import com.project.model.ProductDto;
 import com.project.repository.ProductMapper;
+import com.project.repository.UserMapper;
 
 @Service
 public class ProductService {
     @Autowired 
     private ProductMapper productMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     public List<CommonCodeDto> getCommonCode(String commonCode) {
         return productMapper.getCommonCode(commonCode);
@@ -63,5 +67,10 @@ public class ProductService {
         params.put("categoryCode", categoryCode);
         params.put("productDescription", productDescription);
         return productMapper.insertProductItem(params);
+    }
+
+    public int deleteProduct(int productId) {
+        userMapper.forceDeleteInventory(productId);
+        return productMapper.deleteProduct(productId);
     }
 }
