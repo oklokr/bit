@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main</title>
+    <title>Bit Dental</title>
     <script src="/js/common.js"></script>
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/reset.css">
@@ -62,8 +62,7 @@
             </div>
         </div>
     </div>
-
-
+    
     <!-- 약관 -->
     <div class="modal fade modal-fullscreen" id="termsModal" tabindex="-1" aria-labelledby="termsLabel" aria-hidden="true" data-name="terms-modal">
         <div class="modal-dialog">

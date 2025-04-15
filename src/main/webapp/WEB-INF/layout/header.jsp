@@ -54,7 +54,7 @@
     function handleGetUserInfo() {
         postRequestApi('/api/mypage/info', {}, res => {
             if(validate.isEmpty(res.data.id)) return
-            document.querySelector(".info span").innerText = res.data.id + "님"
+            document.querySelector(".info span").innerText = res.data.companyName + "님"
             document.querySelector("li[data-view='admin']").style.display = res.data.memberType === 2 ? "block" : "none"
         })
     }

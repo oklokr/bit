@@ -3,6 +3,7 @@ package com.project.controller.auth;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,5 +49,24 @@ class JoinRestController {
     @PostMapping("/api/auth/join")
     public int postMethodName(@RequestBody Map<String, Object> requestBody) {
         return userService.registerUserWithTerms(requestBody);
+    }
+
+    @PostMapping("/api/auth/checkDuplicateId")
+    public ResponseEntity<Map<String, Object>> checkDuplicateId(@RequestBody Map<String, String> request) {
+        String id = request.get("id");
+
+        if (id == null || id.trim().isEmpty()) {
+            return ResponseEntity.ok(Map.of(
+                "status", "error",
+                "message", "아이디를 입력해주세요.",
+                "isDuplicate", false
+            ));
+        }
+        boolean isDuplicate = userService.isUserIdDuplicate(id);
+        return ResponseEntity.ok(Map.of(
+            "status", "success",
+            "message", isDuplicate ? "이미 사용 중인 아이디입니다." : "사용 가능한 아이디입니다.",
+            "isDuplicate", isDuplicate
+        ));
     }
 }

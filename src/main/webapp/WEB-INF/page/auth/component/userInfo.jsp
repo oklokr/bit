@@ -54,8 +54,8 @@
 
     function handleIdCheck() {
         const elId = document.querySelector("#id")
-        validate.isEmpty(id) ? modal({ content: "아이디를 입력해주세요." }) : null
-        postRequestApi('/joinStepUser/checkDuplicateId', { id: elId.value }, res => {
+        if(validate.isEmpty(elId.value)) return modal({ content: "아이디를 입력해주세요." })
+        postRequestApi('/api/auth/checkDuplicateId', { id: elId.value }, res => {
             if(res.data.isDuplicate) {
                 modal({ content: "이미 사용중인 아이디입니다." })
                 idCheck = false

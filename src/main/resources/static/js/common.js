@@ -78,7 +78,6 @@ function formatBusinessNumber(businessNumber) {
 }
 
 function termsModal(termsType) {
-    console.log(termsType)
     const modal = new bootstrap.Modal(document.getElementById("termsModal"));
 
     postRequestApi("/api/main/getTermsList", { termsType: termsType }, res => {
@@ -98,11 +97,11 @@ function modal(option) {
     });
 
     const modalEl = document.querySelector(".common-modal");
-    const titleEl = document.getElementById("resultModalLabel");
-    const contentEl = document.getElementById("modalBody");
-    const footerEl = document.querySelector(".modal-footer");
+    const titleEl = modalEl.querySelector("#resultModalLabel");
+    const contentEl = modalEl.querySelector("#modalBody");
+    const footerEl = modalEl.querySelector(".modal-footer");
     let titleInner = ""
-    let contentInner = null;;
+    let contentInner = null;
     let footerInner = ""
 
     
@@ -131,9 +130,9 @@ function modal(option) {
     contentEl.innerHTML = contentInner || content;
     footerEl.innerHTML = footerInner;
 
-    document.querySelector(".btn[data-fn-type='close']")?.addEventListener("click", fnClose)
+    modalEl.querySelector(".btn[data-fn-type='close']")?.addEventListener("click", fnClose)
     modalEl.addEventListener("hidden.bs.modal", () => fnClose, { once: true });
-    document.querySelector(".btn[data-fn-type='confirm']")?.addEventListener("click", fnConfirm)
+    modalEl.querySelector(".btn[data-fn-type='confirm']")?.addEventListener("click", fnConfirm)
     modal.show();
 }
 
