@@ -71,7 +71,7 @@
 </div>
 
 <!-- 비밀번호 확인 모달 -->
-<div class="common-modal modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+<div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -267,8 +267,6 @@
         type: "confirm", // 확인 및 취소 버튼이 있는 모달
         fnConfirm: () => {
             // 탈퇴 요청
-            console.log('탈퇴')
-            return
             fetch('/api/mypage/delete', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' }
