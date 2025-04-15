@@ -91,7 +91,9 @@
 
         <!-- 오른쪽: 초기화 + 탈퇴 버튼 그룹 -->
         <div class="d-flex gap-2 ms-auto">
-            <button class="btn btn-secondary" onclick="locationLink('changeUser', '${id}')">회원유형 변경</button>
+            <c:if test="${userDto.id != user}">
+                <button class="btn btn-secondary" onclick="locationLink('changeUser', '${id}')">회원유형 변경</button>
+            </c:if>
             <button class="btn btn-secondary" onclick="locationLink('resetPw', '${id}')">비밀번호 초기화</button>
             <button class="btn btn-danger" onclick="locationLink('deleteUser', '${id}')">회원 탈퇴</button>
         </div>

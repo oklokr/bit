@@ -14,6 +14,8 @@ import com.project.model.UserDto;
 import com.project.service.AdminService;
 import com.project.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class AdminDetail {
     @Autowired
@@ -23,8 +25,10 @@ public class AdminDetail {
     private String kakaoMapJsKey;
 
     @GetMapping("/admin/detail")
-    public String pageRender(@RequestParam String id, @RequestParam int pageNum, Model model) {
+    public String pageRender(@RequestParam String id, @RequestParam int pageNum, HttpSession session, Model model) {
         UserDto userDto = userService.getUserById(id);
+        String user = userService.getUserInfo(session.getId()).getId();
+        model.addAttribute("user", user);
         model.addAttribute("kakaoMapJsKey", kakaoMapJsKey);
         model.addAttribute("userDto", userDto);
         model.addAttribute("id", userDto.getId());

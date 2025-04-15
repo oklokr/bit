@@ -10,29 +10,29 @@ import com.project.repository.AdminMapper;
 public class AdminService {
     //수정필요
     @Autowired
-    private AdminMapper userMapper;
+    private AdminMapper adminMapper;
 
     public int getCount(String searchName) {
         if (searchName == null || searchName.isBlank()) {
-            return userMapper.countAll();
+            return adminMapper.countAll();
         } else {
-            return userMapper.countByName(searchName);
+            return adminMapper.countByName(searchName);
         }
     }
 
     public List<UserDto> getUsers(Map<String, Object> map){
-        return userMapper.getUsers(map);
+        return adminMapper.getUsers(map);
     }
 
     public int deleteUser(String id){
-        return userMapper.deleteUser(id);
+        return adminMapper.deleteUser(id);
     }
 
     public int changeMemberType(Map<String, Object> map){
-        return userMapper.changeMemberType(map);
+        return adminMapper.changeMemberType(map);
     }
 
     public int resetPassword(String id){
-        return userMapper.resetPassword(id);
+        return adminMapper.resetPassword(id);
     }
 }

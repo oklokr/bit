@@ -33,7 +33,7 @@ public class BoardDetail {
 
 
     @GetMapping("/board/detail")
-    public String boardDetail(@RequestParam int boardId, @RequestParam String pageNum, HttpSession session,
+    public String pageRender(@RequestParam int boardId, @RequestParam String pageNum, HttpSession session,
     Model model) throws Exception {
         BoardDto boardDto = boardService.getArticle(boardId);
         boardService.addCount(boardId);
