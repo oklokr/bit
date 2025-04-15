@@ -9,9 +9,9 @@
 
     <div class="filter-wrap">
         <div class="row">
-            <label for="productName" class="col-sm-2 col-form-label">상풍명</label>
+            <label for="productName" class="col-sm-2 col-form-label">상품명</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" id="productName" value="<%= productName != null ? productName : "" %>">
+                <input type="text" class="form-control" id="productName" placeholder="상품명을 입력해주세요." value="<%= productName != null ? productName : "" %>">
             </div>
         </div>
         <button type="button" class="btn btn-primary btn-sm" onclick="handleFilter()">조회</button>

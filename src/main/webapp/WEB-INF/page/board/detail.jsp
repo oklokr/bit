@@ -39,7 +39,7 @@
                                 <dd class="reply-btn"><button class="btn btn-sm btn-outline-secondary" onclick="handleDisplayForm('${replyDto.replyRef}')">답글</button></dd>
                             </c:if>
                             <c:if test="${replyDto.author == user}">
-                                <dd class="reply-delete-btn"><button class="btn btn-sm btn-outline-secondary" onclick="locationLink('reply_delete', '${replyDto.replyId}')">삭제</button></dd>
+                                <dd class="reply-btn"><button class="btn btn-sm btn-outline-secondary" onclick="locationLink('reply_delete', '${replyDto.replyId}')">삭제</button></dd>
                             </c:if>
                         </c:if>
                     </dl>
@@ -281,8 +281,12 @@
     .board-reply .reply-list dl .reply-btn {
         margin-left: 12px;
     }
+    .board-reply .reply-list dl .reply-btn + .reply-btn {
+        margin-left: 8px;
+    }
 
     .board-reply .reply-list form {
+        padding-left: 30px;
         margin: 20px 0;
     }
 
