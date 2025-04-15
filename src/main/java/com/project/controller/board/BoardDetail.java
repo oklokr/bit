@@ -44,8 +44,9 @@ public class BoardDetail {
         model.addAttribute("replyDtos", replyDtos);
 
         String user = userService.getUserInfo(session.getId()).getCompanyName();
-        
+        int userType = userService.getUserInfo(session.getId()).getMemberType();
         model.addAttribute("user", user);
+        model.addAttribute("userType", userType);
         model.addAttribute("replyCount", replyCount);
         model.addAttribute("boardId", boardId);
         model.addAttribute("pageNum", pageNum);

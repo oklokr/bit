@@ -32,7 +32,7 @@ public class Write{
     }
 
     @PostMapping("/board/write")
-    public String postMethodName(@ModelAttribute BoardDto boardDto, Model model, HttpSession session) {
+    public String postBoard(@ModelAttribute BoardDto boardDto, Model model, HttpSession session) {
         UserDto userDto = userService.getUserInfo(session.getId());
         boardDto.setAuthor(userDto.getCompanyName());
         boardDto.setId(userDto.getId());

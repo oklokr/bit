@@ -54,5 +54,9 @@ public interface UserMapper {
     void updateUser(UserDto userDto);
 
     void deleteUserById(@Param("id") String id);
+
+    void modifyBoard(String id);
+
+    void modifyReply(String id);
 }
 

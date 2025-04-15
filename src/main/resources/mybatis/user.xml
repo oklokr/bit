@@ -92,6 +92,14 @@
         DELETE FROM members WHERE id = #{id}
     </delete>
 
+    <update id="modifyBoard" parameterType="String">
+        Update bulletin_board set id="탈퇴한 회원", author="탈퇴한 회원" where id=#{id}
+    </update>
+
+    <update id="modifyReply" parameterType="String">
+        Update replies set id="탈퇴한 회원", author="탈퇴한 회원" where id=#{id}
+    </update>
+
     <update id="updateUser" parameterType="com.project.model.UserDto">
         UPDATE members
         SET 
@@ -165,4 +173,6 @@
     <delete id="deleteInventory" parameterType="map">
         DELETE FROM inventory WHERE product_id = #{productId} AND id = #{id};
     </delete>
+
+    
 </mapper>

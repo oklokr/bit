@@ -38,7 +38,7 @@
                             <c:if test="${replyDto.replyLevel == 0}">
                                 <dd class="reply-btn"><button class="btn btn-sm btn-outline-secondary" onclick="handleDisplayForm('${replyDto.replyRef}')">답글</button></dd>
                             </c:if>
-                            <c:if test="${replyDto.author == user}">
+                            <c:if test="${replyDto.author == user || userType == 2}">
                                 <dd class="reply-btn"><button class="btn btn-sm btn-outline-secondary" onclick="locationLink('reply_delete', '${replyDto.replyId}')">삭제</button></dd>
                             </c:if>
                         </c:if>
@@ -107,7 +107,7 @@
             <button class="btn btn-outline-primary" onclick="location='/board?pageNum=${pageNum}'">목록</button>
         </div>
 
-        <c:if test="${boardDto.author == user}">
+        <c:if test="${boardDto.author == user || userType == 2}">
             <button class="btn btn-outline-primary" id="deleteBtn" onclick="locationLink('delete', '${boardId}')">삭제</button>
             <button class="btn btn-primary" id="modifyBtn" onclick="locationLink('edit', '/board/edit?boardId=${boardId}&result=${-1}&pageNum=${pageNum}')">수정</button>
         </c:if>
