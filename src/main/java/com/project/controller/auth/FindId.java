@@ -11,13 +11,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.model.UserDto;
 import com.project.service.UserService;
+
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class FindId {
     @GetMapping("/auth/findId")
-    public String pageRender(Model model) {
+    public String pageRender(Model model, HttpSession session, HttpServletResponse response) {
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setDateHeader("Expires", 0);
+
+        UserDto user = (UserDto) session.getAttribute("user");
+        System.out.println(user);
+
         model.addAttribute("title", "아이디 찾기");
         model.addAttribute("contentPage", "/WEB-INF/page/auth/findId.jsp");
         model.addAttribute("defaultLayout", "false");
