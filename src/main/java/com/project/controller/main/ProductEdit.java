@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.model.ProductDto;
 import com.project.model.ProductEditRequestParam;
 import com.project.model.UserDto;
 import com.project.service.ProductService;
@@ -26,16 +27,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ProductEdit {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/main/productEdit")
-    public String PageRender(@RequestParam(value="id", required = false) Integer id, Model model) {
+    public String PageRender(@RequestParam(value="id", required = false) Integer id, Model model, HttpSession session) {
+        String sessionId = session.getId();
+        String userId = userService.getUserInfo(sessionId).getId();
+        boolean isAdmin = userService.getUserInfo(sessionId).getMemberType() != 2;
+        ProductDto item = productService.getProductInfo(id);
+
         model.addAttribute("title", "main page");
         model.addAttribute("contentPage", "/WEB-INF/page/main/productEdit.jsp");
         model.addAttribute("commonCodes", productService.getCommonCode("CATEGORY_TYPE"));
 
         // id가 있을 경우 해당 상품 정보를 가져옴
         if (id != null) {
-            model.addAttribute("productInfo", productService.getProductInfo(id));
+            model.addAttribute("productInfo", item);
+            if(!userId.equals(item.getId()) && isAdmin) {
+                return "error";
+            }
         } else {
             model.addAttribute("productInfo", null); // 신규 등록일 경우
         }

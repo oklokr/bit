@@ -142,7 +142,9 @@ function handleSetProduct() {
 
     postRequestApi('/api/mypage/info', {}, res => {
         if(validate.isEmpty(res.data.id)) return
-        postData.id = res.data.id
+        if(res.data.memberType !== 2) {
+            postData.id = res.data.id
+        }
         postRequestApi('/api/main/product', postData, res => {
             const data = res.data.data;
             document.querySelector('.total-txt > span').innerText = res.data.totalCount;
