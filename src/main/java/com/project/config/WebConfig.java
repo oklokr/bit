@@ -13,9 +13,6 @@ public class WebConfig implements WebMvcConfigurer {
 
     private static final String[] EXCLUDE_PATHS = {
         "/login",
-        "/joinStepUser/**",
-        "/joinStepComp/**",
-        "/findResult",
         "/auth/**",
         "/api/main/getTermsList",
         "/resources/**",
@@ -23,11 +20,6 @@ public class WebConfig implements WebMvcConfigurer {
         "/js/**",
         "/images/**",
         "/favicon.ico",
-        "/joinResult",
-        "/checkBusinessNumber",
-        "/joinStepSuccess",
-        "/mainTerms",
-        "/subTerms",
         "/api/login",
         "/api/auth/**"
     };
