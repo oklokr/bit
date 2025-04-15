@@ -80,6 +80,10 @@
         }
         
         if(validate.isEmpty(elBusinessNumber.value)) return validateError(elBusinessNumber, "사업자번호를 입력해주세요.")
+        if(!validate.isBusinessNumber(businessNumber.value)) {
+            businessNumberCheck = false
+            return validateError(elBusinessNumber, "유효하지 않은 사업자번호입니다.")
+        }
         if(!businessNumberCheck) return validateError(elBusinessNumber, "사업자번호를 확인해주세요.")
         if(validate.isEmpty(address)) return validateError(elAddress, "주소검색을 해주세요.")
         if(validate.isEmpty(postalCode)) return validateError(elPostalCode, "주소검색을 해주세요.")
