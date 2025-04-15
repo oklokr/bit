@@ -261,69 +261,69 @@
     }
 
     function confirmDelete() {
-    modal({
-        title: "회원 탈퇴",
-        content: "정말로 탈퇴하시겠습니까?",
-        type: "confirm", // 확인 및 취소 버튼이 있는 모달
-        fnConfirm: () => {
-            // 탈퇴 요청
-            fetch('/api/mypage/delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
+        modal({
+            title: "회원 탈퇴",
+            content: "정말로 탈퇴하시겠습니까?",
+            type: "confirm", // 확인 및 취소 버튼이 있는 모달
+            fnConfirm: () => {
+                // 탈퇴 요청
+                fetch('/api/mypage/delete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        modal({
+                            title: "탈퇴 완료",
+                            content: data.message,
+                            type: "message",
+                            fnClose: () => {
+                                window.location.href = '/login'; // 로그인 페이지로 이동
+                            }
+                        });
+                    } else {
+                        modal({
+                            title: "탈퇴 실패",
+                            content: data.message,
+                            type: "alert"
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
                     modal({
-                        title: "탈퇴 완료",
-                        content: data.message,
-                        type: "message",
-                        fnClose: () => {
-                            window.location.href = '/login'; // 로그인 페이지로 이동
-                        }
-                    });
-                } else {
-                    modal({
-                        title: "탈퇴 실패",
-                        content: data.message,
+                        title: "오류",
+                        content: "회원 탈퇴 중 문제가 발생했습니다.",
                         type: "alert"
                     });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                modal({
-                    title: "오류",
-                    content: "회원 탈퇴 중 문제가 발생했습니다.",
-                    type: "alert"
                 });
-            });
-        },
-        fnClose: () => {
-            console.log("탈퇴 취소");
-        }
-    });
-}
-
-    function validateBusinessNumber() {
-    const businessNumberInput = document.querySelector('input[name="businessNumber"]');
-    const businessNumber = businessNumberInput.value.trim();
-    const businessNumberRegex = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
-
-    if (!businessNumberRegex.test(businessNumber)) {
-        alert('유효하지 않은 사업자 번호 형식입니다. 올바른 형식을 입력해주세요.');
-        isBusinessNumberValidated = false; // 확인 실패
-        return false;
+            },
+            fnClose: () => {
+                console.log("탈퇴 취소");
+            }
+        });
     }
 
-    alert('유효한 사업자 번호 형식입니다.');
-    isBusinessNumberValidated = true; // 확인 성공
+    function validateBusinessNumber() {
+        const businessNumberInput = document.querySelector('input[name="businessNumber"]');
+        const businessNumber = businessNumberInput.value.trim();
+        const businessNumberRegex = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
 
-    // 사업자 번호 수정 불가능하게 설정
-    businessNumberInput.readOnly = true;
+        if (!businessNumberRegex.test(businessNumber)) {
+            alert('유효하지 않은 사업자 번호 형식입니다. 올바른 형식을 입력해주세요.');
+            isBusinessNumberValidated = false; // 확인 실패
+            return false;
+        }
 
-    return true;
-}
+        alert('유효한 사업자 번호 형식입니다.');
+        isBusinessNumberValidated = true; // 확인 성공
+
+        // 사업자 번호 수정 불가능하게 설정
+        businessNumberInput.readOnly = true;
+
+        return true;
+    }
 
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelector('input[name="phoneNumber"]').addEventListener("input", (event) => {

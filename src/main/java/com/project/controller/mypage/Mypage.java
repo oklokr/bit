@@ -68,38 +68,6 @@ class MypageApiController {
         Map<String, Object> response = new HashMap<>();
         response.put("success", isPasswordCorrect);
         return response;
-}
-
-@PostMapping("/check-duplicate")
-    public ResponseEntity<Map<String, Object>> checkDuplicate(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
-        String phoneNumber = request.get("phoneNumber");
-
-        boolean duplicateEmail = userService.isEmailDuplicate(email);
-        boolean duplicatePhoneNumber = userService.isPhoneNumberDuplicate(phoneNumber);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", !(duplicateEmail || duplicatePhoneNumber));
-        response.put("duplicateEmail", duplicateEmail);
-        response.put("duplicatePhoneNumber", duplicatePhoneNumber);
-
-        return ResponseEntity.ok(response);
-    }
-
-    @PostMapping("/api/validate")
-    public ResponseEntity<Map<String, Object>> validateUserInfo(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
-        String phoneNumber = request.get("phoneNumber");
-
-        boolean duplicateEmail = userService.isEmailDuplicate(email);
-        boolean duplicatePhoneNumber = userService.isPhoneNumberDuplicate(phoneNumber);
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("success", !(duplicateEmail || duplicatePhoneNumber));
-        response.put("duplicateEmail", duplicateEmail);
-        response.put("duplicatePhoneNumber", duplicatePhoneNumber);
-
-        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/mypage/update")

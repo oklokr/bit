@@ -36,18 +36,6 @@
         FROM members
         WHERE id = #{id}
     </select>
-    
-    <select id="existsByEmail" resultType="boolean">
-        SELECT COUNT(*) > 0
-        FROM members
-        WHERE email = #{email}
-    </select>
-
-    <select id="existsByPhoneNumber" resultType="boolean">
-        SELECT COUNT(*) > 0
-        FROM members
-        WHERE phone_number = #{phoneNumber}
-    </select>
 
     <insert id="insertUser" parameterType="com.project.model.UserDto">
         INSERT INTO members (id, company_name, password, email, phone_number, business_number, address, detailed_address, postal_code, member_type, join_date)

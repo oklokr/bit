@@ -34,10 +34,6 @@ public interface UserMapper {
 
     boolean existsByUserId(@Param("id") String id);
 
-    boolean existsByEmail(String email); // 이메일 중복 확인 쿼리
-    
-    boolean existsByPhoneNumber(String phoneNumber); // 전화번호 중복 확인 쿼리
-
     int insertUser(UserDto user);
 
     int insertTermsAgreement(String userId, int termsId);
