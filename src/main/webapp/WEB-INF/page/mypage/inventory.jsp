@@ -124,7 +124,7 @@ function handleSetProduct() {
             row.innerHTML = 
             "<td><input type='checkbox' class='form-check-input' value='"+item.productId+"'></td>"
             + "<td>"+ item.categoryName +"</td>"
-            + "<td><span class='image'><img src='${item.imageUrl}'></span></td>"
+            + "<td><span class='image'><img src="+item.image+"></span></td>"
             + "<td>"+ item.productName +"</td>"
             + "<td>"+ item.productDescription +"</td>"
             + "<td class='count-cell'>"

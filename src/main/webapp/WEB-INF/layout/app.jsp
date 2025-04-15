@@ -68,10 +68,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <p class="title">
-                        <strong class="modal-title fs-5" id="termsModalLabel"></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </p>
+                    <strong class="modal-title fs-5" id="termsModalLabel"></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body"></div>
             </div>  
@@ -82,6 +80,6 @@
 
 <style>
     #app {
-        min-height: calc(100vh - 116px);
+        min-height: calc(100vh - 130px);
     }
 </style>

@@ -1,17 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <footer>
     <ul>
-        <li>이용약관</li>
-        <li>개인정보취급방침</li>
+        <li>
+            <button class="btn" onclick="termsModal('1')">서비스 이용 약관</button>
+        </li>
+        <li>
+            <button class="btn" onclick="termsModal('2')">개인정보 처리방침</button>
+        </li>
+        <li>
+            <button class="btn" onclick="termsModal('3')">마케팅 수신 동의</button>
+        </li>
     </ul>
-    <span class="site-company">Copyright ⓒ2025 Uipac. All Rights reserved</span>
+    <span class="site-company">Copyright ⓒ2025 Bit Dental. All Rights reserved</span>
 </footer>
 
 <style>
     footer {
         display: flex;
         flex-direction: column;
-        height: 58px;
+        height: 72px;
+    }
+
+    footer .btn {
+        font-size: 14px;
+        padding: initial;
+        margin: initial;
     }
     footer ul {
         display: flex;
@@ -19,8 +32,7 @@
         text-decoration: initial;
         font-size: 12px;
         color: #b3b3b3;
-        padding: initial;
-        margin: initial;
+        padding: 4px 0;
         margin: 0 auto;
         gap: 20px;
     }
@@ -28,7 +40,7 @@
     footer ul li {
         position: relative;
     }
-    footer ul li:first-child::after {
+    footer ul li:not(:last-of-type)::after {
         content: " | ";
         position: absolute;
         right: -10px;

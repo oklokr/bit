@@ -73,10 +73,10 @@
                     
                     productList.appendChild(productItem);
 
-                    document.querySelectorAll('.product-img img').forEach(img => {
-                        img.addEventListener('error', () => {
-                            img.src = 'https://onsight.softballspa.com/content/images/thumbs/default-image_450.png';
-                        });
+                    const imgItem = productItem.querySelector('.product-img img')
+                    imgItem.addEventListener('error', () => {
+                        console.log('test');
+                        imgItem.src = 'https://onsight.softballspa.com/content/images/thumbs/default-image_450.png';
                     });
 
                     productItem.querySelector(".product-inner button").addEventListener("click", () => {

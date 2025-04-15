@@ -83,7 +83,7 @@ function termsModal(termsType) {
 
     postRequestApi("/api/main/getTermsList", { termsType: termsType }, res => {
         document.querySelector("#termsModalLabel").innerText = res.data.termsTitle;
-        document.querySelector(".modal-body").innerHTML = res.data.termsContent;
+        document.querySelector("#termsModal .modal-body").innerHTML = res.data.termsContent;
     })
 
     modal.show();
