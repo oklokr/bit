@@ -3,9 +3,9 @@
 <div class="auth-page signup">
     <div class="content">
         <ul>
-            <jsp:include page="terms.jsp" />
-            <jsp:include page="userInfo.jsp" />
-            <jsp:include page="companyInfo.jsp" />
+            <jsp:include page="./component/terms.jsp" />
+            <jsp:include page="./component/userInfo.jsp" />
+            <jsp:include page="./component/companyInfo.jsp" />
         </ul>
     </div>
 </div>
