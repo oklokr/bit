@@ -41,7 +41,7 @@ class FindPwApiController {
     private UserService userService;
     
     @PostMapping("/api/auth/findPw")
-    public Map<String, Object> postMethodName(@RequestBody Map<String, String> requestBody) {
+    public Map<String, Object> findPw(@RequestBody Map<String, String> requestBody) {
         String id = requestBody.get("id");
         String email = requestBody.get("email");
         String phoneNumber = requestBody.get("phoneNumber");

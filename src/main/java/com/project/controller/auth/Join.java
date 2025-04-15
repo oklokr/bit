@@ -47,7 +47,7 @@ class JoinRestController {
     private UserService userService;
 
     @PostMapping("/api/auth/join")
-    public int postMethodName(@RequestBody Map<String, Object> requestBody) {
+    public int join(@RequestBody Map<String, Object> requestBody) {
         return userService.registerUserWithTerms(requestBody);
     }
 

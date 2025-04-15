@@ -37,12 +37,12 @@ public class FindId {
 }
 
 @RestController
-class FindIdApiController {
+class FindIdApiController {   
     @Autowired
     private UserService userService;
 
     @PostMapping("/api/auth/findId")
-    public Map<String, Object> postMethodName(@RequestBody Map<String, String> requestBody) {
+    public Map<String, Object> findId(@RequestBody Map<String, String> requestBody) {
         String companyName = requestBody.get("companyName");
         String email = requestBody.get("email");
         String phoneNumber = requestBody.get("phoneNumber"); // 오타 수정
