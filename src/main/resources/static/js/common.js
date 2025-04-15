@@ -90,6 +90,7 @@ function termsModal(termsType) {
 }
 
 function modal(option) {
+    console.log(option)
     const {title, content, type = "message", backdrop, keyboard, fnClose, fnConfirm} = option;
     const modal = new bootstrap.Modal(document.getElementById("resultModal"), {
         backdrop: backdrop ? true : false || true,
@@ -118,6 +119,7 @@ function modal(option) {
         footerInner = "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='close'>확인</button>"
     }
     if(type === "confirm") {
+        console.log()
         modalEl.classList.add("modal-confirm")
         titleInner = title || "알림";
         footerInner = 
