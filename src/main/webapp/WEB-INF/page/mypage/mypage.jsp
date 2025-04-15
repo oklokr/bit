@@ -35,7 +35,7 @@
             <dl>
                 <dt>사업자 번호</dt>
                 <dd>
-                    <div class="input-group">
+                    <div class="input-group row-group">
                         <input type="text" class="form-control" name="businessNumber" value="${userDto.businessNumber}" maxlength="12" readonly>
                         <button type="button" class="btn btn-outline-primary btn-sm edit-only" style="display: none;" onclick="validateBusinessNumber()">번호 확인</button>
                     </div>
@@ -43,7 +43,7 @@
     
                 <dt>주소</dt>
                 <dd>
-                    <div class="input-group">
+                    <div class="input-group row-group">
                         <input type="text" class="form-control" name="address" value="${userDto.address}" readonly>
                         <button type="button" class="btn btn-outline-primary btn-sm edit-only" style="display: none;" onclick="searchAddress()">주소 검색</button>
                     </div>
@@ -100,90 +100,90 @@
     let isBusinessNumberValidated = false; // 사업자 번호 확인 여부를 저장하는 변수
 
     document.getElementById('userInfoForm').addEventListener('submit', async function (event) {
-    event.preventDefault(); // 폼 제출 방지
+        event.preventDefault(); // 폼 제출 방지
 
-    // 필드 값 가져오기
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
+        // 필드 값 가져오기
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData.entries());
 
-    const newPassword = document.querySelector('input[name="newPassword"]').value.trim();
-    const confirmPassword = document.querySelector('input[name="confirmPassword"]').value.trim();
-    const email = document.querySelector('input[name="email"]').value.trim();
-    const phoneNumber = document.querySelector('input[name="phoneNumber"]').value.trim();
-    const postalCode = document.querySelector('input[name="postalCode"]').value.trim();
+        const newPassword = document.querySelector('input[name="newPassword"]').value.trim();
+        const confirmPassword = document.querySelector('input[name="confirmPassword"]').value.trim();
+        const email = document.querySelector('input[name="email"]').value.trim();
+        const phoneNumber = document.querySelector('input[name="phoneNumber"]').value.trim();
+        const postalCode = document.querySelector('input[name="postalCode"]').value.trim();
 
-    // "병원" 또는 "관리자"를 숫자로 변환
-    data.memberType = data.memberType === '병원' ? 1 : data.memberType === '관리자' ? 2 : 0;
+        // "병원" 또는 "관리자"를 숫자로 변환
+        data.memberType = data.memberType === '병원' ? 1 : data.memberType === '관리자' ? 2 : 0;
 
-    // 신규 비밀번호 처리
-    if (newPassword) {
-        data.password = newPassword; // 신규 비밀번호를 password 필드에 설정
-    }
-
-    // 휴대전화 정규식
-    const phoneRegex = /^010-\d{4}-\d{4}$/;
-
-    // 유효성 검사
-    if (!isBusinessNumberValidated) {
-        alert('사업자 번호 확인을 먼저 진행해주세요.');
-        return; // 폼 제출 중단
-    }
-
-    if (!newPassword) {
-        alert('신규 비밀번호를 입력해주세요.');
-        return; // 폼 제출 중단
-    }
-
-    if (!confirmPassword) {
-        alert('비밀번호 확인을 입력해주세요.');
-        return; // 폼 제출 중단
-    }
-
-    if (newPassword !== confirmPassword) {
-        alert('비밀번호가 일치하지 않습니다.');
-        return; // 폼 제출 중단
-    }
-
-    if (!email) {
-        alert('이메일을 입력해주세요.');
-        return; // 폼 제출 중단
-    }
-
-    if (!phoneNumber) {
-        alert('휴대전화를 입력해주세요.');
-        return; // 폼 제출 중단
-    }
-
-    if (!phoneRegex.test(phoneNumber)) {
-        alert('휴대전화가 올바르지 않습니다. (예: 010-1234-5678)');
-        return; // 폼 제출 중단
-    }
-
-    if (!postalCode) {
-        alert('우편번호를 입력해주세요.');
-        return; // 폼 제출 중단
-    }
-
-    // 서버로 데이터 전송
-    try {
-        const updateResponse = await fetch('/mypage/update', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-
-        const updateResult = await updateResponse.json();
-        if (updateResult.success) {
-            alert(updateResult.message);
-            location.reload(); // 성공 시 페이지 새로고침
-        } else {
-            alert(updateResult.message);
+        // 신규 비밀번호 처리
+        if (newPassword) {
+            data.password = newPassword; // 신규 비밀번호를 password 필드에 설정
         }
-    } catch (error) {
-        console.error('에러 발생:', error);
-        alert('서버와 통신 중 문제가 발생했습니다.');
-    }
-});
+
+        // 휴대전화 정규식
+        const phoneRegex = /^010-\d{4}-\d{4}$/;
+
+        // 유효성 검사
+        if (!isBusinessNumberValidated) {
+            modal({content: '사업자 번호 확인을 먼저 진행해주세요.'});
+            return; // 폼 제출 중단
+        }
+
+        if (!newPassword) {
+            modal({content: '신규 비밀번호를 입력해주세요.'});
+            return; // 폼 제출 중단
+        }
+
+        if (!confirmPassword) {
+            modal({content: '비밀번호 확인을 입력해주세요.'});
+            return; // 폼 제출 중단
+        }
+
+        if (newPassword !== confirmPassword) {
+            modal({content: '비밀번호가 일치하지 않습니다.'});
+            return; // 폼 제출 중단
+        }
+
+        if (!email) {
+            modal({content: '이메일을 입력해주세요.'});
+            return; // 폼 제출 중단
+        }
+
+        if (!phoneNumber) {
+            modal({content: '휴대전화를 입력해주세요.'});
+            return; // 폼 제출 중단
+        }
+
+        if (!phoneRegex.test(phoneNumber)) {
+            modal({content: '휴대전화가 올바르지 않습니다. (예: 010-1234-5678)'});
+            return; // 폼 제출 중단
+        }
+
+        if (!postalCode) {
+            modal({content: '우편번호를 입력해주세요.'});
+            return; // 폼 제출 중단
+        }
+
+        // 서버로 데이터 전송
+        try {
+            const updateResponse = await fetch('/mypage/update', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            const updateResult = await updateResponse.json();
+            if (updateResult.success) {
+                modal({content: updateResult.message});
+                location.reload(); // 성공 시 페이지 새로고침
+            } else {
+                modal({content: updateResult.message});
+            }
+        } catch (error) {
+            console.error('에러 발생:', error);
+            modal({content: '서버와 통신 중 문제가 발생했습니다.'});
+        }
+    });
 
     function openPasswordModal(action) {
         actionType = action;
@@ -311,12 +311,12 @@
         const businessNumberRegex = /^[0-9]{3}-[0-9]{2}-[0-9]{5}$/;
 
         if (!businessNumberRegex.test(businessNumber)) {
-            alert('유효하지 않은 사업자 번호 형식입니다. 올바른 형식을 입력해주세요.');
+            modal({content: '유효하지 않은 사업자 번호 형식입니다. 올바른 형식을 입력해주세요.'});
             isBusinessNumberValidated = false; // 확인 실패
             return false;
         }
 
-        alert('유효한 사업자 번호 형식입니다.');
+        modal({content: '유효한 사업자 번호 형식입니다.'});
         isBusinessNumberValidated = true; // 확인 성공
 
         // 사업자 번호 수정 불가능하게 설정
@@ -381,6 +381,13 @@
     .data-form dl dt.hidden,
     .data-form dl dd.hidden {
         display: none;
+    }
+    .data-form .row-group {
+        display: flex;
+        gap: 12px;
+    }
+    .data-form .row-group .btn {
+        height: 37px;
     }
     .card {
         border: 1px solid #ddd;
