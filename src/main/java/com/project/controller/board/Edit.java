@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class Edit {
     @Autowired
-    private BoardService boardDao;
+    private BoardService boardService;
 
     @GetMapping("/board/edit")
     public String boardEdit(@RequestParam int boardId, @RequestParam String pageNum, 
@@ -23,7 +23,7 @@ public class Edit {
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("result", result);
         model.addAttribute("title", "main page");
-        BoardDto boardDto = boardDao.getArticle(boardId);
+        BoardDto boardDto = boardService.getArticle(boardId);
 
         model.addAttribute("boardId", boardId);
         model.addAttribute("boardDto", boardDto);
@@ -34,7 +34,7 @@ public class Edit {
 
     @PostMapping("/board/edit")
     public String postBoardEdit(@ModelAttribute BoardDto boardDto, @RequestParam String pageNum, Model model, HttpSession session){
-        int result = boardDao.modifyPost(boardDto);
+        int result = boardService.modifyPost(boardDto);
         int id = boardDto.getBoardId();
         session.setAttribute("editResult", result);
         model.addAttribute("pageNum", pageNum);
