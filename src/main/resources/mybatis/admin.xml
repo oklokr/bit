@@ -46,4 +46,12 @@
     <update id="resetPassword" parameterType="String">
         UPDATE members SET password = '1111' WHERE id = #{id}
     </update>
+
+    <update id="modifyBoard" parameterType="String">
+        Update bulletin_board set id=null, author='탈퇴한 회원' where id=#{id}
+    </update>
+
+    <update id="modifyReply" parameterType="String">
+        Update replies set id=null, author='탈퇴한 회원' where id=#{id}
+    </update>
 </mapper>

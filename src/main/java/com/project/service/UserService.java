@@ -208,9 +208,9 @@ public class UserService {
     }
 
     public void deleteUser(String id) {
-        userMapper.deleteUserById(id);
         userMapper.modifyBoard(id);
         userMapper.modifyReply(id);
+        userMapper.deleteUserById(id);
     }
 
     public List<TermsDto> getTermsList(String termsType) {

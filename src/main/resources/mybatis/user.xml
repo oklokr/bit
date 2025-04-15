@@ -93,11 +93,11 @@
     </delete>
 
     <update id="modifyBoard" parameterType="String">
-        Update bulletin_board set id="탈퇴한 회원", author="탈퇴한 회원" where id=#{id}
+        Update bulletin_board set id=null, author='탈퇴한 회원' where id=#{id}
     </update>
 
     <update id="modifyReply" parameterType="String">
-        Update replies set id="탈퇴한 회원", author="탈퇴한 회원" where id=#{id}
+        Update replies set id=null, author='탈퇴한 회원' where id=#{id}
     </update>
 
     <update id="updateUser" parameterType="com.project.model.UserDto">

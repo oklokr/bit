@@ -16,4 +16,6 @@ public interface AdminMapper {
     public int deleteUser(String id);
     public int changeMemberType(Map<String, Object> map);
     public int resetPassword(String id);
+    public void modifyBoard(String id);
+    public void modifyReply(String id);
 }

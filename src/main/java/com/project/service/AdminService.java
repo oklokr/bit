@@ -25,6 +25,8 @@ public class AdminService {
     }
 
     public int deleteUser(String id){
+        adminMapper.modifyBoard(id);
+        adminMapper.modifyReply(id);
         return adminMapper.deleteUser(id);
     }
 
