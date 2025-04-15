@@ -12,15 +12,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.model.UserDto;
 import com.project.service.AdminService;
+import com.project.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class Admin {
     @Autowired
     private AdminService adminService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/admin")
     public String pageRender(@RequestParam(required = false) String searchName, 
-        @RequestParam(required=false) String pageNum, Model model) {
+        @RequestParam(required=false) String pageNum, HttpSession session, Model model) {
+
+        //접근한 사람
+        int type = userService.getUserInfo(session.getId()).getMemberType();
+        if (type != 2){
+            model.addAttribute("contentPage", "/WEB-INF/error.jsp");
+            return "layout/app";
+        }
+
         int pageSize=10;
         int pageBlock=3;
 

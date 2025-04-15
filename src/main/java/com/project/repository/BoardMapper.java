@@ -27,4 +27,5 @@ public interface BoardMapper {
     public int getNestedReplyCount(int replyRef);
     public int deleteRootReply(Map<String, Object> map);
     public int getRootReplyId(int replyRef);
+    public String getUserByBoardId(int boardId);
 }

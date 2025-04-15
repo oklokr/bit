@@ -109,7 +109,7 @@
 
         <c:if test="${boardDto.author == user || userType == 2}">
             <button class="btn btn-outline-primary" id="deleteBtn" onclick="locationLink('delete', '${boardId}')">삭제</button>
-            <button class="btn btn-primary" id="modifyBtn" onclick="locationLink('edit', '/board/edit?boardId=${boardId}&result=${-1}&pageNum=${pageNum}')">수정</button>
+            <button class="btn btn-primary" id="modifyBtn" onclick="locationLink('edit', '/board/edit?boardId=${boardId}&pageNum=${pageNum}')">수정</button>
         </c:if>
     </div>
 </div>

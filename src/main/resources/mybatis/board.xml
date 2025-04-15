@@ -131,4 +131,11 @@
         FROM replies
         WHERE reply_ref = #{replyRef} AND reply_level = 0
     </select>
+
+    <select id="getUserByBoardId" parameterType="int" resultType="String">
+        SELECT id
+        FROM bulletin_board
+        WHERE board_id = #{boardId}
+    </select>
+
 </mapper>

@@ -8,7 +8,7 @@
         <div class="top-area">
             <span>총 ${count}개</span>
             <div class="btns">
-                <a class="btn btn-outline-secondary btn-sm" href="/board/write?result=${-1}" role="button">글쓰기</a>
+                <a class="btn btn-outline-secondary btn-sm" href="/board/write" role="button">글쓰기</a>
             </div>
         </div>
         <table class="table">

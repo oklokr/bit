@@ -52,6 +52,10 @@ public class BoardService {
         return boardmapper.getReplies(boardId);
     }
 
+    public String getUserByBoardId(int boardId){
+        return boardmapper.getUserByBoardId(boardId);
+    }
+
     public int insertReply(ReplyDto replyDto){
         if (replyDto.getReplyLevel() == 0) {
             int maxRef = boardmapper.getMaxReplyRef();
@@ -88,14 +92,10 @@ public class BoardService {
             //대댓글 삭제
             //보드 아이디까지+replyId가 동일해야 함 
             Integer rootReplyState = boardmapper.getRootReplyState(replyRef);
-            System.out.println("-------------rootreplystate------"+rootReplyState);
             if (rootReplyState != null && rootReplyState > 0){
                 //원본 댓글이 지워진 경우
-                System.out.println("원본 댓글이 지워진 경우");
                 int rootReplyId = boardmapper.getRootReplyId(replyRef);
-                System.out.println("rootReplyId: " + rootReplyId);
                 if (boardmapper.getNestedReplyCount(replyRef) == 1){
-                    System.out.println("대댓글이 없는 경우 replyRef의 댓 갯수 잘 구해옴?"+boardmapper.getNestedReplyCount(replyRef));
                     //다른 대댓글이 없는 경우 (이 댓글만 있는 경우) 원댓글 삭제
                     boardmapper.deleteReply(rootReplyId);
                 }

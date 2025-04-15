@@ -26,6 +26,12 @@ public class AdminDetail {
 
     @GetMapping("/admin/detail")
     public String pageRender(@RequestParam String id, @RequestParam int pageNum, HttpSession session, Model model) {
+        //접근한 사람
+        int type = userService.getUserInfo(session.getId()).getMemberType();
+        if (type != 2){
+            model.addAttribute("contentPage", "/WEB-INF/error.jsp");
+            return "layout/app";
+        }
         UserDto userDto = userService.getUserById(id);
         String user = userService.getUserInfo(session.getId()).getId();
         model.addAttribute("user", user);
@@ -50,19 +56,15 @@ class AdminApiController {
 
     @PostMapping("/api/admin/delete")
     public int deleteUser(@RequestBody String id){
-        System.out.println("아이디는"+id);
         id = id.replace("\"", "");
         int result = adminService.deleteUser(id);
-        System.out.println("실행결과: "+result);
         return result;
     }
 
     @PostMapping("/api/admin/reset")
     public int resetPw(@RequestBody String id){
-        System.out.println("비밀번호 리셋"+id);
         id = id.replace("\"", "");
         int result=adminService.resetPassword(id);
-        System.out.println("비밀번호 리셋 실행결과:"+result);
         return result;
     }
 
