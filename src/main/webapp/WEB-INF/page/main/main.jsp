@@ -118,7 +118,7 @@
         width: 100%;
         position: absolute;
         left: 0;
-        top: 230px;
+        top: 400px;
         bottom: 0;
         z-index: -1;
         background: #7eb3ff0d;
