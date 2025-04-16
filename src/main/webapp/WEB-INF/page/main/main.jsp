@@ -110,12 +110,26 @@
 </script>
 
 <style>
+    .main-wrap {
+        position: relative;
+    }
+    .main-wrap::before {
+        content: "";
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 230px;
+        bottom: 0;
+        z-index: -1;
+        background: #7eb3ff0d;
+    }
     .page-wrap .search-wrap {
         margin-top: 40px;
     }
 
     #product-items {
-        margin: 0 -50px;
+        width: 100%;
+        margin: 0 auto;
     }
     #product-items .carousel-control-next, 
     #product-items .carousel-control-prev {
@@ -139,15 +153,10 @@
 
     #product-items .inner li .product-inner {
         display: flex;
-        width: 184px;
+        width: 230px;
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
-    }
-    @media (min-width: 1200px) {
-        #product-items .inner li .product-inner {
-            width: 230px;
-        }
     }
 
     #product-items .product-itme {
@@ -163,7 +172,7 @@
         width: 100%;
         height: 230px;
         border-radius: 10px;
-        border: 1px solid #eee;
+        border: 1px solid #ddd;
         overflow: hidden;
     }
     #product-items .product-itme .product-img img {

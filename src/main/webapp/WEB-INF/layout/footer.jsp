@@ -18,7 +18,9 @@
     footer {
         display: flex;
         flex-direction: column;
+        min-width: 1200px;
         height: 72px;
+        background: #f9f9f9;
     }
 
     footer .btn {

@@ -194,15 +194,10 @@
 
     .product-list .product-inner {
         display: flex;
-        width: 184px;
+        width: 230px;
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
-    }
-    @media (min-width: 1200px) {
-        .product-list .product-inner {
-            width: 230px;
-        }
     }
 
     .product-list .product-itme .product-img {

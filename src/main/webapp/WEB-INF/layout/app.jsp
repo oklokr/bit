@@ -80,6 +80,7 @@
 
 <style>
     #app {
+        min-width: 1200px;
         min-height: calc(100vh - 130px);
     }
 </style>

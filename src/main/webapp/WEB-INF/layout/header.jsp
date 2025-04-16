@@ -70,6 +70,7 @@
 
 <style>
     header {
+        min-width: 1200px;
         height: 58px;
         border-bottom: 1px solid #ccc;
     }
@@ -144,6 +145,18 @@
         background-size: 100%;
     }
 
+    .mypage-modal {
+        padding: initial !important;
+    }
+    .mypage-modal .modal-content::before {
+        content: "";
+        position: absolute;
+        top: 14%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #001dff0f;
+    }
     .mypage-modal.modal[data-name="mypage-modal"] .modal-dialog {
         margin: initial;
         margin-left: auto;
