@@ -123,15 +123,18 @@
             modal({
                 content: "게시글을 삭제하시겠습니까?",
                 type: "confirm",
-                fnConfirm: () =>  postRequestApi("/api/board/delete", data, res => {
-                    modal({
-                        content: "게시글이 삭제되었습니다",
-                        type: "alert",
-                        fnClose: () =>  {
-                            location.href = "/board";
-                        }
+                fnConfirm: () =>  {
+                    postRequestApi("/api/board/delete", data, res => {
+                        modal({
+                            content: "게시글이 삭제되었습니다",
+                            type: "alert",
+                            fnClose: () =>  {
+                                location.href = "/board";
+                            },
+                            returnModal: true
+                        })
                     })
-                })
+                }
             })
         }
         if(type === 'reply_delete') {
@@ -144,7 +147,8 @@
                         type: "alert",
                         fnClose: () =>  {
                             location.reload();
-                        }
+                        },
+                        returnModal: true
                     })
                 })
             })
@@ -193,7 +197,6 @@
                         title: "입력 오류",
                         content: "제목과 내용에 태그를 포함할 수 없습니다.",
                         type: "message",
-                        fnClose: null
                     });
                 }
                 HTMLFormElement.prototype.submit.call(replyForm);

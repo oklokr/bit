@@ -50,6 +50,17 @@
             const groupSize = 8;
             let currentGroup = null;
 
+            if(products.length < 1) {
+                document.querySelector(".more").style.display = "none";
+                productItems.innerHTML = 
+                '<p class="msg-box">'
+                    + "<i class='bi bi-exclamation-circle'></i>"
+                    + '<span style="color: #bbb">등록된 상품이 없습니다.</span>'
+                + '</p>'
+            } else {
+                document.querySelector(".more").style.display = "block";
+            }
+
             products.forEach((item, index) => {
                 if (index % groupSize === 0) {
                     currentGroup = document.createElement('div');
@@ -87,7 +98,10 @@
                     modal({
                         content: "병원재고 관리에 추가하시겠습니까?",
                         type: "confirm",
-                        fnConfirm: () => handleAddInventory(item.productId)
+                        fnConfirm: () => {
+                            handleAddInventory(item.productId)
+                            modal({content: "추가되었습니다", returnModal: true})
+                        },
                     });
                 });
             });

@@ -243,9 +243,12 @@ function handleDeleteInventory() {
     modal({
         content: "삭제하시겠습니까?",
         type: "confirm",
-        fnConfirm: () => postRequestApi('/api/mypage/deleteInventory', deleteData, res => {
-            handleSetProduct();
-        })
+        fnConfirm: () => {
+            postRequestApi('/api/mypage/deleteInventory', deleteData, res => {
+                handleSetProduct()
+                modal({content: "삭제되었습니다.", returnModal: true})
+            })
+        }
     });
 }
 

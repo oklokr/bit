@@ -89,8 +89,7 @@ function termsModal(termsType) {
 }
 
 function modal(option) {
-    document.querySelector("body").focus();
-    const {title, content, type = "message", backdrop, keyboard, fnClose, fnConfirm} = option;
+    const { title, content, type = "message", backdrop, keyboard, fnClose, fnConfirm, returnModal = false } = option;
     const modal = new bootstrap.Modal(document.getElementById("resultModal"), {
         backdrop: backdrop ? true : false || true,
         keyboard: keyboard || true,
@@ -103,35 +102,36 @@ function modal(option) {
     let titleInner = ""
     let contentInner = null;
     let footerInner = ""
-
-    
     modalEl.classList.remove("modal-message", "modal-alert", "modal-confirm");
 
-    if(type === "message") {
-        modalEl.classList.add("modal-message")
-        contentInner = "<p style='margin-bottom: 0; text-align:center;'>"+content+"</p>"
-        footerInner = "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='close'>확인</button>"
-    }
-    if(type === "alert") {
-        modalEl.classList.add("modal-alert")
-        titleInner = title || "알림";
-        footerInner = "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='close'>확인</button>"
-    }
-    if(type === "confirm") {
-        console.log()
-        modalEl.classList.add("modal-confirm")
-        titleInner = title || "알림";
-        footerInner = 
-        "<button type='button' class='btn btn-outline-primary' data-bs-dismiss='modal' data-fn-type='close'>취소</button>"
-        + "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='confirm'>확인</button>"
-    }
-    
-    titleEl.innerText = titleInner;
-    contentEl.innerHTML = contentInner || content;
-    footerEl.innerHTML = footerInner;
+    console.log(content)
 
-    modalEl.querySelector(".btn[data-fn-type='close']")?.addEventListener("click", fnClose)
-    modalEl.addEventListener("hidden.bs.modal", () => fnClose, { once: true });
-    modalEl.querySelector(".btn[data-fn-type='confirm']")?.addEventListener("click", fnConfirm)
-    modal.show();
+    setTimeout(() => {
+        if(type === "message") {
+            modalEl.classList.add("modal-message")
+            contentInner = "<p style='margin-bottom: 0; text-align:center;'>"+content+"</p>"
+            footerInner = "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='close'>확인</button>"
+        }
+        if(type === "alert") {
+            modalEl.classList.add("modal-alert")
+            titleInner = title || "알림";
+            footerInner = "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='close'>확인</button>"
+        }
+        if(type === "confirm") {
+            console.log()
+            modalEl.classList.add("modal-confirm")
+            titleInner = title || "알림";
+            footerInner = 
+            "<button type='button' class='btn btn-outline-primary' data-bs-dismiss='modal' data-fn-type='close'>취소</button>"
+            + "<button type='button' class='btn btn-primary' data-bs-dismiss='modal' data-fn-type='confirm'>확인</button>"
+        }
+        titleEl.innerText = titleInner;
+        contentEl.innerHTML = contentInner || content;
+        footerEl.innerHTML = footerInner;
+        modalEl.querySelector(".btn[data-fn-type='close']")?.addEventListener("click", fnClose)
+        modalEl.querySelector(".modal-backdrop")?.addEventListener("click", () => fnClose)
+        modalEl.querySelector(".btn[data-fn-type='confirm']")?.addEventListener("click", fnConfirm)
+    }, returnModal ? 200 : 0);
+
+    setTimeout(() => modal.show(), returnModal ? 200 : 0);
 }

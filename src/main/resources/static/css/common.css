@@ -2,6 +2,11 @@
 html, body {
     min-width: 1200px;
 }
+
+input::placeholder {
+    color: #aaa !important;
+}
+
 .container {
     min-width: 1200px;
     max-width: 1400px !important;
@@ -111,9 +116,6 @@ html, body {
     padding: 0px 20px;
     border-radius: 20px;
     border-color: #aaa;
-}
-.search-wrap.input-group-lg input::placeholder {
-    color: #aaa;
 }
 
 .search-wrap button.btn {

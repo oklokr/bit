@@ -94,8 +94,7 @@
                 productId: parseInt(urlParams.get('id'))
             }, res => {
                 if(res.data.resultCode !== 1) return
-                modal({content: "삭제되었습니다.", fnClose: () => location.href = "/main/product"})
-                console.log('삭제');
+                modal({content: "삭제되었습니다.", fnClose: () => location.href = "/main/product", returnModal: true})
             })
         }
         modal({type: "confirm", title: "경고", content: "해당 상품과 연관된 회원의 정보가 사라집니다<br>삭제하시겠습니까?", fnConfirm: () => confirm()})

@@ -14,18 +14,20 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th style="width:5%;">No</th>
+                    <th style="width:10%;">No</th>
                     <th style="width:50%;">제목</th>
                     <th style="width:20%;">작성자</th>
-                    <th style="width:12%; white-space: nowrap;">작성일</th>
-                    <th style="width:5%;">조회수</th>
+                    <th style="width:10%; white-space: nowrap;">작성일</th>
+                    <th style="width:10%;">조회수</th>
                 </tr>
             </thead>
             <tbody>
                 <c:if test="${count eq 0}">
                     <tr>
                         <td colspan = "5">
-                            자유게시판 글이 존재하지 않습니다
+                            <p class="msg-box" style="margin-bottom: 0;">
+                               <span style="color: #bbb">자유게시판 글이 존재하지 않습니다.</span>
+                           </p>
                         </td>
                     </tr>
                 </c:if>

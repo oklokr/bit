@@ -83,7 +83,10 @@
                         modal({
                             content: "병원재고 관리에 추가하시겠습니까?",
                             type: "confirm",
-                            fnConfirm: () => handleAddInventory(item.productId)
+                            fnConfirm: () => {
+                                handleAddInventory(item.productId)
+                                modal({content: "추가되었습니다", returnModal: true})
+                            },
                         });
                     });
                 })

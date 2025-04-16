@@ -100,7 +100,7 @@ CREATE TABLE inventory (
     stock_quantity INT NOT NULL DEFAULT 0,
     inventory_registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES product_info(product_id) ON DELETE CASCADE,
-    FOREIGN KEY (id) REFERENCES members(id) ON DELETE SET NULL,
+    FOREIGN KEY (id) REFERENCES members(id) ON DELETE CASCADE,
     FOREIGN KEY (category_code) REFERENCES common_codes(common_value) ON DELETE SET NULL,
     UNIQUE KEY unique_inventory (id, product_id)
 );

@@ -280,13 +280,15 @@
                             type: "message",
                             fnClose: () => {
                                 window.location.href = '/login'; // 로그인 페이지로 이동
-                            }
+                            },
+                            returnModal: true,
                         });
                     } else {
                         modal({
                             title: "탈퇴 실패",
                             content: data.message,
-                            type: "alert"
+                            type: "alert",
+                            returnModal: true,
                         });
                     }
                 })
@@ -295,7 +297,8 @@
                     modal({
                         title: "오류",
                         content: "회원 탈퇴 중 문제가 발생했습니다.",
-                        type: "alert"
+                        type: "alert",
+                        returnModal: true,
                     });
                 });
             },

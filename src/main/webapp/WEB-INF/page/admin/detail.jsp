@@ -117,9 +117,11 @@
             modal({
                 content: data+memberType+"${userDto.companyName}의 회원 유형을 변경하시겠습니까?",
                 type: "confirm",
-                fnConfirm: () =>  postRequestApi("/api/admin/change", userObj, res => {
-                    location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
-                })
+                fnConfirm: () => {
+                    postRequestApi("/api/admin/change", userObj, res => {
+                        location.href = "/admin/detail?pageNum=" + pageNum + "&id=" + id;
+                    })
+                }
             })
         }
         if(type === 'resetPw') {
@@ -135,15 +137,18 @@
             modal({
                 content: "${userDto.companyName}의 회원 탈퇴를 진행하시겠습니까?",
                 type: "confirm",
-                fnConfirm: () =>  postRequestApi("/api/admin/delete", data, res => {
-                    modal({
-                        content: "${userDto.companyName}의 회원 탈퇴가 완료되었습니다.",
-                        type: "alert",
-                        fnClose: () =>  {
-                            location.href = "/admin?pageNum=" + pageNum;
-                        }
-                    })
-                })
+                fnConfirm: () => {
+                    postRequestApi("/api/admin/delete", data, res => {
+                        modal({
+                            content: "${userDto.companyName}의 회원 탈퇴가 완료되었습니다.",
+                            type: "alert",
+                            fnClose: () =>  {
+                                location.href = "/admin?pageNum=" + pageNum;
+                            },
+                            returnModal: true
+                        })
+                    })   
+                }
             })
         }
     }
