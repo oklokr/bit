@@ -155,7 +155,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: #001dff0f;
+        background: #7eb3ff0d;
     }
     .mypage-modal.modal[data-name="mypage-modal"] .modal-dialog {
         margin: initial;
