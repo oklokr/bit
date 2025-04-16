@@ -27,7 +27,7 @@
 <body>
     <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <c:if test='${defaultLayout eq "false"}'>
-        <div id="app">
+        <div id="app" style="background: #7eb3ff0d;">
             <jsp:include page="${contentPage}" />
         </div>
     </c:if>
@@ -77,6 +77,16 @@
     </div>
 </body>
 </html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("button").forEach(item => {
+            item.addEventListener("keydown", e => {
+                return event.preventDefault();
+            })
+        })
+    })
+</script>
 
 <style>
     #app {

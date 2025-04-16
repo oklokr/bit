@@ -158,10 +158,15 @@
         background: #7eb3ff0d;
     }
     .mypage-modal.modal[data-name="mypage-modal"] .modal-dialog {
+        width: 380px;
         margin: initial;
         margin-left: auto;
-
-        width: 380px;
+    }
+    .mypage-modal.modal.fade .modal-dialog {
+        transform: translate(30px, 0);
+    }
+    .mypage-modal.modal.show .modal-dialog {
+        transform: none;
     }
     .mypage-modal.modal[data-name="mypage-modal"] .modal-header {
         flex-direction: column;

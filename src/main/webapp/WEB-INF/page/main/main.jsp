@@ -113,15 +113,25 @@
     .main-wrap {
         position: relative;
     }
-    .main-wrap::before {
+    .main-wrap::after {
         content: "";
         width: 100%;
         position: absolute;
         left: 0;
-        top: 400px;
+        top: 0;
         bottom: 0;
-        z-index: -1;
+        z-index: -2;
         background: #7eb3ff0d;
+    }
+    .main-wrap::before {
+        content: "";
+        width: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 50%;
+        z-index: -1;
+        background: #fff;
     }
     .page-wrap .search-wrap {
         margin-top: 40px;
@@ -175,6 +185,7 @@
         border: 1px solid #ddd;
         overflow: hidden;
     }
+
     #product-items .product-itme .product-img img {
         width: 100%;
     }
