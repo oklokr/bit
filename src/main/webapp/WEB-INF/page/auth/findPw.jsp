@@ -41,7 +41,7 @@
             <p class="result-txt">신규 비밀번호는<br/><strong>"+id+"</strong><br/>입니다.</p>
 
             <div class="bottom-btns center">
-                <button class="btn btn-secondary" onclick="history.back()">로그인하기</button>
+                <button class="btn btn-secondary" onclick="location.href='/auth/login'">로그인하기</button>
             </div>
         </div>
     </div>
