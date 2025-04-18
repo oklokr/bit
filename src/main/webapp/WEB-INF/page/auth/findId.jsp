@@ -41,7 +41,7 @@
             <p class="result-txt">가입된 아이디는 <strong>"+id+"</strong>입니다.</p>
 
             <div class="bottom-btns center">
-                <button class="btn btn-secondary" onclick="history.back()">로그인하기</button>
+                <button class="btn btn-secondary" onclick="location.href='/auth/login'">로그인하기</button>
                 <button class="btn btn-primary" onclick="location.href='/auth/findPw'">비밀번호 찾기</button>
             </div>
         </div>
